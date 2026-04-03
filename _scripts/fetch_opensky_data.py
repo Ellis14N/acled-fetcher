@@ -15,15 +15,21 @@ def main():
 
     print(f"Starting OpenSky fetch: airport={airport}, days_back={days_back}")
 
-    summary = get_opensky_summary(airport_code=airport, days_back=days_back)
+    try:
+        summary = get_opensky_summary(airport_code=airport, days_back=days_back)
 
-    filename = f"data/opensky_{summary['airport'].lower().replace(' ', '_')}_{summary['total_flights']}.json"
-    os.makedirs("data", exist_ok=True)
+        filename = f"data/opensky_{summary['airport'].lower().replace(' ', '_')}_{summary['total_flights']}.json"
+        os.makedirs("data", exist_ok=True)
 
-    with open(filename, "w") as f:
-        json.dump(summary, f, indent=2)
+        with open(filename, "w") as f:
+            json.dump(summary, f, indent=2)
 
-    print(f"✅ OpenSky data saved to {filename}")
+        print(f"✅ OpenSky data saved to {filename}")
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"❌ OpenSky fetch pipeline failed: {e}")
+        raise
 
 
 if __name__ == "__main__":
