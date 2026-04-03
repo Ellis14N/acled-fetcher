@@ -733,31 +733,33 @@
       return;
     }
 
-      breakdownEl.innerHTML = "";
-      breakdownEl.innerHTML = `
-        <div class="breakdown-row">
-          <span class="breakdown-key">Airport</span>
-          <span class="breakdown-value">${data.airport}</span>
-        </div>
-        <div class="breakdown-row">
-          <span class="breakdown-key">Region</span>
-          <span class="breakdown-value">${data.region || 'Unknown'}</span>
-        </div>
-        <div class="breakdown-row">
-          <span class="breakdown-key">Departures (requested)</span>
-          <span class="breakdown-value">${data.total_departures}</span>
-        </div>
-        <div class="breakdown-row">
-          <span class="breakdown-key">Arrivals (requested)</span>
-          <span class="breakdown-value">${data.total_arrivals}</span>
-        </div>`;
-
-      document.getElementById("downloadBtn").textContent = "Download OpenSky Data";
-      return;
-    }
-
     // ACLED default path
     const monthNames = Object.keys(data.monthly);
+    const latestMonthName = monthNames[monthNames.length - 1];
+    const latestData = data.monthly[latestMonthName];
+
+    document.getElementById("resultTitle").textContent = `${data.country} — Overview`;
+    document.getElementById("resultDate").textContent  = `Reported for: ${latestMonthName}`;
+
+    document.getElementById("statLabel1").textContent = "Events (Past 30d)";
+    document.getElementById("statLabel2").textContent = "Fatalities (Past 30d)";
+    document.getElementById("statEvents").textContent     = latestData.events.toLocaleString();
+    document.getElementById("statFatalities").textContent = latestData.fatalities.toLocaleString();
+
+    const breakdownEl = document.getElementById("breakdownRows");
+    breakdownEl.innerHTML = "";
+    const typeCounts = latestData.event_types || {};
+
+    Object.entries(typeCounts).sort((a,b) => b[1]-a[1]).forEach(([type, count]) => {
+      breakdownEl.innerHTML += `
+        <div class="breakdown-row">
+          <span class="breakdown-key">${type}</span>
+          <span class="breakdown-value">${count}</span>
+        </div>`;
+    });
+
+    document.getElementById("downloadBtn").textContent = "Download for Claude";
+  }
     const latestMonthName = monthNames[monthNames.length - 1];
     const latestData = data.monthly[latestMonthName];
 
