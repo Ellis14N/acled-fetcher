@@ -697,13 +697,36 @@
       document.getElementById("resultTitle").textContent = `${data.airport} — OpenSky Overview`;
       document.getElementById("resultDate").textContent  = `Retrieved live data`;
 
-      document.getElementById("statLabel1").textContent = "Flights (window)";
-      document.getElementById("statLabel2").textContent = "Departures (window)";
+      document.getElementById("statLabel1").textContent = "Total flights";
+      document.getElementById("statLabel2").textContent = "Total departures";
 
-      document.getElementById("statEvents").textContent     = data.total_flights.toLocaleString();
-      document.getElementById("statFatalities").textContent = data.total_departures.toLocaleString();
+      document.getElementById("statEvents").textContent     = Number(data.total_flights || 0).toLocaleString();
+      document.getElementById("statFatalities").textContent = Number(data.total_departures || 0).toLocaleString();
 
       const breakdownEl = document.getElementById("breakdownRows");
+      breakdownEl.innerHTML = "";
+      breakdownEl.innerHTML = `
+        <div class="breakdown-row">
+          <span class="breakdown-key">Airport</span>
+          <span class="breakdown-value">${data.airport}</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-key">Region</span>
+          <span class="breakdown-value">${data.region || 'Unknown'}</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-key">Departures (requested)</span>
+          <span class="breakdown-value">${data.total_departures}</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-key">Arrivals (requested)</span>
+          <span class="breakdown-value">${data.total_arrivals}</span>
+        </div>`;
+
+      document.getElementById("downloadBtn").textContent = "Download OpenSky Data";
+      return;
+    }
+
       breakdownEl.innerHTML = "";
       breakdownEl.innerHTML = `
         <div class="breakdown-row">
