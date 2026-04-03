@@ -1,0 +1,49 @@
+name: Fetch OpenSky Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      airport:
+        description: "ICAO airport code for OpenSky fetch"
+        required: true
+        default: "FAOR"
+      days_back:
+        description: "Look-back window in days"
+        required: false
+        default: "7"
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run OpenSky fetch script
+        env:
+          OPENSKY_USERNAME: ${{ secrets.OPENSKY_USERNAME }}
+          OPENSKY_PASSWORD: ${{ secrets.OPENSKY_PASSWORD }}
+        run: |
+          python3 _scripts/opensky_fetch.py
+          python3 - <<'PY' from _scripts.opensky_fetch import get_opensky_summary 
+          summary = get_opensky_summary(airport_code='${{ github.event.inputs.airport }}', days_back=int('${{ github.event.inputs.days_back }}'))
+          import json, os filename = f"data/opensky_{summary['airport'].lower().replace(' ', '_')}_{summary['total_flights']}.json"
+          os.makedirs('data', exist_ok=True) with open(filename, 'w') as f: 
+          json.dump(summary, f, indent=2) print(f"✅ Data saved to {filename}") PY
+
+      - name: Commit output to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Update OpenSky data: ${{ github.event.inputs.airport }}"
+          git push

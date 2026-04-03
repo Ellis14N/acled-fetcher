@@ -374,6 +374,11 @@
         <div class="tool-description">Fetch security & conflict data</div>
       </button>
       
+      <button class="tool-button" onclick="show('fetchOpenSkyScreen')">
+        <div class="tool-name">OpenSky Tool</div>
+        <div class="tool-description">Fetch airspace/airport data</div>
+      </button>
+      
       <button class="tool-button coming-soon">
         <div class="tool-name">Tool 2</div>
         <div class="tool-description">Data analysis</div>
@@ -429,6 +434,25 @@
     <button onclick="runFetch()">Run Fetch →</button>
     <button class="btn-secondary" onclick="clearToken()">Reset GitHub Token</button>
     <div class="error" id="fetchError"></div>
+  </div>
+
+  <div id="fetchOpenSkyScreen" style="display:none">
+    <div class="logo">
+      <div class="logo-icon">✈️</div>
+      <div>
+        <div class="logo-text">14N Monitor DataTool</div>
+        <div class="logo-sub">OpenSky Data Tool</div>
+      </div>
+    </div>
+    <h2>Fetch OpenSky Data</h2>
+    <p class="subtitle">Enter an ICAO airport code and look-back window for OpenSky flights.</p>
+    <label for="airportInput">ICAO Airport Code</label>
+    <input type="text" id="airportInput" placeholder="e.g. FAOR, HKJK, HFUT" />
+    <label for="daysBackInput">Days back</label>
+    <input type="number" id="daysBackInput" min="1" max="30" value="7" />
+    <button onclick="runOpenSky()">Run OpenSky Fetch →</button>
+    <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
+    <div class="error" id="openSkyError"></div>
   </div>
 
   <div id="loadingScreen">
@@ -529,20 +553,45 @@
     if (!token) { clearToken(); return; }
 
     show("loadingScreen");
-    document.getElementById("loadingCountry").textContent = `Fetching data for ${country}...`;
+    document.getElementById("loadingCountry").textContent = `Fetching ACLED data for ${country}...`;
     startProgressAnimation();
 
     try {
-      const runId = await triggerWorkflow(country, token);
-      pollForCompletion(runId, country, token);
+      const runId = await triggerWorkflow("fetch_acled.yml", { country }, token);
+      pollForCompletion(runId, country, token, "acled");
     } catch (err) {
       showFetchError(err.message);
     }
   }
 
-  async function triggerWorkflow(country, token) {
+  async function runOpenSky() {
+    const airport = document.getElementById("airportInput").value.trim();
+    const daysBack = Number(document.getElementById("daysBackInput").value) || 7;
+    if (!airport) {
+      const errorEl = document.getElementById("openSkyError");
+      errorEl.textContent = "Please enter an ICAO airport code.";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    const token = localStorage.getItem("acled_gh_token");
+    if (!token) { clearToken(); return; }
+
+    show("loadingScreen");
+    document.getElementById("loadingCountry").textContent = `Fetching OpenSky data for ${airport}...`;
+    startProgressAnimation();
+
+    try {
+      const runId = await triggerWorkflow("fetch_opensky.yml", { airport, days_back: String(daysBack) }, token);
+      pollForCompletion(runId, airport, token, "opensky");
+    } catch (err) {
+      showFetchError(err.message);
+    }
+  }
+
+  async function triggerWorkflow(workflowFile, inputs, token) {
     const res = await fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/fetch_acled.yml/dispatches`,
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`,
       {
         method: "POST",
         headers: {
@@ -550,7 +599,7 @@
           Accept: "application/vnd.github+json",
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ ref: "main", inputs: { country } })
+        body: JSON.stringify({ ref: "main", inputs })
       }
     );
 
@@ -569,7 +618,7 @@
     return run.id;
   }
 
-  function pollForCompletion(runId, country, token) {
+  function pollForCompletion(runId, key, token, source) {
     markStep("step2", "active");
     pollingInterval = setInterval(async () => {
       try {
@@ -591,14 +640,17 @@
             markStep("step4", "done");
             setProgress(100);
             await sleep(600);
-            
-            const filename = `risk_data_${country.toLowerCase().replace(/\s+/g, "_")}.json`;
-            const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
-            const dataRes = await fetch(url);
-            const data = await dataRes.json();
-            
-            showResults(data);
-            setupDownload(data, country);
+
+            if (source === "acled") {
+              const filename = `risk_data_${key.toLowerCase().replace(/\s+/g, "_")}.json`;
+              const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
+              const dataRes = await fetch(url);
+              const data = await dataRes.json();
+              showResults(data);
+              setupDownload(data, key);
+            } else {
+              show("dashboardScreen");
+            }
           } else { throw new Error("Workflow failed."); }
         }
       } catch (err) { showFetchError(err.message); }
@@ -651,7 +703,7 @@
   }
 
   function show(id) {
-    ["passwordScreen","dashboardScreen","setupScreen","fetchScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
+    ["passwordScreen","dashboardScreen","setupScreen","fetchScreen","fetchOpenSkyScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
   }
 
   function markStep(id, state) {
