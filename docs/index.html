@@ -128,7 +128,7 @@
     .info-box a { color: #a78bfa; text-decoration: none; }
     .info-box a:hover { text-decoration: underline; }
 
-    /* LOADING */
+    /* LOADING SCREEN */
     #loadingScreen { display: none; }
 
     .spinner-wrap {
@@ -187,7 +187,7 @@
     .step.active { color: #e2e8f0; }
     .step-icon   { font-size: 16px; width: 20px; text-align: center; }
 
-    /* RESULTS */
+    /* RESULTS SCREEN */
     #resultsScreen { display: none; }
 
     .result-header {
@@ -251,7 +251,6 @@
 <body>
 <div class="card">
 
-  <!-- ── PASSWORD SCREEN ── -->
   <div id="passwordScreen">
     <div class="logo">
       <div class="logo-icon">🛡️</div>
@@ -261,14 +260,13 @@
       </div>
     </div>
     <h2>Enter Password</h2>
-    <p class="subtitle">This tool is restricted to authorised team members.</p>
+    <p class="subtitle">This tool is restricted to authorized team members.</p>
     <label for="passwordInput">Password</label>
     <input type="password" id="passwordInput" placeholder="Enter team password" />
     <button onclick="checkPassword()">Continue →</button>
     <div class="error" id="passwordError">Incorrect password. Please try again.</div>
   </div>
 
-  <!-- ── SETUP SCREEN (token entry — first time only) ── -->
   <div id="setupScreen" style="display:none">
     <div class="logo">
       <div class="logo-icon">🔑</div>
@@ -278,9 +276,9 @@
       </div>
     </div>
     <h2>Connect to GitHub</h2>
-    <p class="subtitle">Paste your GitHub Personal Access Token below. It will be saved in your browser only — it is never stored in any file or sent anywhere except GitHub.</p>
+    <p class="subtitle">Paste your GitHub Personal Access Token below.</p>
     <div class="info-box">
-      To generate a token: go to <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate new token (classic) → tick <strong>repo</strong> and <strong>workflow</strong> → Generate → copy it here.
+      To generate a token: go to <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate new token (classic) → tick <strong>repo</strong> and <strong>workflow</strong> → copy it here.
     </div>
     <label for="tokenInput">GitHub Personal Access Token</label>
     <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
@@ -288,7 +286,6 @@
     <div class="error" id="tokenError"></div>
   </div>
 
-  <!-- ── FETCH SCREEN ── -->
   <div id="fetchScreen" style="display:none">
     <div class="logo">
       <div class="logo-icon">🌍</div>
@@ -298,15 +295,14 @@
       </div>
     </div>
     <h2>Fetch Security Data</h2>
-    <p class="subtitle">Enter a country to pull the latest conflict data from ACLED.</p>
+    <p class="subtitle">Enter a country name to pull the latest conflict data from ACLED.</p>
     <label for="countryInput">Country</label>
     <input type="text" id="countryInput" placeholder="e.g. Nigeria, Mali, Sudan" />
-    <button id="runBtn" onclick="runFetch()">Run Fetch →</button>
+    <button onclick="runFetch()">Run Fetch →</button>
     <button class="btn-secondary" onclick="clearToken()">Reset GitHub Token</button>
     <div class="error" id="fetchError"></div>
   </div>
 
-  <!-- ── LOADING SCREEN ── -->
   <div id="loadingScreen">
     <div class="spinner-wrap">
       <div class="spinner"></div>
@@ -326,7 +322,6 @@
     </div>
   </div>
 
-  <!-- ── RESULTS SCREEN ── -->
   <div id="resultsScreen">
     <div class="result-header">
       <div class="result-title" id="resultTitle">Results</div>
@@ -334,88 +329,58 @@
     </div>
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="stat-label">Total Events</div>
+        <div class="stat-label">Events (Past 30d)</div>
         <div class="stat-value" id="statEvents">—</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Total Fatalities</div>
+        <div class="stat-label">Fatalities (Past 30d)</div>
         <div class="stat-value" id="statFatalities">—</div>
       </div>
     </div>
     <div class="breakdown">
-      <div class="breakdown-title">Events by Type</div>
+      <div class="breakdown-title">Events by Type (Past 30d)</div>
       <div id="breakdownRows"></div>
     </div>
-    <div class="breakdown">
-      <div class="breakdown-title">Monthly Breakdown</div>
-      <div id="monthlyRows"></div>
-    </div>
     <div style="display: flex; gap: 12px; margin-top: 32px;">
-      <button class="btn-secondary" onclick="runAgain()" style="margin-top: 0; flex: 1;">← Fetch Another Country</button>
-      <button id="downloadBtn" class="btn" style="background: #8b5cf6; flex: 1;">Download for Claude</button>
+      <button class="btn-secondary" onclick="runAgain()" style="margin-top: 0; flex: 1;">← Fetch Another</button>
+      <button id="downloadBtn" style="background: #8b5cf6; flex: 1;">Download for Claude</button>
     </div>
   </div>
-
-  
 </div>
 
 <script>
-  // ══════════════════════════════════════════════════
-  //  CONFIGURATION — only edit these two values
-  //  The GitHub token is entered by the user in the
-  //  browser and never stored in this file.
-  // ══════════════════════════════════════════════════
   const GITHUB_OWNER  = "Ellis14N";
   const GITHUB_REPO   = "acled-fetcher";
   const PAGE_PASSWORD = "14N";
-  // ══════════════════════════════════════════════════
 
   let pollingInterval = null;
   let progressValue   = 0;
   let stepTimer       = 0;
 
-  // ── Boot: decide which screen to show ─────────────
-  window.addEventListener("load", () => {
-    const token = localStorage.getItem("acled_gh_token");
-    if (token) {
-      // Token already saved — go straight to password
-    }
-    // Always start at password screen
-    show("passwordScreen");
-  });
+  window.addEventListener("load", () => { show("passwordScreen"); });
 
-  // ── Password ──────────────────────────────────────
-  document.getElementById("passwordInput")
-    .addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
+  document.getElementById("passwordInput").addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
 
   function checkPassword() {
     const val = document.getElementById("passwordInput").value;
     if (val === PAGE_PASSWORD) {
-      document.getElementById("passwordError").style.display = "none";
       const token = localStorage.getItem("acled_gh_token");
       show(token ? "fetchScreen" : "setupScreen");
-      if (!token) document.getElementById("tokenInput").focus();
-      else        document.getElementById("countryInput").focus();
     } else {
       document.getElementById("passwordError").style.display = "block";
     }
   }
 
-  // ── Token setup ───────────────────────────────────
-  document.getElementById("tokenInput")
-    .addEventListener("keydown", e => { if (e.key === "Enter") saveToken(); });
-
   function saveToken() {
     const token = document.getElementById("tokenInput").value.trim();
     if (!token.startsWith("ghp_") && !token.startsWith("github_pat_")) {
       const err = document.getElementById("tokenError");
-      err.textContent = "Token doesn't look right — it should start with ghp_";
+      err.textContent = "Invalid Token format.";
       err.style.display = "block";
       return;
     }
     localStorage.setItem("acled_gh_token", token);
     show("fetchScreen");
-    document.getElementById("countryInput").focus();
   }
 
   function clearToken() {
@@ -423,21 +388,14 @@
     show("setupScreen");
   }
 
-  // ── Run Fetch ─────────────────────────────────────
-  document.getElementById("countryInput")
-    .addEventListener("keydown", e => { if (e.key === "Enter") runFetch(); });
-
   async function runFetch() {
     const country = document.getElementById("countryInput").value.trim();
     if (!country) return;
-
     const token = localStorage.getItem("acled_gh_token");
     if (!token) { clearToken(); return; }
 
     show("loadingScreen");
-    document.getElementById("loadingCountry").textContent =
-      `Fetching conflict data for ${country}…`;
-
+    document.getElementById("loadingCountry").textContent = `Fetching data for ${country}...`;
     startProgressAnimation();
 
     try {
@@ -448,7 +406,6 @@
     }
   }
 
-  // ── Trigger workflow ──────────────────────────────
   async function triggerWorkflow(country, token) {
     const res = await fetch(
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/fetch_acled.yml/dispatches`,
@@ -463,15 +420,8 @@
       }
     );
 
-    if (res.status === 401) {
-      localStorage.removeItem("acled_gh_token");
-      throw new Error("GitHub token rejected (401). Your token may have expired — click Reset GitHub Token to enter a new one.");
-    }
-
-    if (!res.ok) {
-      const txt = await res.text();
-      throw new Error(`GitHub API error ${res.status}: ${txt}`);
-    }
+    if (res.status === 401) { localStorage.removeItem("acled_gh_token"); throw new Error("GitHub token rejected."); }
+    if (!res.ok) throw new Error(`GitHub API error ${res.status}`);
 
     markStep("step1", "done");
     await sleep(4000);
@@ -480,29 +430,22 @@
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs?per_page=5`,
       { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" } }
     );
-
     const runsData = await runsRes.json();
     const run = runsData.workflow_runs.find(r => r.status !== "completed") || runsData.workflow_runs[0];
     return run.id;
   }
 
-  // ── Poll for completion ───────────────────────────
   function pollForCompletion(runId, country, token) {
     markStep("step2", "active");
-
     pollingInterval = setInterval(async () => {
       try {
         const res = await fetch(
           `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs/${runId}`,
           { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" } }
         );
-
         const run = await res.json();
 
-        if (run.status === "in_progress") {
-          markStep("step2", "done");
-          markStep("step3", "active");
-        }
+        if (run.status === "in_progress") { markStep("step2", "done"); markStep("step3", "active"); }
 
         if (run.status === "completed") {
           clearInterval(pollingInterval);
@@ -514,116 +457,75 @@
             markStep("step4", "done");
             setProgress(100);
             await sleep(600);
-            // We need to capture the data from loadResults to pass it to setupDownload
+            
             const filename = `risk_data_${country.toLowerCase().replace(/\s+/g, "_")}.json`;
             const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
-            const res = await fetch(url);
-            const data = await res.json();
+            const dataRes = await fetch(url);
+            const data = await dataRes.json();
             
             showResults(data);
-            setupDownload(data, country); // <--- This activates the button
-          }
+            setupDownload(data, country);
+          } else { throw new Error("Workflow failed."); }
         }
-      } catch (err) {
-        clearInterval(pollingInterval);
-        showFetchError("Polling error: " + err.message);
-      }
+      } catch (err) { showFetchError(err.message); }
     }, 6000);
   }
 
- function setupDownload(data, country) {
+  function setupDownload(data, country) {
     const downloadBtn = document.getElementById('downloadBtn');
-    
     downloadBtn.onclick = () => {
-      // Formats the data as a JavaScript file with a constant Claude can reference
-      const jsContent = `/**\n * ACLED Data Export\n * Country: ${country}\n * Generated: ${new Date().toISOString()}\n */\n\nconst ACLED_DATA = ${JSON.stringify(data, null, 2)};`;
-      
+      const jsContent = `/**\n * ACLED Data Export\n * Country: ${country}\n */\n\nconst ACLED_DATA = ${JSON.stringify(data, null, 2)};`;
       const blob = new Blob([jsContent], { type: 'text/javascript' });
       const url = URL.createObjectURL(blob);
-      
       const a = document.createElement('a');
       a.href = url;
       a.download = `acled_${country.toLowerCase().replace(/\s+/g, '_')}_data.js`;
       document.body.appendChild(a);
       a.click();
-      
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     };
-  } 
-  
-  // ── Load results ──────────────────────────────────
-  async function loadResults(country) {
-    const filename = `risk_data_${country.toLowerCase().replace(/\s+/g, "_")}.json`;
-    const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
-
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("Could not load results file.");
-    const data = await res.json();
-    showResults(data);
   }
 
-  // ── Display results ───────────────────────────────
   function showResults(data) {
     show("resultsScreen");
+    
+    // 1. Isolate only the most recent month
+    const monthNames = Object.keys(data.monthly);
+    const monthValues = Object.values(data.monthly);
+    const latestMonthName = monthNames[monthNames.length - 1];
+    const latestData = monthValues[monthValues.length - 1];
 
-    document.getElementById("resultTitle").textContent = `${data.country} — Security Overview`;
-    document.getElementById("resultDate").textContent  = "Last 30 days · fetched now";
-    document.getElementById("statEvents").textContent     = data.total_events.toLocaleString();
-    document.getElementById("statFatalities").textContent = data.total_fatalities.toLocaleString();
+    document.getElementById("resultTitle").textContent = `${data.country} — Overview`;
+    document.getElementById("resultDate").textContent  = `Reported for: ${latestMonthName}`;
 
-    const months  = Object.values(data.monthly);
-    const latest  = months[months.length - 1];
-    const typeCounts = latest ? latest.event_types : {};
+    // 2. Use latest month stats only
+    document.getElementById("statEvents").textContent     = latestData ? latestData.events.toLocaleString() : "0";
+    document.getElementById("statFatalities").textContent = latestData ? latestData.fatalities.toLocaleString() : "0";
 
+    // 3. Update breakdown with latest month only
     const breakdownEl = document.getElementById("breakdownRows");
     breakdownEl.innerHTML = "";
-    const sorted = Object.entries(typeCounts).sort((a, b) => b[1] - a[1]);
-    if (sorted.length === 0) {
-      breakdownEl.innerHTML = `<div class="breakdown-row"><span class="breakdown-key">No data</span></div>`;
-    } else {
-      sorted.forEach(([type, count]) => {
-        breakdownEl.innerHTML +=
-          `<div class="breakdown-row">
-            <span class="breakdown-key">${type}</span>
-            <span class="breakdown-value">${count}</span>
-          </div>`;
-      });
-    }
-
-    const monthlyEl = document.getElementById("monthlyRows");
-    monthlyEl.innerHTML = "";
-    Object.entries(data.monthly).forEach(([month, val]) => {
-      monthlyEl.innerHTML +=
-        `<div class="breakdown-row">
-          <span class="breakdown-key">${month}</span>
-          <span class="breakdown-value">${val.events} events · ${val.fatalities} fatalities</span>
-        </div>`;
+    const typeCounts = latestData ? latestData.event_types : {};
+    
+    Object.entries(typeCounts).sort((a,b) => b[1]-a[1]).forEach(([type, count]) => {
+      breakdownEl.innerHTML += `<div class="breakdown-row"><span class="breakdown-key">${type}</span><span class="breakdown-value">${count}</span></div>`;
     });
   }
 
-  // ── Helpers ───────────────────────────────────────
   function show(id) {
-    ["passwordScreen","setupScreen","fetchScreen","loadingScreen","resultsScreen"]
-      .forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
+    ["passwordScreen","setupScreen","fetchScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
   }
 
   function markStep(id, state) {
     const el = document.getElementById(id);
     el.className = `step ${state}`;
-    el.querySelector(".step-icon").textContent =
-      state === "done" ? "✅" : state === "active" ? "🔄" : "⏳";
+    el.querySelector(".step-icon").textContent = state === "done" ? "✅" : state === "active" ? "🔄" : "⏳";
   }
 
   function startProgressAnimation() {
-    progressValue = 0;
-    setProgress(5);
-    stepTimer = setInterval(() => {
-      if (progressValue < 85) {
-        progressValue += Math.random() * 3;
-        setProgress(progressValue);
-      }
-    }, 2000);
+    progressValue = 0; setProgress(5);
+    stepTimer = setInterval(() => { if (progressValue < 85) { progressValue += Math.random() * 3; setProgress(progressValue); } }, 2000);
   }
 
   function setProgress(val) {
@@ -633,12 +535,10 @@
   }
 
   function showFetchError(msg) {
-    clearInterval(pollingInterval);
-    clearInterval(stepTimer);
+    clearInterval(pollingInterval); clearInterval(stepTimer);
     show("fetchScreen");
     const err = document.getElementById("fetchError");
-    err.textContent = msg;
-    err.style.display = "block";
+    err.textContent = msg; err.style.display = "block";
   }
 
   function runAgain() {
