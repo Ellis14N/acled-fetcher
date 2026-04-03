@@ -7,8 +7,13 @@ from acled_fetch import get_acled_security_summary
 # Paths & Setup
 # =========================
 
-# Accept country as a command-line argument, default to Mali
-country = sys.argv[1] if len(sys.argv) > 1 else "Mali"
+# Accept country as a command-line argument (required)
+if len(sys.argv) < 2:
+    print("❌ Error: Country argument is required")
+    print("Usage: python fetch_data.py <country>")
+    sys.exit(1)
+
+country = sys.argv[1]
 
 # Get the directory of this script
 script_dir = os.path.dirname(os.path.abspath(__file__))
