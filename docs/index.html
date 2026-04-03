@@ -646,8 +646,15 @@
               const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
               const dataRes = await fetch(url);
               const data = await dataRes.json();
-              showResults(data);
-              setupDownload(data, key);
+              showResults(data, "acled");
+              setupDownload(data, key, "acled");
+            } else if (source === "opensky") {
+              const filename = `opensky_${key.toLowerCase().replace(/\s+/g, "_")}.json`;
+              const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
+              const dataRes = await fetch(url);
+              const data = await dataRes.json();
+              showResults(data, "opensky");
+              setupDownload(data, key, "opensky");
             } else {
               show("dashboardScreen");
             }
@@ -657,15 +664,25 @@
     }, 6000);
   }
 
-  function setupDownload(data, country) {
+  function setupDownload(data, key, source) {
     const downloadBtn = document.getElementById('downloadBtn');
     downloadBtn.onclick = () => {
-      const jsContent = `/**\n * ACLED Data Export\n * Country: ${country}\n */\n\nconst ACLED_DATA = ${JSON.stringify(data, null, 2)};`;
+      let jsContent;
+      let filename;
+
+      if (source === 'opensky') {
+        jsContent = `/**\n * OpenSky Data Export\n * Airport: ${key}\n */\n\nconst OPENSKY_DATA = ${JSON.stringify(data, null, 2)};`;
+        filename = `opensky_${key.toLowerCase().replace(/\s+/g, '_')}_data.js`;
+      } else {
+        jsContent = `/**\n * ACLED Data Export\n * Country: ${key}\n */\n\nconst ACLED_DATA = ${JSON.stringify(data, null, 2)};`;
+        filename = `acled_${key.toLowerCase().replace(/\s+/g, '_')}_data.js`;
+      }
+
       const blob = new Blob([jsContent], { type: 'text/javascript' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `acled_${country.toLowerCase().replace(/\s+/g, '_')}_data.js`;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -673,10 +690,40 @@
     };
   }
 
-  function showResults(data) {
+  function showResults(data, source) {
     show("resultsScreen");
-    
-    // Logic: Identify the last month entry in the JSON and use its data specifically
+
+    if (source === "opensky") {
+      document.getElementById("resultTitle").textContent = `${data.airport} — OpenSky Overview`;
+      document.getElementById("resultDate").textContent  = `Retrieved live data`;
+      document.getElementById("statEvents").textContent     = data.total_flights.toLocaleString();
+      document.getElementById("statFatalities").textContent = data.total_departures.toLocaleString();
+
+      const breakdownEl = document.getElementById("breakdownRows");
+      breakdownEl.innerHTML = "";
+      breakdownEl.innerHTML = `
+        <div class="breakdown-row">
+          <span class="breakdown-key">Airport</span>
+          <span class="breakdown-value">${data.airport}</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-key">Region</span>
+          <span class="breakdown-value">${data.region || 'Unknown'}</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-key">Departures (requested)</span>
+          <span class="breakdown-value">${data.total_departures}</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="breakdown-key">Arrivals (requested)</span>
+          <span class="breakdown-value">${data.total_arrivals}</span>
+        </div>`;
+
+      document.getElementById("downloadBtn").textContent = "Download OpenSky Data";
+      return;
+    }
+
+    // ACLED default path
     const monthNames = Object.keys(data.monthly);
     const latestMonthName = monthNames[monthNames.length - 1];
     const latestData = data.monthly[latestMonthName];
@@ -684,15 +731,13 @@
     document.getElementById("resultTitle").textContent = `${data.country} — Overview`;
     document.getElementById("resultDate").textContent  = `Reported for: ${latestMonthName}`;
 
-    // FORCE top stats to use month data (latestData.events) instead of grand total (data.total_events)
     document.getElementById("statEvents").textContent     = latestData.events.toLocaleString();
     document.getElementById("statFatalities").textContent = latestData.fatalities.toLocaleString();
 
-    // Fill breakdown rows using only the latest month's types
     const breakdownEl = document.getElementById("breakdownRows");
     breakdownEl.innerHTML = "";
     const typeCounts = latestData.event_types || {};
-    
+
     Object.entries(typeCounts).sort((a,b) => b[1]-a[1]).forEach(([type, count]) => {
       breakdownEl.innerHTML += `
         <div class="breakdown-row">
@@ -700,6 +745,8 @@
           <span class="breakdown-value">${count}</span>
         </div>`;
     });
+
+    document.getElementById("downloadBtn").textContent = "Download for Claude";
   }
 
   function show(id) {
@@ -733,7 +780,10 @@
   function runAgain() {
     show("dashboardScreen");
     document.getElementById("countryInput").value = "";
+    document.getElementById("airportInput").value = "";
+    document.getElementById("daysBackInput").value = "7";
     document.getElementById("fetchError").style.display = "none";
+    document.getElementById("openSkyError").style.display = "none";
   }
 
   function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }

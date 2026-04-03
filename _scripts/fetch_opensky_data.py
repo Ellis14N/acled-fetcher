@@ -26,7 +26,7 @@ def main():
     try:
         summary = get_opensky_summary(airport_code=airport, days_back=days_back)
 
-        filename = f"data/opensky_{summary['airport'].lower().replace(' ', '_')}_{summary['total_flights']}.json"
+        filename = f"data/opensky_{summary['airport'].lower().replace(' ', '_')}.json"
         os.makedirs("data", exist_ok=True)
 
         with open(filename, "w") as f:
