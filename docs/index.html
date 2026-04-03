@@ -5,14 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ACLED Data Fetcher</title>
   <style>
-    /* ── CONFIGURATION ─────────────────────────────────────────
-       Edit the three constants in the <script> block below:
-         GITHUB_OWNER   → your GitHub username
-         GITHUB_REPO    → your repository name
-         GITHUB_TOKEN   → your Personal Access Token
-         PAGE_PASSWORD  → password your team will use to log in
-    ────────────────────────────────────────────────────────── */
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -56,18 +48,9 @@
     .logo-text { font-size: 18px; font-weight: 700; color: #fff; }
     .logo-sub  { font-size: 12px; color: #64748b; margin-top: 1px; }
 
-    h2 {
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-    }
+    h2 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
 
-    .subtitle {
-      font-size: 14px;
-      color: #64748b;
-      margin-bottom: 28px;
-    }
+    .subtitle { font-size: 14px; color: #64748b; margin-bottom: 28px; line-height: 1.6; }
 
     label {
       display: block;
@@ -111,6 +94,15 @@
     button:active { transform: scale(0.99); }
     button:disabled { opacity: 0.5; cursor: not-allowed; }
 
+    .btn-secondary {
+      background: #1a1d27;
+      border: 1px solid #2d3148;
+      color: #a78bfa;
+      margin-top: 10px;
+    }
+
+    .btn-secondary:hover { background: #2d3148; opacity: 1; }
+
     .error {
       background: #2d1f1f;
       border: 1px solid #7f1d1d;
@@ -122,7 +114,21 @@
       display: none;
     }
 
-    /* ── LOADING ── */
+    .info-box {
+      background: #1e2235;
+      border: 1px solid #2d3148;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .info-box a { color: #a78bfa; text-decoration: none; }
+    .info-box a:hover { text-decoration: underline; }
+
+    /* LOADING */
     #loadingScreen { display: none; }
 
     .spinner-wrap {
@@ -144,18 +150,8 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .loading-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .loading-sub {
-      font-size: 14px;
-      color: #64748b;
-      text-align: center;
-      line-height: 1.6;
-    }
+    .loading-title { font-size: 18px; font-weight: 700; color: #fff; }
+    .loading-sub   { font-size: 14px; color: #64748b; text-align: center; line-height: 1.6; }
 
     .progress-bar-wrap {
       width: 100%;
@@ -174,10 +170,7 @@
       transition: width 1s ease;
     }
 
-    .step-list {
-      width: 100%;
-      margin-top: 16px;
-    }
+    .step-list { width: 100%; margin-top: 16px; }
 
     .step {
       display: flex;
@@ -190,12 +183,11 @@
     }
 
     .step:last-child { border-bottom: none; }
-    .step.done  { color: #a3e635; }
-    .step.active{ color: #e2e8f0; }
+    .step.done   { color: #a3e635; }
+    .step.active { color: #e2e8f0; }
+    .step-icon   { font-size: 16px; width: 20px; text-align: center; }
 
-    .step-icon { font-size: 16px; width: 20px; text-align: center; }
-
-    /* ── RESULTS ── */
+    /* RESULTS */
     #resultsScreen { display: none; }
 
     .result-header {
@@ -254,15 +246,6 @@
     .breakdown-row:last-child { border-bottom: none; }
     .breakdown-key   { color: #cbd5e1; }
     .breakdown-value { color: #a78bfa; font-weight: 700; }
-
-    .run-again {
-      background: #1a1d27;
-      border: 1px solid #2d3148;
-      color: #a78bfa;
-      margin-top: 4px;
-    }
-
-    .run-again:hover { background: #2d3148; opacity: 1; }
   </style>
 </head>
 <body>
@@ -285,6 +268,26 @@
     <div class="error" id="passwordError">Incorrect password. Please try again.</div>
   </div>
 
+  <!-- ── SETUP SCREEN (token entry — first time only) ── -->
+  <div id="setupScreen" style="display:none">
+    <div class="logo">
+      <div class="logo-icon">🔑</div>
+      <div>
+        <div class="logo-text">ACLED Fetcher</div>
+        <div class="logo-sub">One-time setup</div>
+      </div>
+    </div>
+    <h2>Connect to GitHub</h2>
+    <p class="subtitle">Paste your GitHub Personal Access Token below. It will be saved in your browser only — it is never stored in any file or sent anywhere except GitHub.</p>
+    <div class="info-box">
+      To generate a token: go to <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate new token (classic) → tick <strong>repo</strong> and <strong>workflow</strong> → Generate → copy it here.
+    </div>
+    <label for="tokenInput">GitHub Personal Access Token</label>
+    <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+    <button onclick="saveToken()">Save & Continue →</button>
+    <div class="error" id="tokenError"></div>
+  </div>
+
   <!-- ── FETCH SCREEN ── -->
   <div id="fetchScreen" style="display:none">
     <div class="logo">
@@ -295,10 +298,11 @@
       </div>
     </div>
     <h2>Fetch Security Data</h2>
-    <p class="subtitle">Enter a country to pull the latest 30 days of ACLED conflict data.</p>
+    <p class="subtitle">Enter a country to pull the latest conflict data from ACLED.</p>
     <label for="countryInput">Country</label>
     <input type="text" id="countryInput" placeholder="e.g. Nigeria, Mali, Sudan" />
     <button id="runBtn" onclick="runFetch()">Run Fetch →</button>
+    <button class="btn-secondary" onclick="clearToken()">Reset GitHub Token</button>
     <div class="error" id="fetchError"></div>
   </div>
 
@@ -346,25 +350,35 @@
       <div class="breakdown-title">Monthly Breakdown</div>
       <div id="monthlyRows"></div>
     </div>
-    <button class="run-again" onclick="runAgain()">← Fetch Another Country</button>
+    <button class="btn-secondary" onclick="runAgain()">← Fetch Another Country</button>
   </div>
 
 </div>
 
 <script>
   // ══════════════════════════════════════════════════
-  //  CONFIGURATION — edit these four values
+  //  CONFIGURATION — only edit these two values
+  //  The GitHub token is entered by the user in the
+  //  browser and never stored in this file.
   // ══════════════════════════════════════════════════
-  const GITHUB_OWNER  = "Ellis14N";   
-  const GITHUB_REPO   = "acled-fetcher";  
-  const GITHUB_TOKEN  = "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";
-  const PAGE_PASSWORD = "14N2026!";   
+  const GITHUB_OWNER  = "YOUR_GITHUB_USERNAME";
+  const GITHUB_REPO   = "YOUR_REPO_NAME";
+  const PAGE_PASSWORD = "YOUR_TEAM_PASSWORD";
   // ══════════════════════════════════════════════════
 
   let pollingInterval = null;
   let progressValue   = 0;
   let stepTimer       = 0;
-  let currentCountry  = "";
+
+  // ── Boot: decide which screen to show ─────────────
+  window.addEventListener("load", () => {
+    const token = localStorage.getItem("acled_gh_token");
+    if (token) {
+      // Token already saved — go straight to password
+    }
+    // Always start at password screen
+    show("passwordScreen");
+  });
 
   // ── Password ──────────────────────────────────────
   document.getElementById("passwordInput")
@@ -373,48 +387,71 @@
   function checkPassword() {
     const val = document.getElementById("passwordInput").value;
     if (val === PAGE_PASSWORD) {
-      document.getElementById("passwordScreen").style.display = "none";
-      document.getElementById("fetchScreen").style.display    = "block";
-      document.getElementById("countryInput").focus();
+      document.getElementById("passwordError").style.display = "none";
+      const token = localStorage.getItem("acled_gh_token");
+      show(token ? "fetchScreen" : "setupScreen");
+      if (!token) document.getElementById("tokenInput").focus();
+      else        document.getElementById("countryInput").focus();
     } else {
       document.getElementById("passwordError").style.display = "block";
     }
   }
 
-  document.getElementById("countryInput") &&
-    document.getElementById("countryInput")
-      .addEventListener("keydown", e => { if (e.key === "Enter") runFetch(); });
+  // ── Token setup ───────────────────────────────────
+  document.getElementById("tokenInput")
+    .addEventListener("keydown", e => { if (e.key === "Enter") saveToken(); });
+
+  function saveToken() {
+    const token = document.getElementById("tokenInput").value.trim();
+    if (!token.startsWith("ghp_") && !token.startsWith("github_pat_")) {
+      const err = document.getElementById("tokenError");
+      err.textContent = "Token doesn't look right — it should start with ghp_";
+      err.style.display = "block";
+      return;
+    }
+    localStorage.setItem("acled_gh_token", token);
+    show("fetchScreen");
+    document.getElementById("countryInput").focus();
+  }
+
+  function clearToken() {
+    localStorage.removeItem("acled_gh_token");
+    show("setupScreen");
+  }
 
   // ── Run Fetch ─────────────────────────────────────
+  document.getElementById("countryInput")
+    .addEventListener("keydown", e => { if (e.key === "Enter") runFetch(); });
+
   async function runFetch() {
     const country = document.getElementById("countryInput").value.trim();
     if (!country) return;
 
-    currentCountry = country;
+    const token = localStorage.getItem("acled_gh_token");
+    if (!token) { clearToken(); return; }
 
-    document.getElementById("fetchScreen").style.display   = "none";
-    document.getElementById("loadingScreen").style.display = "block";
-    document.getElementById("loadingCountry").textContent  =
-      `Fetching last 30 days of conflict data for ${country}…`;
+    show("loadingScreen");
+    document.getElementById("loadingCountry").textContent =
+      `Fetching conflict data for ${country}…`;
 
     startProgressAnimation();
 
     try {
-      const runId = await triggerWorkflow(country);
-      pollForCompletion(runId, country);
+      const runId = await triggerWorkflow(country, token);
+      pollForCompletion(runId, country, token);
     } catch (err) {
-      showFetchError("Failed to trigger workflow: " + err.message);
+      showFetchError(err.message);
     }
   }
 
-  // ── Trigger GitHub Actions workflow ───────────────
-  async function triggerWorkflow(country) {
-    const triggerRes = await fetch(
+  // ── Trigger workflow ──────────────────────────────
+  async function triggerWorkflow(country, token) {
+    const res = await fetch(
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/fetch_acled.yml/dispatches`,
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
+          Authorization: `Bearer ${token}`,
           Accept: "application/vnd.github+json",
           "Content-Type": "application/json"
         },
@@ -422,19 +459,22 @@
       }
     );
 
-    if (!triggerRes.ok) {
-      const txt = await triggerRes.text();
-      throw new Error(`GitHub API error ${triggerRes.status}: ${txt}`);
+    if (res.status === 401) {
+      localStorage.removeItem("acled_gh_token");
+      throw new Error("GitHub token rejected (401). Your token may have expired — click Reset GitHub Token to enter a new one.");
+    }
+
+    if (!res.ok) {
+      const txt = await res.text();
+      throw new Error(`GitHub API error ${res.status}: ${txt}`);
     }
 
     markStep("step1", "done");
-
-    // Wait 4 seconds then find the run ID
     await sleep(4000);
 
     const runsRes = await fetch(
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs?per_page=5`,
-      { headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: "application/vnd.github+json" } }
+      { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" } }
     );
 
     const runsData = await runsRes.json();
@@ -442,15 +482,15 @@
     return run.id;
   }
 
-  // ── Poll until done ───────────────────────────────
-  function pollForCompletion(runId, country) {
+  // ── Poll for completion ───────────────────────────
+  function pollForCompletion(runId, country, token) {
     markStep("step2", "active");
 
     pollingInterval = setInterval(async () => {
       try {
         const res = await fetch(
           `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs/${runId}`,
-          { headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: "application/vnd.github+json" } }
+          { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" } }
         );
 
         const run = await res.json();
@@ -482,7 +522,7 @@
     }, 6000);
   }
 
-  // ── Load results JSON from repo ───────────────────
+  // ── Load results ──────────────────────────────────
   async function loadResults(country) {
     const filename = `risk_data_${country.toLowerCase().replace(/\s+/g, "_")}.json`;
     const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
@@ -495,20 +535,15 @@
 
   // ── Display results ───────────────────────────────
   function showResults(data) {
-    document.getElementById("loadingScreen").style.display  = "none";
-    document.getElementById("resultsScreen").style.display  = "block";
+    show("resultsScreen");
 
-    document.getElementById("resultTitle").textContent =
-      `${data.country} — Security Overview`;
-    document.getElementById("resultDate").textContent =
-      `Last 30 days · fetched now`;
-
+    document.getElementById("resultTitle").textContent = `${data.country} — Security Overview`;
+    document.getElementById("resultDate").textContent  = "Last 30 days · fetched now";
     document.getElementById("statEvents").textContent     = data.total_events.toLocaleString();
     document.getElementById("statFatalities").textContent = data.total_fatalities.toLocaleString();
 
-    // Event type breakdown from most recent month
-    const months   = Object.values(data.monthly);
-    const latest   = months[months.length - 1];
+    const months  = Object.values(data.monthly);
+    const latest  = months[months.length - 1];
     const typeCounts = latest ? latest.event_types : {};
 
     const breakdownEl = document.getElementById("breakdownRows");
@@ -526,7 +561,6 @@
       });
     }
 
-    // Monthly breakdown
     const monthlyEl = document.getElementById("monthlyRows");
     monthlyEl.innerHTML = "";
     Object.entries(data.monthly).forEach(([month, val]) => {
@@ -539,6 +573,11 @@
   }
 
   // ── Helpers ───────────────────────────────────────
+  function show(id) {
+    ["passwordScreen","setupScreen","fetchScreen","loadingScreen","resultsScreen"]
+      .forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
+  }
+
   function markStep(id, state) {
     const el = document.getElementById(id);
     el.className = `step ${state}`;
@@ -566,16 +605,14 @@
   function showFetchError(msg) {
     clearInterval(pollingInterval);
     clearInterval(stepTimer);
-    document.getElementById("loadingScreen").style.display = "none";
-    document.getElementById("fetchScreen").style.display   = "block";
+    show("fetchScreen");
     const err = document.getElementById("fetchError");
     err.textContent = msg;
     err.style.display = "block";
   }
 
   function runAgain() {
-    document.getElementById("resultsScreen").style.display = "none";
-    document.getElementById("fetchScreen").style.display   = "block";
+    show("fetchScreen");
     document.getElementById("countryInput").value = "";
     document.getElementById("fetchError").style.display = "none";
   }
