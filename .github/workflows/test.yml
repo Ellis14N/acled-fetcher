@@ -1,1 +1,40 @@
 
+name: Fetch ACLED Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      country:
+        description: "Country to fetch data for"
+        required: true
+        default: "Mali"
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run fetch script
+        env:
+          ACLED_EMAIL: ${{ secrets.ACLED_EMAIL }}
+          ACLED_PASSWORD: ${{ secrets.ACLED_PASSWORD }}
+        run: python3 _scripts/fetch_data.py "${{ github.event.inputs.country }}"
+
+      - name: Commit output to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Update ACLED data: ${{ github.event.inputs.country }}"
+          git push
