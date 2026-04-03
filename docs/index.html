@@ -490,26 +490,29 @@
   function showResults(data) {
     show("resultsScreen");
     
-    // 1. Isolate only the most recent month
+    // Logic: Identify the last month entry in the JSON and use its data specifically
     const monthNames = Object.keys(data.monthly);
-    const monthValues = Object.values(data.monthly);
     const latestMonthName = monthNames[monthNames.length - 1];
-    const latestData = monthValues[monthValues.length - 1];
+    const latestData = data.monthly[latestMonthName];
 
     document.getElementById("resultTitle").textContent = `${data.country} — Overview`;
     document.getElementById("resultDate").textContent  = `Reported for: ${latestMonthName}`;
 
-    // 2. Use latest month stats only
-    document.getElementById("statEvents").textContent     = latestData ? latestData.events.toLocaleString() : "0";
-    document.getElementById("statFatalities").textContent = latestData ? latestData.fatalities.toLocaleString() : "0";
+    // FORCE top stats to use month data (latestData.events) instead of grand total (data.total_events)
+    document.getElementById("statEvents").textContent     = latestData.events.toLocaleString();
+    document.getElementById("statFatalities").textContent = latestData.fatalities.toLocaleString();
 
-    // 3. Update breakdown with latest month only
+    // Fill breakdown rows using only the latest month's types
     const breakdownEl = document.getElementById("breakdownRows");
     breakdownEl.innerHTML = "";
-    const typeCounts = latestData ? latestData.event_types : {};
+    const typeCounts = latestData.event_types || {};
     
     Object.entries(typeCounts).sort((a,b) => b[1]-a[1]).forEach(([type, count]) => {
-      breakdownEl.innerHTML += `<div class="breakdown-row"><span class="breakdown-key">${type}</span><span class="breakdown-value">${count}</span></div>`;
+      breakdownEl.innerHTML += `
+        <div class="breakdown-row">
+          <span class="breakdown-key">${type}</span>
+          <span class="breakdown-value">${count}</span>
+        </div>`;
     });
   }
 
