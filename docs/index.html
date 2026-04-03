@@ -514,12 +514,18 @@
   document.getElementById("passwordInput").addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
 
   function checkPassword() {
-    const val = document.getElementById("passwordInput").value;
-    if (val === PAGE_PASSWORD) {
+    const val = document.getElementById("passwordInput").value.trim().toUpperCase();
+    const expected = PAGE_PASSWORD.trim().toUpperCase();
+
+    if (val === expected) {
+      document.getElementById("passwordError").style.display = "none";
       const token = localStorage.getItem("acled_gh_token");
       show(token ? "dashboardScreen" : "setupScreen");
     } else {
-      document.getElementById("passwordError").style.display = "block";
+      const err = document.getElementById("passwordError");
+      err.textContent = "Incorrect password. Please try again or contact admin.";
+      err.style.display = "block";
+      document.getElementById("passwordInput").focus();
     }
   }
 
