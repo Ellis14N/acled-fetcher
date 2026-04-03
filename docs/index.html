@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>14N Monitor Data Tool</title>
+  <title>14N Monitor</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -43,6 +43,14 @@
       align-items: center;
       justify-content: center;
       font-size: 18px;
+      overflow: hidden;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .logo-text { font-size: 18px; font-weight: 700; color: #fff; }
@@ -341,57 +349,59 @@
 
   <div id="passwordScreen">
     <div class="logo">
-      <div class="logo-icon">🛡️</div>
+      <div class="logo-icon">
+        <img src="./logo.png" alt="14N Monitor logo" />
+      </div>
       <div>
-        <div class="logo-text">14N Monitor Data Tool</div>
+        <div class="logo-text">14N Monitor</div>
         <div class="logo-sub">Africa Monitor Data Tool</div>
       </div>
     </div>
     <h2>Enter Password</h2>
-    <p class="subtitle">This tool is restricted to authorized team members.</p>
+    <p class="subtitle">This tool is restricted to authorized team members. For access, please contact your administrator.</p>
     <label for="passwordInput">Password</label>
-    <input type="password" id="passwordInput" placeholder="Enter team password" />
+    <input type="password" id="passwordInput" placeholder="Enter Password Here" />
     <button onclick="checkPassword()">Continue →</button>
     <div class="error" id="passwordError">Incorrect password. Please try again.</div>
   </div>
 
   <div id="dashboardScreen" style="display:none">
     <div class="logo">
-      <div class="logo-icon">🛡️</div>
+      <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
       <div>
-        <div class="logo-text">14N Monitor Data Tool</div>
+        <div class="logo-text">14N Monitor</div>
         <div class="logo-sub">Africa Monitor Data Tool</div>
       </div>
     </div>
     <div class="dashboard-header">
-      <div class="dashboard-title">Select a Tool</div>
-      <div class="dashboard-subtitle">Choose a data collection tool to get started</div>
+      <div class="dashboard-title">Select an Extraction Tool</div>
+      <div class="dashboard-subtitle">Choose a data collection tool.</div>
     </div>
     
     <div class="tools-grid">
       <button class="tool-button" onclick="show('fetchScreen')">
-        <div class="tool-name">ACLED Tool</div>
-        <div class="tool-description">Fetch security & conflict data</div>
+        <div class="tool-name">ACLED Extractor</div>
+        <div class="tool-description">Fetch Conflict Data</div>
       </button>
       
       <button class="tool-button" onclick="show('fetchOpenSkyScreen')">
-        <div class="tool-name">OpenSky Tool</div>
-        <div class="tool-description">Fetch airspace and flight activity</div>
+        <div class="tool-name">OpenSky Extractor</div>
+        <div class="tool-description">Fetch Airspace and Flight Activity</div>
       </button>
       
       <button class="tool-button coming-soon">
-        <div class="tool-name">Tool 3</div>
-        <div class="tool-description">Data analysis</div>
+        <div class="tool-name">Tool1 Extractor</div>
+        <div class="tool-description">Fetch</div>
       </button>
       
       <button class="tool-button coming-soon">
-        <div class="tool-name">Tool 3</div>
-        <div class="tool-description">Reporting & insights</div>
+        <div class="tool-name">Tool2 Extractor</div>
+        <div class="tool-description">Fetch</div>
       </button>
       
       <button class="tool-button coming-soon">
-        <div class="tool-name">Tool 4</div>
-        <div class="tool-description">Configuration</div>
+        <div class="tool-name">Tool3 Extractor</div>
+        <div class="tool-description">Fetch</div>
       </button>
     </div>
 
@@ -402,9 +412,9 @@
 
   <div id="setupScreen" style="display:none">
     <div class="logo">
-      <div class="logo-icon">🔑</div>
+      <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
       <div>
-        <div class="logo-text">14N Monitor Data Tool</div>
+        <div class="logo-text">14N Monitor</div>
         <div class="logo-sub">One-time setup</div>
       </div>
     </div>
@@ -421,9 +431,9 @@
 
   <div id="fetchScreen" style="display:none">
     <div class="logo">
-      <div class="logo-icon">🌍</div>
+      <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
       <div>
-        <div class="logo-text">14N Monitor Data Tool</div>
+        <div class="logo-text">14N Monitor</div>
         <div class="logo-sub">Africa Monitor Data Tool</div>
       </div>
     </div>
@@ -438,9 +448,9 @@
 
   <div id="fetchOpenSkyScreen" style="display:none">
     <div class="logo">
-      <div class="logo-icon">✈️</div>
+      <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
       <div>
-        <div class="logo-text">14N Monitor Data Tool</div>
+        <div class="logo-text">14N Monitor</div>
         <div class="logo-sub">OpenSky Data Tool</div>
       </div>
     </div>
@@ -751,7 +761,18 @@
     breakdownEl.innerHTML = "";
     const typeCounts = latestData.event_types || {};
 
-    Object.entries(typeCounts).sort((a,b) => b[1]-a[1]).forEach(([type, count]) => {
+    // Define all event types to display, even if count is 0
+    const allEventTypes = [
+      "Protests",
+      "Explosions/Remote violence",
+      "Battles",
+      "Violence against civilians",
+      "Riots",
+      "Strategic developments"
+    ];
+
+    allEventTypes.forEach(type => {
+      const count = typeCounts[type] || 0;
       breakdownEl.innerHTML += `
         <div class="breakdown-row">
           <span class="breakdown-key">${type}</span>

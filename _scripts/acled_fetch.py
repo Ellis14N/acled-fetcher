@@ -21,7 +21,8 @@ EVENT_TYPES = [
     "Explosions/Remote violence",
     "Battles",
     "Violence against civilians",
-    "Riots"
+    "Riots",
+    "Strategic developments"
 ]
 
 
