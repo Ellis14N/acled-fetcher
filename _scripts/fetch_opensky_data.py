@@ -7,11 +7,11 @@ from _scripts.opensky_fetch import get_opensky_summary
 def main():
     parser = argparse.ArgumentParser(description="Fetch and save OpenSky summary data")
     parser.add_argument("--airport", type=str, required=True, help="ICAO airport code")
-    parser.add_argument("--days-back", type=int, default=7, help="Days back to fetch")
+    parser.add_argument("--days-back", type=int, default=7, help="Days back to fetch (max 7 for OpenSky API)")
 
     args = parser.parse_args()
     airport = args.airport.upper().strip()
-    days_back = min(max(args.days_back, 1), 14)
+    days_back = min(max(args.days_back, 1), 7)
 
     print(f"Starting OpenSky fetch: airport={airport}, days_back={days_back}")
 

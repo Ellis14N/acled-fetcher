@@ -90,7 +90,8 @@ def fetch_flights_by_airport(airport_icao, begin, end):
             auth=get_opensky_auth(),
             timeout=30
         )
-        dep_response.raise_for_status()
+        if not dep_response.ok:
+            raise Exception(f"❌ OpenSky departure fetch failed ({dep_response.status_code}): {dep_response.text}")
         departures = dep_response.json()
         
         # Fetch arrivals
@@ -100,7 +101,8 @@ def fetch_flights_by_airport(airport_icao, begin, end):
             auth=get_opensky_auth(),
             timeout=30
         )
-        arr_response.raise_for_status()
+        if not arr_response.ok:
+            raise Exception(f"❌ OpenSky arrival fetch failed ({arr_response.status_code}): {arr_response.text}")
         arrivals = arr_response.json()
         
         print(f"🛫 {airport_icao}: {len(departures)} departures, {len(arrivals)} arrivals")
