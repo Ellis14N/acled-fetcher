@@ -350,9 +350,12 @@
       <div class="breakdown-title">Monthly Breakdown</div>
       <div id="monthlyRows"></div>
     </div>
-    <button class="btn-secondary" onclick="runAgain()">← Fetch Another Country</button>
+    <div style="display: flex; gap: 12px; margin-top: 32px;">
+      <button class="btn-secondary" onclick="runAgain()" style="margin-top: 0; flex: 1;">← Fetch Another Country</button>
+      <button id="downloadBtn" class="btn" style="background: #8b5cf6; flex: 1;">Download for Claude</button>
+    </div>
   </div>
-
+  
 </div>
 
 <script>
@@ -510,9 +513,14 @@
             markStep("step4", "done");
             setProgress(100);
             await sleep(600);
-            await loadResults(country);
-          } else {
-            showFetchError(`Workflow failed (${run.conclusion}). Check GitHub Actions for details.`);
+            // We need to capture the data from loadResults to pass it to setupDownload
+            const filename = `risk_data_${country.toLowerCase().replace(/\s+/g, "_")}.json`;
+            const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            
+            showResults(data);
+            setupDownload(data, country); // <--- This activates the button
           }
         }
       } catch (err) {
@@ -522,6 +530,27 @@
     }, 6000);
   }
 
+ function setupDownload(data, country) {
+    const downloadBtn = document.getElementById('downloadBtn');
+    
+    downloadBtn.onclick = () => {
+      // Formats the data as a JavaScript file with a constant Claude can reference
+      const jsContent = `/**\n * ACLED Data Export\n * Country: ${country}\n * Generated: ${new Date().toISOString()}\n */\n\nconst ACLED_DATA = ${JSON.stringify(data, null, 2)};`;
+      
+      const blob = new Blob([jsContent], { type: 'text/javascript' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `acled_${country.toLowerCase().replace(/\s+/g, '_')}_data.js`;
+      document.body.appendChild(a);
+      a.click();
+      
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+  } 
+  
   // ── Load results ──────────────────────────────────
   async function loadResults(country) {
     const filename = `risk_data_${country.toLowerCase().replace(/\s+/g, "_")}.json`;
