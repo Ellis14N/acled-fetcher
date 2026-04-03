@@ -375,8 +375,8 @@
       </button>
       
       <button class="tool-button" onclick="show('fetchOpenSkyScreen')">
-        <div class="tool-name">OpenSky Tool)</div>
-        <div class="tool-description">Fetch airspace/airport data</div>
+        <div class="tool-name">OpenSky Tool</div>
+        <div class="tool-description">Fetch airspace and flight activity</div>
       </button>
       
       <button class="tool-button coming-soon">
@@ -481,11 +481,11 @@
     </div>
     <div class="stat-grid">
       <div class="stat-card">
-        <div class="stat-label">Events (Past 30d)</div>
+        <div class="stat-label" id="statLabel1">Events (Past 30d)</div>
         <div class="stat-value" id="statEvents">—</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Fatalities (Past 30d)</div>
+        <div class="stat-label" id="statLabel2">Fatalities (Past 30d)</div>
         <div class="stat-value" id="statFatalities">—</div>
       </div>
     </div>
@@ -696,6 +696,10 @@
     if (source === "opensky") {
       document.getElementById("resultTitle").textContent = `${data.airport} — OpenSky Overview`;
       document.getElementById("resultDate").textContent  = `Retrieved live data`;
+
+      document.getElementById("statLabel1").textContent = "Flights (window)";
+      document.getElementById("statLabel2").textContent = "Departures (window)";
+
       document.getElementById("statEvents").textContent     = data.total_flights.toLocaleString();
       document.getElementById("statFatalities").textContent = data.total_departures.toLocaleString();
 
@@ -731,6 +735,8 @@
     document.getElementById("resultTitle").textContent = `${data.country} — Overview`;
     document.getElementById("resultDate").textContent  = `Reported for: ${latestMonthName}`;
 
+    document.getElementById("statLabel1").textContent = "Events (Past 30d)";
+    document.getElementById("statLabel2").textContent = "Fatalities (Past 30d)";
     document.getElementById("statEvents").textContent     = latestData.events.toLocaleString();
     document.getElementById("statFatalities").textContent = latestData.fatalities.toLocaleString();
 
