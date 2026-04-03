@@ -1,7 +1,15 @@
 import os
 import json
 import argparse
-from _scripts.opensky_fetch import get_opensky_summary
+import sys
+from pathlib import Path
+
+# Allow executing from project root without package installation
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / '_scripts') not in sys.path:
+    sys.path.insert(0, str(ROOT / '_scripts'))
+
+from opensky_fetch import get_opensky_summary
 
 
 def main():

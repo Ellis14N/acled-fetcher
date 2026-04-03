@@ -229,14 +229,30 @@ def get_opensky_summary(airport_code="JFK", days_back=30):
             "weekly": build_weekly_series(all_flights),
             "monthly": build_monthly_series(all_flights)
         }
-        
+
         print(f"\n✅ OpenSky summary compiled:")
         print(f"   Total flights: {summary['total_flights']}")
         print(f"   Departures: {summary['total_departures']}")
         print(f"   Arrivals: {summary['total_arrivals']}")
-        
+
         return summary
-    
+
     except Exception as e:
-        print(f"❌ Error building OpenSky summary: {e}")
+        error_text = str(e)
+        print(f"❌ Error building OpenSky summary: {error_text}")
+
+        if "historical flights" in error_text.lower() or "cannot access historical" in error_text.lower():
+            print("ℹ️ Falling back to live state data because historical flight access is not available")
+            states = fetch_aircraft_states()
+            summary = {
+                "airport": airport_code,
+                "region": AIRPORT_CODES.get(airport_code.replace("K", ""), "Unknown"),
+                "total_flights": len(states),
+                "total_departures": 0,
+                "total_arrivals": 0,
+                "weekly": {},
+                "monthly": {}
+            }
+            return summary
+
         raise
