@@ -35,23 +35,7 @@ jobs:
           OPENSKY_USERNAME: ${{ secrets.OPENSKY_USERNAME }}
           OPENSKY_PASSWORD: ${{ secrets.OPENSKY_PASSWORD }}
         run: |
-          python3 - <<'PY'
-          import os
-          import json
-          from _scripts.opensky_fetch import get_opensky_summary
-
-          airport = "${{ github.event.inputs.airport }}"
-          days_back = int("${{ github.event.inputs.days_back }}")
-
-          summary = get_opensky_summary(airport_code=airport, days_back=days_back)
-
-          filename = f"data/opensky_{summary['airport'].lower().replace(' ', '_')}_{summary['total_flights']}.json"
-          os.makedirs('data', exist_ok=True)
-          with open(filename, 'w') as f:
-            json.dump(summary, f, indent=2)
-
-          print(f"✅ Data saved to {filename}")
-          PY
+          python3 _scripts/fetch_opensky_data.py --airport "${{ github.event.inputs.airport }}" --days-back "${{ github.event.inputs.days_back }}"
 
       - name: Commit output to repo
         run: |
