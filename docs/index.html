@@ -87,7 +87,7 @@
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
+      transition: opacity 0.2s, transform 0.1s, background-color 0.2s;
     }
 
     button:hover  { opacity: 0.9; }
@@ -137,13 +137,13 @@
       padding: 10px;
       display: flex;
       justify-content: center;
-      max-height: 300px;
+      max-height: 350px;
     }
 
     .africa-map {
       width: 100%;
       height: auto;
-      max-height: 280px;
+      max-height: 330px;
     }
 
     .country-path {
@@ -168,7 +168,14 @@
       letter-spacing: 0.1em;
     }
 
-    /* LOADING */
+    text {
+      font-weight: bold;
+      text-anchor: middle;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* LOADING SCREEN */
     #loadingScreen { display: none; }
 
     .spinner-wrap {
@@ -227,7 +234,7 @@
     .step.active { color: #e2e8f0; }
     .step-icon   { font-size: 16px; width: 20px; text-align: center; }
 
-    /* RESULTS */
+    /* RESULTS SCREEN */
     #resultsScreen { display: none; }
 
     .result-header {
@@ -300,7 +307,7 @@
       </div>
     </div>
     <h2>Enter Password</h2>
-    <p class="subtitle">This tool is restricted to authorised team members.</p>
+    <p class="subtitle">This tool is restricted to authorized team members.</p>
     <label for="passwordInput">Password</label>
     <input type="password" id="passwordInput" placeholder="Enter team password" />
     <button onclick="checkPassword()">Continue →</button>
@@ -337,15 +344,25 @@
     <h2>Fetch Security Data</h2>
     <p class="subtitle">Enter a country or select one from the map to pull the latest conflict data.</p>
     
-    <div class="map-label">Interactive Regional Map</div>
+    <div class="map-label">Click a country to start fetching data</div>
     <div class="map-container">
-      <svg class="africa-map" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-        <path class="country-path" d="M300,200 L350,170 L400,200 Z" onclick="mapClick('Mali')"></path>
-        <path class="country-path" d="M410,200 L460,170 L510,200 Z" onclick="mapClick('Niger')"></path>
-        <path class="country-path" d="M350,250 L400,220 L450,250 Z" onclick="mapClick('Nigeria')"></path>
-        <path class="country-path" d="M500,300 L550,270 L600,300 Z" onclick="mapClick('Sudan')"></path>
-        <path class="country-path" d="M480,400 L530,370 L580,400 Z" onclick="mapClick('DRC')"></path>
-        <path class="country-path" d="M320,350 L370,320 L420,350 Z" onclick="mapClick('Burkina Faso')"></path>
+      <svg class="africa-map" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#242936" d="M185,100 L210,95 L250,90 L300,92 L350,105 L400,120 L450,150 L480,200 L490,250 L480,300 L450,350 L400,450 L350,550 L320,580 L300,585 L280,560 L250,500 L220,450 L200,400 L180,350 L150,300 L120,250 L100,200 L120,150 L150,120 Z" />
+        
+        <path class="country-path" d="M160,180 L200,170 L220,200 L200,240 L170,230 Z" onclick="mapClick('Mali')"></path>
+        <text x="175" y="210" fill="#64748b" font-size="10">MALI</text>
+        
+        <path class="country-path" d="M240,250 L280,250 L290,290 L250,300 L230,280 Z" onclick="mapClick('Nigeria')"></path>
+        <text x="245" y="280" fill="#64748b" font-size="10">NIGERIA</text>
+        
+        <path class="country-path" d="M380,200 L430,210 L440,260 L390,270 L370,240 Z" onclick="mapClick('Sudan')"></path>
+        <text x="390" y="240" fill="#64748b" font-size="10">SUDAN</text>
+
+        <path class="country-path" d="M320,320 L370,320 L380,380 L330,390 L300,360 Z" onclick="mapClick('DRC')"></path>
+        <text x="330" y="360" fill="#64748b" font-size="10">DRC</text>
+
+        <path class="country-path" d="M230,180 L300,170 L310,230 L240,245 Z" onclick="mapClick('Niger')"></path>
+        <text x="255" y="210" fill="#64748b" font-size="10">NIGER</text>
       </svg>
     </div>
 
@@ -394,13 +411,9 @@
       <div class="breakdown-title">Events by Type</div>
       <div id="breakdownRows"></div>
     </div>
-    <div class="breakdown">
-      <div class="breakdown-title">Monthly Breakdown</div>
-      <div id="monthlyRows"></div>
-    </div>
     <div style="display: flex; gap: 12px; margin-top: 32px;">
       <button class="btn-secondary" onclick="runAgain()" style="margin-top: 0; flex: 1;">← Fetch Another</button>
-      <button id="downloadBtn" class="btn" style="background: #8b5cf6; flex: 1;">Download for Claude</button>
+      <button id="downloadBtn" style="background: #8b5cf6; flex: 1;">Download for Claude</button>
     </div>
   </div>
 </div>
@@ -414,16 +427,13 @@
   let progressValue   = 0;
   let stepTimer       = 0;
 
-  window.addEventListener("load", () => {
-    show("passwordScreen");
-  });
+  window.addEventListener("load", () => { show("passwordScreen"); });
 
   document.getElementById("passwordInput").addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
 
   function checkPassword() {
     const val = document.getElementById("passwordInput").value;
     if (val === PAGE_PASSWORD) {
-      document.getElementById("passwordError").style.display = "none";
       const token = localStorage.getItem("acled_gh_token");
       show(token ? "fetchScreen" : "setupScreen");
     } else {
@@ -452,11 +462,11 @@
     const input = document.getElementById("countryInput");
     input.value = countryName;
     const btn = document.getElementById("runBtn");
-    btn.style.transform = "scale(0.95)";
+    btn.style.backgroundColor = "#8b5cf6";
     setTimeout(() => {
-      btn.style.transform = "scale(1)";
+      btn.style.backgroundColor = "";
       runFetch();
-    }, 150);
+    }, 300);
   }
 
   async function runFetch() {
@@ -466,7 +476,7 @@
     if (!token) { clearToken(); return; }
 
     show("loadingScreen");
-    document.getElementById("loadingCountry").textContent = `Fetching conflict data for ${country}…`;
+    document.getElementById("loadingCountry").textContent = `Fetching data for ${country}...`;
     startProgressAnimation();
 
     try {
@@ -491,10 +501,7 @@
       }
     );
 
-    if (res.status === 401) {
-      localStorage.removeItem("acled_gh_token");
-      throw new Error("GitHub token rejected.");
-    }
+    if (res.status === 401) { localStorage.removeItem("acled_gh_token"); throw new Error("GitHub token rejected."); }
     if (!res.ok) throw new Error(`GitHub API error ${res.status}`);
 
     markStep("step1", "done");
@@ -519,10 +526,7 @@
         );
         const run = await res.json();
 
-        if (run.status === "in_progress") {
-          markStep("step2", "done");
-          markStep("step3", "active");
-        }
+        if (run.status === "in_progress") { markStep("step2", "done"); markStep("step3", "active"); }
 
         if (run.status === "completed") {
           clearInterval(pollingInterval);
@@ -542,13 +546,9 @@
             
             showResults(data);
             setupDownload(data, country);
-          } else {
-            throw new Error("Workflow failed.");
-          }
+          } else { throw new Error("Workflow failed."); }
         }
-      } catch (err) {
-        showFetchError(err.message);
-      }
+      } catch (err) { showFetchError(err.message); }
     }, 6000);
   }
 
@@ -571,24 +571,20 @@
   function showResults(data) {
     show("resultsScreen");
     document.getElementById("resultTitle").textContent = `${data.country} — Overview`;
-    document.getElementById("resultDate").textContent  = "Last 30 days · Updated now";
+    document.getElementById("resultDate").textContent  = "Last 30 days";
     document.getElementById("statEvents").textContent     = data.total_events.toLocaleString();
     document.getElementById("statFatalities").textContent = data.total_fatalities.toLocaleString();
 
     const breakdownEl = document.getElementById("breakdownRows");
     breakdownEl.innerHTML = "";
+    
+    // Summary of latest month
     const months = Object.values(data.monthly);
     const latest = months[months.length - 1];
     const typeCounts = latest ? latest.event_types : {};
     
     Object.entries(typeCounts).sort((a,b) => b[1]-a[1]).forEach(([type, count]) => {
       breakdownEl.innerHTML += `<div class="breakdown-row"><span class="breakdown-key">${type}</span><span class="breakdown-value">${count}</span></div>`;
-    });
-
-    const monthlyEl = document.getElementById("monthlyRows");
-    monthlyEl.innerHTML = "";
-    Object.entries(data.monthly).forEach(([month, val]) => {
-      monthlyEl.innerHTML += `<div class="breakdown-row"><span class="breakdown-key">${month}</span><span class="breakdown-value">${val.events} events</span></div>`;
     });
   }
 
