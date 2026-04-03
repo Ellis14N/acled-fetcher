@@ -509,9 +509,10 @@
   let progressValue   = 0;
   let stepTimer       = 0;
 
-  window.addEventListener("load", () => { show("passwordScreen"); });
-
-  document.getElementById("passwordInput").addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
+  window.addEventListener("load", () => {
+    show("passwordScreen");
+    document.getElementById("passwordInput").addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
+  });
 
   function checkPassword() {
     const val = document.getElementById("passwordInput").value.trim().toUpperCase();
