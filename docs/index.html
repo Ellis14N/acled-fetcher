@@ -246,6 +246,94 @@
     .breakdown-row:last-child { border-bottom: none; }
     .breakdown-key   { color: #cbd5e1; }
     .breakdown-value { color: #a78bfa; font-weight: 700; }
+
+    /* DASHBOARD SCREEN */
+    #dashboardScreen { display: none; }
+
+    .dashboard-header {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .dashboard-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .dashboard-subtitle { font-size: 14px; color: #64748b; }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 600px) {
+      .tools-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .tool-button {
+      background: linear-gradient(135deg, #1e293b, #2d3548);
+      border: 1px solid #2d3148;
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      color: #e2e8f0;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      min-height: 140px;
+      justify-content: center;
+    }
+
+    .tool-button:hover {
+      background: linear-gradient(135deg, #2d3548, #3d4558);
+      border-color: #6366f1;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+    }
+
+    .tool-button:active {
+      transform: translateY(0);
+    }
+
+    .tool-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .tool-description {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .tool-button.coming-soon {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .tool-button.coming-soon .tool-name::after {
+      content: " (Coming Soon)";
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .user-menu {
+      display: flex;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .user-menu button {
+      flex: 1;
+      padding: 11px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -265,6 +353,46 @@
     <input type="password" id="passwordInput" placeholder="Enter team password" />
     <button onclick="checkPassword()">Continue →</button>
     <div class="error" id="passwordError">Incorrect password. Please try again.</div>
+  </div>
+
+  <div id="dashboardScreen" style="display:none">
+    <div class="logo">
+      <div class="logo-icon">🛡️</div>
+      <div>
+        <div class="logo-text">14N Monitor DataTool</div>
+        <div class="logo-sub">Conflict Data Tool</div>
+      </div>
+    </div>
+    <div class="dashboard-header">
+      <div class="dashboard-title">Select a Tool</div>
+      <div class="dashboard-subtitle">Choose a data collection tool to get started</div>
+    </div>
+    
+    <div class="tools-grid">
+      <button class="tool-button" onclick="show('fetchScreen')">
+        <div class="tool-name">ACLED Tool</div>
+        <div class="tool-description">Fetch security & conflict data</div>
+      </button>
+      
+      <button class="tool-button coming-soon">
+        <div class="tool-name">Tool 2</div>
+        <div class="tool-description">Data analysis</div>
+      </button>
+      
+      <button class="tool-button coming-soon">
+        <div class="tool-name">Tool 3</div>
+        <div class="tool-description">Reporting & insights</div>
+      </button>
+      
+      <button class="tool-button coming-soon">
+        <div class="tool-name">Tool 4</div>
+        <div class="tool-description">Configuration</div>
+      </button>
+    </div>
+
+    <div class="user-menu">
+      <button class="btn-secondary" onclick="logout()" style="margin-top: 0;">Logout</button>
+    </div>
   </div>
 
   <div id="setupScreen" style="display:none">
@@ -365,7 +493,7 @@
     const val = document.getElementById("passwordInput").value;
     if (val === PAGE_PASSWORD) {
       const token = localStorage.getItem("acled_gh_token");
-      show(token ? "fetchScreen" : "setupScreen");
+      show(token ? "dashboardScreen" : "setupScreen");
     } else {
       document.getElementById("passwordError").style.display = "block";
     }
@@ -380,12 +508,18 @@
       return;
     }
     localStorage.setItem("acled_gh_token", token);
-    show("fetchScreen");
+    show("dashboardScreen");
   }
 
   function clearToken() {
     localStorage.removeItem("acled_gh_token");
     show("setupScreen");
+  }
+
+  function logout() {
+    show("passwordScreen");
+    document.getElementById("passwordInput").value = "";
+    document.getElementById("passwordError").style.display = "none";
   }
 
   async function runFetch() {
@@ -517,7 +651,7 @@
   }
 
   function show(id) {
-    ["passwordScreen","setupScreen","fetchScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
+    ["passwordScreen","dashboardScreen","setupScreen","fetchScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
   }
 
   function markStep(id, state) {
@@ -545,7 +679,7 @@
   }
 
   function runAgain() {
-    show("fetchScreen");
+    show("dashboardScreen");
     document.getElementById("countryInput").value = "";
     document.getElementById("fetchError").style.display = "none";
   }
