@@ -1,0 +1,184 @@
+{
+  "country": "Burkina Faso",
+  "total_events": 452,
+  "total_fatalities": 1841,
+  "weekly": {
+    "2024-12-30 to 2025-01-05": {
+      "events": 19,
+      "fatalities": 91,
+      "event_types": {
+        "Protests": 1,
+        "Explosions/Remote violence": 3,
+        "Battles": 13,
+        "Violence against civilians": 2
+      }
+    },
+    "2025-01-06 to 2025-01-12": {
+      "events": 35,
+      "fatalities": 146,
+      "event_types": {
+        "Protests": 4,
+        "Explosions/Remote violence": 10,
+        "Battles": 21
+      }
+    },
+    "2025-01-13 to 2025-01-19": {
+      "events": 30,
+      "fatalities": 67,
+      "event_types": {
+        "Protests": 3,
+        "Explosions/Remote violence": 10,
+        "Battles": 14,
+        "Violence against civilians": 3
+      }
+    },
+    "2025-01-20 to 2025-01-26": {
+      "events": 31,
+      "fatalities": 139,
+      "event_types": {
+        "Protests": 3,
+        "Explosions/Remote violence": 11,
+        "Battles": 14,
+        "Violence against civilians": 3
+      }
+    },
+    "2025-01-27 to 2025-02-02": {
+      "events": 39,
+      "fatalities": 125,
+      "event_types": {
+        "Protests": 17,
+        "Explosions/Remote violence": 7,
+        "Battles": 10,
+        "Violence against civilians": 5
+      }
+    },
+    "2025-02-03 to 2025-02-09": {
+      "events": 26,
+      "fatalities": 103,
+      "event_types": {
+        "Protests": 2,
+        "Explosions/Remote violence": 6,
+        "Battles": 16,
+        "Violence against civilians": 2
+      }
+    },
+    "2025-02-10 to 2025-02-16": {
+      "events": 44,
+      "fatalities": 240,
+      "event_types": {
+        "Protests": 5,
+        "Explosions/Remote violence": 5,
+        "Battles": 29,
+        "Violence against civilians": 5
+      }
+    },
+    "2025-02-17 to 2025-02-23": {
+      "events": 41,
+      "fatalities": 131,
+      "event_types": {
+        "Protests": 6,
+        "Explosions/Remote violence": 5,
+        "Battles": 25,
+        "Violence against civilians": 5
+      }
+    },
+    "2025-02-24 to 2025-03-02": {
+      "events": 22,
+      "fatalities": 37,
+      "event_types": {
+        "Protests": 2,
+        "Explosions/Remote violence": 2,
+        "Battles": 18
+      }
+    },
+    "2025-03-03 to 2025-03-09": {
+      "events": 40,
+      "fatalities": 156,
+      "event_types": {
+        "Protests": 1,
+        "Explosions/Remote violence": 7,
+        "Battles": 24,
+        "Violence against civilians": 8
+      }
+    },
+    "2025-03-10 to 2025-03-16": {
+      "events": 45,
+      "fatalities": 324,
+      "event_types": {
+        "Explosions/Remote violence": 9,
+        "Battles": 30,
+        "Violence against civilians": 6
+      }
+    },
+    "2025-03-17 to 2025-03-23": {
+      "events": 43,
+      "fatalities": 150,
+      "event_types": {
+        "Protests": 2,
+        "Explosions/Remote violence": 20,
+        "Battles": 13,
+        "Violence against civilians": 6,
+        "Riots": 2
+      }
+    },
+    "2025-03-24 to 2025-03-30": {
+      "events": 27,
+      "fatalities": 104,
+      "event_types": {
+        "Explosions/Remote violence": 7,
+        "Battles": 20
+      }
+    },
+    "2025-03-31 to 2025-04-06": {
+      "events": 10,
+      "fatalities": 28,
+      "event_types": {
+        "Explosions/Remote violence": 6,
+        "Battles": 3,
+        "Violence against civilians": 1
+      }
+    }
+  },
+  "monthly": {
+    "2025-01": {
+      "events": 150,
+      "fatalities": 549,
+      "event_types": {
+        "Protests": 26,
+        "Explosions/Remote violence": 41,
+        "Battles": 70,
+        "Violence against civilians": 13
+      }
+    },
+    "2025-02": {
+      "events": 134,
+      "fatalities": 527,
+      "event_types": {
+        "Protests": 17,
+        "Explosions/Remote violence": 17,
+        "Battles": 88,
+        "Violence against civilians": 12
+      }
+    },
+    "2025-03": {
+      "events": 161,
+      "fatalities": 743,
+      "event_types": {
+        "Protests": 3,
+        "Explosions/Remote violence": 47,
+        "Battles": 89,
+        "Violence against civilians": 20,
+        "Riots": 2
+      }
+    },
+    "2025-04": {
+      "events": 7,
+      "fatalities": 22,
+      "event_types": {
+        "Explosions/Remote violence": 3,
+        "Battles": 3,
+        "Violence against civilians": 1
+      }
+    }
+  }
+}
