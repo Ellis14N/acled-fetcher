@@ -1,12 +1,13 @@
 {
   "country": "Mali",
   "country_code": "MLI",
-  "date_retrieved": "2026-04-03T23:38:26.594704",
-  "total_displaced": 4173814,
+  "date_retrieved": "2026-04-03T23:52:51.439318",
+  "reference_year": "2025",
+  "total_displaced": 540993,
   "population_types": {
-    "refugees": 917633,
-    "asylum_seekers": 25286,
-    "idps": 3230895,
+    "refugees": 138530,
+    "asylum_seekers": 296,
+    "idps": 402167,
     "stateless": 0,
     "oip": 0
   },
@@ -15,94 +16,94 @@
       "origin": "Mali",
       "refugees": 0,
       "asylum_seekers": 0,
-      "idps": 3230895,
+      "idps": 402167,
       "stateless": 0,
       "oip": 0,
-      "total": 3230895
-    },
-    {
-      "origin": "Mauritania",
-      "refugees": 394106,
-      "asylum_seekers": 1401,
-      "idps": 0,
-      "stateless": 0,
-      "oip": 0,
-      "total": 395507
+      "total": 402167
     },
     {
       "origin": "Burkina Faso",
-      "refugees": 289121,
-      "asylum_seekers": 97,
-      "idps": 0,
-      "stateless": 0,
-      "oip": 0,
-      "total": 289218
-    },
-    {
-      "origin": "Niger",
-      "refugees": 126682,
+      "refugees": 96155,
       "asylum_seekers": 0,
       "idps": 0,
       "stateless": 0,
       "oip": 0,
-      "total": 126682
+      "total": 96155
     },
     {
-      "origin": "Cote d'Ivoire",
-      "refugees": 27914,
-      "asylum_seekers": 10182,
+      "origin": "Niger",
+      "refugees": 25432,
+      "asylum_seekers": 0,
       "idps": 0,
       "stateless": 0,
       "oip": 0,
-      "total": 38096
+      "total": 25432
     },
     {
-      "origin": "Unknown",
-      "refugees": 32278,
-      "asylum_seekers": 150,
+      "origin": "Mauritania",
+      "refugees": 15012,
+      "asylum_seekers": 0,
       "idps": 0,
       "stateless": 0,
       "oip": 0,
-      "total": 32428
-    },
-    {
-      "origin": "Sierra Leone",
-      "refugees": 15321,
-      "asylum_seekers": 3305,
-      "idps": 0,
-      "stateless": 0,
-      "oip": 0,
-      "total": 18626
+      "total": 15012
     },
     {
       "origin": "Central African Rep.",
-      "refugees": 12872,
-      "asylum_seekers": 3306,
+      "refugees": 1399,
+      "asylum_seekers": 115,
       "idps": 0,
       "stateless": 0,
       "oip": 0,
-      "total": 16178
+      "total": 1514
     },
     {
       "origin": "Dem. Rep. of the Congo",
-      "refugees": 5002,
-      "asylum_seekers": 1965,
+      "refugees": 302,
+      "asylum_seekers": 51,
       "idps": 0,
       "stateless": 0,
       "oip": 0,
-      "total": 6967
+      "total": 353
     },
     {
-      "origin": "Liberia",
-      "refugees": 6343,
-      "asylum_seekers": 318,
+      "origin": "Syrian Arab Rep.",
+      "refugees": 40,
+      "asylum_seekers": 29,
       "idps": 0,
       "stateless": 0,
       "oip": 0,
-      "total": 6661
+      "total": 69
+    },
+    {
+      "origin": "Congo",
+      "refugees": 54,
+      "asylum_seekers": 13,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 67
+    },
+    {
+      "origin": "Togo",
+      "refugees": 38,
+      "asylum_seekers": 0,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 38
+    },
+    {
+      "origin": "T\u00fcrkiye",
+      "refugees": 27,
+      "asylum_seekers": 5,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 32
     }
   ],
-  "origin_country_count": 35,
+  "origin_country_count": 21,
   "yearly_totals": {
     "1971": 60,
     "1986": 50,

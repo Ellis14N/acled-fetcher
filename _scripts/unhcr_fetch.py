@@ -4,6 +4,7 @@ from collections import defaultdict
 
 # UNHCR Refugee Statistics API v1 (public endpoints)
 UNHCR_API_BASE = "https://api.unhcr.org/population/v1"
+UNHCR_MAX_PAGE_SCAN = 250
 
 # ISO 3166-1 alpha-3 country codes for supported countries
 COUNTRY_ISO_CODES = {
@@ -49,7 +50,7 @@ def fetch_population_data_by_country_of_asylum(country_iso_code):
         page = 1
         max_pages = 1
 
-        while page <= max_pages:
+        while page <= max_pages and page <= UNHCR_MAX_PAGE_SCAN:
             params = {**base_params, "page": page}
             response = requests.get(url, params=params, timeout=30)
             response.raise_for_status()
@@ -60,6 +61,9 @@ def fetch_population_data_by_country_of_asylum(country_iso_code):
 
             max_pages = int(payload.get("maxPages", 1) or 1) if isinstance(payload, dict) else 1
             page += 1
+
+        if max_pages > UNHCR_MAX_PAGE_SCAN:
+            print(f"⚠️  Pagination capped at {UNHCR_MAX_PAGE_SCAN} pages (API reported {max_pages})")
 
         print(f"   → Retrieved {len(all_records)} displacement records")
         return all_records
@@ -80,6 +84,11 @@ def to_int(value):
 def normalize_origin_name(origin):
     text = str(origin or "").strip()
     return "Unknown/Unspecified" if not text or text == "-" else text
+
+
+def parse_year(value):
+    text = str(value or "").strip()
+    return text if len(text) == 4 and text.isdigit() else None
 
 
 def aggregate_population_by_origin(records):
@@ -136,7 +145,7 @@ def build_yearly_totals(records):
     yearly = defaultdict(int)
 
     for record in records:
-        year = str(record.get("year", "")).strip()
+        year = parse_year(record.get("year", ""))
         if not year:
             continue
 
@@ -149,6 +158,17 @@ def build_yearly_totals(records):
         )
 
     return dict(sorted(yearly.items(), key=lambda item: item[0]))
+
+
+def select_latest_year_records(records):
+    """Select only records from the latest available year."""
+    years = sorted({parse_year(r.get("year", "")) for r in records if parse_year(r.get("year", ""))})
+    if not years:
+        return None, []
+
+    latest_year = years[-1]
+    latest_records = [r for r in records if parse_year(r.get("year", "")) == latest_year]
+    return latest_year, latest_records
 
 
 def build_trend_summary(yearly_totals):
@@ -230,8 +250,11 @@ def get_unhcr_displacement_data(country="Mali"):
     raw_records = fetch_population_data_by_country_of_asylum(country_iso)
     if not raw_records:
         raise Exception(f"❌ No displacement data found for {country}")
-    
-    totals, by_origin = aggregate_population_by_origin(raw_records)
+
+    latest_year, latest_records = select_latest_year_records(raw_records)
+    records_for_summary = latest_records if latest_records else raw_records
+
+    totals, by_origin = aggregate_population_by_origin(records_for_summary)
     top_origins = get_top_origin_countries(by_origin)
     yearly_totals = build_yearly_totals(raw_records)
     trend = build_trend_summary(yearly_totals)
@@ -242,6 +265,7 @@ def get_unhcr_displacement_data(country="Mali"):
         "country": country,
         "country_code": country_iso,
         "date_retrieved": datetime.now().isoformat(),
+        "reference_year": latest_year,
         "total_displaced": total_displaced,
         "population_types": totals,
         "top_origin_countries": top_origins,

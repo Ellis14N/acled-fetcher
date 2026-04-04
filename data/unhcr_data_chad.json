@@ -1,0 +1,152 @@
+{
+  "country": "Chad",
+  "country_code": "TCD",
+  "date_retrieved": "2026-04-03T23:53:37.199624",
+  "reference_year": "2025",
+  "total_displaced": 1664547,
+  "population_types": {
+    "refugees": 1430067,
+    "asylum_seekers": 8791,
+    "idps": 225689,
+    "stateless": 0,
+    "oip": 0
+  },
+  "top_origin_countries": [
+    {
+      "origin": "Sudan",
+      "refugees": 1258904,
+      "asylum_seekers": 3241,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 1262145
+    },
+    {
+      "origin": "Chad",
+      "refugees": 0,
+      "asylum_seekers": 0,
+      "idps": 225689,
+      "stateless": 0,
+      "oip": 0,
+      "total": 225689
+    },
+    {
+      "origin": "Central African Rep.",
+      "refugees": 139657,
+      "asylum_seekers": 4755,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 144412
+    },
+    {
+      "origin": "Nigeria",
+      "refugees": 21517,
+      "asylum_seekers": 542,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 22059
+    },
+    {
+      "origin": "Cameroon",
+      "refugees": 8714,
+      "asylum_seekers": 71,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 8785
+    },
+    {
+      "origin": "Niger",
+      "refugees": 849,
+      "asylum_seekers": 6,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 855
+    },
+    {
+      "origin": "Dem. Rep. of the Congo",
+      "refugees": 217,
+      "asylum_seekers": 17,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 234
+    },
+    {
+      "origin": "South Sudan",
+      "refugees": 64,
+      "asylum_seekers": 49,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 113
+    },
+    {
+      "origin": "Syrian Arab Rep.",
+      "refugees": 42,
+      "asylum_seekers": 26,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 68
+    },
+    {
+      "origin": "Ethiopia",
+      "refugees": 38,
+      "asylum_seekers": 22,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 60
+    }
+  ],
+  "origin_country_count": 21,
+  "yearly_totals": {
+    "1992": 70,
+    "1993": 62,
+    "1994": 105,
+    "1995": 100,
+    "1996": 100,
+    "1997": 298,
+    "1998": 8807,
+    "1999": 23477,
+    "2000": 18233,
+    "2001": 13595,
+    "2002": 34488,
+    "2003": 146558,
+    "2004": 259880,
+    "2005": 275475,
+    "2006": 399439,
+    "2007": 472979,
+    "2008": 497279,
+    "2009": 509085,
+    "2010": 479036,
+    "2011": 490653,
+    "2012": 463863,
+    "2013": 454570,
+    "2014": 454690,
+    "2015": 424427,
+    "2016": 517485,
+    "2017": 512118,
+    "2018": 619984,
+    "2019": 616704,
+    "2020": 819341,
+    "2021": 967060,
+    "2022": 979006,
+    "2023": 1321765,
+    "2024": 1507255,
+    "2025": 1664547
+  },
+  "trend": {
+    "basis": "yearly",
+    "direction": "increasing",
+    "change": 157292,
+    "change_pct": 10.44,
+    "latest_year": "2025",
+    "previous_year": "2024"
+  },
+  "raw_record_count": 411
+}
