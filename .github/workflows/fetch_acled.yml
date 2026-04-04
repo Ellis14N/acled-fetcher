@@ -19,6 +19,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Validate required ACLED secrets
+        env:
+          ACLED_EMAIL: ${{ secrets.ACLED_EMAIL }}
+          ACLED_PASSWORD: ${{ secrets.ACLED_PASSWORD }}
+        run: |
+          if [ -z "$ACLED_EMAIL" ] || [ -z "$ACLED_PASSWORD" ]; then
+            echo "❌ Missing required repository secrets: ACLED_EMAIL and/or ACLED_PASSWORD"
+            echo "Set them in Settings → Secrets and variables → Actions"
+            exit 1
+          fi
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:

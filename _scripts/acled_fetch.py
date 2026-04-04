@@ -2,7 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Load credentials
 load_dotenv()
@@ -11,6 +11,8 @@ ACLED_EMAIL = os.getenv("ACLED_EMAIL")
 ACLED_PASSWORD = os.getenv("ACLED_PASSWORD")
 
 if not ACLED_EMAIL or not ACLED_PASSWORD:
+    if os.getenv("GITHUB_ACTIONS") == "true":
+        raise ValueError("❌ Missing required GitHub Actions secrets: ACLED_EMAIL and/or ACLED_PASSWORD")
     raise ValueError("❌ Please set ACLED_EMAIL and ACLED_PASSWORD in your .env file")
 
 TOKEN_URL = "https://acleddata.com/oauth/token"
@@ -26,6 +28,13 @@ EVENT_TYPES = [
     "Riots",
     "Strategic developments"
 ]
+
+
+def safe_int(value):
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
 
 
 def get_access_token():
@@ -87,7 +96,9 @@ def fetch_all_event_types(country, date_from, date_to):
     # Deduplicate
     unique_events = {}
     for e in all_events:
-        unique_events[e["event_id_cnty"]] = e
+        event_id = e.get("event_id_cnty")
+        if event_id:
+            unique_events[event_id] = e
 
     combined = list(unique_events.values())
 
@@ -130,7 +141,7 @@ def build_weekly_series(events):
             }
 
         ts[key]["events"] += 1
-        ts[key]["fatalities"] += int(e.get("fatalities", 0))
+        ts[key]["fatalities"] += safe_int(e.get("fatalities", 0))
         ts[key]["event_types"][e.get("event_type", "Unknown")] += 1
 
     for k in ts:
@@ -158,7 +169,7 @@ def build_monthly_series(events):
             }
 
         ts[key]["events"] += 1
-        ts[key]["fatalities"] += int(e.get("fatalities", 0))
+        ts[key]["fatalities"] += safe_int(e.get("fatalities", 0))
         ts[key]["event_types"][e.get("event_type", "Unknown")] += 1
 
     for k in ts:
@@ -251,7 +262,7 @@ def get_acled_security_summary(country="Mali", date_from=None, date_to=None):
         "date_from": date_from_str,
         "date_to": date_to_str,
         "total_events": len(events),
-        "total_fatalities": sum(int(e.get("fatalities", 0)) for e in events),
+        "total_fatalities": sum(safe_int(e.get("fatalities", 0)) for e in events),
         "event_type_totals": build_event_type_totals(events),
         "weekly": build_weekly_series(events),
         "monthly": monthly,

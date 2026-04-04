@@ -822,7 +822,11 @@
             } else {
               show("dashboardScreen");
             }
-          } else { throw new Error("Workflow failed."); }
+          } else {
+            const conclusion = run.conclusion || "unknown";
+            const detailsUrl = run.html_url ? ` Details: ${run.html_url}` : "";
+            throw new Error(`Workflow failed (${conclusion}).${detailsUrl}`);
+          }
         }
       } catch (err) { showFetchError(err.message, source); }
     }, 6000);
