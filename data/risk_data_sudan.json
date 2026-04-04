@@ -1,206 +1,196 @@
 {
   "country": "Sudan",
-  "total_events": 2147,
-  "total_fatalities": 6524,
+  "total_events": 2300,
+  "total_fatalities": 8104,
   "weekly": {
-    "2024-12-30 to 2025-01-05": {
-      "events": 104,
-      "fatalities": 185,
+    "2024-09-30 to 2024-10-06": {
+      "events": 198,
+      "fatalities": 993,
       "event_types": {
-        "Protests": 1,
-        "Explosions/Remote violence": 39,
-        "Battles": 11,
-        "Violence against civilians": 30,
-        "Strategic developments": 23
+        "Explosions/Remote violence": 48,
+        "Battles": 73,
+        "Violence against civilians": 43,
+        "Strategic developments": 34
       }
     },
-    "2025-01-06 to 2025-01-12": {
-      "events": 200,
-      "fatalities": 444,
+    "2024-10-07 to 2024-10-13": {
+      "events": 156,
+      "fatalities": 361,
       "event_types": {
         "Protests": 2,
-        "Explosions/Remote violence": 37,
-        "Battles": 47,
-        "Violence against civilians": 37,
-        "Riots": 1,
-        "Strategic developments": 76
-      }
-    },
-    "2025-01-13 to 2025-01-19": {
-      "events": 195,
-      "fatalities": 1098,
-      "event_types": {
-        "Protests": 1,
-        "Explosions/Remote violence": 39,
-        "Battles": 39,
-        "Violence against civilians": 61,
-        "Strategic developments": 55
-      }
-    },
-    "2025-01-20 to 2025-01-26": {
-      "events": 180,
-      "fatalities": 487,
-      "event_types": {
-        "Protests": 3,
-        "Explosions/Remote violence": 43,
-        "Battles": 40,
-        "Violence against civilians": 44,
-        "Strategic developments": 50
-      }
-    },
-    "2025-01-27 to 2025-02-02": {
-      "events": 182,
-      "fatalities": 518,
-      "event_types": {
-        "Protests": 2,
-        "Explosions/Remote violence": 39,
-        "Battles": 41,
-        "Violence against civilians": 32,
-        "Strategic developments": 68
-      }
-    },
-    "2025-02-03 to 2025-02-09": {
-      "events": 181,
-      "fatalities": 401,
-      "event_types": {
-        "Explosions/Remote violence": 30,
-        "Battles": 45,
-        "Violence against civilians": 46,
-        "Strategic developments": 60
-      }
-    },
-    "2025-02-10 to 2025-02-16": {
-      "events": 200,
-      "fatalities": 474,
-      "event_types": {
-        "Protests": 3,
-        "Explosions/Remote violence": 23,
-        "Battles": 55,
-        "Violence against civilians": 90,
-        "Strategic developments": 29
-      }
-    },
-    "2025-02-17 to 2025-02-23": {
-      "events": 160,
-      "fatalities": 453,
-      "event_types": {
-        "Protests": 8,
-        "Explosions/Remote violence": 34,
-        "Battles": 57,
-        "Violence against civilians": 31,
+        "Explosions/Remote violence": 53,
+        "Battles": 31,
+        "Violence against civilians": 40,
         "Strategic developments": 30
       }
     },
-    "2025-02-24 to 2025-03-02": {
-      "events": 154,
-      "fatalities": 313,
+    "2024-10-14 to 2024-10-20": {
+      "events": 212,
+      "fatalities": 632,
       "event_types": {
-        "Protests": 5,
-        "Explosions/Remote violence": 29,
-        "Battles": 54,
-        "Violence against civilians": 37,
-        "Strategic developments": 29
+        "Explosions/Remote violence": 59,
+        "Battles": 44,
+        "Violence against civilians": 50,
+        "Strategic developments": 59
       }
     },
-    "2025-03-03 to 2025-03-09": {
-      "events": 134,
-      "fatalities": 291,
+    "2024-10-21 to 2024-10-27": {
+      "events": 230,
+      "fatalities": 1474,
       "event_types": {
-        "Explosions/Remote violence": 35,
-        "Battles": 47,
-        "Violence against civilians": 27,
-        "Strategic developments": 25
+        "Protests": 2,
+        "Explosions/Remote violence": 39,
+        "Battles": 42,
+        "Violence against civilians": 103,
+        "Riots": 2,
+        "Strategic developments": 42
       }
     },
-    "2025-03-10 to 2025-03-16": {
-      "events": 146,
-      "fatalities": 349,
+    "2024-10-28 to 2024-11-03": {
+      "events": 181,
+      "fatalities": 396,
       "event_types": {
-        "Explosions/Remote violence": 35,
-        "Battles": 22,
-        "Violence against civilians": 54,
+        "Explosions/Remote violence": 27,
+        "Battles": 23,
+        "Violence against civilians": 89,
+        "Strategic developments": 42
+      }
+    },
+    "2024-11-04 to 2024-11-10": {
+      "events": 163,
+      "fatalities": 430,
+      "event_types": {
+        "Protests": 1,
+        "Explosions/Remote violence": 42,
+        "Battles": 19,
+        "Violence against civilians": 55,
+        "Strategic developments": 46
+      }
+    },
+    "2024-11-11 to 2024-11-17": {
+      "events": 162,
+      "fatalities": 703,
+      "event_types": {
+        "Explosions/Remote violence": 37,
+        "Battles": 26,
+        "Violence against civilians": 53,
+        "Strategic developments": 46
+      }
+    },
+    "2024-11-18 to 2024-11-24": {
+      "events": 150,
+      "fatalities": 420,
+      "event_types": {
+        "Protests": 1,
+        "Explosions/Remote violence": 34,
+        "Battles": 33,
+        "Violence against civilians": 40,
+        "Riots": 1,
+        "Strategic developments": 41
+      }
+    },
+    "2024-11-25 to 2024-12-01": {
+      "events": 169,
+      "fatalities": 183,
+      "event_types": {
+        "Explosions/Remote violence": 69,
+        "Battles": 34,
+        "Violence against civilians": 22,
+        "Strategic developments": 44
+      }
+    },
+    "2024-12-02 to 2024-12-08": {
+      "events": 187,
+      "fatalities": 749,
+      "event_types": {
+        "Protests": 2,
+        "Explosions/Remote violence": 51,
+        "Battles": 51,
+        "Violence against civilians": 31,
+        "Riots": 1,
+        "Strategic developments": 51
+      }
+    },
+    "2024-12-09 to 2024-12-15": {
+      "events": 135,
+      "fatalities": 576,
+      "event_types": {
+        "Protests": 2,
+        "Explosions/Remote violence": 50,
+        "Battles": 21,
+        "Violence against civilians": 38,
+        "Strategic developments": 24
+      }
+    },
+    "2024-12-16 to 2024-12-22": {
+      "events": 156,
+      "fatalities": 698,
+      "event_types": {
+        "Protests": 3,
+        "Explosions/Remote violence": 43,
+        "Battles": 41,
+        "Violence against civilians": 34,
         "Strategic developments": 35
       }
     },
-    "2025-03-17 to 2025-03-23": {
-      "events": 140,
-      "fatalities": 845,
+    "2024-12-23 to 2024-12-29": {
+      "events": 161,
+      "fatalities": 450,
       "event_types": {
         "Protests": 1,
-        "Explosions/Remote violence": 35,
-        "Battles": 41,
-        "Violence against civilians": 23,
-        "Strategic developments": 40
+        "Explosions/Remote violence": 38,
+        "Battles": 43,
+        "Violence against civilians": 30,
+        "Strategic developments": 49
       }
     },
-    "2025-03-24 to 2025-03-30": {
-      "events": 118,
-      "fatalities": 355,
+    "2024-12-30 to 2025-01-05": {
+      "events": 40,
+      "fatalities": 39,
       "event_types": {
-        "Explosions/Remote violence": 29,
-        "Battles": 24,
-        "Violence against civilians": 12,
-        "Strategic developments": 53
-      }
-    },
-    "2025-03-31 to 2025-04-06": {
-      "events": 53,
-      "fatalities": 311,
-      "event_types": {
-        "Protests": 2,
-        "Explosions/Remote violence": 11,
-        "Battles": 9,
-        "Violence against civilians": 20,
-        "Riots": 1,
-        "Strategic developments": 10
+        "Protests": 1,
+        "Explosions/Remote violence": 9,
+        "Battles": 4,
+        "Violence against civilians": 13,
+        "Strategic developments": 13
       }
     }
   },
   "monthly": {
-    "2025-01": {
-      "events": 782,
-      "fatalities": 2420,
+    "2024-10": {
+      "events": 896,
+      "fatalities": 3688,
       "event_types": {
-        "Protests": 8,
-        "Explosions/Remote violence": 181,
-        "Battles": 162,
-        "Violence against civilians": 197,
-        "Riots": 1,
-        "Strategic developments": 233
+        "Protests": 4,
+        "Explosions/Remote violence": 211,
+        "Battles": 204,
+        "Violence against civilians": 292,
+        "Riots": 2,
+        "Strategic developments": 183
       }
     },
-    "2025-02": {
-      "events": 719,
-      "fatalities": 1869,
-      "event_types": {
-        "Protests": 17,
-        "Explosions/Remote violence": 118,
-        "Battles": 219,
-        "Violence against civilians": 193,
-        "Strategic developments": 172
-      }
-    },
-    "2025-03": {
-      "events": 608,
-      "fatalities": 2035,
-      "event_types": {
-        "Protests": 1,
-        "Explosions/Remote violence": 152,
-        "Battles": 146,
-        "Violence against civilians": 139,
-        "Strategic developments": 170
-      }
-    },
-    "2025-04": {
-      "events": 38,
-      "fatalities": 200,
+    "2024-11": {
+      "events": 699,
+      "fatalities": 1840,
       "event_types": {
         "Protests": 2,
-        "Explosions/Remote violence": 7,
-        "Battles": 5,
-        "Violence against civilians": 15,
+        "Explosions/Remote violence": 188,
+        "Battles": 115,
+        "Violence against civilians": 197,
         "Riots": 1,
-        "Strategic developments": 8
+        "Strategic developments": 196
+      }
+    },
+    "2024-12": {
+      "events": 705,
+      "fatalities": 2576,
+      "event_types": {
+        "Protests": 9,
+        "Explosions/Remote violence": 200,
+        "Battles": 166,
+        "Violence against civilians": 152,
+        "Riots": 1,
+        "Strategic developments": 177
       }
     }
   },
@@ -208,27 +198,54 @@
     {
       "actor": "Rapid Support Forces",
       "actor_type": "Unknown",
-      "count": 1645
-    },
-    {
-      "actor": "Military Forces of Sudan (2019-)",
-      "actor_type": "Unknown",
-      "count": 1040
+      "count": 1722
     },
     {
       "actor": "Civilians (Sudan)",
       "actor_type": "Unknown",
-      "count": 861
+      "count": 1060
+    },
+    {
+      "actor": "Military Forces of Sudan (2019-)",
+      "actor_type": "Unknown",
+      "count": 1009
     },
     {
       "actor": "Darfur Communal Militia (Sudan)",
       "actor_type": "Unknown",
-      "count": 72
+      "count": 98
+    },
+    {
+      "actor": "Darfur Joint Forces/JSAMF: Joint Force of Armed Struggle Movement",
+      "actor_type": "Unknown",
+      "count": 54
+    }
+  ],
+  "top_actors_recent": [
+    {
+      "actor": "Rapid Support Forces",
+      "actor_type": "Unknown",
+      "count": 500
+    },
+    {
+      "actor": "Military Forces of Sudan (2019-)",
+      "actor_type": "Unknown",
+      "count": 343
+    },
+    {
+      "actor": "Darfur Communal Militia (Sudan)",
+      "actor_type": "Unknown",
+      "count": 29
+    },
+    {
+      "actor": "Government of Sudan (2019-)",
+      "actor_type": "Unknown",
+      "count": 24
     },
     {
       "actor": "Unidentified Armed Group (Sudan)",
       "actor_type": "Unknown",
-      "count": 63
+      "count": 12
     }
   ]
 }
