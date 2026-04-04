@@ -12,19 +12,24 @@
       background: #2d2d2d;
       color: #ffffff;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin: 0;
     }
 
     .card {
       background: #1a1d27;
       border: 1px solid #2d3148;
-      border-radius: 16px;
+      border-radius: 0;
       padding: 40px;
       width: 100%;
-      max-width: 520px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      max-width: none;
+      min-height: 100vh;
+      box-shadow: none;
+    }
+
+    @media (max-width: 700px) {
+      .card {
+        padding: 24px 16px;
+      }
     }
 
     .logo {
@@ -342,6 +347,31 @@
       padding: 11px;
       font-size: 14px;
     }
+
+    .fetch-all-tool {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: 100%;
+      max-width: calc((100% - 16px) / 2);
+      background: linear-gradient(135deg, #1f4d3a, #2f7a5b);
+      border-color: #3ea37b;
+    }
+
+    @media (max-width: 599px) {
+      .fetch-all-tool {
+        max-width: 100%;
+      }
+    }
+
+    .fetch-all-tool:hover {
+      background: linear-gradient(135deg, #27644b, #3b936f);
+      border-color: #5bc798;
+      box-shadow: 0 8px 24px rgba(76, 175, 80, 0.25);
+    }
+
+    .fetch-all-tool .tool-description {
+      color: #c9f3e2;
+    }
   </style>
 </head>
 <body>
@@ -379,6 +409,11 @@
     </div>
     
     <div class="tools-grid">
+      <button class="tool-button fetch-all-tool" onclick="runFetchAllAfrica()">
+        <div class="tool-name">Fetch All - Africa</div>
+        <div class="tool-description">Run Continent-wide Data Pull</div>
+      </button>
+
       <button class="tool-button" onclick="show('fetchScreen')">
         <div class="tool-name">ACLED Extractor</div>
         <div class="tool-description">Fetch Conflict Data</div>
@@ -408,6 +443,52 @@
     <div class="user-menu">
       <button class="btn-secondary" onclick="logout()" style="margin-top: 0;">Logout</button>
     </div>
+  </div>
+
+  <div id="fetchAllAfricaScreen" style="display:none">
+    <div class="logo">
+      <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
+      <div>
+        <div class="logo-text">14N Monitor</div>
+        <div class="logo-sub">Fetch All - Africa</div>
+      </div>
+    </div>
+    <h2>Select API Batch</h2>
+    <p class="subtitle">Choose an API to run a continent-wide pull workflow.</p>
+
+    <div class="tools-grid">
+      <button class="tool-button" onclick="launchAllAfricaApi('acled')">
+        <div class="tool-name">ACLED API</div>
+        <div class="tool-description">Run ACLED all-Africa pull</div>
+      </button>
+
+      <button class="tool-button" onclick="launchAllAfricaApi('opensky')">
+        <div class="tool-name">OpenSky API</div>
+        <div class="tool-description">Run OpenSky all-Africa pull</div>
+      </button>
+
+      <button class="tool-button" onclick="launchAllAfricaApi('unhcr')">
+        <div class="tool-name">UNHCR API</div>
+        <div class="tool-description">Run UNHCR all-Africa pull</div>
+      </button>
+
+      <button class="tool-button coming-soon">
+        <div class="tool-name">API 4</div>
+        <div class="tool-description">Coming soon</div>
+      </button>
+
+      <button class="tool-button coming-soon">
+        <div class="tool-name">API 5</div>
+        <div class="tool-description">Coming soon</div>
+      </button>
+
+      <button class="tool-button coming-soon">
+        <div class="tool-name">API 6</div>
+        <div class="tool-description">Coming soon</div>
+      </button>
+    </div>
+
+    <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
   </div>
 
   <div id="setupScreen" style="display:none">
@@ -714,6 +795,37 @@
       pollForCompletion(runId, country, token, "unhcr");
     } catch (err) {
       showFetchError(err.message, "unhcr");
+    }
+  }
+
+  function runFetchAllAfrica() {
+    show("fetchAllAfricaScreen");
+  }
+
+  function launchAllAfricaApi(api) {
+    if (api === "acled") {
+      document.getElementById("countryInput").value = "Africa";
+      const errorEl = document.getElementById("fetchError");
+      errorEl.textContent = "ACLED all-Africa preset selected. Confirm or edit, then run fetch.";
+      errorEl.style.display = "block";
+      show("fetchScreen");
+      return;
+    }
+
+    if (api === "opensky") {
+      const errorEl = document.getElementById("openSkyError");
+      errorEl.textContent = "OpenSky all-Africa mode selected. Enter an airport or hub and run fetch.";
+      errorEl.style.display = "block";
+      show("fetchOpenSkyScreen");
+      return;
+    }
+
+    if (api === "unhcr") {
+      document.getElementById("unhcrCountryInput").value = "Africa";
+      const errorEl = document.getElementById("unhcrError");
+      errorEl.textContent = "UNHCR all-Africa preset selected. Confirm or edit, then run fetch.";
+      errorEl.style.display = "block";
+      show("fetchUNHCRScreen");
     }
   }
 
@@ -1087,7 +1199,7 @@
 
 
   function show(id) {
-    ["passwordScreen","dashboardScreen","setupScreen","fetchScreen","fetchOpenSkyScreen","fetchUNHCRScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
+    ["passwordScreen","dashboardScreen","fetchAllAfricaScreen","setupScreen","fetchScreen","fetchOpenSkyScreen","fetchUNHCRScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
   }
 
   function markStep(id, state) {
