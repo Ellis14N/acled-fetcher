@@ -757,6 +757,7 @@
     document.getElementById("statEvents").textContent     = latestData.events.toLocaleString();
     document.getElementById("statFatalities").textContent = latestData.fatalities.toLocaleString();
 
+
     const breakdownEl = document.getElementById("breakdownRows");
     breakdownEl.innerHTML = "";
     const typeCounts = latestData.event_types || {};
@@ -780,8 +781,37 @@
         </div>`;
     });
 
+// Add top actors section (with spacing, 3-col, recent data)
+    const topActorsEl = document.createElement('div');
+    topActorsEl.id = 'topActorsBreakdown';
+    topActorsEl.style.marginTop = '20px';
+    topActorsEl.className = 'breakdown';
+    topActorsEl.innerHTML = `
+      <div class="breakdown-title">Top 5 Actors (Past 30 Days)</div>
+      <div id="topActorsRows"></div>
+    `;
+    breakdownEl.parentNode.insertBefore(topActorsEl, breakdownEl.nextSibling);
+
+    const actorsRowsEl = document.getElementById('topActorsRows');
+    const actorsData = data.top_actors_recent || data.top_actors || [];
+    actorsRowsEl.innerHTML = '';
+    if (actorsData.length > 0) {
+      actorsData.forEach((actor, idx) => {
+        if (idx >= 5) return;
+        if (actor.actor.toLowerCase().includes('civilian')) return;
+        actorsRowsEl.innerHTML += `
+          <div class="breakdown-row">
+            <span class="breakdown-key">${actor.actor}</span>
+            <span class="breakdown-value">${actor.count}</span>
+          </div>`;
+      });
+    } else {
+      actorsRowsEl.innerHTML = '<div class="breakdown-row"><span class="breakdown-key">No recent actor data</span></div>';
+    }
+
     document.getElementById("downloadBtn").textContent = "Download for Claude";
   }
+
 
   function show(id) {
     ["passwordScreen","dashboardScreen","setupScreen","fetchScreen","fetchOpenSkyScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");

@@ -216,21 +216,47 @@ def get_acled_security_summary(country="Mali"):
     - total fatalities
     - weekly and monthly time series
     """
-    date_from_str = "2025-01-01"   # TEMP TEST
-    date_to_str = "2025-04-02"     # TEMP TEST
+    date_from_str = "2024-10-01"   # Past 30 days approx
+    date_to_str = "2024-12-31"     # Past 30 days approx
 
     print(f"📅 Date range: {date_from_str} → {date_to_str}")
     print(f"🌍 Country: {country}")
 
     events = fetch_all_event_types(country, date_from_str, date_to_str)
 
+    monthly = build_monthly_series(events)
+    latest_month_key = list(monthly.keys())[-1] if monthly else None
+    recent_events = [e for e in events if e.get('event_date', '').startswith(latest_month_key)] if latest_month_key else []
+
+    def build_filtered_actor_summary(events_local, top_n=5):
+        counts = defaultdict(int)
+        types = defaultdict(lambda: defaultdict(int))
+        for e in events_local:
+            for actor_field, type_field in [("actor1", "actor1_type"), ("actor2", "actor2_type")]:
+                actor = e.get(actor_field)
+                if not actor or not isinstance(actor, str) or actor.strip().lower() == "unknown" or "civilian" in actor.lower():
+                    continue
+                actor = actor.strip()
+                counts[actor] += 1
+                actor_type = e.get(type_field) or "Unknown"
+                actor_type = actor_type.strip() if isinstance(actor_type, str) else str(actor_type)
+                types[actor][actor_type] += 1
+        top_actors = sorted(counts.items(), key=lambda item: item[1], reverse=True)[:top_n]
+        summary = []
+        for actor, count in top_actors:
+            type_counts = types[actor]
+            actor_type = sorted(type_counts.items(), key=lambda item: (-item[1], item[0]))[0][0] if type_counts else "Unknown"
+            summary.append({"actor": actor, "actor_type": actor_type, "count": count})
+        return summary
+
     summary = {
         "country": country,
         "total_events": len(events),
         "total_fatalities": sum(int(e.get("fatalities", 0)) for e in events),
         "weekly": build_weekly_series(events),
-        "monthly": build_monthly_series(events),
-        "top_actors": build_actor_summary(events)
+        "monthly": monthly,
+        "top_actors": build_actor_summary(events),  # Keep total for download
+        "top_actors_recent": build_filtered_actor_summary(recent_events)  # Latest month, no civilians
     }
 
     return summary
