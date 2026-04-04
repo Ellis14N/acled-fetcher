@@ -1,0 +1,231 @@
+{
+  "country": "Mali",
+  "total_events": 529,
+  "total_fatalities": 1126,
+  "weekly": {
+    "2024-12-30 to 2025-01-05": {
+      "events": 20,
+      "fatalities": 36,
+      "event_types": {
+        "Explosions/Remote violence": 4,
+        "Battles": 6,
+        "Violence against civilians": 7,
+        "Strategic developments": 3
+      }
+    },
+    "2025-01-06 to 2025-01-12": {
+      "events": 28,
+      "fatalities": 109,
+      "event_types": {
+        "Protests": 2,
+        "Explosions/Remote violence": 8,
+        "Battles": 6,
+        "Violence against civilians": 7,
+        "Riots": 1,
+        "Strategic developments": 4
+      }
+    },
+    "2025-01-13 to 2025-01-19": {
+      "events": 43,
+      "fatalities": 58,
+      "event_types": {
+        "Protests": 2,
+        "Explosions/Remote violence": 9,
+        "Battles": 4,
+        "Violence against civilians": 21,
+        "Riots": 1,
+        "Strategic developments": 6
+      }
+    },
+    "2025-01-20 to 2025-01-26": {
+      "events": 39,
+      "fatalities": 72,
+      "event_types": {
+        "Explosions/Remote violence": 9,
+        "Battles": 6,
+        "Violence against civilians": 15,
+        "Strategic developments": 9
+      }
+    },
+    "2025-01-27 to 2025-02-02": {
+      "events": 46,
+      "fatalities": 111,
+      "event_types": {
+        "Explosions/Remote violence": 10,
+        "Battles": 12,
+        "Violence against civilians": 13,
+        "Strategic developments": 11
+      }
+    },
+    "2025-02-03 to 2025-02-09": {
+      "events": 24,
+      "fatalities": 81,
+      "event_types": {
+        "Explosions/Remote violence": 4,
+        "Battles": 2,
+        "Violence against civilians": 10,
+        "Riots": 1,
+        "Strategic developments": 7
+      }
+    },
+    "2025-02-10 to 2025-02-16": {
+      "events": 44,
+      "fatalities": 119,
+      "event_types": {
+        "Explosions/Remote violence": 9,
+        "Battles": 12,
+        "Violence against civilians": 16,
+        "Strategic developments": 7
+      }
+    },
+    "2025-02-17 to 2025-02-23": {
+      "events": 52,
+      "fatalities": 157,
+      "event_types": {
+        "Explosions/Remote violence": 7,
+        "Battles": 20,
+        "Violence against civilians": 19,
+        "Strategic developments": 6
+      }
+    },
+    "2025-02-24 to 2025-03-02": {
+      "events": 41,
+      "fatalities": 36,
+      "event_types": {
+        "Protests": 1,
+        "Explosions/Remote violence": 13,
+        "Battles": 8,
+        "Violence against civilians": 12,
+        "Strategic developments": 7
+      }
+    },
+    "2025-03-03 to 2025-03-09": {
+      "events": 31,
+      "fatalities": 45,
+      "event_types": {
+        "Protests": 2,
+        "Explosions/Remote violence": 5,
+        "Battles": 9,
+        "Violence against civilians": 5,
+        "Riots": 1,
+        "Strategic developments": 9
+      }
+    },
+    "2025-03-10 to 2025-03-16": {
+      "events": 48,
+      "fatalities": 48,
+      "event_types": {
+        "Protests": 1,
+        "Explosions/Remote violence": 13,
+        "Battles": 7,
+        "Violence against civilians": 13,
+        "Strategic developments": 14
+      }
+    },
+    "2025-03-17 to 2025-03-23": {
+      "events": 52,
+      "fatalities": 89,
+      "event_types": {
+        "Explosions/Remote violence": 17,
+        "Battles": 10,
+        "Violence against civilians": 17,
+        "Strategic developments": 8
+      }
+    },
+    "2025-03-24 to 2025-03-30": {
+      "events": 47,
+      "fatalities": 124,
+      "event_types": {
+        "Explosions/Remote violence": 9,
+        "Battles": 8,
+        "Violence against civilians": 19,
+        "Strategic developments": 11
+      }
+    },
+    "2025-03-31 to 2025-04-06": {
+      "events": 14,
+      "fatalities": 41,
+      "event_types": {
+        "Explosions/Remote violence": 4,
+        "Battles": 2,
+        "Violence against civilians": 2,
+        "Strategic developments": 6
+      }
+    }
+  },
+  "monthly": {
+    "2025-01": {
+      "events": 166,
+      "fatalities": 373,
+      "event_types": {
+        "Protests": 4,
+        "Explosions/Remote violence": 37,
+        "Battles": 30,
+        "Violence against civilians": 63,
+        "Riots": 2,
+        "Strategic developments": 30
+      }
+    },
+    "2025-02": {
+      "events": 166,
+      "fatalities": 393,
+      "event_types": {
+        "Protests": 1,
+        "Explosions/Remote violence": 35,
+        "Battles": 43,
+        "Violence against civilians": 57,
+        "Riots": 1,
+        "Strategic developments": 29
+      }
+    },
+    "2025-03": {
+      "events": 185,
+      "fatalities": 319,
+      "event_types": {
+        "Protests": 3,
+        "Explosions/Remote violence": 46,
+        "Battles": 37,
+        "Violence against civilians": 54,
+        "Riots": 1,
+        "Strategic developments": 44
+      }
+    },
+    "2025-04": {
+      "events": 12,
+      "fatalities": 41,
+      "event_types": {
+        "Explosions/Remote violence": 3,
+        "Battles": 2,
+        "Violence against civilians": 2,
+        "Strategic developments": 5
+      }
+    }
+  },
+  "top_actors": [
+    {
+      "actor": "Military Forces of Mali (2021-)",
+      "actor_type": "Unknown",
+      "count": 326
+    },
+    {
+      "actor": "Civilians (Mali)",
+      "actor_type": "Unknown",
+      "count": 280
+    },
+    {
+      "actor": "JNIM: Group for Support of Islam and Muslims",
+      "actor_type": "Unknown",
+      "count": 253
+    },
+    {
+      "actor": "Islamic State Sahel Province (ISSP)",
+      "actor_type": "Unknown",
+      "count": 40
+    },
+    {
+      "actor": "Dozo Communal Militia (Mali)",
+      "actor_type": "Unknown",
+      "count": 24
+    }
+  ]
+}
