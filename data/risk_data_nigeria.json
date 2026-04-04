@@ -1,222 +1,211 @@
 {
   "country": "Nigeria",
-  "total_events": 1562,
-  "total_fatalities": 3116,
+  "total_events": 1392,
+  "total_fatalities": 2332,
   "weekly": {
-    "2024-12-30 to 2025-01-05": {
-      "events": 152,
-      "fatalities": 298,
+    "2024-09-30 to 2024-10-06": {
+      "events": 75,
+      "fatalities": 106,
       "event_types": {
-        "Protests": 1,
-        "Explosions/Remote violence": 3,
-        "Battles": 33,
-        "Violence against civilians": 97,
-        "Riots": 5,
-        "Strategic developments": 13
-      }
-    },
-    "2025-01-06 to 2025-01-12": {
-      "events": 206,
-      "fatalities": 525,
-      "event_types": {
-        "Protests": 5,
-        "Explosions/Remote violence": 8,
-        "Battles": 59,
-        "Violence against civilians": 110,
-        "Riots": 6,
-        "Strategic developments": 18
-      }
-    },
-    "2025-01-13 to 2025-01-19": {
-      "events": 103,
-      "fatalities": 188,
-      "event_types": {
-        "Protests": 12,
+        "Protests": 20,
         "Explosions/Remote violence": 1,
-        "Battles": 36,
-        "Violence against civilians": 42,
-        "Riots": 6,
-        "Strategic developments": 6
+        "Battles": 22,
+        "Violence against civilians": 23,
+        "Riots": 8,
+        "Strategic developments": 1
       }
     },
-    "2025-01-20 to 2025-01-26": {
-      "events": 101,
-      "fatalities": 344,
-      "event_types": {
-        "Protests": 7,
-        "Explosions/Remote violence": 4,
-        "Battles": 34,
-        "Violence against civilians": 44,
-        "Riots": 7,
-        "Strategic developments": 5
-      }
-    },
-    "2025-01-27 to 2025-02-02": {
-      "events": 93,
-      "fatalities": 160,
+    "2024-10-07 to 2024-10-13": {
+      "events": 86,
+      "fatalities": 119,
       "event_types": {
         "Protests": 6,
         "Explosions/Remote violence": 2,
-        "Battles": 20,
-        "Violence against civilians": 48,
-        "Riots": 12,
-        "Strategic developments": 5
-      }
-    },
-    "2025-02-03 to 2025-02-09": {
-      "events": 129,
-      "fatalities": 239,
-      "event_types": {
-        "Protests": 12,
-        "Explosions/Remote violence": 1,
-        "Battles": 49,
-        "Violence against civilians": 60,
-        "Riots": 3,
-        "Strategic developments": 4
-      }
-    },
-    "2025-02-10 to 2025-02-16": {
-      "events": 120,
-      "fatalities": 167,
-      "event_types": {
-        "Protests": 13,
-        "Explosions/Remote violence": 1,
-        "Battles": 34,
-        "Violence against civilians": 59,
-        "Riots": 10,
-        "Strategic developments": 3
-      }
-    },
-    "2025-02-17 to 2025-02-23": {
-      "events": 112,
-      "fatalities": 173,
-      "event_types": {
-        "Protests": 9,
-        "Explosions/Remote violence": 2,
         "Battles": 26,
-        "Violence against civilians": 66,
-        "Riots": 5,
-        "Strategic developments": 4
-      }
-    },
-    "2025-02-24 to 2025-03-02": {
-      "events": 125,
-      "fatalities": 140,
-      "event_types": {
-        "Protests": 9,
-        "Explosions/Remote violence": 3,
-        "Battles": 37,
-        "Violence against civilians": 62,
-        "Riots": 6,
-        "Strategic developments": 8
-      }
-    },
-    "2025-03-03 to 2025-03-09": {
-      "events": 146,
-      "fatalities": 224,
-      "event_types": {
-        "Protests": 13,
-        "Explosions/Remote violence": 4,
-        "Battles": 37,
-        "Violence against civilians": 81,
-        "Riots": 7,
-        "Strategic developments": 4
-      }
-    },
-    "2025-03-10 to 2025-03-16": {
-      "events": 96,
-      "fatalities": 223,
-      "event_types": {
-        "Protests": 15,
-        "Explosions/Remote violence": 8,
-        "Battles": 32,
         "Violence against civilians": 33,
+        "Riots": 8,
+        "Strategic developments": 11
+      }
+    },
+    "2024-10-14 to 2024-10-20": {
+      "events": 106,
+      "fatalities": 155,
+      "event_types": {
+        "Protests": 11,
+        "Explosions/Remote violence": 2,
+        "Battles": 37,
+        "Violence against civilians": 43,
+        "Riots": 6,
+        "Strategic developments": 7
+      }
+    },
+    "2024-10-21 to 2024-10-27": {
+      "events": 73,
+      "fatalities": 94,
+      "event_types": {
+        "Protests": 7,
+        "Explosions/Remote violence": 1,
+        "Battles": 19,
+        "Violence against civilians": 38,
         "Riots": 6,
         "Strategic developments": 2
       }
     },
-    "2025-03-17 to 2025-03-23": {
-      "events": 91,
-      "fatalities": 224,
+    "2024-10-28 to 2024-11-03": {
+      "events": 82,
+      "fatalities": 116,
       "event_types": {
-        "Protests": 10,
-        "Explosions/Remote violence": 9,
-        "Battles": 25,
-        "Violence against civilians": 28,
+        "Protests": 8,
+        "Explosions/Remote violence": 2,
+        "Battles": 32,
+        "Violence against civilians": 31,
+        "Riots": 4,
+        "Strategic developments": 5
+      }
+    },
+    "2024-11-04 to 2024-11-10": {
+      "events": 136,
+      "fatalities": 327,
+      "event_types": {
+        "Protests": 9,
+        "Explosions/Remote violence": 6,
+        "Battles": 44,
+        "Violence against civilians": 59,
+        "Riots": 6,
+        "Strategic developments": 12
+      }
+    },
+    "2024-11-11 to 2024-11-17": {
+      "events": 126,
+      "fatalities": 219,
+      "event_types": {
+        "Protests": 8,
+        "Explosions/Remote violence": 4,
+        "Battles": 43,
+        "Violence against civilians": 47,
+        "Riots": 9,
+        "Strategic developments": 15
+      }
+    },
+    "2024-11-18 to 2024-11-24": {
+      "events": 116,
+      "fatalities": 168,
+      "event_types": {
+        "Protests": 7,
+        "Explosions/Remote violence": 3,
+        "Battles": 30,
+        "Violence against civilians": 50,
         "Riots": 11,
+        "Strategic developments": 15
+      }
+    },
+    "2024-11-25 to 2024-12-01": {
+      "events": 113,
+      "fatalities": 130,
+      "event_types": {
+        "Protests": 18,
+        "Explosions/Remote violence": 2,
+        "Battles": 36,
+        "Violence against civilians": 46,
+        "Riots": 3,
         "Strategic developments": 8
       }
     },
-    "2025-03-24 to 2025-03-30": {
-      "events": 61,
-      "fatalities": 176,
+    "2024-12-02 to 2024-12-08": {
+      "events": 126,
+      "fatalities": 158,
       "event_types": {
         "Protests": 7,
-        "Explosions/Remote violence": 2,
-        "Battles": 25,
-        "Violence against civilians": 19,
-        "Riots": 7,
-        "Strategic developments": 1
+        "Explosions/Remote violence": 7,
+        "Battles": 35,
+        "Violence against civilians": 63,
+        "Riots": 4,
+        "Strategic developments": 10
       }
     },
-    "2025-03-31 to 2025-04-06": {
-      "events": 27,
-      "fatalities": 35,
+    "2024-12-09 to 2024-12-15": {
+      "events": 122,
+      "fatalities": 185,
       "event_types": {
-        "Protests": 5,
-        "Explosions/Remote violence": 1,
-        "Battles": 10,
-        "Violence against civilians": 7,
-        "Riots": 4
+        "Protests": 7,
+        "Explosions/Remote violence": 4,
+        "Battles": 29,
+        "Violence against civilians": 65,
+        "Riots": 9,
+        "Strategic developments": 8
+      }
+    },
+    "2024-12-16 to 2024-12-22": {
+      "events": 97,
+      "fatalities": 181,
+      "event_types": {
+        "Protests": 8,
+        "Explosions/Remote violence": 6,
+        "Battles": 21,
+        "Violence against civilians": 47,
+        "Riots": 5,
+        "Strategic developments": 10
+      }
+    },
+    "2024-12-23 to 2024-12-29": {
+      "events": 103,
+      "fatalities": 335,
+      "event_types": {
+        "Protests": 4,
+        "Explosions/Remote violence": 6,
+        "Battles": 32,
+        "Violence against civilians": 48,
+        "Riots": 7,
+        "Strategic developments": 6
+      }
+    },
+    "2024-12-30 to 2025-01-05": {
+      "events": 31,
+      "fatalities": 39,
+      "event_types": {
+        "Explosions/Remote violence": 3,
+        "Battles": 5,
+        "Violence against civilians": 19,
+        "Riots": 2,
+        "Strategic developments": 2
       }
     }
   },
   "monthly": {
-    "2025-01": {
-      "events": 619,
-      "fatalities": 1456,
-      "event_types": {
-        "Protests": 31,
-        "Explosions/Remote violence": 18,
-        "Battles": 172,
-        "Violence against civilians": 319,
-        "Riots": 34,
-        "Strategic developments": 45
-      }
-    },
-    "2025-02": {
-      "events": 495,
-      "fatalities": 757,
-      "event_types": {
-        "Protests": 40,
-        "Explosions/Remote violence": 6,
-        "Battles": 148,
-        "Violence against civilians": 257,
-        "Riots": 25,
-        "Strategic developments": 19
-      }
-    },
-    "2025-03": {
-      "events": 427,
-      "fatalities": 879,
+    "2024-10": {
+      "events": 371,
+      "fatalities": 520,
       "event_types": {
         "Protests": 50,
-        "Explosions/Remote violence": 24,
-        "Battles": 128,
-        "Violence against civilians": 174,
-        "Riots": 34,
-        "Strategic developments": 17
+        "Explosions/Remote violence": 6,
+        "Battles": 115,
+        "Violence against civilians": 148,
+        "Riots": 30,
+        "Strategic developments": 22
       }
     },
-    "2025-04": {
-      "events": 21,
-      "fatalities": 24,
+    "2024-11": {
+      "events": 520,
+      "fatalities": 864,
       "event_types": {
-        "Protests": 3,
-        "Explosions/Remote violence": 1,
-        "Battles": 9,
-        "Violence against civilians": 6,
-        "Riots": 2
+        "Protests": 43,
+        "Explosions/Remote violence": 16,
+        "Battles": 167,
+        "Violence against civilians": 209,
+        "Riots": 31,
+        "Strategic developments": 54
+      }
+    },
+    "2024-12": {
+      "events": 501,
+      "fatalities": 948,
+      "event_types": {
+        "Protests": 27,
+        "Explosions/Remote violence": 27,
+        "Battles": 129,
+        "Violence against civilians": 255,
+        "Riots": 27,
+        "Strategic developments": 36
       }
     }
   },
@@ -224,27 +213,54 @@
     {
       "actor": "Civilians (Nigeria)",
       "actor_type": "Unknown",
-      "count": 863
+      "count": 741
     },
     {
       "actor": "Military Forces of Nigeria (2023-)",
       "actor_type": "Unknown",
-      "count": 267
+      "count": 198
     },
     {
       "actor": "Unidentified Armed Group (Nigeria)",
       "actor_type": "Unknown",
-      "count": 244
-    },
-    {
-      "actor": "Zamfara Communal Militia (Nigeria)",
-      "actor_type": "Unknown",
-      "count": 206
+      "count": 180
     },
     {
       "actor": "Katsina Communal Militia (Nigeria)",
       "actor_type": "Unknown",
-      "count": 172
+      "count": 128
+    },
+    {
+      "actor": "Zamfara Communal Militia (Nigeria)",
+      "actor_type": "Unknown",
+      "count": 126
+    }
+  ],
+  "top_actors_recent": [
+    {
+      "actor": "Unidentified Armed Group (Nigeria)",
+      "actor_type": "Unknown",
+      "count": 72
+    },
+    {
+      "actor": "Military Forces of Nigeria (2023-)",
+      "actor_type": "Unknown",
+      "count": 66
+    },
+    {
+      "actor": "Sokoto Communal Militia (Nigeria)",
+      "actor_type": "Unknown",
+      "count": 55
+    },
+    {
+      "actor": "Katsina Communal Militia (Nigeria)",
+      "actor_type": "Unknown",
+      "count": 54
+    },
+    {
+      "actor": "Zamfara Communal Militia (Nigeria)",
+      "actor_type": "Unknown",
+      "count": 43
     }
   ]
 }
