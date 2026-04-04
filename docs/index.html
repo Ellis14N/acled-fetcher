@@ -389,9 +389,9 @@
         <div class="tool-description">Fetch Airspace and Flight Activity</div>
       </button>
       
-      <button class="tool-button coming-soon">
-        <div class="tool-name">Tool1 Extractor</div>
-        <div class="tool-description">Fetch</div>
+      <button class="tool-button" onclick="show('fetchUNHCRScreen')">
+        <div class="tool-name">UNHCR Extractor</div>
+        <div class="tool-description">Fetch Refugee & Displacement Data</div>
       </button>
       
       <button class="tool-button coming-soon">
@@ -463,6 +463,23 @@
     <button onclick="runOpenSky()">Run OpenSky Fetch →</button>
     <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
     <div class="error" id="openSkyError"></div>
+  </div>
+
+  <div id="fetchUNHCRScreen" style="display:none">
+    <div class="logo">
+      <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
+      <div>
+        <div class="logo-text">14N Monitor</div>
+        <div class="logo-sub">UNHCR Data Tool</div>
+      </div>
+    </div>
+    <h2>Fetch UNHCR Displacement Data</h2>
+    <p class="subtitle">Enter a country name to fetch refugee and displacement statistics.</p>
+    <label for="unhcrCountryInput">Country</label>
+    <input type="text" id="unhcrCountryInput" placeholder="e.g. Mali, Nigeria, Sudan, Chad" />
+    <button onclick="runUNHCR()">Run UNHCR Fetch →</button>
+    <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
+    <div class="error" id="unhcrError"></div>
   </div>
 
   <div id="loadingScreen">
@@ -676,6 +693,30 @@
     }
   }
 
+  async function runUNHCR() {
+    const country = document.getElementById("unhcrCountryInput").value.trim();
+    if (!country) {
+      const errorEl = document.getElementById("unhcrError");
+      errorEl.textContent = "Please enter a country name.";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    const token = getToken();
+    if (!token) { clearToken(); return; }
+
+    show("loadingScreen");
+    document.getElementById("loadingCountry").textContent = `Fetching UNHCR data for ${country}...`;
+    startProgressAnimation();
+
+    try {
+      const runId = await triggerWorkflow("fetch_unhcr.yml", { country }, token);
+      pollForCompletion(runId, country, token, "unhcr");
+    } catch (err) {
+      showFetchError(err.message, "unhcr");
+    }
+  }
+
   async function triggerWorkflow(workflowFile, inputs, token) {
     const runsUrl =
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${encodeURIComponent(workflowFile)}/runs?event=workflow_dispatch&branch=main&per_page=50`;
@@ -695,7 +736,7 @@
     }
 
     const res = await fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`,
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${encodeURIComponent(workflowFile)}/dispatches`,
       {
         method: "POST",
         headers: {
@@ -776,6 +817,14 @@
               const data = await dataRes.json();
               showResults(data, "opensky");
               setupDownload(data, key, "opensky");
+            } else if (source === "unhcr") {
+              const filename = `unhcr_data_${key.toLowerCase().replace(/\s+/g, "_")}.json`;
+              const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
+              const dataRes = await fetch(url);
+              if (!dataRes.ok) throw new Error(`Failed to load UNHCR output file (${dataRes.status})`);
+              const data = await dataRes.json();
+              showResults(data, "unhcr");
+              setupDownload(data, key, "unhcr");
             } else {
               show("dashboardScreen");
             }
@@ -845,6 +894,74 @@
         </div>`;
 
       document.getElementById("downloadBtn").textContent = "Download OpenSky Data";
+      return;
+    }
+
+    if (source === "unhcr") {
+      document.getElementById("resultTitle").textContent = `${data.country} — UNHCR Displacement Overview`;
+      document.getElementById("resultDate").textContent  = `Retrieved: ${new Date(data.date_retrieved).toLocaleDateString()}`;
+
+      document.getElementById("statLabel1").textContent = "Total Displaced";
+      document.getElementById("statLabel2").textContent = "Origin Countries";
+
+      document.getElementById("statEvents").textContent     = Number(data.total_displaced || 0).toLocaleString();
+      document.getElementById("statFatalities").textContent = (data.top_origin_countries || []).length;
+
+      const breakdownEl = document.getElementById("breakdownRows");
+      breakdownEl.innerHTML = "";
+
+      // Display population types
+      const popTypes = data.population_types || {};
+      const typeLabels = {
+        "refugees": "Refugees",
+        "asylum_seekers": "Asylum Seekers",
+        "idps": "IDPs",
+        "stateless": "Stateless",
+        "oip": "Other in Need"
+      };
+
+      Object.entries(typeLabels).forEach(([key, label]) => {
+        const count = popTypes[key] || 0;
+        if (count > 0) {
+          breakdownEl.innerHTML += `
+            <div class="breakdown-row">
+              <span class="breakdown-key">${label}</span>
+              <span class="breakdown-value">${count.toLocaleString()}</span>
+            </div>`;
+        }
+      });
+
+      // Add top origin countries section
+      const oldTopOrigins = document.getElementById('topOriginsBreakdown');
+      if (oldTopOrigins) oldTopOrigins.remove();
+
+      const topOriginsEl = document.createElement('div');
+      topOriginsEl.id = 'topOriginsBreakdown';
+      topOriginsEl.style.marginTop = '20px';
+      topOriginsEl.className = 'breakdown';
+      topOriginsEl.innerHTML = `
+        <div class="breakdown-title">Top 10 Countries of Origin</div>
+        <div id="topOriginsRows"></div>
+      `;
+      breakdownEl.parentNode.insertBefore(topOriginsEl, breakdownEl.nextSibling);
+
+      const originsRowsEl = document.getElementById('topOriginsRows');
+      const originsData = data.top_origin_countries || [];
+      originsRowsEl.innerHTML = '';
+      if (originsData.length > 0) {
+        originsData.forEach((origin, idx) => {
+          if (idx >= 10) return;
+          originsRowsEl.innerHTML += `
+            <div class="breakdown-row">
+              <span class="breakdown-key">${origin.origin}</span>
+              <span class="breakdown-value">${origin.total.toLocaleString()}</span>
+            </div>`;
+        });
+      } else {
+        originsRowsEl.innerHTML = '<div class="breakdown-row"><span class="breakdown-key">No origin data</span></div>';
+      }
+
+      document.getElementById("downloadBtn").textContent = "Download UNHCR Data";
       return;
     }
 
@@ -923,7 +1040,7 @@
 
 
   function show(id) {
-    ["passwordScreen","dashboardScreen","setupScreen","fetchScreen","fetchOpenSkyScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
+    ["passwordScreen","dashboardScreen","setupScreen","fetchScreen","fetchOpenSkyScreen","fetchUNHCRScreen","loadingScreen","resultsScreen"].forEach(s => document.getElementById(s).style.display = s === id ? "block" : "none");
   }
 
   function markStep(id, state) {
