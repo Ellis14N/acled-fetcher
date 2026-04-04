@@ -30,6 +30,11 @@ AIRPORT_CODES = {
 }
 
 
+def get_region_for_airport(airport_code):
+    code = (airport_code or "").strip().upper()
+    return AIRPORT_CODES.get(code, "Unknown")
+
+
 def get_opensky_auth():
     """Return authentication tuple for OpenSky API."""
     return (OPENSKY_USERNAME, OPENSKY_PASSWORD)
@@ -222,7 +227,7 @@ def get_opensky_summary(airport_code="JFK", days_back=30):
         
         summary = {
             "airport": airport_code,
-            "region": AIRPORT_CODES.get(airport_code.replace("K", ""), "Unknown"),
+            "region": get_region_for_airport(airport_code),
             "total_flights": len(all_flights),
             "total_departures": len(departures),
             "total_arrivals": len(arrivals),
@@ -246,7 +251,7 @@ def get_opensky_summary(airport_code="JFK", days_back=30):
             states = fetch_aircraft_states()
             summary = {
                 "airport": airport_code,
-                "region": AIRPORT_CODES.get(airport_code.replace("K", ""), "Unknown"),
+                "region": get_region_for_airport(airport_code),
                 "total_flights": len(states),
                 "total_departures": 0,
                 "total_arrivals": 0,

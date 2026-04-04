@@ -1,8 +1,8 @@
 import os
 import requests
 from dotenv import load_dotenv
-from collections import Counter, defaultdict
-from datetime import datetime, timedelta
+from collections import defaultdict
+from datetime import datetime
 
 # Load credentials
 load_dotenv()
@@ -15,6 +15,8 @@ if not ACLED_EMAIL or not ACLED_PASSWORD:
 
 TOKEN_URL = "https://acleddata.com/oauth/token"
 DATA_URL = "https://acleddata.com/api/acled/read"
+DEFAULT_DATE_FROM = os.getenv("ACLED_DATE_FROM", "2025-01-01")
+DEFAULT_DATE_TO = os.getenv("ACLED_DATE_TO", "2025-02-01")
 
 EVENT_TYPES = [
     "Protests",
@@ -35,7 +37,7 @@ def get_access_token():
         "client_id": "acled"
     }
 
-    response = requests.post(TOKEN_URL, headers=headers, data=data)
+    response = requests.post(TOKEN_URL, headers=headers, data=data, timeout=30)
 
     if response.status_code == 200:
         print("✅ ACLED access token obtained successfully")
@@ -64,10 +66,8 @@ def fetch_single_event_type(token, event_type, country, date_from, date_to):
     }
 
     print(f"   → Fetching event data from ACLED")
-    response = requests.get(DATA_URL, headers=headers, params=params)
+    response = requests.get(DATA_URL, headers=headers, params=params, timeout=60)
     response.raise_for_status()
-
-    print(f"   → Raw response: {response.text[:500]}")
 
     data = response.json()
     events = data.get("data", data) if isinstance(data, dict) else data
@@ -167,40 +167,60 @@ def build_monthly_series(events):
     return dict(sorted(ts.items()))
 
 
-def build_actor_summary(events, top_n=5):
-    """Return the top N actors with their most frequent actor type."""
-    counts = defaultdict(int)
-    types = defaultdict(lambda: defaultdict(int))
+def build_event_type_totals(events):
+    """Count event types across all events in the selected date window."""
+    totals = defaultdict(int)
+    for e in events:
+        totals[e.get("event_type", "Unknown")] += 1
+    return dict(totals)
+
+
+def build_actor_summary(events, top_n=5, exclude_civilians=False):
+    """Return top actors counted by unique event participation."""
+    actor_event_ids = defaultdict(set)
+    actor_types = defaultdict(lambda: defaultdict(int))
 
     for e in events:
+        event_id = e.get("event_id_cnty")
+        if not event_id:
+            continue
+
+        # Ensure each actor is counted at most once per event even if it appears twice.
+        actors_in_event = {}
         for actor_field, type_field in [("actor1", "actor1_type"), ("actor2", "actor2_type")]:
             actor = e.get(actor_field)
             if not actor or not isinstance(actor, str):
                 continue
+
             actor = actor.strip()
             if not actor or actor.lower() == "unknown":
                 continue
+            if exclude_civilians and "civilian" in actor.lower():
+                continue
 
-            counts[actor] += 1
             actor_type = e.get(type_field) or "Unknown"
             actor_type = actor_type.strip() if isinstance(actor_type, str) else str(actor_type)
             if not actor_type:
                 actor_type = "Unknown"
-            types[actor][actor_type] += 1
 
-    top_actors = sorted(counts.items(), key=lambda item: item[1], reverse=True)[:top_n]
+            if actor not in actors_in_event:
+                actors_in_event[actor] = actor_type
+
+        for actor, actor_type in actors_in_event.items():
+            actor_event_ids[actor].add(event_id)
+            actor_types[actor][actor_type] += 1
+
+    top_actors = sorted(
+        ((actor, len(event_ids)) for actor, event_ids in actor_event_ids.items()),
+        key=lambda item: item[1],
+        reverse=True
+    )[:top_n]
+
     summary = []
     for actor, count in top_actors:
-        type_counts = types[actor]
-        if type_counts:
-            actor_type = sorted(type_counts.items(), key=lambda item: (-item[1], item[0]))[0][0]
-        else:
-            actor_type = "Unknown"
-        summary.append({
-            "actor": actor,
-            "actor_type": actor_type,
-            "count": count
-        })
+        type_counts = actor_types[actor]
+        actor_type = sorted(type_counts.items(), key=lambda item: (-item[1], item[0]))[0][0] if type_counts else "Unknown"
+        summary.append({"actor": actor, "actor_type": actor_type, "count": count})
 
     return summary
 
@@ -209,15 +229,15 @@ def build_actor_summary(events, top_n=5):
 # PIPELINE WRAPPER FUNCTION
 # =========================
 
-def get_acled_security_summary(country="Mali"):
+def get_acled_security_summary(country="Mali", date_from=None, date_to=None):
     """
     Returns structured SEC summary for the pipeline:
     - total events
     - total fatalities
     - weekly and monthly time series
     """
-    date_from_str = "2024-10-01"   # Past 30 days approx
-    date_to_str = "2024-12-31"     # Past 30 days approx
+    date_from_str = date_from or DEFAULT_DATE_FROM
+    date_to_str = date_to or DEFAULT_DATE_TO
 
     print(f"📅 Date range: {date_from_str} → {date_to_str}")
     print(f"🌍 Country: {country}")
@@ -225,38 +245,18 @@ def get_acled_security_summary(country="Mali"):
     events = fetch_all_event_types(country, date_from_str, date_to_str)
 
     monthly = build_monthly_series(events)
-    latest_month_key = list(monthly.keys())[-1] if monthly else None
-    recent_events = [e for e in events if e.get('event_date', '').startswith(latest_month_key)] if latest_month_key else []
-
-    def build_filtered_actor_summary(events_local, top_n=5):
-        counts = defaultdict(int)
-        types = defaultdict(lambda: defaultdict(int))
-        for e in events_local:
-            for actor_field, type_field in [("actor1", "actor1_type"), ("actor2", "actor2_type")]:
-                actor = e.get(actor_field)
-                if not actor or not isinstance(actor, str) or actor.strip().lower() == "unknown" or "civilian" in actor.lower():
-                    continue
-                actor = actor.strip()
-                counts[actor] += 1
-                actor_type = e.get(type_field) or "Unknown"
-                actor_type = actor_type.strip() if isinstance(actor_type, str) else str(actor_type)
-                types[actor][actor_type] += 1
-        top_actors = sorted(counts.items(), key=lambda item: item[1], reverse=True)[:top_n]
-        summary = []
-        for actor, count in top_actors:
-            type_counts = types[actor]
-            actor_type = sorted(type_counts.items(), key=lambda item: (-item[1], item[0]))[0][0] if type_counts else "Unknown"
-            summary.append({"actor": actor, "actor_type": actor_type, "count": count})
-        return summary
 
     summary = {
         "country": country,
+        "date_from": date_from_str,
+        "date_to": date_to_str,
         "total_events": len(events),
         "total_fatalities": sum(int(e.get("fatalities", 0)) for e in events),
+        "event_type_totals": build_event_type_totals(events),
         "weekly": build_weekly_series(events),
         "monthly": monthly,
-        "top_actors": build_actor_summary(events),  # Keep total for download
-        "top_actors_recent": build_filtered_actor_summary(recent_events)  # Latest month, no civilians
+        "top_actors": build_actor_summary(events),
+        "top_actors_recent": build_actor_summary(events, exclude_civilians=True)
     }
 
     return summary
@@ -270,8 +270,8 @@ if __name__ == "__main__":
     import sys
 
     country = sys.argv[1] if len(sys.argv) > 1 else "Mali"
-    date_from_str = "2025-01-01"   # TEMP TEST
-    date_to_str = "2025-04-02"     # TEMP TEST
+    date_from_str = DEFAULT_DATE_FROM
+    date_to_str = DEFAULT_DATE_TO
 
     print(f"=== ACLED {country} Time-Series (temp test range) ===")
     print(f"📅 {date_from_str} → {date_to_str}")

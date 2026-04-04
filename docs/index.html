@@ -514,6 +514,10 @@
   const GITHUB_OWNER  = "Ellis14N";
   const GITHUB_REPO   = "acled-fetcher";
   const PAGE_PASSWORD = "14N";
+  const DEFAULT_ACLED_WINDOW_FROM = "2025-01-01";
+  const DEFAULT_ACLED_WINDOW_TO = "2025-02-01";
+
+  const TOKEN_KEY = "acled_gh_token";
 
   let pollingInterval = null;
   let progressValue   = 0;
@@ -524,13 +528,78 @@
     document.getElementById("passwordInput").addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
   });
 
+  function normalizeWindowDate(value, fallback) {
+    const text = String(value || "").trim();
+    if (!text) return fallback;
+
+    const lowered = text.toLowerCase();
+    if (["unknown", "n/a", "na", "null", "undefined", "none", "-"] .includes(lowered)) {
+      return fallback;
+    }
+
+    // Prefer ISO-style date values to keep the window label consistent.
+    if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+
+    return fallback;
+  }
+
+  function sumEventTypes(eventTypes) {
+    if (!eventTypes || typeof eventTypes !== "object") return 0;
+    return Object.values(eventTypes).reduce((acc, count) => acc + Number(count || 0), 0);
+  }
+
+  function aggregateEventTypesFromSeries(series) {
+    const totals = {};
+    if (!series || typeof series !== "object") return totals;
+
+    Object.values(series).forEach(bucket => {
+      const types = bucket?.event_types;
+      if (!types || typeof types !== "object") return;
+
+      Object.entries(types).forEach(([type, count]) => {
+        totals[type] = (totals[type] || 0) + Number(count || 0);
+      });
+    });
+
+    return totals;
+  }
+
+  function getEventTypeTotalsForDisplay(data) {
+    const directTotals = data?.event_type_totals;
+    if (directTotals && sumEventTypes(directTotals) > 0) {
+      return directTotals;
+    }
+
+    const monthlyTotals = aggregateEventTypesFromSeries(data?.monthly);
+    if (sumEventTypes(monthlyTotals) > 0) {
+      return monthlyTotals;
+    }
+
+    const weeklyTotals = aggregateEventTypesFromSeries(data?.weekly);
+    return weeklyTotals;
+  }
+
+  function getToken() {
+    const sessionToken = sessionStorage.getItem(TOKEN_KEY);
+    if (sessionToken) return sessionToken;
+
+    // Migrate any previously persisted token to session scope for safer storage.
+    const legacyToken = localStorage.getItem(TOKEN_KEY);
+    if (legacyToken) {
+      sessionStorage.setItem(TOKEN_KEY, legacyToken);
+      localStorage.removeItem(TOKEN_KEY);
+      return legacyToken;
+    }
+    return null;
+  }
+
   function checkPassword() {
     const val = document.getElementById("passwordInput").value.trim().toUpperCase();
     const expected = PAGE_PASSWORD.trim().toUpperCase();
 
     if (val === expected) {
       document.getElementById("passwordError").style.display = "none";
-      const token = localStorage.getItem("acled_gh_token");
+      const token = getToken();
       show(token ? "dashboardScreen" : "setupScreen");
     } else {
       const err = document.getElementById("passwordError");
@@ -548,12 +617,13 @@
       err.style.display = "block";
       return;
     }
-    localStorage.setItem("acled_gh_token", token);
+    sessionStorage.setItem(TOKEN_KEY, token);
     show("dashboardScreen");
   }
 
   function clearToken() {
-    localStorage.removeItem("acled_gh_token");
+    sessionStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(TOKEN_KEY);
     show("setupScreen");
   }
 
@@ -566,7 +636,7 @@
   async function runFetch() {
     const country = document.getElementById("countryInput").value.trim();
     if (!country) return;
-    const token = localStorage.getItem("acled_gh_token");
+    const token = getToken();
     if (!token) { clearToken(); return; }
 
     show("loadingScreen");
@@ -577,7 +647,7 @@
       const runId = await triggerWorkflow("fetch_acled.yml", { country }, token);
       pollForCompletion(runId, country, token, "acled");
     } catch (err) {
-      showFetchError(err.message);
+      showFetchError(err.message, "acled");
     }
   }
 
@@ -591,7 +661,7 @@
       return;
     }
 
-    const token = localStorage.getItem("acled_gh_token");
+    const token = getToken();
     if (!token) { clearToken(); return; }
 
     show("loadingScreen");
@@ -602,11 +672,28 @@
       const runId = await triggerWorkflow("fetch_opensky.yml", { airport, days_back: String(daysBack) }, token);
       pollForCompletion(runId, airport, token, "opensky");
     } catch (err) {
-      showFetchError(err.message);
+      showFetchError(err.message, "opensky");
     }
   }
 
   async function triggerWorkflow(workflowFile, inputs, token) {
+    const runsUrl =
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${encodeURIComponent(workflowFile)}/runs?event=workflow_dispatch&branch=main&per_page=50`;
+
+    // Snapshot latest run before dispatch so we can reliably detect the new one.
+    let latestRunBeforeDispatch = null;
+    try {
+      const beforeRes = await fetch(runsUrl, {
+        headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" }
+      });
+      if (beforeRes.ok) {
+        const beforeData = await beforeRes.json();
+        latestRunBeforeDispatch = (beforeData.workflow_runs || [])[0] || null;
+      }
+    } catch (_err) {
+      // Best-effort snapshot only; continue with dispatch path.
+    }
+
     const res = await fetch(
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`,
       {
@@ -620,19 +707,34 @@
       }
     );
 
-    if (res.status === 401) { localStorage.removeItem("acled_gh_token"); throw new Error("GitHub token rejected."); }
+    if (res.status === 401) {
+      sessionStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(TOKEN_KEY);
+      throw new Error("GitHub token rejected.");
+    }
     if (!res.ok) throw new Error(`GitHub API error ${res.status}`);
 
     markStep("step1", "done");
-    await sleep(4000);
+    const dispatchedAt = Date.now();
+    const previousRunId = latestRunBeforeDispatch?.id || 0;
 
-    const runsRes = await fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs?per_page=5`,
-      { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" } }
-    );
-    const runsData = await runsRes.json();
-    const run = runsData.workflow_runs.find(r => r.status !== "completed") || runsData.workflow_runs[0];
-    return run.id;
+    for (let attempt = 0; attempt < 20; attempt++) {
+      await sleep(3000);
+      const runsRes = await fetch(runsUrl, {
+        headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" }
+      });
+      if (!runsRes.ok) throw new Error(`GitHub API error ${runsRes.status} while locating workflow run`);
+
+      const runsData = await runsRes.json();
+      const workflowRuns = runsData.workflow_runs || [];
+      const run = workflowRuns.find(r => {
+        const createdAtMs = new Date(r.created_at).getTime();
+        return Number(r.id) > Number(previousRunId) && createdAtMs >= dispatchedAt - 120000;
+      });
+      if (run) return run.id;
+    }
+
+    throw new Error("Workflow dispatched, but the run did not appear in time. Please retry in a few seconds.");
   }
 
   function pollForCompletion(runId, key, token, source) {
@@ -662,6 +764,7 @@
               const filename = `risk_data_${key.toLowerCase().replace(/\s+/g, "_")}.json`;
               const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
               const dataRes = await fetch(url);
+              if (!dataRes.ok) throw new Error(`Failed to load ACLED output file (${dataRes.status})`);
               const data = await dataRes.json();
               showResults(data, "acled");
               setupDownload(data, key, "acled");
@@ -669,6 +772,7 @@
               const filename = `opensky_${key.toLowerCase().replace(/\s+/g, "_")}.json`;
               const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
               const dataRes = await fetch(url);
+              if (!dataRes.ok) throw new Error(`Failed to load OpenSky output file (${dataRes.status})`);
               const data = await dataRes.json();
               showResults(data, "opensky");
               setupDownload(data, key, "opensky");
@@ -677,7 +781,7 @@
             }
           } else { throw new Error("Workflow failed."); }
         }
-      } catch (err) { showFetchError(err.message); }
+      } catch (err) { showFetchError(err.message, source); }
     }, 6000);
   }
 
@@ -745,22 +849,24 @@
     }
 
     // ACLED default path
-    const monthNames = Object.keys(data.monthly);
-    const latestMonthName = monthNames[monthNames.length - 1];
-    const latestData = data.monthly[latestMonthName];
+    const windowFrom = normalizeWindowDate(data.date_from, DEFAULT_ACLED_WINDOW_FROM);
+    const windowTo = normalizeWindowDate(data.date_to, DEFAULT_ACLED_WINDOW_TO);
+    const typeCounts = getEventTypeTotalsForDisplay(data);
+    const eventsFromTypeCounts = sumEventTypes(typeCounts);
+    const totalEvents = Number(data.total_events || 0);
+    const eventsDisplayValue = eventsFromTypeCounts > 0 ? eventsFromTypeCounts : totalEvents;
 
     document.getElementById("resultTitle").textContent = `${data.country} — Overview`;
-    document.getElementById("resultDate").textContent  = `Reported for: ${latestMonthName}`;
+    document.getElementById("resultDate").textContent  = `Window: ${windowFrom} to ${windowTo}`;
 
     document.getElementById("statLabel1").textContent = "Events (Past 30d)";
     document.getElementById("statLabel2").textContent = "Fatalities (Past 30d)";
-    document.getElementById("statEvents").textContent     = latestData.events.toLocaleString();
-    document.getElementById("statFatalities").textContent = latestData.fatalities.toLocaleString();
+    document.getElementById("statEvents").textContent     = eventsDisplayValue.toLocaleString();
+    document.getElementById("statFatalities").textContent = Number(data.total_fatalities || 0).toLocaleString();
 
 
     const breakdownEl = document.getElementById("breakdownRows");
     breakdownEl.innerHTML = "";
-    const typeCounts = latestData.event_types || {};
 
     // Define all event types to display, even if count is 0
     const allEventTypes = [
@@ -781,7 +887,10 @@
         </div>`;
     });
 
-// Add top actors section (with spacing, 3-col, recent data)
+    const oldTopActors = document.getElementById('topActorsBreakdown');
+    if (oldTopActors) oldTopActors.remove();
+
+    // Add top actors section (with spacing, 3-col, recent data)
     const topActorsEl = document.createElement('div');
     topActorsEl.id = 'topActorsBreakdown';
     topActorsEl.style.marginTop = '20px';
@@ -834,11 +943,20 @@
     if (val >= 100) clearInterval(stepTimer);
   }
 
-  function showFetchError(msg) {
+  function showFetchError(msg, source = "acled") {
     clearInterval(pollingInterval); clearInterval(stepTimer);
+    if (source === "opensky") {
+      show("fetchOpenSkyScreen");
+      const err = document.getElementById("openSkyError");
+      err.textContent = msg;
+      err.style.display = "block";
+      return;
+    }
+
     show("fetchScreen");
     const err = document.getElementById("fetchError");
-    err.textContent = msg; err.style.display = "block";
+    err.textContent = msg;
+    err.style.display = "block";
   }
 
   function runAgain() {

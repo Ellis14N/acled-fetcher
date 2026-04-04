@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from acled_fetch import get_acled_security_summary
+from acled_fetch import get_acled_security_summary, DEFAULT_DATE_FROM, DEFAULT_DATE_TO
 
 # =========================
 # Paths & Setup
@@ -29,7 +29,7 @@ os.makedirs(os.path.dirname(output_path), exist_ok=True)
 # Fetch ACLED Data
 # =========================
 
-print(f"=== Fetching ACLED Security Data: {country} (last 30 days) ===")
+print(f"=== Fetching ACLED Security Data: {country} ({DEFAULT_DATE_FROM} to {DEFAULT_DATE_TO}) ===")
 
 try:
     # Fetches last 30 days of data for the given country

@@ -62,12 +62,12 @@ in your code.
 
 4. Add the first secret:
    - **Name:** `ACLED_EMAIL`
-   - **Secret:** `ellisdjones0607@hotmail.com`
+   - **Secret:** `your-acled-email@example.com`
    - Click **Add secret**
 
 5. Click **New repository secret** again to add the second:
    - **Name:** `ACLED_PASSWORD`
-   - **Secret:** `NaSaeu099!`
+   - **Secret:** `your-acled-password`
    - Click **Add secret**
 
 6. You should now see both `ACLED_EMAIL` and `ACLED_PASSWORD` listed
