@@ -1,7 +1,7 @@
 {
   "country": "Mali",
   "country_code": "MLI",
-  "date_retrieved": "2026-04-03T23:38:26.594704",
+  "date_retrieved": "2026-04-03T23:49:12.408796",
   "total_displaced": 4173814,
   "population_types": {
     "refugees": 917633,
@@ -12,14 +12,147 @@
   },
   "top_origin_countries": [
     {
-      "origin": "-",
-      "refugees": 917633,
-      "asylum_seekers": 25286,
+      "origin": "Mali",
+      "refugees": 0,
+      "asylum_seekers": 0,
       "idps": 3230895,
       "stateless": 0,
       "oip": 0,
-      "total": 4173814
+      "total": 3230895
+    },
+    {
+      "origin": "Mauritania",
+      "refugees": 394106,
+      "asylum_seekers": 1401,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 395507
+    },
+    {
+      "origin": "Burkina Faso",
+      "refugees": 289121,
+      "asylum_seekers": 97,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 289218
+    },
+    {
+      "origin": "Niger",
+      "refugees": 126682,
+      "asylum_seekers": 0,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 126682
+    },
+    {
+      "origin": "Cote d'Ivoire",
+      "refugees": 27914,
+      "asylum_seekers": 10182,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 38096
+    },
+    {
+      "origin": "Unknown",
+      "refugees": 32278,
+      "asylum_seekers": 150,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 32428
+    },
+    {
+      "origin": "Sierra Leone",
+      "refugees": 15321,
+      "asylum_seekers": 3305,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 18626
+    },
+    {
+      "origin": "Central African Rep.",
+      "refugees": 12872,
+      "asylum_seekers": 3306,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 16178
+    },
+    {
+      "origin": "Dem. Rep. of the Congo",
+      "refugees": 5002,
+      "asylum_seekers": 1965,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 6967
+    },
+    {
+      "origin": "Liberia",
+      "refugees": 6343,
+      "asylum_seekers": 318,
+      "idps": 0,
+      "stateless": 0,
+      "oip": 0,
+      "total": 6661
     }
   ],
-  "raw_record_count": 41
+  "origin_country_count": 35,
+  "yearly_totals": {
+    "1971": 60,
+    "1986": 50,
+    "1987": 50,
+    "1988": 50,
+    "1989": 50,
+    "1990": 13411,
+    "1991": 13120,
+    "1992": 13109,
+    "1993": 15224,
+    "1994": 18800,
+    "1995": 17916,
+    "1996": 18234,
+    "1997": 12552,
+    "1998": 13594,
+    "1999": 8302,
+    "2000": 9122,
+    "2001": 9243,
+    "2002": 9809,
+    "2003": 10720,
+    "2004": 12337,
+    "2005": 13061,
+    "2006": 12463,
+    "2007": 11107,
+    "2008": 11484,
+    "2009": 15234,
+    "2010": 15254,
+    "2011": 18115,
+    "2012": 242096,
+    "2013": 269426,
+    "2014": 115642,
+    "2015": 78169,
+    "2016": 54499,
+    "2017": 55762,
+    "2018": 147753,
+    "2019": 235427,
+    "2020": 381306,
+    "2021": 400948,
+    "2022": 441449,
+    "2023": 421455,
+    "2024": 496418,
+    "2025": 540993
+  },
+  "trend": {
+    "basis": "yearly",
+    "direction": "increasing",
+    "change": 44575,
+    "change_pct": 8.98,
+    "latest_year": "2025",
+    "previous_year": "2024"
+  },
+  "raw_record_count": 509
 }

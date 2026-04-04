@@ -48,3 +48,4 @@ try:
 
 except Exception as e:
     print(f"❌ Failed to fetch ACLED data: {e}")
+    sys.exit(1)

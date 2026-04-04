@@ -40,6 +40,7 @@ def fetch_population_data_by_country_of_asylum(country_iso_code):
         url = f"{UNHCR_API_BASE}/population/"
         base_params = {
             "coa": country_iso_code,  # country of asylum (destination)
+            "coo_all": "true",
             "cf_type": "ISO",
             "limit": 1000,
         }
@@ -76,6 +77,11 @@ def to_int(value):
         return 0
 
 
+def normalize_origin_name(origin):
+    text = str(origin or "").strip()
+    return "Unknown/Unspecified" if not text or text == "-" else text
+
+
 def aggregate_population_by_origin(records):
     """
     Aggregate displacement population by country of origin.
@@ -101,7 +107,7 @@ def aggregate_population_by_origin(records):
     })
     
     for record in records:
-        origin = record.get("coo_name", "Unknown")
+        origin = normalize_origin_name(record.get("coo_name", "Unknown"))
         
         refugees = to_int(record.get("refugees", 0))
         asylum_seekers = to_int(record.get("asylum_seekers", 0))
@@ -123,6 +129,64 @@ def aggregate_population_by_origin(records):
         by_origin[origin]["total"] += refugees + asylum_seekers + idps + stateless + oip
     
     return totals, dict(by_origin)
+
+
+def build_yearly_totals(records):
+    """Aggregate displaced totals by year."""
+    yearly = defaultdict(int)
+
+    for record in records:
+        year = str(record.get("year", "")).strip()
+        if not year:
+            continue
+
+        yearly[year] += (
+            to_int(record.get("refugees", 0))
+            + to_int(record.get("asylum_seekers", 0))
+            + to_int(record.get("idps", 0))
+            + to_int(record.get("stateless", 0))
+            + to_int(record.get("oip", 0))
+        )
+
+    return dict(sorted(yearly.items(), key=lambda item: item[0]))
+
+
+def build_trend_summary(yearly_totals):
+    """Return trend direction by comparing latest year with previous year."""
+    years = sorted(yearly_totals.keys())
+    if len(years) < 2:
+        return {
+            "basis": "yearly",
+            "direction": "insufficient_data",
+            "change": 0,
+            "change_pct": None,
+            "latest_year": years[-1] if years else None,
+            "previous_year": None,
+        }
+
+    latest_year = years[-1]
+    previous_year = years[-2]
+    latest_total = yearly_totals[latest_year]
+    previous_total = yearly_totals[previous_year]
+    change = latest_total - previous_total
+
+    if change > 0:
+        direction = "increasing"
+    elif change < 0:
+        direction = "decreasing"
+    else:
+        direction = "stable"
+
+    change_pct = round((change / previous_total) * 100, 2) if previous_total else None
+
+    return {
+        "basis": "yearly",
+        "direction": direction,
+        "change": change,
+        "change_pct": change_pct,
+        "latest_year": latest_year,
+        "previous_year": previous_year,
+    }
 
 
 def get_top_origin_countries(by_origin, top_n=10):
@@ -169,6 +233,8 @@ def get_unhcr_displacement_data(country="Mali"):
     
     totals, by_origin = aggregate_population_by_origin(raw_records)
     top_origins = get_top_origin_countries(by_origin)
+    yearly_totals = build_yearly_totals(raw_records)
+    trend = build_trend_summary(yearly_totals)
     
     total_displaced = sum(totals.values())
     
@@ -179,6 +245,9 @@ def get_unhcr_displacement_data(country="Mali"):
         "total_displaced": total_displaced,
         "population_types": totals,
         "top_origin_countries": top_origins,
+        "origin_country_count": len(by_origin),
+        "yearly_totals": yearly_totals,
+        "trend": trend,
         "raw_record_count": len(raw_records)
     }
     

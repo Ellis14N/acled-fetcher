@@ -830,7 +830,7 @@
 
   async function fetchJsonWithRetry(url, label) {
     let lastStatus = 0;
-    for (let attempt = 1; attempt <= 12; attempt++) {
+    for (let attempt = 1; attempt <= 24; attempt++) {
       const res = await fetch(`${url}&attempt=${attempt}`);
       if (res.ok) {
         return await res.json();
@@ -858,6 +858,9 @@
       if (source === 'opensky') {
         jsContent = `/**\n * OpenSky Data Export\n * Airport: ${key}\n */\n\nconst OPENSKY_DATA = ${JSON.stringify(data, null, 2)};`;
         filename = `opensky_${key.toLowerCase().replace(/\s+/g, '_')}_data.js`;
+      } else if (source === 'unhcr') {
+        jsContent = `/**\n * UNHCR Data Export\n * Country: ${key}\n */\n\nconst UNHCR_DATA = ${JSON.stringify(data, null, 2)};`;
+        filename = `unhcr_${key.toLowerCase().replace(/\s+/g, '_')}_data.js`;
       } else {
         jsContent = `/**\n * ACLED Data Export\n * Country: ${key}\n */\n\nconst ACLED_DATA = ${JSON.stringify(data, null, 2)};`;
         filename = `acled_${key.toLowerCase().replace(/\s+/g, '_')}_data.js`;
@@ -878,7 +881,18 @@
   function showResults(data, source) {
     show("resultsScreen");
 
+    const removeIfExists = (id) => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    };
+
+    const mainBreakdownTitle = document.querySelector("#resultsScreen .breakdown .breakdown-title");
+
     if (source === "opensky") {
+      removeIfExists("topOriginsBreakdown");
+      removeIfExists("topActorsBreakdown");
+      if (mainBreakdownTitle) mainBreakdownTitle.textContent = "OpenSky Breakdown";
+
       document.getElementById("resultTitle").textContent = `${data.airport} — OpenSky Overview`;
       document.getElementById("resultDate").textContent  = `Retrieved live data`;
 
@@ -913,14 +927,26 @@
     }
 
     if (source === "unhcr") {
+      removeIfExists("topActorsBreakdown");
+      if (mainBreakdownTitle) mainBreakdownTitle.textContent = "Displacement Breakdown";
+
       document.getElementById("resultTitle").textContent = `${data.country} — UNHCR Displacement Overview`;
-      document.getElementById("resultDate").textContent  = `Retrieved: ${new Date(data.date_retrieved).toLocaleDateString()}`;
+      const trendBasis = data.trend?.basis === "yearly" ? "yearly snapshots" : "available snapshots";
+      document.getElementById("resultDate").textContent  = `Retrieved: ${new Date(data.date_retrieved).toLocaleDateString()} • Trend basis: ${trendBasis}`;
 
       document.getElementById("statLabel1").textContent = "Total Displaced";
-      document.getElementById("statLabel2").textContent = "Origin Countries";
+      document.getElementById("statLabel2").textContent = "Trend (Yearly)";
 
       document.getElementById("statEvents").textContent     = Number(data.total_displaced || 0).toLocaleString();
-      document.getElementById("statFatalities").textContent = (data.top_origin_countries || []).length;
+      const trend = data.trend || {};
+      const trendDirection = trend.direction || "insufficient_data";
+      const trendSymbol = trendDirection === "increasing" ? "+" : trendDirection === "decreasing" ? "-" : "=";
+      const trendPct = trend.change_pct;
+      const trendYears = trend.latest_year && trend.previous_year ? ` ${trend.previous_year}-${trend.latest_year}` : "";
+      const trendText = trendDirection === "insufficient_data"
+        ? "No trend data"
+        : `${trendSymbol} ${trendPct === null || trendPct === undefined ? "n/a" : `${Math.abs(trendPct)}%`}${trendYears}`;
+      document.getElementById("statFatalities").textContent = trendText;
 
       const breakdownEl = document.getElementById("breakdownRows");
       breakdownEl.innerHTML = "";
@@ -947,8 +973,7 @@
       });
 
       // Add top origin countries section
-      const oldTopOrigins = document.getElementById('topOriginsBreakdown');
-      if (oldTopOrigins) oldTopOrigins.remove();
+      removeIfExists("topOriginsBreakdown");
 
       const topOriginsEl = document.createElement('div');
       topOriginsEl.id = 'topOriginsBreakdown';
@@ -981,6 +1006,9 @@
     }
 
     // ACLED default path
+    removeIfExists("topOriginsBreakdown");
+    if (mainBreakdownTitle) mainBreakdownTitle.textContent = "Events by Type (Past 30d)";
+
     const windowFrom = normalizeWindowDate(data.date_from, DEFAULT_ACLED_WINDOW_FROM);
     const windowTo = normalizeWindowDate(data.date_to, DEFAULT_ACLED_WINDOW_TO);
     const typeCounts = getEventTypeTotalsForDisplay(data);
