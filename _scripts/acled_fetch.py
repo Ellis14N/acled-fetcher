@@ -1,7 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime, timedelta
 
 # Load credentials
@@ -59,16 +59,14 @@ def fetch_single_event_type(token, event_type, country, date_from, date_to):
         "limit": 5000,
         "fields": (
             "event_id_cnty|event_date|event_type|sub_event_type|"
-            "fatalities|actor1|actor2|admin1|location"
+            "fatalities|actor1|actor1_type|actor2|actor2_type|admin1|location"
         )
     }
 
-    print(f"\n🔍 Fetching: {event_type}")
-
+    print(f"   → Fetching event data from ACLED")
     response = requests.get(DATA_URL, headers=headers, params=params)
     response.raise_for_status()
 
-    print(f"   → Status: {response.status_code}")
     print(f"   → Raw response: {response.text[:500]}")
 
     data = response.json()
@@ -169,6 +167,44 @@ def build_monthly_series(events):
     return dict(sorted(ts.items()))
 
 
+def build_actor_summary(events, top_n=5):
+    """Return the top N actors with their most frequent actor type."""
+    counts = defaultdict(int)
+    types = defaultdict(lambda: defaultdict(int))
+
+    for e in events:
+        for actor_field, type_field in [("actor1", "actor1_type"), ("actor2", "actor2_type")]:
+            actor = e.get(actor_field)
+            if not actor or not isinstance(actor, str):
+                continue
+            actor = actor.strip()
+            if not actor or actor.lower() == "unknown":
+                continue
+
+            counts[actor] += 1
+            actor_type = e.get(type_field) or "Unknown"
+            actor_type = actor_type.strip() if isinstance(actor_type, str) else str(actor_type)
+            if not actor_type:
+                actor_type = "Unknown"
+            types[actor][actor_type] += 1
+
+    top_actors = sorted(counts.items(), key=lambda item: item[1], reverse=True)[:top_n]
+    summary = []
+    for actor, count in top_actors:
+        type_counts = types[actor]
+        if type_counts:
+            actor_type = sorted(type_counts.items(), key=lambda item: (-item[1], item[0]))[0][0]
+        else:
+            actor_type = "Unknown"
+        summary.append({
+            "actor": actor,
+            "actor_type": actor_type,
+            "count": count
+        })
+
+    return summary
+
+
 # =========================
 # PIPELINE WRAPPER FUNCTION
 # =========================
@@ -193,7 +229,8 @@ def get_acled_security_summary(country="Mali"):
         "total_events": len(events),
         "total_fatalities": sum(int(e.get("fatalities", 0)) for e in events),
         "weekly": build_weekly_series(events),
-        "monthly": build_monthly_series(events)
+        "monthly": build_monthly_series(events),
+        "top_actors": build_actor_summary(events)
     }
 
     return summary
@@ -229,6 +266,11 @@ if __name__ == "__main__":
         print("\n=== MONTHLY OUTPUT ===")
         for k, v in monthly_ts.items():
             print(k, v)
-
+        print("\n=== TOP 5 ACTORS ===")
+        top_actors = build_actor_summary(events)
+        print(f"{'Actor':<40} {'Actor Type':<30} {'Count':>5}")
+        print("-" * 80)
+        for row in top_actors:
+            print(f"{row['actor']:<40} {row['actor_type']:<30} {row['count']:>5}")
     else:
         print("No events returned.")
