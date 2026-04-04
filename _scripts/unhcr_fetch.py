@@ -5,29 +5,52 @@ from collections import defaultdict
 # UNHCR Refugee Statistics API v1 (public endpoints)
 UNHCR_API_BASE = "https://api.unhcr.org/population/v1"
 UNHCR_MAX_PAGE_SCAN = 250
+UNHCR_COUNTRIES_ENDPOINT = f"{UNHCR_API_BASE}/countries/"
 
-# ISO 3166-1 alpha-3 country codes for supported countries
-COUNTRY_ISO_CODES = {
-    "mali": "MLI",
-    "nigeria": "NGA",
-    "sudan": "SDN",
-    "chad": "TCD",
-}
+def fetch_country_lookup_table():
+    """Fetch country lookup table from UNHCR countries endpoint."""
+    response = requests.get(UNHCR_COUNTRIES_ENDPOINT, params={"limit": 400}, timeout=30)
+    response.raise_for_status()
+    payload = response.json()
+    items = payload.get("items", []) if isinstance(payload, dict) else []
+
+    lookup = {}
+    for item in items:
+        name = str(item.get("name") or "").strip()
+        iso = str(item.get("iso") or "").strip().upper()
+        if not name or len(iso) != 3:
+            continue
+
+        lookup[name.lower()] = iso
+
+    return lookup
 
 
 def get_country_iso_code(country_name):
-    """Convert country name to ISO 3-letter code."""
-    country_lower = country_name.lower().strip()
-    
-    if country_lower in COUNTRY_ISO_CODES:
-        return COUNTRY_ISO_CODES[country_lower]
-    
-    # Try partial match
-    for key, code in COUNTRY_ISO_CODES.items():
-        if country_lower in key or key in country_lower:
-            return code
-    
-    raise ValueError(f"Country '{country_name}' not supported. Use: {', '.join(COUNTRY_ISO_CODES.keys())}")
+    """Resolve country name or ISO3 code to ISO3."""
+    candidate = str(country_name or "").strip()
+    if not candidate:
+        raise ValueError("Country is required")
+
+    # Accept direct ISO3 input.
+    if len(candidate) == 3 and candidate.isalpha():
+        return candidate.upper()
+
+    country_lookup = fetch_country_lookup_table()
+    candidate_lower = candidate.lower()
+
+    if candidate_lower in country_lookup:
+        return country_lookup[candidate_lower]
+
+    # Fallback partial match for common user input variations.
+    partial_matches = [iso for name, iso in country_lookup.items() if candidate_lower in name]
+    if len(partial_matches) == 1:
+        return partial_matches[0]
+
+    if len(partial_matches) > 1:
+        raise ValueError(f"Country '{country_name}' is ambiguous. Please use a more specific name or ISO3 code.")
+
+    raise ValueError(f"Country '{country_name}' not found in UNHCR country list.")
 
 
 def fetch_population_data_by_country_of_asylum(country_iso_code):
