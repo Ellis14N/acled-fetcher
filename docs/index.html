@@ -804,25 +804,19 @@
             if (source === "acled") {
               const filename = `risk_data_${key.toLowerCase().replace(/\s+/g, "_")}.json`;
               const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
-              const dataRes = await fetch(url);
-              if (!dataRes.ok) throw new Error(`Failed to load ACLED output file (${dataRes.status})`);
-              const data = await dataRes.json();
+              const data = await fetchJsonWithRetry(url, "ACLED");
               showResults(data, "acled");
               setupDownload(data, key, "acled");
             } else if (source === "opensky") {
               const filename = `opensky_${key.toLowerCase().replace(/\s+/g, "_")}.json`;
               const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
-              const dataRes = await fetch(url);
-              if (!dataRes.ok) throw new Error(`Failed to load OpenSky output file (${dataRes.status})`);
-              const data = await dataRes.json();
+              const data = await fetchJsonWithRetry(url, "OpenSky");
               showResults(data, "opensky");
               setupDownload(data, key, "opensky");
             } else if (source === "unhcr") {
               const filename = `unhcr_data_${key.toLowerCase().replace(/\s+/g, "_")}.json`;
               const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
-              const dataRes = await fetch(url);
-              if (!dataRes.ok) throw new Error(`Failed to load UNHCR output file (${dataRes.status})`);
-              const data = await dataRes.json();
+              const data = await fetchJsonWithRetry(url, "UNHCR");
               showResults(data, "unhcr");
               setupDownload(data, key, "unhcr");
             } else {
@@ -832,6 +826,27 @@
         }
       } catch (err) { showFetchError(err.message, source); }
     }, 6000);
+  }
+
+  async function fetchJsonWithRetry(url, label) {
+    let lastStatus = 0;
+    for (let attempt = 1; attempt <= 12; attempt++) {
+      const res = await fetch(`${url}&attempt=${attempt}`);
+      if (res.ok) {
+        return await res.json();
+      }
+      lastStatus = res.status;
+
+      // Raw GitHub can lag briefly after workflow completion.
+      if (res.status === 404 || res.status === 409 || res.status === 429 || res.status >= 500) {
+        await sleep(2500);
+        continue;
+      }
+
+      throw new Error(`Failed to load ${label} output file (${res.status})`);
+    }
+
+    throw new Error(`Failed to load ${label} output file after retries (${lastStatus || "unknown"})`);
   }
 
   function setupDownload(data, key, source) {

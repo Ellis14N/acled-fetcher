@@ -1,0 +1,25 @@
+{
+  "country": "Mali",
+  "country_code": "MLI",
+  "date_retrieved": "2026-04-03T23:38:26.594704",
+  "total_displaced": 4173814,
+  "population_types": {
+    "refugees": 917633,
+    "asylum_seekers": 25286,
+    "idps": 3230895,
+    "stateless": 0,
+    "oip": 0
+  },
+  "top_origin_countries": [
+    {
+      "origin": "-",
+      "refugees": 917633,
+      "asylum_seekers": 25286,
+      "idps": 3230895,
+      "stateless": 0,
+      "oip": 0,
+      "total": 4173814
+    }
+  ],
+  "raw_record_count": 41
+}

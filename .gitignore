@@ -1,0 +1,11 @@
+# Python cache and env artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+
+# Local dotenv
+.env

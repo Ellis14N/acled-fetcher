@@ -1,6 +1,4 @@
-import os
 import requests  # type: ignore
-import json
 from datetime import datetime
 from collections import defaultdict
 
@@ -40,26 +38,42 @@ def fetch_population_data_by_country_of_asylum(country_iso_code):
     """
     try:
         url = f"{UNHCR_API_BASE}/population/"
-        params = {
+        base_params = {
             "coa": country_iso_code,  # country of asylum (destination)
-            "coa_all": False,
             "cf_type": "ISO",
-            "limit": 5000,
-            "columns": "refugees,asylum_seekers,idps,stateless,oip"
+            "limit": 1000,
         }
-        
-        response = requests.get(url, params=params, timeout=30)
-        response.raise_for_status()
-        
-        data = response.json()
-        records = data.get("data", [])
-        
-        print(f"   → Retrieved {len(records)} displacement records")
-        return records
-        
+
+        all_records = []
+        page = 1
+        max_pages = 1
+
+        while page <= max_pages:
+            params = {**base_params, "page": page}
+            response = requests.get(url, params=params, timeout=30)
+            response.raise_for_status()
+
+            payload = response.json()
+            items = payload.get("items", []) if isinstance(payload, dict) else []
+            all_records.extend(items)
+
+            max_pages = int(payload.get("maxPages", 1) or 1) if isinstance(payload, dict) else 1
+            page += 1
+
+        print(f"   → Retrieved {len(all_records)} displacement records")
+        return all_records
+
     except requests.exceptions.RequestException as e:
         print(f"⚠️  API Error: {e}")
         return []
+
+
+def to_int(value):
+    """Safely convert API values to integers."""
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
 
 
 def aggregate_population_by_origin(records):
@@ -89,11 +103,11 @@ def aggregate_population_by_origin(records):
     for record in records:
         origin = record.get("coo_name", "Unknown")
         
-        refugees = int(record.get("refugees", 0)) or 0
-        asylum_seekers = int(record.get("asylum_seekers", 0)) or 0
-        idps = int(record.get("idps", 0)) or 0
-        stateless = int(record.get("stateless", 0)) or 0
-        oip = int(record.get("oip", 0)) or 0
+        refugees = to_int(record.get("refugees", 0))
+        asylum_seekers = to_int(record.get("asylum_seekers", 0))
+        idps = to_int(record.get("idps", 0))
+        stateless = to_int(record.get("stateless", 0))
+        oip = to_int(record.get("oip", 0))
         
         totals["refugees"] += refugees
         totals["asylum_seekers"] += asylum_seekers
@@ -106,9 +120,7 @@ def aggregate_population_by_origin(records):
         by_origin[origin]["idps"] += idps
         by_origin[origin]["stateless"] += stateless
         by_origin[origin]["oip"] += oip
-        by_origin[origin]["total"] = (
-            refugees + asylum_seekers + idps + stateless + oip
-        )
+        by_origin[origin]["total"] += refugees + asylum_seekers + idps + stateless + oip
     
     return totals, dict(by_origin)
 
