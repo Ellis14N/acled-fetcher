@@ -1,7 +1,8 @@
 import os
 import sys
 import json
-from unhcr_fetch import get_unhcr_displacement_data
+from africa_countries import slugify_country
+from unhcr_fetch import NoDisplacementDataError, get_unhcr_displacement_data
 
 # =========================
 # Paths & Setup
@@ -19,7 +20,7 @@ country = sys.argv[1]
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Path to save unhcr_data.json (named per country)
-output_filename = f"unhcr_data_{country.lower().replace(' ', '_')}.json"
+output_filename = f"unhcr_data_{slugify_country(country)}.json"
 output_path = os.path.join(script_dir, "../data", output_filename)
 
 # Ensure the folder exists
@@ -45,6 +46,10 @@ try:
     print(f"   Total displaced: {displacement_data['total_displaced']:,}")
     print(f"   Top origin countries: {len(displacement_data['top_origin_countries'])}")
     print(f"   Records processed: {displacement_data['raw_record_count']}")
+
+except NoDisplacementDataError as e:
+    print(f"❌ Failed to fetch UNHCR data: {e}")
+    sys.exit(1)
 
 except Exception as e:
     print(f"❌ Failed to fetch UNHCR data: {e}")

@@ -10,11 +10,6 @@ load_dotenv()
 ACLED_EMAIL = os.getenv("ACLED_EMAIL")
 ACLED_PASSWORD = os.getenv("ACLED_PASSWORD")
 
-if not ACLED_EMAIL or not ACLED_PASSWORD:
-    if os.getenv("GITHUB_ACTIONS") == "true":
-        raise ValueError("❌ Missing required GitHub Actions secrets: ACLED_EMAIL and/or ACLED_PASSWORD")
-    raise ValueError("❌ Please set ACLED_EMAIL and ACLED_PASSWORD in your .env file")
-
 TOKEN_URL = "https://acleddata.com/oauth/token"
 DATA_URL = "https://acleddata.com/api/acled/read"
 DEFAULT_DATE_FROM = os.getenv("ACLED_DATE_FROM", "2025-01-01")
@@ -37,7 +32,19 @@ def safe_int(value):
         return 0
 
 
+def validate_acled_credentials():
+    if ACLED_EMAIL and ACLED_PASSWORD:
+        return
+
+    if os.getenv("GITHUB_ACTIONS") == "true":
+        raise ValueError("❌ Missing required GitHub Actions secrets: ACLED_EMAIL and/or ACLED_PASSWORD")
+
+    raise ValueError("❌ Please set ACLED_EMAIL and ACLED_PASSWORD in your .env file")
+
+
 def get_access_token():
+    validate_acled_credentials()
+
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     data = {
         "username": ACLED_EMAIL,

@@ -6,6 +6,14 @@ from collections import defaultdict
 UNHCR_API_BASE = "https://api.unhcr.org/population/v1"
 UNHCR_MAX_PAGE_SCAN = 250
 UNHCR_COUNTRIES_ENDPOINT = f"{UNHCR_API_BASE}/countries/"
+COUNTRY_ALIASES = {
+    "central african republic": "CAF",
+    "democratic republic of the congo": "COD",
+}
+
+
+class NoDisplacementDataError(Exception):
+    pass
 
 def fetch_country_lookup_table():
     """Fetch country lookup table from UNHCR countries endpoint."""
@@ -35,6 +43,9 @@ def get_country_iso_code(country_name):
     # Accept direct ISO3 input.
     if len(candidate) == 3 and candidate.isalpha():
         return candidate.upper()
+
+    if candidate.lower() in COUNTRY_ALIASES:
+        return COUNTRY_ALIASES[candidate.lower()]
 
     country_lookup = fetch_country_lookup_table()
     candidate_lower = candidate.lower()
@@ -72,6 +83,7 @@ def fetch_population_data_by_country_of_asylum(country_iso_code):
         all_records = []
         page = 1
         max_pages = 1
+        pagination_truncated = False
 
         while page <= max_pages and page <= UNHCR_MAX_PAGE_SCAN:
             params = {**base_params, "page": page}
@@ -86,14 +98,15 @@ def fetch_population_data_by_country_of_asylum(country_iso_code):
             page += 1
 
         if max_pages > UNHCR_MAX_PAGE_SCAN:
+            pagination_truncated = True
             print(f"⚠️  Pagination capped at {UNHCR_MAX_PAGE_SCAN} pages (API reported {max_pages})")
 
         print(f"   → Retrieved {len(all_records)} displacement records")
-        return all_records
+        return all_records, pagination_truncated
 
     except requests.exceptions.RequestException as e:
         print(f"⚠️  API Error: {e}")
-        return []
+        return [], False
 
 
 def to_int(value):
@@ -270,9 +283,9 @@ def get_unhcr_displacement_data(country="Mali"):
     except ValueError as e:
         raise Exception(str(e))
     
-    raw_records = fetch_population_data_by_country_of_asylum(country_iso)
+    raw_records, pagination_truncated = fetch_population_data_by_country_of_asylum(country_iso)
     if not raw_records:
-        raise Exception(f"❌ No displacement data found for {country}")
+        raise NoDisplacementDataError(f"No displacement data found for {country}")
 
     latest_year, latest_records = select_latest_year_records(raw_records)
     records_for_summary = latest_records if latest_records else raw_records
@@ -295,7 +308,8 @@ def get_unhcr_displacement_data(country="Mali"):
         "origin_country_count": len(by_origin),
         "yearly_totals": yearly_totals,
         "trend": trend,
-        "raw_record_count": len(raw_records)
+        "raw_record_count": len(raw_records),
+        "pagination_truncated": pagination_truncated,
     }
     
     return summary

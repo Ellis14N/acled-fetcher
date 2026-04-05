@@ -2,6 +2,7 @@ import os
 import sys
 import json
 from acled_fetch import get_acled_security_summary, DEFAULT_DATE_FROM, DEFAULT_DATE_TO
+from africa_countries import slugify_country
 
 # =========================
 # Paths & Setup
@@ -19,7 +20,7 @@ country = sys.argv[1]
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Path to save risk_data.json (named per country)
-output_filename = f"risk_data_{country.lower().replace(' ', '_')}.json"
+output_filename = f"risk_data_{slugify_country(country)}.json"
 output_path = os.path.join(script_dir, "../data", output_filename)
 
 # Ensure the folder exists
