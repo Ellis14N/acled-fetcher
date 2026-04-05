@@ -1,7 +1,7 @@
 {
-  "country": "mali",
+  "country": "Mali",
   "country_code": "MLI",
-  "date_retrieved": "2026-04-04T06:57:20.888826",
+  "date_retrieved": "2026-04-05T04:33:04.956824",
   "reference_year": "2025",
   "total_displaced": 540993,
   "population_types": {
@@ -155,5 +155,6 @@
     "latest_year": "2025",
     "previous_year": "2024"
   },
-  "raw_record_count": 509
+  "raw_record_count": 509,
+  "pagination_truncated": false
 }
