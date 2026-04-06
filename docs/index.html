@@ -2206,8 +2206,14 @@
 
     var current = snapshot && snapshot.current ? snapshot.current : {};
     var projection = snapshot && snapshot.projection ? snapshot.projection : {};
+    var market = snapshot && snapshot.market_prices ? snapshot.market_prices : {};
+    var trade = snapshot && snapshot.trade_flows ? snapshot.trade_flows : {};
+    var crop = snapshot && snapshot.crop_production ? snapshot.crop_production : {};
     var currentAreas = Array.isArray(current.impacted_areas) ? current.impacted_areas : [];
     var projectionAreas = Array.isArray(projection.impacted_areas) ? projection.impacted_areas : [];
+    var marketHighlights = Array.isArray(market.highlights) ? market.highlights : [];
+    var tradeHighlights = Array.isArray(trade.highlights) ? trade.highlights : [];
+    var cropHighlights = Array.isArray(crop.highlights) ? crop.highlights : [];
     var levelClass = 'level-' + Math.max(0, Math.min(5, Number(snapshot && snapshot.summary_level || 0)));
     var html = '';
     html += '<div class="food-severity-badge ' + levelClass + '">' + escapeHtml(snapshot && snapshot.summary_label ? snapshot.summary_label : 'FEWS snapshot') + '</div>';
@@ -2227,6 +2233,33 @@
       + '<div class="food-meta"><strong style="color:var(--text-soft)">People impacted:</strong> ' + escapeHtml(projection.population_label || 'Population estimate unavailable') + '</div>'
       + '<div class="food-meta"><strong style="color:var(--text-soft)">Population period:</strong> ' + escapeHtml(projection.population_period || 'Unavailable') + '</div>'
       + '<div class="food-meta"><strong style="color:var(--text-soft)">Impacted areas:</strong> ' + escapeHtml(projectionAreas.length ? projectionAreas.map(function(item) { return item.name + ' (' + item.phase_label + ')'; }).join(', ') : 'No Phase 3+ areas in the latest projected FEWS area snapshot') + '</div>'
+      + '</div>';
+    html += '<div class="food-section">'
+      + '<div class="food-section-title">Market Price Fluctuations</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Latest period:</strong> ' + escapeHtml(market.latest_period || 'Unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Commodities tracked:</strong> ' + escapeHtml(String(market.commodity_count || 0)) + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Highlights:</strong> ' + escapeHtml(marketHighlights.length ? marketHighlights.map(function(item) {
+          var valueText = item.value == null ? 'No value' : String(item.value);
+          return (item.commodity || 'Unknown') + ': ' + valueText + (item.unit ? (' ' + item.unit) : '') + ' (' + (item.market || 'Unknown market') + ')';
+        }).join(', ') : 'No market highlights available') + '</div>'
+      + '</div>';
+    html += '<div class="food-section">'
+      + '<div class="food-section-title">Trade Flow Quantities</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Latest period:</strong> ' + escapeHtml(trade.latest_period || 'Unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Flows tracked:</strong> ' + escapeHtml(String(trade.flow_count || 0)) + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Highlights:</strong> ' + escapeHtml(tradeHighlights.length ? tradeHighlights.map(function(item) {
+          var valueText = item.value == null ? 'No value' : String(item.value);
+          return (item.commodity || 'Unknown') + ': ' + valueText + (item.unit ? (' ' + item.unit) : '') + ' (' + (item.origin || 'Unknown') + ' -> ' + (item.destination || 'Unknown') + ')';
+        }).join(', ') : 'No trade flow highlights available') + '</div>'
+      + '</div>';
+    html += '<div class="food-section">'
+      + '<div class="food-section-title">Crop Production Statistics</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Latest period:</strong> ' + escapeHtml(crop.latest_period || 'Unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Records tracked:</strong> ' + escapeHtml(String(crop.record_count || 0)) + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Highlights:</strong> ' + escapeHtml(cropHighlights.length ? cropHighlights.map(function(item) {
+          var valueText = item.value == null ? 'No value' : String(item.value);
+          return (item.crop || 'Unknown') + ': ' + valueText + (item.unit ? (' ' + item.unit) : '') + ' (' + (item.area || 'Unknown area') + ')';
+        }).join(', ') : 'No crop production highlights available') + '</div>'
       + '</div>';
     html += '</div>';
     if (snapshot && snapshot.url && isSafeUrl(snapshot.url)) {
@@ -2859,8 +2892,17 @@
     throw new Error('Load failed across direct and proxy routes (' + (lastErr && lastErr.message ? lastErr.message : 'unknown') + ')');
   }
 
-  async function fetchJsonWithFallback(url) {
-    var text = await fetchTextWithFallback(url);
+  async function fetchJsonWithFallback(url, fetchOptions) {
+    var text;
+    if (fetchOptions) {
+      var directResp = await fetch(url, fetchOptions);
+      if (!directResp.ok) {
+        throw new Error('HTTP ' + directResp.status);
+      }
+      text = await directResp.text();
+    } else {
+      text = await fetchTextWithFallback(url);
+    }
     try {
       return JSON.parse(text);
     } catch (_) {
