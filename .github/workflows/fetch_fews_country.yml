@@ -1,10 +1,10 @@
-name: "Fetch FEWS Food Security Snapshot"
+name: "Fetch FEWS Country Snapshot"
 
 "on":
   workflow_dispatch:
     inputs:
       country:
-        description: "Country to fetch FEWS food security data for"
+        description: "Country to fetch FEWS current and projected food security data for"
         required: true
         default: "Chad"
 
@@ -14,8 +14,6 @@ permissions:
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
     steps:
       - name: Checkout repo
@@ -26,7 +24,7 @@ jobs:
           FEWS_USERNAME: ${{ secrets.FEWS_username }}
           FEWS_PASSWORD: ${{ secrets.FEWS_password }}
         run: |
-          if [ -z "$FEWS_USERNAME" ] || [ -z "$FEWS_PASSWORD" ]; then
+          if [ -z "$(printf '%s' "$FEWS_USERNAME" | tr -d '[:space:]')" ] || [ -z "$(printf '%s' "$FEWS_PASSWORD" | tr -d '[:space:]')" ]; then
             echo "Missing required repository secrets: FEWS_username and/or FEWS_password"
             exit 1
           fi
@@ -39,16 +37,16 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run FEWS food snapshot script
+      - name: Run FEWS country snapshot script
         env:
           FEWS_USERNAME: ${{ secrets.FEWS_username }}
           FEWS_PASSWORD: ${{ secrets.FEWS_password }}
-        run: python3 _scripts/fetch_fews_food_data.py "${{ github.event.inputs.country }}"
+        run: python3 -u _scripts/fetch_fews_country_snapshot.py "${{ github.event.inputs.country }}"
 
-      - name: Commit output to repo
+      - name: Commit FEWS snapshot output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
-          git diff --cached --quiet || git commit -m "Update FEWS food snapshot: ${{ github.event.inputs.country }}"
+          git add data/fews_snapshot_*.json
+          git diff --cached --quiet || git commit -m "Update FEWS snapshot: ${{ github.event.inputs.country }}"
           git push

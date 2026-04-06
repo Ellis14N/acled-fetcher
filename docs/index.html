@@ -940,12 +940,12 @@
         </div>
       </div>
       <h2>Fetch Food Security and Famine Risk</h2>
-      <p class="subtitle">Enter a country name or ISO3 code to fetch FEWS NET and IPC snapshots as separate datasets, including Phase 3/4/5 ADM1 hotspots and trend percentages. FEWS compares the latest projection period with the previous projection period (typically around 3 months when available).</p>
+      <p class="subtitle">Enter a country name or ISO3 code to fetch a rewritten FEWS current and forward projection snapshot, plus the live IPC country analysis card if you provide an IPC API key.</p>
       <label for="foodCountryInput">Country or ISO3</label>
       <input type="text" id="foodCountryInput" placeholder="e.g. Sudan, Ethiopia, SOM" autocomplete="off" />
       <label for="ipcApiKeyInput">IPC API Key (required for IPC card)</label>
       <input type="password" id="ipcApiKeyInput" placeholder="Paste IPC API key" autocomplete="off" />
-      <div class="advisory-notice" style="margin:16px 0 0">FEWS NET data is loaded from a GitHub Actions snapshot that uses repository secrets server-side, then refreshes the latest snapshot for this country. IPC analysis still loads live from the IPC API.</div>
+      <div class="advisory-notice" style="margin:16px 0 0">FEWS data is fetched server-side from the FEWS API with your GitHub repository secrets, then written back as a country snapshot. The FEWS card shows current phase, projected phase, impacted population, and impacted areas. IPC analysis still loads live from the IPC API.</div>
       <div class="error" id="foodFetchError"></div>
       <button onclick="runFoodSecurityRisk()">Fetch Food Security Risk</button>
       <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
@@ -956,7 +956,7 @@
         <div class="result-title" id="foodResultTitle"></div>
       </div>
       <div class="advisory-notice">
-        Data comes from FEWS NET Data Warehouse IPC endpoints. Treat this as rapid situational awareness and verify final decisions against official FEWS NET and IPC publications.
+        FEWS data comes from the FEWS API through a dedicated GitHub Actions workflow. Verify high-stakes decisions against the latest FEWS publications.
       </div>
       <div class="food-grid" id="foodRiskGrid"></div>
       <button class="btn-secondary" onclick="show('fetchFoodSecurityScreen')" style="margin-top: 20px;">New Search</button>
@@ -1079,8 +1079,6 @@
   const DEFAULT_ACLED_WINDOW_TO = "2025-02-01";
   const TOKEN_KEY = "acled_gh_token";
   const IPC_API_KEY_SESSION = "ipc_api_key";
-  const FEWS_TOKEN_SESSION = 'fews_jwt';
-  const FEWS_TOKEN_EXPIRY_SESSION = 'fews_jwt_expiry';
 
   const EVENT_TYPES = [
     "Protests",
@@ -1098,6 +1096,65 @@
     stateless: "Stateless",
     oip: "Others of Interest"
   };
+
+  const COUNTRY_CODE_ROWS = [
+    ["Algeria", "DZ", "DZA", ["Algeria"]],
+    ["Angola", "AO", "AGO", ["Angola"]],
+    ["Benin", "BJ", "BEN", ["Benin"]],
+    ["Botswana", "BW", "BWA", ["Botswana"]],
+    ["Burkina Faso", "BF", "BFA", ["Burkina Faso"]],
+    ["Burundi", "BI", "BDI", ["Burundi"]],
+    ["Cabo Verde", "CV", "CPV", ["Cabo Verde", "Cape Verde"]],
+    ["Cameroon", "CM", "CMR", ["Cameroon"]],
+    ["Central African Republic", "CF", "CAF", ["Central African Republic", "CAR"]],
+    ["Chad", "TD", "TCD", ["Chad"]],
+    ["Comoros", "KM", "COM", ["Comoros"]],
+    ["Congo", "CG", "COG", ["Congo", "Republic of the Congo"]],
+    ["Democratic Republic of the Congo", "CD", "COD", ["Democratic Republic of the Congo", "Democratic Republic of Congo", "DR Congo", "DRC"]],
+    ["Djibouti", "DJ", "DJI", ["Djibouti"]],
+    ["Egypt", "EG", "EGY", ["Egypt"]],
+    ["Equatorial Guinea", "GQ", "GNQ", ["Equatorial Guinea"]],
+    ["Eritrea", "ER", "ERI", ["Eritrea"]],
+    ["Eswatini", "SZ", "SWZ", ["Eswatini", "Swaziland"]],
+    ["Ethiopia", "ET", "ETH", ["Ethiopia"]],
+    ["Gabon", "GA", "GAB", ["Gabon"]],
+    ["Gambia", "GM", "GMB", ["Gambia", "The Gambia"]],
+    ["Ghana", "GH", "GHA", ["Ghana"]],
+    ["Guinea", "GN", "GIN", ["Guinea"]],
+    ["Guinea-Bissau", "GW", "GNB", ["Guinea-Bissau", "Guinea Bissau"]],
+    ["Cote d'Ivoire", "CI", "CIV", ["Cote d'Ivoire", "Cote dIvoire", "Ivory Coast", "Cote d Ivoire"]],
+    ["Kenya", "KE", "KEN", ["Kenya"]],
+    ["Lesotho", "LS", "LSO", ["Lesotho"]],
+    ["Liberia", "LR", "LBR", ["Liberia"]],
+    ["Libya", "LY", "LBY", ["Libya"]],
+    ["Madagascar", "MG", "MDG", ["Madagascar"]],
+    ["Malawi", "MW", "MWI", ["Malawi"]],
+    ["Mali", "ML", "MLI", ["Mali"]],
+    ["Mauritania", "MR", "MRT", ["Mauritania"]],
+    ["Mauritius", "MU", "MUS", ["Mauritius"]],
+    ["Morocco", "MA", "MAR", ["Morocco"]],
+    ["Mozambique", "MZ", "MOZ", ["Mozambique"]],
+    ["Namibia", "NA", "NAM", ["Namibia"]],
+    ["Niger", "NE", "NER", ["Niger"]],
+    ["Nigeria", "NG", "NGA", ["Nigeria"]],
+    ["Rwanda", "RW", "RWA", ["Rwanda"]],
+    ["Sao Tome and Principe", "ST", "STP", ["Sao Tome and Principe", "Sao Tome & Principe"]],
+    ["Senegal", "SN", "SEN", ["Senegal"]],
+    ["Seychelles", "SC", "SYC", ["Seychelles"]],
+    ["Sierra Leone", "SL", "SLE", ["Sierra Leone"]],
+    ["Somalia", "SO", "SOM", ["Somalia"]],
+    ["South Africa", "ZA", "ZAF", ["South Africa"]],
+    ["South Sudan", "SS", "SSD", ["South Sudan"]],
+    ["Sudan", "SD", "SDN", ["Sudan"]],
+    ["Tanzania", "TZ", "TZA", ["Tanzania"]],
+    ["Togo", "TG", "TGO", ["Togo"]],
+    ["Tunisia", "TN", "TUN", ["Tunisia"]],
+    ["Uganda", "UG", "UGA", ["Uganda"]],
+    ["Zambia", "ZM", "ZMB", ["Zambia"]],
+    ["Zimbabwe", "ZW", "ZWE", ["Zimbabwe"]]
+  ];
+
+  const COUNTRY_CODE_LOOKUP = buildCountryCodeLookup(COUNTRY_CODE_ROWS);
 
   const COUNTRY_WORKFLOWS = {
     acled: {
@@ -1142,7 +1199,6 @@
   let progressValue = 0;
   let stepTimer = 0;
   let activeFetchContext = null;
-  let fewsCountryLookupCache = null;
 
   window.addEventListener("load", () => {
     show("passwordScreen");
@@ -1951,10 +2007,7 @@
     const grid = document.getElementById('foodRiskGrid');
     const cards = [
       { id: 'food-ipc-api', icon: '📈', name: 'IPC Country Analysis API', fn: () => fetchIpcCountryAnalysis(country) },
-      { id: 'food-fews-phase', icon: '🌾', name: 'FEWS NET — IPC Phase & Population' },
-      { id: 'food-fews-market', icon: '🏪', name: 'FEWS NET — Market Prices' },
-      { id: 'food-fews-trade', icon: '🚚', name: 'FEWS NET — Cross-Border Trade Flow' },
-      { id: 'food-fews-crop', icon: '🌽', name: 'FEWS NET — Crop Production' },
+      { id: 'food-fews', icon: '🌾', name: 'FEWS API — Current and Forward Projection' },
     ];
 
     grid.innerHTML = cards.map(function(card) {
@@ -1985,23 +2038,23 @@
     );
 
     if (!token) {
-      renderFewsSnapshotError('GitHub token required to run FEWS workflow snapshot. Add your GitHub token in setup to load FEWS cards.');
+      renderFewsSnapshotError('GitHub token required to run the FEWS workflow. Add your GitHub token in setup to load the FEWS card.');
       await Promise.allSettled(jobs);
       return;
     }
 
     jobs.push(
       (async function() {
-        var existingSnapshot = await fetchFoodSnapshotOnce(country).catch(function() { return null; });
-        if (existingSnapshot && existingSnapshot.cards) {
+        var existingSnapshot = await fetchFewsSnapshotOnce(country).catch(function() { return null; });
+        if (existingSnapshot && existingSnapshot.current && existingSnapshot.projection) {
           renderFewsSnapshot(existingSnapshot);
         }
 
-        var freshSnapshot = await loadFoodSecuritySnapshotFromWorkflow(country, token);
+        var freshSnapshot = await loadFewsSnapshotFromWorkflow(country, token);
         renderFewsSnapshot(freshSnapshot);
       })().catch(function(err) {
         var msg = err && err.message ? err.message : String(err);
-        if (!(document.querySelector('#food-fews-phase .food-card-body') || {}).textContent || document.querySelector('#food-fews-phase .food-card-body').textContent.indexOf('Unavailable:') !== -1 || document.querySelector('#food-fews-phase .food-card-body').textContent.indexOf('Fetching...') !== -1) {
+        if (!(document.querySelector('#food-fews .food-card-body') || {}).textContent || document.querySelector('#food-fews .food-card-body').textContent.indexOf('Unavailable:') !== -1 || document.querySelector('#food-fews .food-card-body').textContent.indexOf('Fetching...') !== -1) {
           renderFewsSnapshotError(msg);
         }
       })
@@ -2011,18 +2064,11 @@
   }
 
   function renderFewsSnapshot(snapshot) {
-    var cards = snapshot && snapshot.cards ? snapshot.cards : {};
-    renderFoodCard('food-fews-phase', cards.phase || null, cards.phase ? null : 'FEWS phase snapshot missing from workflow output');
-    renderFoodCard('food-fews-market', cards.market || null, cards.market ? null : 'FEWS market snapshot missing from workflow output');
-    renderFoodCard('food-fews-trade', cards.trade || null, cards.trade ? null : 'FEWS trade snapshot missing from workflow output');
-    renderFoodCard('food-fews-crop', cards.crop || null, cards.crop ? null : 'FEWS crop snapshot missing from workflow output');
+    renderFewsCard(snapshot, null);
   }
 
   function renderFewsSnapshotError(message) {
-    renderFoodCard('food-fews-phase', null, message);
-    renderFoodCard('food-fews-market', null, message);
-    renderFoodCard('food-fews-trade', null, message);
-    renderFoodCard('food-fews-crop', null, message);
+    renderFewsCard(null, message);
   }
 
   async function dispatchWorkflowWithoutLoadingUI(workflowFile, inputs, token) {
@@ -2134,19 +2180,60 @@
     throw new Error('Workflow timed out before completing.');
   }
 
-  async function fetchFoodSnapshotOnce(country) {
-    var filename = `food_security_${slugify(country)}.json`;
+  async function fetchFewsSnapshotOnce(country) {
+    var filename = `fews_snapshot_${slugify(country)}.json`;
     var url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
     var response = await fetch(url);
     if (!response.ok) return null;
     return response.json();
   }
 
-  async function loadFoodSecuritySnapshotFromWorkflow(country, token) {
-    var workflowFile = 'fetch_fews_food.yml';
+  async function loadFewsSnapshotFromWorkflow(country, token) {
+    var workflowFile = 'fetch_fews_country.yml';
     var runId = await dispatchWorkflowWithoutLoadingUI(workflowFile, { country: country }, token);
     await waitForWorkflowRunCompletion(runId, token);
-    return fetchJsonWithRetry(`food_security_${slugify(country)}.json`);
+    return fetchJsonWithRetry(`fews_snapshot_${slugify(country)}.json`);
+  }
+
+  function renderFewsCard(snapshot, error) {
+    var bodyEl = document.querySelector('#food-fews .food-card-body');
+    if (!bodyEl) return;
+
+    if (error) {
+      bodyEl.innerHTML = '<div class="food-error">Unavailable: ' + escapeHtml(error) + '</div>';
+      return;
+    }
+
+    var current = snapshot && snapshot.current ? snapshot.current : {};
+    var projection = snapshot && snapshot.projection ? snapshot.projection : {};
+    var currentAreas = Array.isArray(current.impacted_areas) ? current.impacted_areas : [];
+    var projectionAreas = Array.isArray(projection.impacted_areas) ? projection.impacted_areas : [];
+    var levelClass = 'level-' + Math.max(0, Math.min(5, Number(snapshot && snapshot.summary_level || 0)));
+    var html = '';
+    html += '<div class="food-severity-badge ' + levelClass + '">' + escapeHtml(snapshot && snapshot.summary_label ? snapshot.summary_label : 'FEWS snapshot') + '</div>';
+    html += '<div class="food-meta"><strong style="color:var(--text-soft)">Current country phase:</strong> ' + escapeHtml(current.phase_label || 'Unavailable') + '</div>';
+    html += '<div class="food-meta"><strong style="color:var(--text-soft)">Forward projection phase:</strong> ' + escapeHtml(projection.phase_label || 'Unavailable') + '</div>';
+    html += '<div class="food-sections">';
+    html += '<div class="food-section">'
+      + '<div class="food-section-title">Current Situation</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Phase period:</strong> ' + escapeHtml(current.phase_period || current.phase_date || 'Unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">People impacted:</strong> ' + escapeHtml(current.population_label || 'Population estimate unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Population period:</strong> ' + escapeHtml(current.population_period || 'Unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Impacted areas:</strong> ' + escapeHtml(currentAreas.length ? currentAreas.map(function(item) { return item.name + ' (' + item.phase_label + ')'; }).join(', ') : 'No Phase 3+ areas in the latest current FEWS area snapshot') + '</div>'
+      + '</div>';
+    html += '<div class="food-section">'
+      + '<div class="food-section-title">Forward Projection</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Phase period:</strong> ' + escapeHtml(projection.phase_period || projection.phase_date || 'Unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">People impacted:</strong> ' + escapeHtml(projection.population_label || 'Population estimate unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Population period:</strong> ' + escapeHtml(projection.population_period || 'Unavailable') + '</div>'
+      + '<div class="food-meta"><strong style="color:var(--text-soft)">Impacted areas:</strong> ' + escapeHtml(projectionAreas.length ? projectionAreas.map(function(item) { return item.name + ' (' + item.phase_label + ')'; }).join(', ') : 'No Phase 3+ areas in the latest projected FEWS area snapshot') + '</div>'
+      + '</div>';
+    html += '</div>';
+    if (snapshot && snapshot.url && isSafeUrl(snapshot.url)) {
+      html += '<div class="food-meta"><a href="' + escapeHtml(snapshot.url) + '" target="_blank" rel="noopener noreferrer">View FEWS API source -></a></div>';
+    }
+
+    bodyEl.innerHTML = html;
   }
 
   function renderFoodCard(id, data, error) {
@@ -2192,158 +2279,6 @@
     }
 
     bodyEl.innerHTML = html;
-  }
-
-  async function fetchFewsNetIpcPhase(countryInput) {
-    var [records, popRecords] = await Promise.all([
-      fetchIpcPhaseRecords(countryInput),
-      fetchIpcPopulationRecords(countryInput).catch(function() { return []; }),
-    ]);
-    if (!records.length) throw new Error('No FEWS NET IPC phase records found for this country.');
-
-    var latestProjectionAdmin0 = pickLatestRecord(records, function(item) {
-      return String(item.unit_type || '').toLowerCase() === 'admin0' && isProjectionScenario(item.scenario_name);
-    });
-    var latestCurrentAdmin0 = pickLatestRecord(records, function(item) {
-      return String(item.unit_type || '').toLowerCase() === 'admin0' && isCurrentSituation(item.scenario_name);
-    });
-    var latestCountry = latestProjectionAdmin0 || latestCurrentAdmin0 || pickLatestRecord(records, function(item) {
-      return String(item.unit_type || '').toLowerCase() === 'admin0';
-    }) || pickLatestRecord(records, null);
-    if (!latestCountry) throw new Error('No country-level FEWS NET record found.');
-
-    var latestProjectionDate = latestProjectionAdmin0 ? normalizeFoodDate(latestProjectionAdmin0.reporting_date) : null;
-    var latestCurrentDate = latestCurrentAdmin0 ? normalizeFoodDate(latestCurrentAdmin0.reporting_date) : null;
-
-    var projectionHotspots = records
-      .filter(function(item) {
-        var unit = String(item.unit_type || '').toLowerCase();
-        return latestProjectionDate
-          && normalizeFoodDate(item.reporting_date) === latestProjectionDate
-          && isProjectionScenario(item.scenario_name)
-          && (unit === 'admin1' || unit === 'fsc_admin' || unit === 'fsc_admin_lhz')
-          && toNumber(item.value) >= 3;
-      })
-      .sort(function(a, b) {
-        if (toNumber(b.value) !== toNumber(a.value)) return toNumber(b.value) - toNumber(a.value);
-        return String(a.geographic_unit_name || '').localeCompare(String(b.geographic_unit_name || ''));
-      })
-      .slice(0, 12);
-
-    var currentHotspots = records
-      .filter(function(item) {
-        var unit = String(item.unit_type || '').toLowerCase();
-        return latestCurrentDate
-          && normalizeFoodDate(item.reporting_date) === latestCurrentDate
-          && isCurrentSituation(item.scenario_name)
-          && (unit === 'admin1' || unit === 'fsc_admin' || unit === 'fsc_admin_lhz')
-          && toNumber(item.value) >= 3;
-      })
-      .sort(function(a, b) {
-        if (toNumber(b.value) !== toNumber(a.value)) return toNumber(b.value) - toNumber(a.value);
-        return String(a.geographic_unit_name || '').localeCompare(String(b.geographic_unit_name || ''));
-      })
-      .slice(0, 12);
-
-    var currentPct3p = latestCurrentAdmin0 ? sumPctPhases(latestCurrentAdmin0) : null;
-    var projectedPct3p = latestProjectionAdmin0 ? sumPctPhases(latestProjectionAdmin0) : null;
-    var forwardPctChange = (currentPct3p !== null && currentPct3p !== 0 && projectedPct3p !== null)
-      ? (((projectedPct3p - currentPct3p) / currentPct3p) * 100)
-      : null;
-
-    var previousProjection = latestProjectionAdmin0 ? pickPreviousRecord(records, latestProjectionAdmin0, function(item) {
-      return String(item.unit_type || '').toLowerCase() === 'admin0' && isProjectionScenario(item.scenario_name);
-    }) : null;
-    var projectedPctPrev = previousProjection ? sumPctPhases(previousProjection) : null;
-    var projectedPctTrend = (projectedPctPrev !== null && projectedPctPrev !== 0 && projectedPct3p !== null)
-      ? (((projectedPct3p - projectedPctPrev) / projectedPctPrev) * 100)
-      : null;
-
-    var primaryLevel = latestProjectionAdmin0 ? toNumber(latestProjectionAdmin0.value) : toNumber(latestCountry.value);
-
-    var projEmergency = projectionHotspots.filter(function(item) { return toNumber(item.value) >= 4; });
-    var projFamine = projectionHotspots.filter(function(item) { return toNumber(item.value) >= 5; });
-    var curEmergency = currentHotspots.filter(function(item) { return toNumber(item.value) >= 4; });
-    var curFamine = currentHotspots.filter(function(item) { return toNumber(item.value) >= 5; });
-
-    var trendParts = [];
-    if (forwardPctChange !== null) {
-      trendParts.push((forwardPctChange >= 0 ? '+' : '') + forwardPctChange.toFixed(1) + '% Phase 3+ share from current to projection');
-    }
-    if (projectedPctTrend !== null) {
-      trendParts.push((projectedPctTrend >= 0 ? '+' : '') + projectedPctTrend.toFixed(1) + '% vs previous projection period');
-    }
-
-    var currentStatusText = latestCurrentAdmin0 ? phaseLevelText(toNumber(latestCurrentAdmin0.value)) : 'Unavailable';
-    var projectionStatusText = latestProjectionAdmin0 ? phaseLevelText(toNumber(latestProjectionAdmin0.value)) : 'Unavailable';
-    var currentHotspotText = currentHotspots.length
-      ? currentHotspots.map(function(item) {
-          return (item.geographic_unit_name || 'Unknown ADM1') + ' (Phase ' + Math.round(toNumber(item.value)) + ')';
-        }).join(', ')
-      : 'No Phase 3+ ADM1 hotspots in latest current period';
-    var projectionHotspotText = projectionHotspots.length
-      ? projectionHotspots.map(function(item) {
-          return (item.geographic_unit_name || 'Unknown ADM1') + ' (Phase ' + Math.round(toNumber(item.value)) + ')';
-        }).join(', ')
-      : 'No Phase 3+ ADM1 hotspots in latest projection period';
-
-    // Find latest Phase 3+ population records for each scenario
-    var currentPopRecord = popRecords
-      .filter(function(r) { return isPhase3Plus(r) && isCurrentSituation(r.scenario_name); })
-      .sort(function(a, b) {
-        var ae = a.projection_end || a.reporting_date || '';
-        var be = b.projection_end || b.reporting_date || '';
-        return be.localeCompare(ae);
-      })[0] || null;
-    var projectionPopRecord = popRecords
-      .filter(function(r) { return isPhase3Plus(r) && isProjectionScenario(r.scenario_name); })
-      .sort(function(a, b) {
-        var ae = a.projection_end || a.reporting_date || '';
-        var be = b.projection_end || b.reporting_date || '';
-        return be.localeCompare(ae);
-      })[0] || null;
-
-    return {
-      level: Math.round(primaryLevel),
-      levelText: phaseGroupingText(primaryLevel),
-      riskScore: 'Current: ' + (latestCurrentAdmin0 ? toNumber(latestCurrentAdmin0.value).toFixed(1) : 'N/A')
-        + ' | Projection: ' + (latestProjectionAdmin0 ? toNumber(latestProjectionAdmin0.value).toFixed(1) : 'N/A'),
-      status: 'Current ' + (latestCurrentAdmin0 ? phaseLevelText(toNumber(latestCurrentAdmin0.value)) : 'Unavailable')
-        + ' | Projection ' + (latestProjectionAdmin0 ? phaseLevelText(toNumber(latestProjectionAdmin0.value)) : 'Unavailable'),
-      latestPeriod: 'Current: ' + (latestCurrentAdmin0 ? formatIsoDateShort(latestCurrentAdmin0.reporting_date) : 'N/A')
-        + ' | Projection: ' + (latestProjectionAdmin0 ? formatIsoDateShort(latestProjectionAdmin0.reporting_date) : 'N/A'),
-      trend: trendParts.length ? trendParts.join(' | ') : (currentPct3p === null ? 'Trend unavailable (pct fields not published for this country)' : 'Insufficient data'),
-      adm1Summary: 'See Current and Projection sections below',
-      famineSummary: 'Projection Phase 3+/4+/5 areas: '
-        + projectionHotspots.length + '/' + projEmergency.length + '/' + projFamine.length
-        + ' | Current Phase 3+/4+/5 areas: '
-        + currentHotspots.length + '/' + curEmergency.length + '/' + curFamine.length,
-      sections: [
-        {
-          title: 'Current Situation',
-          ipcPhase: latestCurrentAdmin0 ? ('IPC ' + currentStatusText) : 'Unavailable',
-          population: currentPopRecord
-            ? currentPopRecord.population_range + ' Phase 3+ in need'
-            : 'Population estimate unavailable',
-          period: currentPopRecord
-            ? formatPopPeriod(currentPopRecord)
-            : (latestCurrentAdmin0 ? formatIsoDateShort(latestCurrentAdmin0.reporting_date) : 'N/A'),
-          hotspots: currentHotspotText,
-        },
-        {
-          title: 'Forward Projection',
-          ipcPhase: latestProjectionAdmin0 ? ('IPC ' + projectionStatusText) : 'Unavailable',
-          population: projectionPopRecord
-            ? projectionPopRecord.population_range + ' Phase 3+ in need'
-            : 'Population estimate unavailable',
-          period: projectionPopRecord
-            ? formatPopPeriod(projectionPopRecord)
-            : (latestProjectionAdmin0 ? formatIsoDateShort(latestProjectionAdmin0.reporting_date) : 'N/A'),
-          hotspots: projectionHotspotText,
-        }
-      ],
-      url: 'https://fdw.fews.net/api/ipcphase/',
-    };
   }
 
   async function fetchIpcCountryAnalysis(countryInput) {
@@ -2416,73 +2351,6 @@
     };
   }
 
-  async function getFewsJwt() {
-    // Return cached token if still valid (stored at login, expires in 11h)
-    var cached = sessionStorage.getItem(FEWS_TOKEN_SESSION) || '';
-    var expiry = parseInt(sessionStorage.getItem(FEWS_TOKEN_EXPIRY_SESSION) || '0');
-    if (cached && Date.now() < expiry) return cached;
-
-    return '';
-  }
-
-  function fewsJwtParam(token) {
-    return token ? '&jwt=' + encodeURIComponent(token) : '';
-  }
-
-  async function fetchIpcPhaseRecords(countryInput) {
-    var jwt = await getFewsJwt();
-    var jp = fewsJwtParam(jwt);
-
-    // Resolve any input (name / ISO3 / ISO2) → ISO2 code for reliable API filtering
-    var iso2 = await resolveIpcCountryCode(countryInput);
-    if (!iso2) {
-      // Fallback: use input directly (may be ISO2 already)
-      iso2 = String(countryInput || '').trim().toUpperCase();
-    }
-
-    // Two parallel targeted queries:
-    // 1) admin0 only — the country-level phase record (small, fast, avoids mixed ordering issue)
-    // 2) all sub-national records for the same date window — for ADM1 hotspot extraction
-    var admin0Url = 'https://fdw.fews.net/api/ipcphase/?format=json&page_size=100&ordering=-reporting_date'
-      + '&unit_type=admin0&country_code=' + encodeURIComponent(iso2)
-      + '&classification_scale=IPC30&classification_scale=IPC31' + jp;
-    var adm1Url = 'https://fdw.fews.net/api/ipcphase/?format=json&page_size=500&ordering=-reporting_date'
-      + '&country_code=' + encodeURIComponent(iso2)
-      + '&classification_scale=IPC30&classification_scale=IPC31' + jp;
-
-    var results = await Promise.all([
-      fetchAllPagedResults(admin0Url, 2).catch(function() { return []; }),
-      fetchAllPagedResults(adm1Url, 2).catch(function() { return []; }),
-    ]);
-
-    // Merge, deduplicating by record id
-    var seen = Object.create(null);
-    var merged = [];
-    for (var li = 0; li < results.length; li++) {
-      for (var ri = 0; ri < results[li].length; ri++) {
-        var rec = results[li][ri];
-        var key = String(rec.id || (rec.fnid + '|' + rec.reporting_date + '|' + rec.scenario));
-        if (!seen[key]) { seen[key] = true; merged.push(rec); }
-      }
-    }
-    return merged;
-  }
-
-  async function fetchIpcPopulationRecords(countryInput) {
-    var jwt = await getFewsJwt();
-    var jp = fewsJwtParam(jwt);
-
-    var iso2 = await resolveIpcCountryCode(countryInput);
-    if (!iso2) iso2 = String(countryInput || '').trim().toUpperCase();
-
-    // Order by projection_end so that the most recent projection period appears first
-    var url = 'https://fdw.fews.net/api/ipcpopulationsize/?format=json&page_size=500&ordering=-projection_end'
-      + '&country_code=' + encodeURIComponent(iso2)
-      + '&classification_scale=IPC30&classification_scale=IPC31' + jp;
-
-    return fetchAllPagedResults(url, 2).catch(function() { return []; });
-  }
-
   async function fetchIpcAnalysisRecords(countryInput) {
     var ipcKey = String(sessionStorage.getItem(IPC_API_KEY_SESSION) || '').trim();
     if (!ipcKey) {
@@ -2496,14 +2364,24 @@
 
     var year = new Date().getFullYear();
     var urls = [
-      'https://api.ipcinfo.org/areas?format=json&key=' + encodeURIComponent(ipcKey) + '&country=' + encodeURIComponent(countryCode) + '&year=' + year,
-      'https://api.ipcinfo.org/areas?format=json&key=' + encodeURIComponent(ipcKey) + '&country=' + encodeURIComponent(countryCode),
+      'https://app.ipcinfo.org/api/public/population-tracking/country/' + encodeURIComponent(countryCode) + '?year=' + year,
+      'https://app.ipcinfo.org/api/public/population-tracking/country/' + encodeURIComponent(countryCode) + '?year=' + (year - 1),
+      'https://app.ipcinfo.org/api/public/population-tracking/country/' + encodeURIComponent(countryCode),
     ];
 
     for (var i = 0; i < urls.length; i++) {
       try {
-        var payload = await fetchJsonWithFallback(urls[i]);
-        if (Array.isArray(payload) && payload.length) return payload;
+        var payload = await fetchJsonWithFallback(urls[i], {
+          headers: { 'Ocp-Apim-Subscription-Key': ipcKey },
+        });
+        var list = Array.isArray(payload)
+          ? payload
+          : Array.isArray(payload && payload.data)
+            ? payload.data
+            : Array.isArray(payload && payload.results)
+              ? payload.results
+              : [];
+        if (list.length) return list;
       } catch (err) {
         if (err && err.message && (err.message.indexOf('401') !== -1 || err.message.indexOf('403') !== -1)) {
           throw new Error('IPC API key rejected or unauthorized. Please verify your key.');
@@ -2516,267 +2394,67 @@
 
   async function resolveIpcCountryCode(countryInput) {
     var q = String(countryInput || '').trim();
+    if (!q) return null;
     if (/^[A-Za-z]{2}$/.test(q)) return q.toUpperCase();
 
-    var lookup = await getFewsCountryLookup();
-    var lower = q.toLowerCase();
-
-    for (var i = 0; i < lookup.length; i++) {
-      var row = lookup[i];
-      var iso2 = String(row.iso3166a2 || '').toUpperCase();
-      var iso3 = String(row.iso3166a3 || '').toUpperCase();
-      var names = [row.preferred_name, row.iso_en_name, row.iso_en_ro_name, row.country, row.name]
-        .map(function(v) { return String(v || '').toLowerCase().trim(); });
-
-      if (/^[A-Za-z]{3}$/.test(q) && iso3 === q.toUpperCase()) return iso2;
-      if (names.indexOf(lower) !== -1) return iso2;
-    }
-
-    for (var j = 0; j < lookup.length; j++) {
-      var row2 = lookup[j];
-      var name2 = String(row2.preferred_name || row2.iso_en_name || '').toLowerCase();
-      if (name2 && name2.indexOf(lower) !== -1) return String(row2.iso3166a2 || '').toUpperCase();
-    }
-
-    return null;
+    var normalized = normalizeCountryLookupKey(q);
+    return COUNTRY_CODE_LOOKUP[normalized] || null;
   }
 
-  async function fetchFewsMarketPrices(countryInput) {
-    var jwt = await getFewsJwt();
-    if (!jwt) throw new Error('FEWS NET login required for market price data. Add credentials and try again.');
-    var jp = fewsJwtParam(jwt);
+  function normalizeCountryLookupKey(value) {
+    return String(value || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
 
-    var iso2 = await resolveIpcCountryCode(countryInput);
-    if (!iso2) iso2 = String(countryInput || '').trim().toUpperCase();
-
-    var url = 'https://fdw.fews.net/api/marketpricefacts/?format=json&page_size=500&ordering=-reporting_date'
-      + '&country_code=' + encodeURIComponent(iso2) + jp;
-
-    var records = await fetchAllPagedResults(url, 2);
-    if (!records.length) throw new Error('No market price data found for this country.');
-
-    // Group by commodity and find latest date per commodity
-    var byComm = Object.create(null);
-    for (var i = 0; i < records.length; i++) {
-      var r = records[i];
-      var comm = r.commodity_name || r.indicator || r.indicator_name || r.cpcv2_name || r.cpcv2 || 'Unknown';
-      var date = normalizeFoodDate(r.reporting_date || r.date);
-      if (!byComm[comm] || date > byComm[comm].date) {
-        byComm[comm] = {
-          date: date,
-          market: r.market_name || r.market || r.geographic_unit_name || '',
-          value: r.value != null ? r.value : (r.quantity || r.price || ''),
-          unit: r.unit || r.unit_name || r.currency || '',
-          raw: r,
-        };
-      }
-    }
-
-    var commodities = Object.keys(byComm).sort();
-    var lines = commodities.slice(0, 15).map(function(comm) {
-      var d = byComm[comm];
-      var valStr = d.value !== '' ? String(d.value) + (d.unit ? ' ' + d.unit : '') : 'No value';
-      return comm + ': ' + valStr + (d.market ? ' (' + d.market + ')' : '') + ' — ' + formatIsoDateShort(d.date);
+  function buildCountryCodeLookup(rows) {
+    var lookup = Object.create(null);
+    rows.forEach(function(row) {
+      var displayName = row[0];
+      var iso2 = row[1];
+      var iso3 = row[2];
+      var aliases = row[3] || [];
+      [displayName, iso2, iso3].concat(aliases).forEach(function(value) {
+        var key = normalizeCountryLookupKey(value);
+        if (key) lookup[key] = iso2;
+      });
     });
-
-    // Find most recent date overall
-    var allDates = records.map(function(r) { return normalizeFoodDate(r.reporting_date || r.date); }).filter(Boolean).sort();
-    var latestDate = allDates[allDates.length - 1] || '';
-
-    return {
-      level: 0,
-      levelText: 'Market data',
-      riskScore: commodities.length + ' commodities tracked',
-      status: 'Latest price report: ' + (latestDate ? formatIsoDateShort(latestDate) : 'Unknown'),
-      latestPeriod: latestDate ? formatIsoDateShort(latestDate) : 'Unknown',
-      trend: null,
-      adm1Summary: lines.join(' | '),
-      famineSummary: null,
-      sections: null,
-      url: 'https://fdw.fews.net/api/marketpricefacts/',
-    };
-  }
-
-  async function fetchFewsTradeFlow(countryInput) {
-    var jwt = await getFewsJwt();
-    if (!jwt) throw new Error('FEWS NET login required for trade flow data. Add credentials and try again.');
-    var jp = fewsJwtParam(jwt);
-
-    var iso2 = await resolveIpcCountryCode(countryInput);
-    if (!iso2) iso2 = String(countryInput || '').trim().toUpperCase();
-
-    // Try as origin country
-    var url = 'https://fdw.fews.net/api/tradeflowquantityvalue/?format=json&page_size=300&ordering=-reporting_date'
-      + '&origin_country_code=' + encodeURIComponent(iso2) + jp;
-
-    var records = await fetchAllPagedResults(url, 2).catch(function() { return []; });
-
-    // If no origin records, try destination
-    if (!records.length) {
-      var url2 = 'https://fdw.fews.net/api/tradeflowquantityvalue/?format=json&page_size=300&ordering=-reporting_date'
-        + '&destination_country_code=' + encodeURIComponent(iso2) + jp;
-      records = await fetchAllPagedResults(url2, 2).catch(function() { return []; });
-    }
-
-    if (!records.length) throw new Error('No cross-border trade flow data found for this country.');
-
-    var allDates = records.map(function(r) { return normalizeFoodDate(r.reporting_date || r.date); }).filter(Boolean).sort();
-    var latestDate = allDates[allDates.length - 1] || '';
-
-    // Pick most recent records and summarise key flows
-    var recent = records
-      .filter(function(r) { return normalizeFoodDate(r.reporting_date || r.date) === latestDate; })
-      .slice(0, 10);
-
-    var lines = recent.map(function(r) {
-      var commodity = r.commodity_name || r.indicator || r.indicator_name || r.cpcv2_name || 'Unknown';
-      var origin = r.origin_country || r.origin_country_name || '';
-      var dest = r.destination_country || r.destination_country_name || '';
-      var val = r.value != null ? String(r.value) + (r.unit ? ' ' + r.unit : '') : '';
-      var arrow = (origin && dest) ? origin + ' → ' + dest : (origin || dest);
-      return commodity + ': ' + val + (arrow ? ' (' + arrow + ')' : '');
-    });
-
-    return {
-      level: 0,
-      levelText: 'Trade flow data',
-      riskScore: records.length + ' flow records',
-      status: 'Latest period: ' + (latestDate ? formatIsoDateShort(latestDate) : 'Unknown'),
-      latestPeriod: latestDate ? formatIsoDateShort(latestDate) : 'Unknown',
-      trend: null,
-      adm1Summary: lines.join(' | ') || 'No detail available',
-      famineSummary: null,
-      sections: null,
-      url: 'https://fdw.fews.net/api/tradeflowquantityvalue/',
-    };
-  }
-
-  async function getFewsCountryLookup() {
-    if (fewsCountryLookupCache) return fewsCountryLookupCache;
-    var jwt = await getFewsJwt();
-    var url = 'https://fdw.fews.net/api/country/?format=json&page_size=500' + fewsJwtParam(jwt);
-    var payload = await fetchJsonWithFallback(url);
-    fewsCountryLookupCache = payload && Array.isArray(payload.results) ? payload.results : [];
-    return fewsCountryLookupCache;
-  }
-
-  async function fetchAllPagedResults(url, maxPages) {
-    var out = [];
-    var nextUrl = url;
-    var pages = Number(maxPages || 1);
-
-    for (var i = 0; i < pages && nextUrl; i++) {
-      var payload = await fetchJsonWithFallback(nextUrl);
-      if (!payload || !Array.isArray(payload.results)) break;
-      out = out.concat(payload.results);
-      nextUrl = payload.next || null;
-    }
-    return out;
-  }
-
-  function pickLatestRecord(records, predicate) {
-    var filtered = (records || []).filter(function(item) {
-      return !predicate || predicate(item);
-    });
-    if (!filtered.length) return null;
-
-    filtered.sort(function(a, b) {
-      return normalizeFoodDate(b.reporting_date).localeCompare(normalizeFoodDate(a.reporting_date));
-    });
-    return filtered[0];
-  }
-
-  function pickPreviousRecord(records, latest, predicate) {
-    if (!latest) return null;
-    var latestDate = normalizeFoodDate(latest.reporting_date);
-    var filtered = (records || []).filter(function(item) {
-      if (predicate && !predicate(item)) return false;
-      return normalizeFoodDate(item.reporting_date) < latestDate;
-    });
-    if (!filtered.length) return null;
-
-    filtered.sort(function(a, b) {
-      return normalizeFoodDate(b.reporting_date).localeCompare(normalizeFoodDate(a.reporting_date));
-    });
-    return filtered[0];
-  }
-
-  function sumPctPhases(record) {
-    var p3 = record.pct_phase3, p4 = record.pct_phase4, p5 = record.pct_phase5;
-    if (p3 == null && p4 == null && p5 == null) return null;
-    return toNumber(p3) + toNumber(p4) + toNumber(p5);
-  }
-
-  function isPhase3Plus(r) {
-    var p = String(r.phase || '').trim();
-    return p === '3+' || p === '3' || /^3\b/.test(p);
-  }
-
-  function isSafeUrl(url) {
-    return /^https?:\/\//i.test(String(url || ''));
-  }
-
-  function normalizeFoodDate(value) {
-    var text = String(value || '').trim();
-    if (!text) return '';
-    var d = new Date(text);
-    if (isNaN(d.getTime())) return text;
-    return d.toISOString().slice(0, 10);
-  }
-
-  function toNumber(value) {
-    var n = Number(value);
-    return isNaN(n) ? 0 : n;
-  }
-
-  function isCurrentSituation(label) {
-    return String(label || '').toLowerCase().indexOf('current') !== -1;
-  }
-
-  function isProjectionScenario(label) {
-    var t = String(label || '').toLowerCase();
-    return t.indexOf('projection') !== -1 || t.indexOf('most likely') !== -1 || t.indexOf('near term') !== -1 || t.indexOf('ml') !== -1;
-  }
-
-  function monthDiff(startDate, endDate) {
-    var start = new Date(startDate);
-    var end = new Date(endDate);
-    if (isNaN(start.getTime()) || isNaN(end.getTime())) return null;
-    return Math.abs((end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()));
-  }
-
-  function ipcCountryMatch(item, query, isoLike) {
-    var q = String(query || '').trim().toLowerCase();
-    var fields = [
-      item && item.country,
-      item && item.country_name,
-      item && item.country_label,
-      item && item.admin_0,
-      item && item.iso3,
-      item && item.country_code,
-      item && item.iso,
-    ].map(function(v) { return String(v || '').trim().toLowerCase(); });
-
-    if (isoLike) {
-      return fields.indexOf(q) !== -1;
-    }
-    return fields.some(function(v) { return v === q || v.indexOf(q) !== -1; });
+    return lookup;
   }
 
   function extractPhaseValue(item) {
+    if (!item) return 0;
+
     var direct = [
-      item && item.overall_phase,
-      item && item.phase,
-      item && item.ipc_phase,
-      item && item.phase_value,
-      item && item.classification,
-      item && item.classification_phase,
-      item && item.phase_id,
+      item.overall_phase,
+      item.phase,
+      item.ipc_phase,
+      item.phase_value,
+      item.classification,
+      item.classification_phase,
+      item.phase_id,
     ];
+
     for (var i = 0; i < direct.length; i++) {
       var n = Number(String(direct[i] == null ? '' : direct[i]).replace(/[^0-9.]/g, ''));
       if (!isNaN(n) && n >= 1 && n <= 5) return Math.round(n);
     }
+
+    var textFields = [
+      item.phase_label,
+      item.classification_label,
+      item.description,
+      item.title,
+    ];
+
+    for (var j = 0; j < textFields.length; j++) {
+      var match = String(textFields[j] || '').match(/phase\s*([1-5])/i);
+      if (match) return Number(match[1]);
+    }
+
     return 0;
   }
 
@@ -2867,6 +2545,23 @@
     if (text.indexOf('2.5') !== -1 || toNumber(value) >= 2500000) return 2;
     if (toNumber(value) > 0) return 1;
     return 0;
+  }
+
+  function isSafeUrl(url) {
+    return /^https?:\/\//i.test(String(url || ''));
+  }
+
+  function normalizeFoodDate(value) {
+    var text = String(value || '').trim();
+    if (!text) return '';
+    var d = new Date(text);
+    if (isNaN(d.getTime())) return text;
+    return d.toISOString().slice(0, 10);
+  }
+
+  function toNumber(value) {
+    var n = Number(value);
+    return isNaN(n) ? 0 : n;
   }
 
   // ─────────────────────────────────────────────────────────────────────────────
