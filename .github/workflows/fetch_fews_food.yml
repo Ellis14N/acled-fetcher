@@ -1,0 +1,54 @@
+name: "Fetch FEWS Food Security Snapshot"
+
+"on":
+  workflow_dispatch:
+    inputs:
+      country:
+        description: "Country to fetch FEWS food security data for"
+        required: true
+        default: "Chad"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Validate required FEWS secrets
+        env:
+          FEWS_USERNAME: ${{ secrets.FEWS_username }}
+          FEWS_PASSWORD: ${{ secrets.FEWS_password }}
+        run: |
+          if [ -z "$FEWS_USERNAME" ] || [ -z "$FEWS_PASSWORD" ]; then
+            echo "Missing required repository secrets: FEWS_username and/or FEWS_password"
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run FEWS food snapshot script
+        env:
+          FEWS_USERNAME: ${{ secrets.FEWS_username }}
+          FEWS_PASSWORD: ${{ secrets.FEWS_password }}
+        run: python3 _scripts/fetch_fews_food_data.py "${{ github.event.inputs.country }}"
+
+      - name: Commit output to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Update FEWS food snapshot: ${{ github.event.inputs.country }}"
+          git push

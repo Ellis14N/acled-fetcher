@@ -486,6 +486,227 @@
       .result-title,
       .africa-title { font-size: 21px; }
     }
+
+    /* ── Travel Advisories ── */
+    .advisory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+      align-items: stretch;
+    }
+
+    @media (max-width: 860px) {
+      .advisory-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .advisory-grid { grid-template-columns: 1fr; }
+    }
+
+    .advisory-card {
+      background: var(--panel-soft);
+      border: 1px solid rgba(90, 107, 143, 0.24);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .advisory-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      min-height: 58px;
+    }
+
+    .advisory-flag { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 1px; }
+
+    .advisory-source {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .advisory-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      width: fit-content;
+    }
+
+    .advisory-badge.level-4 { background: #b91c1c; }
+    .advisory-badge.level-3 { background: #c2410c; }
+    .advisory-badge.level-2 { background: #b45309; }
+    .advisory-badge.level-1 { background: #15803d; }
+    .advisory-badge.level-0 { background: #475569; }
+
+    .advisory-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .advisory-meta a {
+      color: #b9b0ff;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .advisory-meta a:hover { text-decoration: underline; }
+
+    .advisory-change {
+      font-size: 12px;
+      background: rgba(202, 138, 4, 0.18);
+      border: 1px solid rgba(202, 138, 4, 0.35);
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: #fde68a;
+      line-height: 1.4;
+    }
+
+    .advisory-loading {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .advisory-error {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .advisory-notice {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(90, 107, 143, 0.24);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .advisory-notice code {
+      background: rgba(79, 70, 229, 0.18);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #b9b0ff;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 20px 0;
+      align-items: stretch;
+    }
+
+    .food-card {
+      background: var(--panel-soft);
+      border: 1px solid rgba(90, 107, 143, 0.24);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .food-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      min-height: 46px;
+    }
+
+    .food-icon {
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .food-source {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .food-severity-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      width: fit-content;
+    }
+
+    .food-severity-badge.level-5 { background: #7f1d1d; }
+    .food-severity-badge.level-4 { background: #b91c1c; }
+    .food-severity-badge.level-3 { background: #c2410c; }
+    .food-severity-badge.level-2 { background: #b45309; }
+    .food-severity-badge.level-1 { background: #15803d; }
+    .food-severity-badge.level-0 { background: #475569; }
+
+    .food-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .food-meta a {
+      color: #b9b0ff;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .food-meta a:hover { text-decoration: underline; }
+
+    .food-loading {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .food-error {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .food-sections {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 860px) {
+      .food-sections { grid-template-columns: 1fr; }
+    }
+
+    .food-section {
+      background: rgba(12, 18, 31, 0.7);
+      border: 1px solid rgba(90, 107, 143, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .food-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-soft);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
@@ -543,14 +764,14 @@
           <div class="tool-description">Fetch flight activity for a specific airport and time window.</div>
         </button>
 
-        <button class="tool-button coming-soon">
-          <div class="tool-name">API 4</div>
-          <div class="tool-description">Reserved for future extractor.</div>
+        <button class="tool-button" onclick="show('fetchFoodSecurityScreen')">
+          <div class="tool-name">Food Security Risk</div>
+          <div class="tool-description">Fetch FEWS NET and IPC food insecurity risk, trends, and ADM1 hotspots.</div>
         </button>
 
-        <button class="tool-button coming-soon">
-          <div class="tool-name">API 5</div>
-          <div class="tool-description">Reserved for future extractor.</div>
+        <button class="tool-button" onclick="show('fetchTravelAdvisoriesScreen')">
+          <div class="tool-name">Travel Advisories</div>
+          <div class="tool-description">Live travel advisories from UK FCDO, US State Dept, Australian DFAT, and French MEAE.</div>
         </button>
 
         <button class="tool-button coming-soon">
@@ -693,6 +914,69 @@
       <div class="error" id="openSkyError"></div>
     </div>
 
+    <div id="fetchTravelAdvisoriesScreen" style="display:none">
+      <div class="logo">
+        <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
+        <div>
+          <div class="logo-text">14N Monitor</div>
+          <div class="logo-sub">Travel Advisories</div>
+        </div>
+      </div>
+      <h2>Travel Advisories</h2>
+      <p class="subtitle">Enter a country name to fetch a simple summary from four sources. Each source uses its own parser because advisory formats differ.</p>
+      <label for="travelCountryInput">Country Name</label>
+      <input type="text" id="travelCountryInput" placeholder="e.g. Chad, Sudan, Mali…" autocomplete="off" />
+      <div class="error" id="travelFetchError"></div>
+      <button onclick="runTravelAdvisories()">Fetch Advisories</button>
+      <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
+    </div>
+
+    <div id="fetchFoodSecurityScreen" style="display:none">
+      <div class="logo">
+        <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
+        <div>
+          <div class="logo-text">14N Monitor</div>
+          <div class="logo-sub">Food Security Risk</div>
+        </div>
+      </div>
+      <h2>Fetch Food Security and Famine Risk</h2>
+      <p class="subtitle">Enter a country name or ISO3 code to fetch FEWS NET and IPC snapshots as separate datasets, including Phase 3/4/5 ADM1 hotspots and trend percentages. FEWS compares the latest projection period with the previous projection period (typically around 3 months when available).</p>
+      <label for="foodCountryInput">Country or ISO3</label>
+      <input type="text" id="foodCountryInput" placeholder="e.g. Sudan, Ethiopia, SOM" autocomplete="off" />
+      <label for="ipcApiKeyInput">IPC API Key (required for IPC card)</label>
+      <input type="password" id="ipcApiKeyInput" placeholder="Paste IPC API key" autocomplete="off" />
+      <div class="advisory-notice" style="margin:16px 0 0">FEWS NET data is loaded from a GitHub Actions snapshot that uses repository secrets server-side, then refreshes the latest snapshot for this country. IPC analysis still loads live from the IPC API.</div>
+      <div class="error" id="foodFetchError"></div>
+      <button onclick="runFoodSecurityRisk()">Fetch Food Security Risk</button>
+      <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
+    </div>
+
+    <div id="foodResultsScreen" style="display:none">
+      <div style="margin-bottom: 24px;">
+        <div class="result-title" id="foodResultTitle"></div>
+      </div>
+      <div class="advisory-notice">
+        Data comes from FEWS NET Data Warehouse IPC endpoints. Treat this as rapid situational awareness and verify final decisions against official FEWS NET and IPC publications.
+      </div>
+      <div class="food-grid" id="foodRiskGrid"></div>
+      <button class="btn-secondary" onclick="show('fetchFoodSecurityScreen')" style="margin-top: 20px;">New Search</button>
+      <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
+    </div>
+
+    <div id="travelResultsScreen" style="display:none">
+      <div style="margin-bottom: 24px;">
+        <div class="result-title" id="travelResultTitle"></div>
+      </div>
+      <div class="advisory-notice">
+        Advisory data is fetched live from official sources with source-specific parsers. Always verify on the official government pages before making travel decisions.
+      </div>
+      <div class="advisory-grid" id="advisoryGrid"></div>
+      <button id="travelDownloadBtn" onclick="downloadTravelAdvisories()" disabled>Download All Advisories (JSON)</button>
+      <button id="travelDownloadCsvBtn" class="btn-secondary" onclick="downloadTravelAdvisoriesCsv()" disabled>Download All Advisories (CSV)</button>
+      <button class="btn-secondary" onclick="show('fetchTravelAdvisoriesScreen')" style="margin-top: 20px;">New Search</button>
+      <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
+    </div>
+
     <div id="loadingScreen">
       <div class="spinner-wrap">
         <div class="spinner"></div>
@@ -794,6 +1078,9 @@
   const DEFAULT_ACLED_WINDOW_FROM = "2025-01-01";
   const DEFAULT_ACLED_WINDOW_TO = "2025-02-01";
   const TOKEN_KEY = "acled_gh_token";
+  const IPC_API_KEY_SESSION = "ipc_api_key";
+  const FEWS_TOKEN_SESSION = 'fews_jwt';
+  const FEWS_TOKEN_EXPIRY_SESSION = 'fews_jwt_expiry';
 
   const EVENT_TYPES = [
     "Protests",
@@ -855,6 +1142,7 @@
   let progressValue = 0;
   let stepTimer = 0;
   let activeFetchContext = null;
+  let fewsCountryLookupCache = null;
 
   window.addEventListener("load", () => {
     show("passwordScreen");
@@ -1017,7 +1305,7 @@
   }
 
   async function triggerWorkflow(workflowFile, inputs, token) {
-    const previousLatestRunId = await fetchLatestWorkflowRunId(workflowFile, token);
+    const previousLatestRunId = await fetchLatestWorkflowRunId(workflowFile, token, true);
 
     const dispatchResponse = await fetch(
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${encodeURIComponent(workflowFile)}/dispatches`,
@@ -1038,6 +1326,10 @@
       throw new Error("GitHub token rejected.");
     }
 
+    if (dispatchResponse.status === 404) {
+      throw new Error(getWorkflowMissingMessage(workflowFile));
+    }
+
     if (!dispatchResponse.ok) {
       throw new Error(`GitHub API error ${dispatchResponse.status}`);
     }
@@ -1047,7 +1339,7 @@
 
     for (let attempt = 0; attempt < 20; attempt += 1) {
       await sleep(3000);
-      const runs = await fetchWorkflowRuns(workflowFile, token);
+      const runs = await fetchWorkflowRuns(workflowFile, token, true);
       const newRun = runs.find(run => previousLatestRunId === null || run.id > previousLatestRunId);
       if (newRun) {
         markStep("step2", "done");
@@ -1059,18 +1351,25 @@
     throw new Error("Workflow dispatched, but the run did not appear in time. It may still be starting in GitHub Actions.");
   }
 
-  async function fetchLatestWorkflowRunId(workflowFile, token) {
-    const runs = await fetchWorkflowRuns(workflowFile, token);
+  async function fetchLatestWorkflowRunId(workflowFile, token, tolerateMissing) {
+    const runs = await fetchWorkflowRuns(workflowFile, token, tolerateMissing);
     return runs.length ? runs[0].id : null;
   }
 
-  async function fetchWorkflowRuns(workflowFile, token) {
+  async function fetchWorkflowRuns(workflowFile, token, tolerateMissing) {
     const response = await fetch(
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${encodeURIComponent(workflowFile)}/runs?event=workflow_dispatch&branch=main&per_page=20`,
       { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" } }
     );
 
+    if (response.status === 404 && tolerateMissing) {
+      return [];
+    }
+
     if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error(getWorkflowMissingMessage(workflowFile));
+      }
       throw new Error(`GitHub API error ${response.status} while locating workflow run`);
     }
 
@@ -1218,9 +1517,10 @@
       secondary.style.display = "block";
       document.getElementById("secondaryBreakdownTitle").textContent = "Top Origin Countries";
       const topOrigins = (data.top_origin_countries || []).slice(0, 5);
+      const flowSummaryRow = breakdownRow("Displacement flow", getUnhcrFlowSummary(data));
       document.getElementById("topActorsRows").innerHTML = topOrigins.length
-        ? topOrigins.map(item => breakdownRow(item.origin || "Unknown", formatNumber(item.total || 0))).join("")
-        : '<div class="breakdown-row"><span class="breakdown-key">No origin data available</span><span class="breakdown-value">-</span></div>';
+        ? flowSummaryRow + topOrigins.map(item => breakdownRow(item.origin || "Unknown", `${formatNumber(item.total || 0)} (${formatSharePercent(item.total || 0, data.total_displaced || 0)} of total)`)).join("")
+        : flowSummaryRow + '<div class="breakdown-row"><span class="breakdown-key">No origin data available</span><span class="breakdown-value">-</span></div>';
       return;
     }
 
@@ -1340,8 +1640,8 @@
         <th>Total Displaced</th>
         <th>Refugees</th>
         <th>IDPs</th>
-        <th>Top Origin</th>
-        <th>Trend</th>
+        <th>Displacement Flow</th>
+        <th>YoY Trend</th>
       </tr>`;
 
     document.getElementById("africaTableBody").innerHTML = (data.countries || []).map((country, index) => `
@@ -1352,8 +1652,8 @@
         <td>${formatNumber(country.total_displaced || 0)}</td>
         <td>${formatNumber((country.population_types || {}).refugees || 0)}</td>
         <td>${formatNumber((country.population_types || {}).idps || 0)}</td>
-        <td>${escapeHtml(getTopOriginLabel(country.top_origin_countries || []))}</td>
-        <td>${escapeHtml(getTrendLabel(country.trend || {}))}</td>
+        <td>${escapeHtml(getTopOriginFlowLabel(country))}</td>
+        <td>${escapeHtml(`YoY ${getTrendLabel(country.trend || {})}`)}</td>
       </tr>`).join("");
   }
 
@@ -1374,6 +1674,10 @@
       "fetchScreen",
       "fetchUNHCRScreen",
       "fetchOpenSkyScreen",
+      "fetchFoodSecurityScreen",
+      "fetchTravelAdvisoriesScreen",
+      "foodResultsScreen",
+      "travelResultsScreen",
       "loadingScreen",
       "resultsScreen",
       "africaResultsScreen"
@@ -1512,10 +1816,37 @@
     return `${origin.origin || "Unknown"} (${formatNumber(origin.total || 0)})`;
   }
 
+  function getTopOriginFlowLabel(country) {
+    const origins = (country && country.top_origin_countries) || [];
+    if (!origins.length) return "No origin flow data";
+
+    const topOrigin = origins[0];
+    const originName = topOrigin.origin || "Unknown";
+    const hostName = (country && country.country) || "Host country";
+    const topTotal = Number(topOrigin.total || 0);
+    const hostTotal = Number((country && country.total_displaced) || 0);
+    return `${originName} -> ${hostName} (${formatNumber(topTotal)} | ${formatSharePercent(topTotal, hostTotal)} of total)`;
+  }
+
   function getTrendLabel(trend) {
     if (!trend || !trend.direction || trend.direction === "insufficient_data") return "Insufficient data";
     if (trend.change_pct === null || trend.change_pct === undefined) return capitalize(trend.direction);
     return `${capitalize(trend.direction)} (${trend.change_pct > 0 ? "+" : ""}${trend.change_pct}%)`;
+  }
+
+  function formatSharePercent(value, total) {
+    const numerator = Number(value || 0);
+    const denominator = Number(total || 0);
+    if (!denominator || denominator <= 0) return "0%";
+    return `${((numerator / denominator) * 100).toFixed(1)}%`;
+  }
+
+  function getUnhcrFlowSummary(data) {
+    const hostCountry = data && data.country ? String(data.country) : "Host country";
+    const originCount = Number((data && data.origin_country_count) || 0);
+    const trendLabel = getTrendLabel((data && data.trend) || {});
+    const direction = trendLabel === "Insufficient data" ? "trend unavailable" : trendLabel;
+    return `${originCount} origin countries -> ${hostCountry} | YoY ${direction}`;
   }
 
   function capitalize(value) {
@@ -1556,6 +1887,21 @@
     return date.toLocaleString();
   }
 
+  function formatIsoDateShort(value) {
+    if (!value) return 'Unknown';
+    var d = new Date(value);
+    if (isNaN(d.getTime())) return String(value);
+    return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+  }
+
+  function formatPopPeriod(rec) {
+    if (!rec) return 'N/A';
+    var start = rec.projection_start;
+    var end = rec.projection_end;
+    if (start && end && start !== end) return formatIsoDateShort(start) + ' \u2013 ' + formatIsoDateShort(end);
+    return formatIsoDateShort(start || end || rec.reporting_date);
+  }
+
   function escapeHtml(value) {
     return String(value)
       .replace(/&/g, "&amp;")
@@ -1575,6 +1921,1532 @@
 
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  function getWorkflowMissingMessage(workflowFile) {
+    return 'GitHub workflow "' + workflowFile + '" was not found on the GitHub repository main branch. Push .github/workflows/' + workflowFile + ' to GitHub, then retry.';
+  }
+
+  async function runFoodSecurityRisk() {
+    const country = (document.getElementById('foodCountryInput').value || '').trim();
+    const ipcKeyInput = (document.getElementById('ipcApiKeyInput').value || '').trim();
+    const token = getToken();
+    if (ipcKeyInput) {
+      sessionStorage.setItem(IPC_API_KEY_SESSION, ipcKeyInput);
+    }
+    const errEl = document.getElementById('foodFetchError');
+    if (errEl) errEl.style.display = 'none';
+
+    if (!country) {
+      if (errEl) {
+        errEl.textContent = 'Please enter a country name or ISO3 code.';
+        errEl.style.display = 'block';
+      }
+      return;
+    }
+
+    document.getElementById('foodResultTitle').textContent = 'Food Security and Famine Risk: ' + country;
+    show('foodResultsScreen');
+
+    const grid = document.getElementById('foodRiskGrid');
+    const cards = [
+      { id: 'food-ipc-api', icon: '📈', name: 'IPC Country Analysis API', fn: () => fetchIpcCountryAnalysis(country) },
+      { id: 'food-fews-phase', icon: '🌾', name: 'FEWS NET — IPC Phase & Population' },
+      { id: 'food-fews-market', icon: '🏪', name: 'FEWS NET — Market Prices' },
+      { id: 'food-fews-trade', icon: '🚚', name: 'FEWS NET — Cross-Border Trade Flow' },
+      { id: 'food-fews-crop', icon: '🌽', name: 'FEWS NET — Crop Production' },
+    ];
+
+    grid.innerHTML = cards.map(function(card) {
+      return (
+        '<div class="food-card" id="' + card.id + '">' +
+          '<div class="food-card-header">' +
+            '<span class="food-icon">' + card.icon + '</span>' +
+            '<span class="food-source">' + escapeHtml(card.name) + '</span>' +
+          '</div>' +
+          '<div class="food-card-body">' +
+            '<div class="food-loading">Fetching...</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+
+    var jobs = [];
+
+    jobs.push(
+      fetchIpcCountryAnalysis(country)
+        .then(function(result) {
+          renderFoodCard('food-ipc-api', result, null);
+        })
+        .catch(function(err) {
+          var msg = err && err.message ? err.message : String(err);
+          renderFoodCard('food-ipc-api', null, msg);
+        })
+    );
+
+    if (!token) {
+      renderFewsSnapshotError('GitHub token required to run FEWS workflow snapshot. Add your GitHub token in setup to load FEWS cards.');
+      await Promise.allSettled(jobs);
+      return;
+    }
+
+    jobs.push(
+      (async function() {
+        var existingSnapshot = await fetchFoodSnapshotOnce(country).catch(function() { return null; });
+        if (existingSnapshot && existingSnapshot.cards) {
+          renderFewsSnapshot(existingSnapshot);
+        }
+
+        var freshSnapshot = await loadFoodSecuritySnapshotFromWorkflow(country, token);
+        renderFewsSnapshot(freshSnapshot);
+      })().catch(function(err) {
+        var msg = err && err.message ? err.message : String(err);
+        if (!(document.querySelector('#food-fews-phase .food-card-body') || {}).textContent || document.querySelector('#food-fews-phase .food-card-body').textContent.indexOf('Unavailable:') !== -1 || document.querySelector('#food-fews-phase .food-card-body').textContent.indexOf('Fetching...') !== -1) {
+          renderFewsSnapshotError(msg);
+        }
+      })
+    );
+
+    await Promise.allSettled(jobs);
+  }
+
+  function renderFewsSnapshot(snapshot) {
+    var cards = snapshot && snapshot.cards ? snapshot.cards : {};
+    renderFoodCard('food-fews-phase', cards.phase || null, cards.phase ? null : 'FEWS phase snapshot missing from workflow output');
+    renderFoodCard('food-fews-market', cards.market || null, cards.market ? null : 'FEWS market snapshot missing from workflow output');
+    renderFoodCard('food-fews-trade', cards.trade || null, cards.trade ? null : 'FEWS trade snapshot missing from workflow output');
+    renderFoodCard('food-fews-crop', cards.crop || null, cards.crop ? null : 'FEWS crop snapshot missing from workflow output');
+  }
+
+  function renderFewsSnapshotError(message) {
+    renderFoodCard('food-fews-phase', null, message);
+    renderFoodCard('food-fews-market', null, message);
+    renderFoodCard('food-fews-trade', null, message);
+    renderFoodCard('food-fews-crop', null, message);
+  }
+
+  async function dispatchWorkflowWithoutLoadingUI(workflowFile, inputs, token) {
+    var previousLatestRunId = await fetchLatestWorkflowRunId(workflowFile, token, true);
+
+    var dispatchResponse = await fetch(
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${encodeURIComponent(workflowFile)}/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ref: 'main', inputs: inputs })
+      }
+    );
+
+    if (dispatchResponse.status === 401) {
+      sessionStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(TOKEN_KEY);
+      throw new Error('GitHub token rejected.');
+    }
+
+    if (dispatchResponse.status === 404) {
+      throw new Error(getWorkflowMissingMessage(workflowFile));
+    }
+
+    if (!dispatchResponse.ok) {
+      throw new Error(`GitHub API error ${dispatchResponse.status}`);
+    }
+
+    for (var attempt = 0; attempt < 20; attempt += 1) {
+      await sleep(3000);
+      var runs = await fetchWorkflowRuns(workflowFile, token, true);
+      var newRun = runs.find(function(run) {
+        return previousLatestRunId === null || run.id > previousLatestRunId;
+      });
+      if (newRun) return newRun.id;
+    }
+
+    throw new Error('Workflow dispatched, but the run did not appear in time.');
+  }
+
+  async function waitForWorkflowRunCompletion(runId, token) {
+    for (var attempt = 0; attempt < 60; attempt += 1) {
+      var response = await fetch(
+        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs/${runId}`,
+        { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' } }
+      );
+
+      if (!response.ok) {
+        throw new Error(`GitHub API error ${response.status} while checking workflow status`);
+      }
+
+      var run = await response.json();
+      if (run.status === 'queued' || run.status === 'in_progress') {
+        await sleep(6000);
+        continue;
+      }
+
+      if (run.status === 'completed' && run.conclusion === 'success') return;
+
+      var runUrl = run.html_url ? ` ${run.html_url}` : '';
+      throw new Error(`Workflow ${run.conclusion || run.status || 'failed'}.${runUrl}`);
+    }
+
+    throw new Error('Workflow timed out before completing.');
+  }
+
+  async function fetchFoodSnapshotOnce(country) {
+    var filename = `food_security_${slugify(country)}.json`;
+    var url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/data/${filename}?t=${Date.now()}`;
+    var response = await fetch(url);
+    if (!response.ok) return null;
+    return response.json();
+  }
+
+  async function loadFoodSecuritySnapshotFromWorkflow(country, token) {
+    var workflowFile = 'fetch_fews_food.yml';
+    var runId = await dispatchWorkflowWithoutLoadingUI(workflowFile, { country: country }, token);
+    await waitForWorkflowRunCompletion(runId, token);
+    return fetchJsonWithRetry(`food_security_${slugify(country)}.json`);
+  }
+
+  function renderFoodCard(id, data, error) {
+    var bodyEl = document.querySelector('#' + id + ' .food-card-body');
+    if (!bodyEl) return;
+
+    if (error) {
+      bodyEl.innerHTML = '<div class="food-error">Unavailable: ' + escapeHtml(error) + '</div>';
+      return;
+    }
+
+    var levelClass = 'level-' + Math.max(0, Math.min(5, Number(data.level || 0)));
+    var html = '';
+    html += '<div class="food-severity-badge ' + levelClass + '">' + escapeHtml(data.levelText || 'Risk data available') + '</div>';
+    html += '<div class="food-meta"><strong style="color:var(--text-soft)">IPC phase (country level):</strong> ' + escapeHtml(data.riskScore || 'Not available') + '</div>';
+    html += '<div class="food-meta"><strong style="color:var(--text-soft)">Status:</strong> ' + escapeHtml(data.status || 'Not available') + '</div>';
+    html += '<div class="food-meta"><strong style="color:var(--text-soft)">Latest period:</strong> ' + escapeHtml(data.latestPeriod || 'Not available') + '</div>';
+    html += '<div class="food-meta"><strong style="color:var(--text-soft)">Trend:</strong> ' + escapeHtml(data.trend || 'Insufficient data') + '</div>';
+
+    if (data.sections && data.sections.length) {
+      html += '<div class="food-sections">';
+      html += data.sections.map(function(section) {
+        var sectionHtml = '<div class="food-section">';
+        sectionHtml += '<div class="food-section-title">' + escapeHtml(section.title || 'Section') + '</div>';
+        sectionHtml += '<div class="food-meta"><strong style="color:var(--text-soft)">IPC Phase:</strong> ' + escapeHtml(section.ipcPhase || section.status || 'N/A') + '</div>';
+        sectionHtml += '<div class="food-meta"><strong style="color:var(--text-soft)">Population Phase 3+ in need:</strong> ' + escapeHtml(section.population || 'Not available') + '</div>';
+        sectionHtml += '<div class="food-meta"><strong style="color:var(--text-soft)">Period:</strong> ' + escapeHtml(section.period || 'N/A') + '</div>';
+        sectionHtml += '<div class="food-meta"><strong style="color:var(--text-soft)">ADM1 hotspots (Phase 3+):</strong> ' + escapeHtml(section.hotspots || 'None reported') + '</div>';
+        sectionHtml += '</div>';
+        return sectionHtml;
+      }).join('');
+      html += '</div>';
+    } else {
+      html += '<div class="food-meta"><strong style="color:var(--text-soft)">ADM1 hotspots:</strong> ' + escapeHtml(data.adm1Summary || 'No high-risk ADM1 records found') + '</div>';
+    }
+
+    if (data.famineSummary) {
+      html += '<div class="food-meta"><strong style="color:var(--text-soft)">Phase area counts:</strong> ' + escapeHtml(data.famineSummary) + '</div>';
+    }
+
+    if (data.url && isSafeUrl(data.url)) {
+      html += '<div class="food-meta"><a href="' + escapeHtml(data.url) + '" target="_blank" rel="noopener noreferrer">View source -></a></div>';
+    }
+
+    bodyEl.innerHTML = html;
+  }
+
+  async function fetchFewsNetIpcPhase(countryInput) {
+    var [records, popRecords] = await Promise.all([
+      fetchIpcPhaseRecords(countryInput),
+      fetchIpcPopulationRecords(countryInput).catch(function() { return []; }),
+    ]);
+    if (!records.length) throw new Error('No FEWS NET IPC phase records found for this country.');
+
+    var latestProjectionAdmin0 = pickLatestRecord(records, function(item) {
+      return String(item.unit_type || '').toLowerCase() === 'admin0' && isProjectionScenario(item.scenario_name);
+    });
+    var latestCurrentAdmin0 = pickLatestRecord(records, function(item) {
+      return String(item.unit_type || '').toLowerCase() === 'admin0' && isCurrentSituation(item.scenario_name);
+    });
+    var latestCountry = latestProjectionAdmin0 || latestCurrentAdmin0 || pickLatestRecord(records, function(item) {
+      return String(item.unit_type || '').toLowerCase() === 'admin0';
+    }) || pickLatestRecord(records, null);
+    if (!latestCountry) throw new Error('No country-level FEWS NET record found.');
+
+    var latestProjectionDate = latestProjectionAdmin0 ? normalizeFoodDate(latestProjectionAdmin0.reporting_date) : null;
+    var latestCurrentDate = latestCurrentAdmin0 ? normalizeFoodDate(latestCurrentAdmin0.reporting_date) : null;
+
+    var projectionHotspots = records
+      .filter(function(item) {
+        var unit = String(item.unit_type || '').toLowerCase();
+        return latestProjectionDate
+          && normalizeFoodDate(item.reporting_date) === latestProjectionDate
+          && isProjectionScenario(item.scenario_name)
+          && (unit === 'admin1' || unit === 'fsc_admin' || unit === 'fsc_admin_lhz')
+          && toNumber(item.value) >= 3;
+      })
+      .sort(function(a, b) {
+        if (toNumber(b.value) !== toNumber(a.value)) return toNumber(b.value) - toNumber(a.value);
+        return String(a.geographic_unit_name || '').localeCompare(String(b.geographic_unit_name || ''));
+      })
+      .slice(0, 12);
+
+    var currentHotspots = records
+      .filter(function(item) {
+        var unit = String(item.unit_type || '').toLowerCase();
+        return latestCurrentDate
+          && normalizeFoodDate(item.reporting_date) === latestCurrentDate
+          && isCurrentSituation(item.scenario_name)
+          && (unit === 'admin1' || unit === 'fsc_admin' || unit === 'fsc_admin_lhz')
+          && toNumber(item.value) >= 3;
+      })
+      .sort(function(a, b) {
+        if (toNumber(b.value) !== toNumber(a.value)) return toNumber(b.value) - toNumber(a.value);
+        return String(a.geographic_unit_name || '').localeCompare(String(b.geographic_unit_name || ''));
+      })
+      .slice(0, 12);
+
+    var currentPct3p = latestCurrentAdmin0 ? sumPctPhases(latestCurrentAdmin0) : null;
+    var projectedPct3p = latestProjectionAdmin0 ? sumPctPhases(latestProjectionAdmin0) : null;
+    var forwardPctChange = (currentPct3p !== null && currentPct3p !== 0 && projectedPct3p !== null)
+      ? (((projectedPct3p - currentPct3p) / currentPct3p) * 100)
+      : null;
+
+    var previousProjection = latestProjectionAdmin0 ? pickPreviousRecord(records, latestProjectionAdmin0, function(item) {
+      return String(item.unit_type || '').toLowerCase() === 'admin0' && isProjectionScenario(item.scenario_name);
+    }) : null;
+    var projectedPctPrev = previousProjection ? sumPctPhases(previousProjection) : null;
+    var projectedPctTrend = (projectedPctPrev !== null && projectedPctPrev !== 0 && projectedPct3p !== null)
+      ? (((projectedPct3p - projectedPctPrev) / projectedPctPrev) * 100)
+      : null;
+
+    var primaryLevel = latestProjectionAdmin0 ? toNumber(latestProjectionAdmin0.value) : toNumber(latestCountry.value);
+
+    var projEmergency = projectionHotspots.filter(function(item) { return toNumber(item.value) >= 4; });
+    var projFamine = projectionHotspots.filter(function(item) { return toNumber(item.value) >= 5; });
+    var curEmergency = currentHotspots.filter(function(item) { return toNumber(item.value) >= 4; });
+    var curFamine = currentHotspots.filter(function(item) { return toNumber(item.value) >= 5; });
+
+    var trendParts = [];
+    if (forwardPctChange !== null) {
+      trendParts.push((forwardPctChange >= 0 ? '+' : '') + forwardPctChange.toFixed(1) + '% Phase 3+ share from current to projection');
+    }
+    if (projectedPctTrend !== null) {
+      trendParts.push((projectedPctTrend >= 0 ? '+' : '') + projectedPctTrend.toFixed(1) + '% vs previous projection period');
+    }
+
+    var currentStatusText = latestCurrentAdmin0 ? phaseLevelText(toNumber(latestCurrentAdmin0.value)) : 'Unavailable';
+    var projectionStatusText = latestProjectionAdmin0 ? phaseLevelText(toNumber(latestProjectionAdmin0.value)) : 'Unavailable';
+    var currentHotspotText = currentHotspots.length
+      ? currentHotspots.map(function(item) {
+          return (item.geographic_unit_name || 'Unknown ADM1') + ' (Phase ' + Math.round(toNumber(item.value)) + ')';
+        }).join(', ')
+      : 'No Phase 3+ ADM1 hotspots in latest current period';
+    var projectionHotspotText = projectionHotspots.length
+      ? projectionHotspots.map(function(item) {
+          return (item.geographic_unit_name || 'Unknown ADM1') + ' (Phase ' + Math.round(toNumber(item.value)) + ')';
+        }).join(', ')
+      : 'No Phase 3+ ADM1 hotspots in latest projection period';
+
+    // Find latest Phase 3+ population records for each scenario
+    var currentPopRecord = popRecords
+      .filter(function(r) { return isPhase3Plus(r) && isCurrentSituation(r.scenario_name); })
+      .sort(function(a, b) {
+        var ae = a.projection_end || a.reporting_date || '';
+        var be = b.projection_end || b.reporting_date || '';
+        return be.localeCompare(ae);
+      })[0] || null;
+    var projectionPopRecord = popRecords
+      .filter(function(r) { return isPhase3Plus(r) && isProjectionScenario(r.scenario_name); })
+      .sort(function(a, b) {
+        var ae = a.projection_end || a.reporting_date || '';
+        var be = b.projection_end || b.reporting_date || '';
+        return be.localeCompare(ae);
+      })[0] || null;
+
+    return {
+      level: Math.round(primaryLevel),
+      levelText: phaseGroupingText(primaryLevel),
+      riskScore: 'Current: ' + (latestCurrentAdmin0 ? toNumber(latestCurrentAdmin0.value).toFixed(1) : 'N/A')
+        + ' | Projection: ' + (latestProjectionAdmin0 ? toNumber(latestProjectionAdmin0.value).toFixed(1) : 'N/A'),
+      status: 'Current ' + (latestCurrentAdmin0 ? phaseLevelText(toNumber(latestCurrentAdmin0.value)) : 'Unavailable')
+        + ' | Projection ' + (latestProjectionAdmin0 ? phaseLevelText(toNumber(latestProjectionAdmin0.value)) : 'Unavailable'),
+      latestPeriod: 'Current: ' + (latestCurrentAdmin0 ? formatIsoDateShort(latestCurrentAdmin0.reporting_date) : 'N/A')
+        + ' | Projection: ' + (latestProjectionAdmin0 ? formatIsoDateShort(latestProjectionAdmin0.reporting_date) : 'N/A'),
+      trend: trendParts.length ? trendParts.join(' | ') : (currentPct3p === null ? 'Trend unavailable (pct fields not published for this country)' : 'Insufficient data'),
+      adm1Summary: 'See Current and Projection sections below',
+      famineSummary: 'Projection Phase 3+/4+/5 areas: '
+        + projectionHotspots.length + '/' + projEmergency.length + '/' + projFamine.length
+        + ' | Current Phase 3+/4+/5 areas: '
+        + currentHotspots.length + '/' + curEmergency.length + '/' + curFamine.length,
+      sections: [
+        {
+          title: 'Current Situation',
+          ipcPhase: latestCurrentAdmin0 ? ('IPC ' + currentStatusText) : 'Unavailable',
+          population: currentPopRecord
+            ? currentPopRecord.population_range + ' Phase 3+ in need'
+            : 'Population estimate unavailable',
+          period: currentPopRecord
+            ? formatPopPeriod(currentPopRecord)
+            : (latestCurrentAdmin0 ? formatIsoDateShort(latestCurrentAdmin0.reporting_date) : 'N/A'),
+          hotspots: currentHotspotText,
+        },
+        {
+          title: 'Forward Projection',
+          ipcPhase: latestProjectionAdmin0 ? ('IPC ' + projectionStatusText) : 'Unavailable',
+          population: projectionPopRecord
+            ? projectionPopRecord.population_range + ' Phase 3+ in need'
+            : 'Population estimate unavailable',
+          period: projectionPopRecord
+            ? formatPopPeriod(projectionPopRecord)
+            : (latestProjectionAdmin0 ? formatIsoDateShort(latestProjectionAdmin0.reporting_date) : 'N/A'),
+          hotspots: projectionHotspotText,
+        }
+      ],
+      url: 'https://fdw.fews.net/api/ipcphase/',
+    };
+  }
+
+  async function fetchIpcCountryAnalysis(countryInput) {
+    var records = await fetchIpcAnalysisRecords(countryInput);
+    if (!records.length) {
+      throw new Error('IPC API returned no matching country records for this country code.');
+    }
+
+    var withPhase = records.filter(function(item) {
+      return extractPhaseValue(item) >= 1;
+    });
+    if (!withPhase.length) throw new Error('IPC API returned records but no phase values were detected.');
+
+    var latestDate = withPhase
+      .map(function(item) { return normalizeFoodDate(extractIpcDate(item)); })
+      .filter(function(v) { return !!v; })
+      .sort()
+      .slice(-1)[0];
+
+    var latest = withPhase.filter(function(item) {
+      return normalizeFoodDate(extractIpcDate(item)) === latestDate;
+    });
+
+    var previousDate = withPhase
+      .map(function(item) { return normalizeFoodDate(extractIpcDate(item)); })
+      .filter(function(v) { return !!v && v < latestDate; })
+      .sort()
+      .slice(-1)[0] || null;
+
+    var previous = previousDate ? withPhase.filter(function(item) {
+      return normalizeFoodDate(extractIpcDate(item)) === previousDate;
+    }) : [];
+
+    var hotspots3 = latest.filter(function(item) { return extractPhaseValue(item) >= 3; });
+    var hotspots4 = latest.filter(function(item) { return extractPhaseValue(item) >= 4; });
+    var hotspots5 = latest.filter(function(item) { return extractPhaseValue(item) >= 5; });
+
+    var prevHotspots3 = previous.filter(function(item) { return extractPhaseValue(item) >= 3; }).length;
+    var trendPct = (previous.length && prevHotspots3 > 0)
+      ? (((hotspots3.length - prevHotspots3) / prevHotspots3) * 100)
+      : null;
+
+    var maxLevel = latest.reduce(function(max, item) {
+      return Math.max(max, extractPhaseValue(item));
+    }, 0);
+
+    var totalPhase3Pop = hotspots3.reduce(function(sum, item) {
+      return sum + extractIpcPhase3WorsePopulation(item);
+    }, 0);
+
+    return {
+      level: maxLevel,
+      levelText: phaseGroupingText(maxLevel),
+      riskScore: 'Phase 3+: ' + hotspots3.length + ' areas | ' + formatNumber(totalPhase3Pop) + ' people',
+      status: 'IPC dataset | Period: ' + (latest.length ? periodLabel(latest[0].period) : 'Unknown') + ' | Phase 4+: ' + hotspots4.length + ' | Phase 5: ' + hotspots5.length,
+      latestPeriod: latestDate ? formatIsoDateShort(latestDate) : 'Unknown',
+      trend: trendPct === null
+        ? 'Insufficient data'
+        : ((trendPct >= 0 ? '+' : '') + trendPct.toFixed(1) + '% change in count of Phase 3+ areas vs previous period'),
+      adm1Summary: hotspots3.length
+        ? hotspots3.slice(0, 12).map(function(item) {
+            var area = extractIpcAreaName(item);
+            return area + ' (Phase ' + extractPhaseValue(item) + ')';
+          }).join(', ')
+        : 'No Phase 3+ IPC areas reported in latest period',
+      famineSummary: hotspots5.length
+        ? hotspots5.slice(0, 8).map(function(item) { return extractIpcAreaName(item); }).join(', ')
+        : 'No Phase 5 IPC areas detected in latest period',
+      url: 'https://docs.api.ipcinfo.org',
+    };
+  }
+
+  async function getFewsJwt() {
+    // Return cached token if still valid (stored at login, expires in 11h)
+    var cached = sessionStorage.getItem(FEWS_TOKEN_SESSION) || '';
+    var expiry = parseInt(sessionStorage.getItem(FEWS_TOKEN_EXPIRY_SESSION) || '0');
+    if (cached && Date.now() < expiry) return cached;
+
+    return '';
+  }
+
+  function fewsJwtParam(token) {
+    return token ? '&jwt=' + encodeURIComponent(token) : '';
+  }
+
+  async function fetchIpcPhaseRecords(countryInput) {
+    var jwt = await getFewsJwt();
+    var jp = fewsJwtParam(jwt);
+
+    // Resolve any input (name / ISO3 / ISO2) → ISO2 code for reliable API filtering
+    var iso2 = await resolveIpcCountryCode(countryInput);
+    if (!iso2) {
+      // Fallback: use input directly (may be ISO2 already)
+      iso2 = String(countryInput || '').trim().toUpperCase();
+    }
+
+    // Two parallel targeted queries:
+    // 1) admin0 only — the country-level phase record (small, fast, avoids mixed ordering issue)
+    // 2) all sub-national records for the same date window — for ADM1 hotspot extraction
+    var admin0Url = 'https://fdw.fews.net/api/ipcphase/?format=json&page_size=100&ordering=-reporting_date'
+      + '&unit_type=admin0&country_code=' + encodeURIComponent(iso2)
+      + '&classification_scale=IPC30&classification_scale=IPC31' + jp;
+    var adm1Url = 'https://fdw.fews.net/api/ipcphase/?format=json&page_size=500&ordering=-reporting_date'
+      + '&country_code=' + encodeURIComponent(iso2)
+      + '&classification_scale=IPC30&classification_scale=IPC31' + jp;
+
+    var results = await Promise.all([
+      fetchAllPagedResults(admin0Url, 2).catch(function() { return []; }),
+      fetchAllPagedResults(adm1Url, 2).catch(function() { return []; }),
+    ]);
+
+    // Merge, deduplicating by record id
+    var seen = Object.create(null);
+    var merged = [];
+    for (var li = 0; li < results.length; li++) {
+      for (var ri = 0; ri < results[li].length; ri++) {
+        var rec = results[li][ri];
+        var key = String(rec.id || (rec.fnid + '|' + rec.reporting_date + '|' + rec.scenario));
+        if (!seen[key]) { seen[key] = true; merged.push(rec); }
+      }
+    }
+    return merged;
+  }
+
+  async function fetchIpcPopulationRecords(countryInput) {
+    var jwt = await getFewsJwt();
+    var jp = fewsJwtParam(jwt);
+
+    var iso2 = await resolveIpcCountryCode(countryInput);
+    if (!iso2) iso2 = String(countryInput || '').trim().toUpperCase();
+
+    // Order by projection_end so that the most recent projection period appears first
+    var url = 'https://fdw.fews.net/api/ipcpopulationsize/?format=json&page_size=500&ordering=-projection_end'
+      + '&country_code=' + encodeURIComponent(iso2)
+      + '&classification_scale=IPC30&classification_scale=IPC31' + jp;
+
+    return fetchAllPagedResults(url, 2).catch(function() { return []; });
+  }
+
+  async function fetchIpcAnalysisRecords(countryInput) {
+    var ipcKey = String(sessionStorage.getItem(IPC_API_KEY_SESSION) || '').trim();
+    if (!ipcKey) {
+      throw new Error('IPC API key is required. Add your key in the Food Security screen and try again.');
+    }
+
+    var countryCode = await resolveIpcCountryCode(countryInput);
+    if (!countryCode) {
+      throw new Error('Could not resolve country to ISO2 code required by IPC API.');
+    }
+
+    var year = new Date().getFullYear();
+    var urls = [
+      'https://api.ipcinfo.org/areas?format=json&key=' + encodeURIComponent(ipcKey) + '&country=' + encodeURIComponent(countryCode) + '&year=' + year,
+      'https://api.ipcinfo.org/areas?format=json&key=' + encodeURIComponent(ipcKey) + '&country=' + encodeURIComponent(countryCode),
+    ];
+
+    for (var i = 0; i < urls.length; i++) {
+      try {
+        var payload = await fetchJsonWithFallback(urls[i]);
+        if (Array.isArray(payload) && payload.length) return payload;
+      } catch (err) {
+        if (err && err.message && (err.message.indexOf('401') !== -1 || err.message.indexOf('403') !== -1)) {
+          throw new Error('IPC API key rejected or unauthorized. Please verify your key.');
+        }
+      }
+    }
+
+    return [];
+  }
+
+  async function resolveIpcCountryCode(countryInput) {
+    var q = String(countryInput || '').trim();
+    if (/^[A-Za-z]{2}$/.test(q)) return q.toUpperCase();
+
+    var lookup = await getFewsCountryLookup();
+    var lower = q.toLowerCase();
+
+    for (var i = 0; i < lookup.length; i++) {
+      var row = lookup[i];
+      var iso2 = String(row.iso3166a2 || '').toUpperCase();
+      var iso3 = String(row.iso3166a3 || '').toUpperCase();
+      var names = [row.preferred_name, row.iso_en_name, row.iso_en_ro_name, row.country, row.name]
+        .map(function(v) { return String(v || '').toLowerCase().trim(); });
+
+      if (/^[A-Za-z]{3}$/.test(q) && iso3 === q.toUpperCase()) return iso2;
+      if (names.indexOf(lower) !== -1) return iso2;
+    }
+
+    for (var j = 0; j < lookup.length; j++) {
+      var row2 = lookup[j];
+      var name2 = String(row2.preferred_name || row2.iso_en_name || '').toLowerCase();
+      if (name2 && name2.indexOf(lower) !== -1) return String(row2.iso3166a2 || '').toUpperCase();
+    }
+
+    return null;
+  }
+
+  async function fetchFewsMarketPrices(countryInput) {
+    var jwt = await getFewsJwt();
+    if (!jwt) throw new Error('FEWS NET login required for market price data. Add credentials and try again.');
+    var jp = fewsJwtParam(jwt);
+
+    var iso2 = await resolveIpcCountryCode(countryInput);
+    if (!iso2) iso2 = String(countryInput || '').trim().toUpperCase();
+
+    var url = 'https://fdw.fews.net/api/marketpricefacts/?format=json&page_size=500&ordering=-reporting_date'
+      + '&country_code=' + encodeURIComponent(iso2) + jp;
+
+    var records = await fetchAllPagedResults(url, 2);
+    if (!records.length) throw new Error('No market price data found for this country.');
+
+    // Group by commodity and find latest date per commodity
+    var byComm = Object.create(null);
+    for (var i = 0; i < records.length; i++) {
+      var r = records[i];
+      var comm = r.commodity_name || r.indicator || r.indicator_name || r.cpcv2_name || r.cpcv2 || 'Unknown';
+      var date = normalizeFoodDate(r.reporting_date || r.date);
+      if (!byComm[comm] || date > byComm[comm].date) {
+        byComm[comm] = {
+          date: date,
+          market: r.market_name || r.market || r.geographic_unit_name || '',
+          value: r.value != null ? r.value : (r.quantity || r.price || ''),
+          unit: r.unit || r.unit_name || r.currency || '',
+          raw: r,
+        };
+      }
+    }
+
+    var commodities = Object.keys(byComm).sort();
+    var lines = commodities.slice(0, 15).map(function(comm) {
+      var d = byComm[comm];
+      var valStr = d.value !== '' ? String(d.value) + (d.unit ? ' ' + d.unit : '') : 'No value';
+      return comm + ': ' + valStr + (d.market ? ' (' + d.market + ')' : '') + ' — ' + formatIsoDateShort(d.date);
+    });
+
+    // Find most recent date overall
+    var allDates = records.map(function(r) { return normalizeFoodDate(r.reporting_date || r.date); }).filter(Boolean).sort();
+    var latestDate = allDates[allDates.length - 1] || '';
+
+    return {
+      level: 0,
+      levelText: 'Market data',
+      riskScore: commodities.length + ' commodities tracked',
+      status: 'Latest price report: ' + (latestDate ? formatIsoDateShort(latestDate) : 'Unknown'),
+      latestPeriod: latestDate ? formatIsoDateShort(latestDate) : 'Unknown',
+      trend: null,
+      adm1Summary: lines.join(' | '),
+      famineSummary: null,
+      sections: null,
+      url: 'https://fdw.fews.net/api/marketpricefacts/',
+    };
+  }
+
+  async function fetchFewsTradeFlow(countryInput) {
+    var jwt = await getFewsJwt();
+    if (!jwt) throw new Error('FEWS NET login required for trade flow data. Add credentials and try again.');
+    var jp = fewsJwtParam(jwt);
+
+    var iso2 = await resolveIpcCountryCode(countryInput);
+    if (!iso2) iso2 = String(countryInput || '').trim().toUpperCase();
+
+    // Try as origin country
+    var url = 'https://fdw.fews.net/api/tradeflowquantityvalue/?format=json&page_size=300&ordering=-reporting_date'
+      + '&origin_country_code=' + encodeURIComponent(iso2) + jp;
+
+    var records = await fetchAllPagedResults(url, 2).catch(function() { return []; });
+
+    // If no origin records, try destination
+    if (!records.length) {
+      var url2 = 'https://fdw.fews.net/api/tradeflowquantityvalue/?format=json&page_size=300&ordering=-reporting_date'
+        + '&destination_country_code=' + encodeURIComponent(iso2) + jp;
+      records = await fetchAllPagedResults(url2, 2).catch(function() { return []; });
+    }
+
+    if (!records.length) throw new Error('No cross-border trade flow data found for this country.');
+
+    var allDates = records.map(function(r) { return normalizeFoodDate(r.reporting_date || r.date); }).filter(Boolean).sort();
+    var latestDate = allDates[allDates.length - 1] || '';
+
+    // Pick most recent records and summarise key flows
+    var recent = records
+      .filter(function(r) { return normalizeFoodDate(r.reporting_date || r.date) === latestDate; })
+      .slice(0, 10);
+
+    var lines = recent.map(function(r) {
+      var commodity = r.commodity_name || r.indicator || r.indicator_name || r.cpcv2_name || 'Unknown';
+      var origin = r.origin_country || r.origin_country_name || '';
+      var dest = r.destination_country || r.destination_country_name || '';
+      var val = r.value != null ? String(r.value) + (r.unit ? ' ' + r.unit : '') : '';
+      var arrow = (origin && dest) ? origin + ' → ' + dest : (origin || dest);
+      return commodity + ': ' + val + (arrow ? ' (' + arrow + ')' : '');
+    });
+
+    return {
+      level: 0,
+      levelText: 'Trade flow data',
+      riskScore: records.length + ' flow records',
+      status: 'Latest period: ' + (latestDate ? formatIsoDateShort(latestDate) : 'Unknown'),
+      latestPeriod: latestDate ? formatIsoDateShort(latestDate) : 'Unknown',
+      trend: null,
+      adm1Summary: lines.join(' | ') || 'No detail available',
+      famineSummary: null,
+      sections: null,
+      url: 'https://fdw.fews.net/api/tradeflowquantityvalue/',
+    };
+  }
+
+  async function getFewsCountryLookup() {
+    if (fewsCountryLookupCache) return fewsCountryLookupCache;
+    var jwt = await getFewsJwt();
+    var url = 'https://fdw.fews.net/api/country/?format=json&page_size=500' + fewsJwtParam(jwt);
+    var payload = await fetchJsonWithFallback(url);
+    fewsCountryLookupCache = payload && Array.isArray(payload.results) ? payload.results : [];
+    return fewsCountryLookupCache;
+  }
+
+  async function fetchAllPagedResults(url, maxPages) {
+    var out = [];
+    var nextUrl = url;
+    var pages = Number(maxPages || 1);
+
+    for (var i = 0; i < pages && nextUrl; i++) {
+      var payload = await fetchJsonWithFallback(nextUrl);
+      if (!payload || !Array.isArray(payload.results)) break;
+      out = out.concat(payload.results);
+      nextUrl = payload.next || null;
+    }
+    return out;
+  }
+
+  function pickLatestRecord(records, predicate) {
+    var filtered = (records || []).filter(function(item) {
+      return !predicate || predicate(item);
+    });
+    if (!filtered.length) return null;
+
+    filtered.sort(function(a, b) {
+      return normalizeFoodDate(b.reporting_date).localeCompare(normalizeFoodDate(a.reporting_date));
+    });
+    return filtered[0];
+  }
+
+  function pickPreviousRecord(records, latest, predicate) {
+    if (!latest) return null;
+    var latestDate = normalizeFoodDate(latest.reporting_date);
+    var filtered = (records || []).filter(function(item) {
+      if (predicate && !predicate(item)) return false;
+      return normalizeFoodDate(item.reporting_date) < latestDate;
+    });
+    if (!filtered.length) return null;
+
+    filtered.sort(function(a, b) {
+      return normalizeFoodDate(b.reporting_date).localeCompare(normalizeFoodDate(a.reporting_date));
+    });
+    return filtered[0];
+  }
+
+  function sumPctPhases(record) {
+    var p3 = record.pct_phase3, p4 = record.pct_phase4, p5 = record.pct_phase5;
+    if (p3 == null && p4 == null && p5 == null) return null;
+    return toNumber(p3) + toNumber(p4) + toNumber(p5);
+  }
+
+  function isPhase3Plus(r) {
+    var p = String(r.phase || '').trim();
+    return p === '3+' || p === '3' || /^3\b/.test(p);
+  }
+
+  function isSafeUrl(url) {
+    return /^https?:\/\//i.test(String(url || ''));
+  }
+
+  function normalizeFoodDate(value) {
+    var text = String(value || '').trim();
+    if (!text) return '';
+    var d = new Date(text);
+    if (isNaN(d.getTime())) return text;
+    return d.toISOString().slice(0, 10);
+  }
+
+  function toNumber(value) {
+    var n = Number(value);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function isCurrentSituation(label) {
+    return String(label || '').toLowerCase().indexOf('current') !== -1;
+  }
+
+  function isProjectionScenario(label) {
+    var t = String(label || '').toLowerCase();
+    return t.indexOf('projection') !== -1 || t.indexOf('most likely') !== -1 || t.indexOf('near term') !== -1 || t.indexOf('ml') !== -1;
+  }
+
+  function monthDiff(startDate, endDate) {
+    var start = new Date(startDate);
+    var end = new Date(endDate);
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) return null;
+    return Math.abs((end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()));
+  }
+
+  function ipcCountryMatch(item, query, isoLike) {
+    var q = String(query || '').trim().toLowerCase();
+    var fields = [
+      item && item.country,
+      item && item.country_name,
+      item && item.country_label,
+      item && item.admin_0,
+      item && item.iso3,
+      item && item.country_code,
+      item && item.iso,
+    ].map(function(v) { return String(v || '').trim().toLowerCase(); });
+
+    if (isoLike) {
+      return fields.indexOf(q) !== -1;
+    }
+    return fields.some(function(v) { return v === q || v.indexOf(q) !== -1; });
+  }
+
+  function extractPhaseValue(item) {
+    var direct = [
+      item && item.overall_phase,
+      item && item.phase,
+      item && item.ipc_phase,
+      item && item.phase_value,
+      item && item.classification,
+      item && item.classification_phase,
+      item && item.phase_id,
+    ];
+    for (var i = 0; i < direct.length; i++) {
+      var n = Number(String(direct[i] == null ? '' : direct[i]).replace(/[^0-9.]/g, ''));
+      if (!isNaN(n) && n >= 1 && n <= 5) return Math.round(n);
+    }
+    return 0;
+  }
+
+  function extractIpcAreaName(item) {
+    var candidates = [
+      item && item.title,
+      item && item.adm1,
+      item && item.admin1,
+      item && item.admin_1,
+      item && item.area,
+      item && item.area_name,
+      item && item.region,
+      item && item.zone,
+      item && item.geographic_unit_name,
+    ];
+    for (var i = 0; i < candidates.length; i++) {
+      var text = String(candidates[i] || '').trim();
+      if (text) return text;
+    }
+    return 'Unknown area';
+  }
+
+  function extractIpcDate(item) {
+    var candidates = [
+      item && item.from,
+      item && item.reporting_date,
+      item && item.analysis_date,
+      item && item.date,
+      item && item.period_start,
+      item && item.start_date,
+      item && item.created_at,
+      item && item.updated_at,
+    ];
+    for (var i = 0; i < candidates.length; i++) {
+      var text = String(candidates[i] || '').trim();
+      if (text) return text;
+    }
+    return '';
+  }
+
+  function extractIpcPhase3WorsePopulation(item) {
+    if (!item) return 0;
+    return toNumber(item.phase3_worse_population);
+  }
+
+  function periodLabel(periodCode) {
+    var code = String(periodCode || '').toUpperCase();
+    if (code === 'C') return 'Current';
+    if (code === 'P') return 'Projected';
+    if (code === 'A') return 'Second projected';
+    return 'Unknown';
+  }
+
+  function phaseLevelText(value) {
+    var level = Math.round(toNumber(value));
+    if (level >= 5) return 'Phase 5 - Famine/Catastrophe';
+    if (level === 4) return 'Phase 4 - Emergency';
+    if (level === 3) return 'Phase 3 - Crisis';
+    if (level === 2) return 'Phase 2 - Stressed';
+    if (level === 1) return 'Phase 1 - Minimal';
+    return 'Unclassified';
+  }
+
+  function phaseGroupingText(value) {
+    var level = Math.round(toNumber(value));
+    if (level >= 5) return 'Phase 5 (Catastrophe/Famine)';
+    if (level >= 4) return 'Phase 4+ (Emergency or worse)';
+    if (level >= 3) return 'Phase 3+ (Crisis or worse)';
+    if (level >= 1) return 'Phase 1-2 (Minimal to Stressed)';
+    return 'Grouping unavailable';
+  }
+
+  function classifyFoodRisk(value) {
+    var level = Math.round(toNumber(value));
+    if (level >= 5) return 'Extreme famine risk';
+    if (level === 4) return 'Very high food insecurity risk';
+    if (level === 3) return 'High food insecurity risk';
+    if (level === 2) return 'Moderate stress';
+    if (level === 1) return 'Minimal risk';
+    return 'Risk unavailable';
+  }
+
+  function populationRangeLevel(rangeLabel, value) {
+    var text = String(rangeLabel || '').toLowerCase();
+    if (text.indexOf('10.0+') !== -1 || toNumber(value) >= 10000000) return 5;
+    if (text.indexOf('7.5') !== -1 || toNumber(value) >= 7500000) return 4;
+    if (text.indexOf('5.0') !== -1 || toNumber(value) >= 5000000) return 3;
+    if (text.indexOf('2.5') !== -1 || toNumber(value) >= 2500000) return 2;
+    if (toNumber(value) > 0) return 1;
+    return 0;
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Travel Advisories – source-specific parsers with normalized output
+  // ─────────────────────────────────────────────────────────────────────────────
+  const ADVISORY_CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+  let latestTravelAdvisoryBundle = null;
+
+  async function runTravelAdvisories() {
+    const country = (document.getElementById('travelCountryInput').value || '').trim();
+    const errEl   = document.getElementById('travelFetchError');
+    if (errEl) errEl.style.display = 'none';
+
+    if (!country) {
+      if (errEl) {
+        errEl.textContent = 'Please enter a country name.';
+        errEl.style.display = 'block';
+      }
+      return;
+    }
+
+    document.getElementById('travelResultTitle').textContent = 'Travel Advisories: ' + country;
+    show('travelResultsScreen');
+
+    var downloadBtn = document.getElementById('travelDownloadBtn');
+    var downloadCsvBtn = document.getElementById('travelDownloadCsvBtn');
+    if (downloadBtn) downloadBtn.disabled = true;
+    if (downloadCsvBtn) downloadCsvBtn.disabled = true;
+
+    latestTravelAdvisoryBundle = {
+      country: country,
+      generated_at: new Date().toISOString(),
+      sources: [],
+    };
+
+    const sources = [
+      { id: 'adv-fcdo',  flag: '🇬🇧', name: 'Foreign, Commonwealth, and Development Office',              fn: () => fetchFCDO(country) },
+      { id: 'adv-state', flag: '🇺🇸', name: 'US State Department', fn: () => fetchStateDept(country) },
+      { id: 'adv-dfat',  flag: '🇦🇺', name: 'Department of Foreign Affairs and Trade',      fn: () => fetchAusDFAT(country) },
+      { id: 'adv-meae',  flag: '🇫🇷', name: 'Ministry of Europe and Foreign Affairs',          fn: () => fetchFrenchMEAE(country) },
+    ];
+
+    const grid = document.getElementById('advisoryGrid');
+    grid.innerHTML = sources.map(function(s) {
+      return (
+        '<div class="advisory-card" id="' + s.id + '">' +
+          '<div class="advisory-card-header">' +
+            '<span class="advisory-flag">' + s.flag + '</span>' +
+            '<span class="advisory-source">' + escapeHtml(s.name) + '</span>' +
+          '</div>' +
+          '<div class="advisory-card-body">' +
+            '<div class="advisory-loading">Fetching...</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+
+    var jobs = sources.map(function(s) {
+      return s.fn()
+        .then(function(data) {
+          renderAdvisoryCard(s.id, data, null);
+          latestTravelAdvisoryBundle.sources.push({
+            source: s.name,
+            status: 'ok',
+            data: data,
+          });
+        })
+        .catch(function(err) {
+          var msg = err && err.message ? err.message : String(err);
+          renderAdvisoryCard(s.id, null, msg);
+          latestTravelAdvisoryBundle.sources.push({
+            source: s.name,
+            status: 'error',
+            error: msg,
+          });
+        });
+    });
+
+    await Promise.allSettled(jobs);
+    latestTravelAdvisoryBundle.generated_at = new Date().toISOString();
+    if (downloadBtn) downloadBtn.disabled = false;
+    if (downloadCsvBtn) downloadCsvBtn.disabled = false;
+  }
+
+  function downloadTravelAdvisories() {
+    if (!latestTravelAdvisoryBundle || !latestTravelAdvisoryBundle.sources || latestTravelAdvisoryBundle.sources.length === 0) {
+      alert('No advisory data is available to download yet.');
+      return;
+    }
+
+    var countrySlug = normalizeCountrySlug(latestTravelAdvisoryBundle.country || 'country');
+    var filename = 'travel_advisories_' + countrySlug + '_' + new Date().toISOString().slice(0, 10) + '.json';
+    var payload = JSON.stringify(latestTravelAdvisoryBundle, null, 2);
+    var blob = new Blob([payload], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadTravelAdvisoriesCsv() {
+    if (!latestTravelAdvisoryBundle || !latestTravelAdvisoryBundle.sources || latestTravelAdvisoryBundle.sources.length === 0) {
+      alert('No advisory data is available to download yet.');
+      return;
+    }
+
+    var rows = [];
+    rows.push([
+      'country',
+      'generated_at',
+      'source',
+      'status',
+      'level',
+      'level_text',
+      'advisory',
+      'still_current_at',
+      'updated_at',
+      'primary_driver',
+      'url',
+      'error'
+    ]);
+
+    latestTravelAdvisoryBundle.sources.forEach(function(entry) {
+      var d = entry.data || {};
+      rows.push([
+        latestTravelAdvisoryBundle.country || '',
+        latestTravelAdvisoryBundle.generated_at || '',
+        entry.source || '',
+        entry.status || '',
+        d.level == null ? '' : String(d.level),
+        d.levelText || '',
+        d.advisory || '',
+        d.stillCurrentAt || '',
+        d.updatedAt || '',
+        d.primaryDriver || '',
+        d.url || '',
+        entry.error || ''
+      ]);
+    });
+
+    var csv = rows.map(function(cols) {
+      return cols.map(function(value) {
+        var cell = String(value == null ? '' : value);
+        if (/[",\n]/.test(cell)) {
+          cell = '"' + cell.replace(/"/g, '""') + '"';
+        }
+        return cell;
+      }).join(',');
+    }).join('\n');
+
+    var countrySlug = normalizeCountrySlug(latestTravelAdvisoryBundle.country || 'country');
+    var filename = 'travel_advisories_' + countrySlug + '_' + new Date().toISOString().slice(0, 10) + '.csv';
+    downloadFile(csv, filename, 'text/csv;charset=utf-8');
+  }
+
+  function renderAdvisoryCard(id, data, error) {
+    var bodyEl = document.querySelector('#' + id + ' .advisory-card-body');
+    if (!bodyEl) return;
+
+    if (error) {
+      bodyEl.innerHTML = '<div class="advisory-error">Unavailable: ' + escapeHtml(error) + '</div>';
+      return;
+    }
+
+    var levelClass = (data.level >= 1 && data.level <= 4) ? 'level-' + data.level : 'level-0';
+    var html = '';
+    if (data.levelText) {
+      html += '<div class="advisory-badge ' + levelClass + '">' + escapeHtml(data.levelText) + '</div>';
+    }
+
+    html += '<div class="advisory-meta"><strong style="color:var(--text-soft)">Advisory:</strong> ' + escapeHtml(data.advisory || 'Not available') + '</div>';
+    html += '<div class="advisory-meta"><strong style="color:var(--text-soft)">Still current at:</strong> ' + escapeHtml(data.stillCurrentAt || 'Not available') + '</div>';
+    html += '<div class="advisory-meta"><strong style="color:var(--text-soft)">Updated:</strong> ' + escapeHtml(data.updatedAt || 'Not available') + '</div>';
+    html += '<div class="advisory-meta"><strong style="color:var(--text-soft)">Primary driver:</strong> ' + escapeHtml(data.primaryDriver || 'Not available') + '</div>';
+
+    if (data.url) {
+      html += '<div class="advisory-meta"><a href="' + escapeHtml(data.url) + '" target="_blank" rel="noopener noreferrer">View source -></a></div>';
+    }
+
+    bodyEl.innerHTML = html;
+  }
+
+  function formatDate(value) {
+    if (!value) return null;
+    var d = new Date(value);
+    if (isNaN(d.getTime())) return String(value);
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
+
+  function translateFrenchDateToEnglish(dateStr) {
+    if (!dateStr) return null;
+    var out = String(dateStr).trim().toLowerCase();
+    var monthMap = {
+      'janvier': 'January',
+      'fevrier': 'February',
+      'février': 'February',
+      'mars': 'March',
+      'avril': 'April',
+      'mai': 'May',
+      'juin': 'June',
+      'juillet': 'July',
+      'aout': 'August',
+      'août': 'August',
+      'septembre': 'September',
+      'octobre': 'October',
+      'novembre': 'November',
+      'decembre': 'December',
+      'décembre': 'December',
+    };
+
+    Object.keys(monthMap).forEach(function(fr) {
+      out = out.replace(new RegExp('\\b' + fr + '\\b', 'g'), monthMap[fr]);
+    });
+
+    out = out.replace(/1er\s+/g, '1 ');
+    return out.replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+  }
+
+  function translateFrenchSnippetToEnglish(text) {
+    if (!text) return null;
+    var out = String(text);
+    var replacements = [
+      [/situation sécuritaire/gi, 'security situation'],
+      [/appel à la vigilance/gi, 'call for vigilance'],
+      [/restrictions de circulation/gi, 'movement restrictions'],
+      [/épidémie de choléra/gi, 'cholera outbreak'],
+      [/publié le/gi, 'published on'],
+      [/actualisé le/gi, 'updated on'],
+      [/compte tenu de/gi, 'given'],
+      [/en raison de/gi, 'due to'],
+      [/risque(s)? terroriste(s)?/gi, 'terrorism risk$1'],
+      [/vigilance renforcée/gi, 'enhanced vigilance'],
+      [/formellement déconseillé/gi, 'formally advised against'],
+      [/déconseillé sauf raison impérative/gi, 'advised against except for imperative reasons'],
+    ];
+
+    for (var i = 0; i < replacements.length; i++) {
+      out = out.replace(replacements[i][0], replacements[i][1]);
+    }
+    return out;
+  }
+
+  function extractPrimaryDriver(text) {
+    var t = (text || '').toLowerCase();
+    if (!t) return null;
+
+    var rules = [
+      { re: /terroris|terrorist|attentat/, label: 'Terrorism risk' },
+      { re: /kidnap|abduct/, label: 'Kidnapping risk' },
+      { re: /civil unrest|unrest|demonstration|protest/, label: 'Civil unrest' },
+      { re: /armed conflict|conflict|war|fighting|insurg/, label: 'Armed conflict' },
+      { re: /violent crime|crime|carjacking|robbery/, label: 'Violent crime' },
+      { re: /health|disease|outbreak|epidemic/, label: 'Health risk' },
+      { re: /natural disaster|flood|cyclone|earthquake/, label: 'Natural hazards' },
+    ];
+
+    for (var i = 0; i < rules.length; i++) {
+      if (rules[i].re.test(t)) return rules[i].label;
+    }
+    return 'Security risk';
+  }
+
+  function htmlToText(html) {
+    if (!html) return '';
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    return (doc.body && doc.body.textContent ? doc.body.textContent : '').replace(/\s+/g, ' ').trim();
+  }
+
+  async function fetchTextWithFallback(url) {
+    var cleanUrl = String(url || '').trim();
+    var attempts = [
+      cleanUrl,
+      ADVISORY_CORS_PROXY + encodeURIComponent(cleanUrl),
+      'https://corsproxy.io/?' + encodeURIComponent(cleanUrl),
+      'https://r.jina.ai/http://' + cleanUrl.replace(/^https?:\/\//i, ''),
+    ];
+
+    var lastErr = null;
+    for (var i = 0; i < attempts.length; i++) {
+      try {
+        var resp = await fetch(attempts[i]);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        var text = await resp.text();
+        if (text && text.length > 100) return text;
+        throw new Error('Empty response');
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+    throw new Error('Load failed across direct and proxy routes (' + (lastErr && lastErr.message ? lastErr.message : 'unknown') + ')');
+  }
+
+  async function fetchJsonWithFallback(url) {
+    var text = await fetchTextWithFallback(url);
+    try {
+      return JSON.parse(text);
+    } catch (_) {
+      // r.jina.ai and some proxies can prepend plain text lines before JSON.
+      var firstBrace = text.indexOf('{');
+      var firstBracket = text.indexOf('[');
+      var idx = -1;
+      if (firstBrace === -1) idx = firstBracket;
+      else if (firstBracket === -1) idx = firstBrace;
+      else idx = Math.min(firstBrace, firstBracket);
+      if (idx > 0) {
+        return JSON.parse(text.slice(idx));
+      }
+      throw new Error('Invalid JSON payload');
+    }
+  }
+
+  function normalizeCountrySlug(country) {
+    var key = (country || '').toLowerCase().trim();
+    var map = {
+      'dr congo': 'democratic-republic-of-the-congo',
+      'drc': 'democratic-republic-of-the-congo',
+      'democratic republic of congo': 'democratic-republic-of-the-congo',
+      'democratic republic of the congo': 'democratic-republic-of-the-congo',
+      'car': 'central-african-republic',
+      'central african republic': 'central-african-republic',
+      'ivory coast': 'cote-d-ivoire',
+      "cote d'ivoire": 'cote-d-ivoire',
+      'the gambia': 'gambia',
+    };
+    if (map[key]) return map[key];
+    return key.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  }
+
+  // UK FCDO: API parser
+  function parseFCDOApiResponse(json, fallbackCountry, slug) {
+    var details = json.details || {};
+    var countryName = (details.country && details.country.name) || fallbackCountry;
+    var statuses = details.alert_status || [];
+
+    var advisory = 'FCDO advises normal caution for ' + countryName + '.';
+    var level = 1;
+    var levelText = 'No specific restrictions';
+
+    if (statuses.indexOf('avoid_all_travel') !== -1 || statuses.indexOf('avoid_all_travel_to_whole_country') !== -1) {
+      advisory = 'FCDO advises against all travel to ' + countryName + '.';
+      level = 4;
+      levelText = 'Advises against all travel';
+    } else if (statuses.indexOf('avoid_all_travel_to_parts') !== -1) {
+      advisory = 'FCDO advises against all travel to parts of ' + countryName + '.';
+      level = 3;
+      levelText = 'Advises against all travel to parts';
+    } else if (statuses.indexOf('avoid_all_but_essential_travel') !== -1) {
+      advisory = 'FCDO advises against all but essential travel to ' + countryName + '.';
+      level = 3;
+      levelText = 'Advises against all but essential travel';
+    } else if (statuses.indexOf('avoid_all_but_essential_travel_to_parts') !== -1) {
+      advisory = 'FCDO advises against all but essential travel to parts of ' + countryName + '.';
+      level = 2;
+      levelText = 'Advises against all but essential travel to parts';
+    }
+
+    // GOV.UK "Still current at" is page-rendered; use the current retrieval date.
+    var stillCurrentAt = formatDate(new Date());
+    var updatedAtRaw = (details.change_history && details.change_history[0] && details.change_history[0].public_timestamp)
+      || json.public_updated_at
+      || json.updated_at;
+    var updatedAt = formatDate(updatedAtRaw);
+
+    var safetyPart = '';
+    var parts = details.parts || [];
+    for (var i = 0; i < parts.length; i++) {
+      if ((parts[i].slug || '').indexOf('safety') !== -1) {
+        safetyPart = parts[i].body || '';
+        break;
+      }
+    }
+
+    var driverSource = htmlToText(safetyPart + ' ' + (details.change_description || ''));
+    var primaryDriver = extractPrimaryDriver(driverSource);
+
+    return {
+      level: level,
+      levelText: levelText,
+      advisory: advisory,
+      stillCurrentAt: stillCurrentAt,
+      updatedAt: updatedAt,
+      primaryDriver: primaryDriver,
+      url: 'https://www.gov.uk/foreign-travel-advice/' + slug,
+    };
+  }
+
+  async function fetchFCDO(country) {
+    var slug = normalizeCountrySlug(country);
+    var resp = await fetch('https://www.gov.uk/api/content/foreign-travel-advice/' + slug);
+    if (resp.status === 404) throw new Error('No FCDO page found for "' + country + '"');
+    if (!resp.ok) throw new Error('FCDO API error: HTTP ' + resp.status);
+    var json = await resp.json();
+    return parseFCDOApiResponse(json, country, slug);
+  }
+
+  // US State Department: ArcGIS parser
+  function parseStateDeptArcgisResponse(json, country) {
+    if (!json || !json.features || json.features.length === 0) {
+      throw new Error('Country not found in State Department data');
+    }
+
+    var attrs = json.features[0].attributes || {};
+    var level = parseInt(attrs.Advisory_Level, 10);
+    var levelMap = {
+      1: 'Level 1: Exercise Normal Precautions',
+      2: 'Level 2: Exercise Increased Caution',
+      3: 'Level 3: Reconsider Travel',
+      4: 'Level 4: Do Not Travel',
+    };
+    var levelText = levelMap[level] || 'Advisory level unavailable';
+    var advisory = 'US State Department ' + levelText + ' for ' + (attrs.Country_Name || country) + '.';
+
+    var updatedAt = attrs.Date_Updated ? formatDate(Number(attrs.Date_Updated)) : null;
+    var primaryDriver = extractPrimaryDriver(attrs.Advisory_Text || attrs.Latest_Headline || '');
+
+    return {
+      level: (level >= 1 && level <= 4) ? level : 0,
+      levelText: levelText,
+      advisory: advisory,
+      stillCurrentAt: formatDate(new Date()),
+      updatedAt: updatedAt,
+      primaryDriver: primaryDriver,
+      url: 'https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html',
+    };
+  }
+
+  async function fetchStateDept(country) {
+    var sqlWhere = "Country_Name = '" + country.replace(/'/g, "''") + "'";
+    var arcgisUrl = 'https://gis.state.gov/arcgis/rest/services/travel/Travel/MapServer/0/query'
+      + '?f=json&where=' + encodeURIComponent(sqlWhere)
+      + '&outFields=*';
+
+    try {
+      var json = await fetchJsonWithFallback(arcgisUrl);
+      return parseStateDeptArcgisResponse(json, country);
+    } catch (_) {
+      // Fallback to the public advisory index page when ArcGIS is blocked.
+      var indexUrl = 'https://travel.state.gov/en/international-travel/travel-advisories.html';
+      var pageText = htmlToText(await fetchTextWithFallback(indexUrl));
+      var countryEsc = country.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var re = new RegExp(countryEsc + '[\\s\\S]{0,180}?Level\\s*[1-4]', 'i');
+      var hit = pageText.match(re);
+      if (!hit) throw new Error('Country not found on US State advisory page');
+      var levelMatch = hit[0].match(/Level\s*([1-4])/i);
+      var level = levelMatch ? parseInt(levelMatch[1], 10) : 0;
+      var map = {
+        1: 'Level 1: Exercise Normal Precautions',
+        2: 'Level 2: Exercise Increased Caution',
+        3: 'Level 3: Reconsider Travel',
+        4: 'Level 4: Do Not Travel',
+      };
+      return {
+        level: level,
+        levelText: map[level] || 'Advisory level unavailable',
+        advisory: 'US State Department ' + (map[level] || 'advisory') + ' for ' + country + '.',
+        stillCurrentAt: formatDate(new Date()),
+        updatedAt: null,
+        primaryDriver: extractPrimaryDriver(hit[0]),
+        url: indexUrl,
+      };
+    }
+  }
+
+  // Australian DFAT: destinations page parser + country page parser
+  function parseDFATDestinationsHtml(html, country) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var rows = doc.querySelectorAll('tr');
+    var target = (country || '').toLowerCase().trim();
+
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].querySelectorAll('td');
+      if (cells.length < 4) continue;
+      var name = (cells[0].textContent || '').replace(/\s+/g, ' ').trim();
+      if (name.toLowerCase() !== target) continue;
+
+      var linkEl = cells[0].querySelector('a[href*="/destinations/"]');
+      return {
+        countryName: name,
+        levelText: (cells[2].textContent || '').replace(/\s+/g, ' ').trim(),
+        updatedAt: (cells[3].textContent || '').replace(/\s+/g, ' ').trim(),
+        href: linkEl ? linkEl.getAttribute('href') : null,
+      };
+    }
+    throw new Error('Country not found in DFAT destinations table');
+  }
+
+  function parseDFATCountryHtml(html) {
+    var text = htmlToText(html);
+    var driver = extractPrimaryDriver(text);
+    var m = text.match(/Latest update:\s*([^\.]+\.[^\.]*\.)/i);
+    return {
+      advisorySentence: m ? m[1].trim() : null,
+      primaryDriver: driver,
+    };
+  }
+
+  async function fetchAusDFAT(country) {
+    var listUrl = 'https://www.smartraveller.gov.au/destinations';
+    var listHtml = await fetchTextWithFallback(listUrl);
+
+    var parsedList = parseDFATDestinationsHtml(listHtml, country);
+    var detail = { advisorySentence: null, primaryDriver: null };
+
+    if (parsedList.href) {
+      var detailUrl = 'https://www.smartraveller.gov.au' + parsedList.href;
+      try {
+        detail = parseDFATCountryHtml(await fetchTextWithFallback(detailUrl));
+      } catch (_) {
+        // Leave detail fields nullable if detail page cannot be fetched.
+      }
+    }
+
+    var levelMap = {
+      'do not travel': 4,
+      'reconsider your need to travel': 3,
+      'exercise a high degree of caution': 2,
+      'exercise normal safety precautions': 1,
+    };
+    var level = levelMap[(parsedList.levelText || '').toLowerCase()] || 0;
+
+    return {
+      level: level,
+      levelText: parsedList.levelText || 'Advisory level unavailable',
+      advisory: detail.advisorySentence || ('DFAT advises: ' + (parsedList.levelText || 'See source') + ' for ' + parsedList.countryName + '.'),
+      stillCurrentAt: formatDate(new Date()),
+      updatedAt: parsedList.updatedAt || null,
+      primaryDriver: detail.primaryDriver || 'Security risk',
+      url: parsedList.href ? ('https://www.smartraveller.gov.au' + parsedList.href) : listUrl,
+    };
+  }
+
+  // French MEAE: country page parser
+  function parseFrenchMEAEHtml(html, country, url) {
+    var text = htmlToText(html);
+    var levelText = 'See advisory page';
+    var level = 0;
+
+    if (/formellement\s+d[eé]conseill[eé]/i.test(text)) {
+      level = 4;
+      levelText = 'Formally advised against';
+    } else if (/d[eé]conseill[eé]\s+sauf\s+raison\s+imp[eé]rative/i.test(text)) {
+      level = 3;
+      levelText = 'Advised against except for imperative reasons';
+    } else if (/vigilance\s+renforc[eé]e/i.test(text)) {
+      level = 2;
+      levelText = 'Enhanced vigilance';
+    }
+
+    var updatedMatch = text.match(/Dernière mise à jour le\s*:?\s*([^\-\n]+)/i);
+    var currentMatch = text.match(/Information toujours valide le\s*:?\s*([^\-\n]+)/i);
+    var advisory = 'MEAE advises: ' + levelText + ' for ' + country + '.';
+
+    return {
+      level: level,
+      levelText: levelText,
+      advisory: advisory,
+      stillCurrentAt: currentMatch ? translateFrenchDateToEnglish(currentMatch[1].trim()) : formatDate(new Date()),
+      updatedAt: updatedMatch ? translateFrenchDateToEnglish(updatedMatch[1].trim()) : null,
+      primaryDriver: extractPrimaryDriver(text),
+      url: url,
+    };
+  }
+
+  async function fetchFrenchMEAE(country) {
+    var slugMap = {
+      'chad': 'tchad',
+      'south sudan': 'soudan-du-sud',
+      'morocco': 'maroc',
+      'algeria': 'algerie',
+      'tunisia': 'tunisie',
+      'mali': 'mali',
+      'sudan': 'soudan',
+      'niger': 'niger',
+      'burkina faso': 'burkina-faso',
+      'ivory coast': 'cote-d-ivoire',
+      "cote d'ivoire": 'cote-d-ivoire',
+      'dr congo': 'republique-democratique-du-congo',
+      'drc': 'republique-democratique-du-congo',
+      'democratic republic of the congo': 'republique-democratique-du-congo',
+      'central african republic': 'republique-centrafricaine',
+      'car': 'republique-centrafricaine',
+    };
+
+    var key = (country || '').toLowerCase().trim();
+    var slug = slugMap[key] || key.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    var pageUrl = 'https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/' + slug + '/';
+
+    try {
+      var html = await fetchTextWithFallback(pageUrl);
+      if (html.length < 2000) throw new Error('Short response');
+      return parseFrenchMEAEHtml(html, country, pageUrl);
+    } catch (_) {
+      // Fallback to the two pages the user provided.
+      var mainUrl = 'https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/';
+      var latestUrl = 'https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/dernieres-minutes/';
+      var latestText = htmlToText(await fetchTextWithFallback(latestUrl));
+      var countryEsc = country.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var hitRe = new RegExp(countryEsc + '[\\s\\S]{0,220}?(Situation sécuritaire|Vigilance|Publié le|Actualisé le)', 'i');
+      var hit = latestText.match(hitRe);
+      if (!hit) {
+        var mainText = htmlToText(await fetchTextWithFallback(mainUrl));
+        if (!new RegExp(countryEsc, 'i').test(mainText)) {
+          throw new Error('Country not found on French advisory pages');
+        }
+      }
+      var snippet = hit ? hit[0] : country;
+      return {
+        level: /formellement\s+d[eé]conseill[eé]/i.test(snippet) ? 4 : (/vigilance\s+renforc[eé]e/i.test(snippet) ? 2 : 0),
+        levelText: /formellement\s+d[eé]conseill[eé]/i.test(snippet) ? 'Formally advised against' : (/vigilance\s+renforc[eé]e/i.test(snippet) ? 'Enhanced vigilance' : 'See advisory page'),
+        advisory: translateFrenchSnippetToEnglish(snippet) || ('MEAE advisory available for ' + country + '. See latest notice.'),
+        stillCurrentAt: formatDate(new Date()),
+        updatedAt: null,
+        primaryDriver: extractPrimaryDriver(snippet),
+        url: latestUrl,
+      };
+    }
   }
 </script>
 </body>
