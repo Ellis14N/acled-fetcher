@@ -518,14 +518,23 @@ def main():
         print("Usage: python fetch_fews_food_data.py <country>")
         sys.exit(1)
 
-    username = os.getenv("FEWS_USERNAME")
-    password = os.getenv("FEWS_PASSWORD")
+    username = (os.getenv("FEWS_USERNAME") or "").strip()
+    password = (os.getenv("FEWS_PASSWORD") or "").strip()
     if not username or not password:
         print("❌ Missing FEWS_USERNAME and/or FEWS_PASSWORD environment variables")
         sys.exit(1)
 
     country_input = sys.argv[1]
-    session = build_session(username, password)
+    try:
+        session = build_session(username, password)
+    except requests.HTTPError as exc:
+        status_code = exc.response.status_code if exc.response is not None else None
+        if status_code in (401, 403):
+            raise RuntimeError(
+                "FEWS authentication failed. Check the FEWS_username and FEWS_password repository secrets."
+            ) from exc
+        raise
+
     country = resolve_country(session, country_input)
     iso2 = country["iso2"]
     country_name = country["country"]

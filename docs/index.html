@@ -2068,6 +2068,36 @@
   }
 
   async function waitForWorkflowRunCompletion(runId, token) {
+    async function fetchWorkflowFailureContext() {
+      var jobsResponse = await fetch(
+        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs/${runId}/jobs?per_page=20`,
+        { headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' } }
+      );
+
+      if (!jobsResponse.ok) return '';
+
+      var jobsPayload = await jobsResponse.json();
+      var failedJob = (jobsPayload.jobs || []).find(function(job) {
+        return job.conclusion && job.conclusion !== 'success' && job.conclusion !== 'skipped';
+      });
+
+      if (!failedJob) return '';
+
+      var failedStep = (failedJob.steps || []).find(function(step) {
+        return step.conclusion && step.conclusion !== 'success' && step.conclusion !== 'skipped';
+      });
+
+      if (failedStep && failedStep.name) {
+        return 'job "' + (failedJob.name || 'unknown') + '", step "' + failedStep.name + '"';
+      }
+
+      if (failedJob.name) {
+        return 'job "' + failedJob.name + '"';
+      }
+
+      return '';
+    }
+
     for (var attempt = 0; attempt < 60; attempt += 1) {
       var response = await fetch(
         `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs/${runId}`,
@@ -2086,8 +2116,19 @@
 
       if (run.status === 'completed' && run.conclusion === 'success') return;
 
+      var failureContext = await fetchWorkflowFailureContext().catch(function() { return ''; });
       var runUrl = run.html_url ? ` ${run.html_url}` : '';
-      throw new Error(`Workflow ${run.conclusion || run.status || 'failed'}.${runUrl}`);
+      var status = run.conclusion || run.status || 'failed';
+      var message = 'FEWS snapshot workflow failed';
+      if (status && status !== 'failure') {
+        message += ' (' + status + ')';
+      }
+      message += '.';
+      if (failureContext) {
+        message += ' Failed at ' + failureContext + '.';
+      }
+      message += runUrl;
+      throw new Error(message);
     }
 
     throw new Error('Workflow timed out before completing.');
