@@ -309,6 +309,17 @@ def fetch_crop_records(session, iso2):
     )
 
 
+def safe_fetch_records(label, fetcher):
+    try:
+        return fetcher()
+    except requests.RequestException as exc:
+        log(f"Warning: {label} request failed ({exc})")
+        return []
+    except (ValueError, KeyError, TypeError) as exc:
+        log(f"Warning: {label} payload parse failed ({exc})")
+        return []
+
+
 def choose_latest_population_record(records, predicate):
     matches = [record for record in records if predicate(record)]
     if not matches:
@@ -581,12 +592,36 @@ def main():
     iso2, country_name = resolve_country(session, country_input)
     log(f"Resolved {country_input} to {country_name} ({iso2})")
 
-    admin0_phase_records = fetch_country_phase_records(session, iso2)
-    recent_phase_records = fetch_recent_phase_records(session, iso2)
-    population_records = fetch_population_records(session, iso2)
-    market_records = fetch_market_records(session, iso2)
-    trade_records = fetch_trade_records(session, iso2)
-    crop_records = fetch_crop_records(session, iso2)
+    admin0_phase_records = safe_fetch_records(
+        "country-level phase records",
+        lambda: fetch_country_phase_records(session, iso2),
+    )
+    recent_phase_records = safe_fetch_records(
+        "recent phase records",
+        lambda: fetch_recent_phase_records(session, iso2),
+    )
+    population_records = safe_fetch_records(
+        "population records",
+        lambda: fetch_population_records(session, iso2),
+    )
+    market_records = safe_fetch_records(
+        "market records",
+        lambda: fetch_market_records(session, iso2),
+    )
+    trade_records = safe_fetch_records(
+        "trade records",
+        lambda: fetch_trade_records(session, iso2),
+    )
+    crop_records = safe_fetch_records(
+        "crop records",
+        lambda: fetch_crop_records(session, iso2),
+    )
+
+    if not any([admin0_phase_records, recent_phase_records, population_records, market_records, trade_records, crop_records]):
+        raise RuntimeError(
+            "FEWS API returned no records across phase, population, market, trade, and crop endpoints. "
+            "Check FEWS credentials and country availability."
+        )
 
     current_phase = choose_latest_record(
         admin0_phase_records,
