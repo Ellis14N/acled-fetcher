@@ -600,6 +600,110 @@
       color: #b9b0ff;
     }
 
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+      align-items: stretch;
+    }
+
+    .weather-card {
+      background: var(--panel-soft);
+      border: 1px solid rgba(90, 107, 143, 0.24);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .weather-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .weather-source {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .weather-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .weather-status.high {
+      background: rgba(185, 28, 28, 0.2);
+      color: #fecaca;
+      border: 1px solid rgba(248, 113, 113, 0.28);
+    }
+
+    .weather-status.watch {
+      background: rgba(180, 83, 9, 0.2);
+      color: #fcd34d;
+      border: 1px solid rgba(251, 191, 36, 0.28);
+    }
+
+    .weather-status.low {
+      background: rgba(21, 128, 61, 0.2);
+      color: #bbf7d0;
+      border: 1px solid rgba(74, 222, 128, 0.28);
+    }
+
+    .weather-status.info {
+      background: rgba(71, 85, 105, 0.22);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+    }
+
+    .weather-headline {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.45;
+    }
+
+    .weather-summary,
+    .weather-meta,
+    .weather-error {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .weather-points {
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+      color: var(--text-soft);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .weather-link {
+      color: #b9b0ff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .weather-link:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
@@ -657,9 +761,9 @@
           <div class="tool-description">Fetch flight activity for a specific airport and time window.</div>
         </button>
 
-        <button class="tool-button coming-soon">
-          <div class="tool-name">Food Security Risk</div>
-          <div class="tool-description">Temporarily unavailable.</div>
+        <button class="tool-button" onclick="show('fetchWeatherScreen')">
+          <div class="tool-name">Weather and Severe Events</div>
+          <div class="tool-description">Country-level flood, disaster, severe weather, air quality, and IGAD outlooks from five live sources.</div>
         </button>
 
         <button class="tool-button" onclick="show('fetchTravelAdvisoriesScreen')">
@@ -838,6 +942,36 @@
       <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
     </div>
 
+    <div id="fetchWeatherScreen" style="display:none">
+      <div class="logo">
+        <div class="logo-icon"><img src="./logo.png" alt="14N Monitor logo" /></div>
+        <div>
+          <div class="logo-text">14N Monitor</div>
+          <div class="logo-sub">Weather and Severe Events</div>
+        </div>
+      </div>
+      <h2>Weather and Severe Events</h2>
+      <p class="subtitle">Enter one country to fetch live flood forecasting, GDACS event monitoring, WMO severe warnings, CAMS-backed air quality, and ICPAC regional outlooks.</p>
+      <label for="weatherCountryInput">Country Name</label>
+      <input type="text" id="weatherCountryInput" placeholder="e.g. Chad, Sudan, Kenya" autocomplete="off" />
+      <div class="error" id="weatherFetchError"></div>
+      <button onclick="runWeatherMonitoring()">Fetch Weather and Severe Events</button>
+      <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
+    </div>
+
+    <div id="weatherResultsScreen" style="display:none">
+      <div style="margin-bottom: 24px;">
+        <div class="result-title" id="weatherResultTitle"></div>
+        <div class="result-date" id="weatherResultMeta"></div>
+      </div>
+      <div class="advisory-notice">
+        Weather cards are fetched live from public sources and summarized at country level. Verify operational decisions against the linked source pages.
+      </div>
+      <div class="weather-grid" id="weatherGrid"></div>
+      <button class="btn-secondary" onclick="show('fetchWeatherScreen')" style="margin-top: 20px;">New Search</button>
+      <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
+    </div>
+
     <div id="loadingScreen">
       <div class="spinner-wrap">
         <div class="spinner"></div>
@@ -981,6 +1115,21 @@
     }
   };
 
+  const WEATHER_COUNTRY_ALIASES = {
+    "car": ["central african republic", "republique centrafricaine"],
+    "central african republic": ["car", "republique centrafricaine"],
+    "cote d ivoire": ["ivory coast", "cote d'ivoire"],
+    "ivory coast": ["cote d ivoire", "cote d'ivoire"],
+    "drc": ["democratic republic of the congo", "dr congo", "congo kinshasa"],
+    "dr congo": ["democratic republic of the congo", "drc", "congo kinshasa"],
+    "democratic republic of the congo": ["drc", "dr congo", "congo kinshasa"],
+    "republic of the congo": ["congo brazzaville"],
+    "the gambia": ["gambia"],
+    "eswatini": ["swaziland"],
+    "cape verde": ["cabo verde"],
+    "cabo verde": ["cape verde"]
+  };
+
   const AFRICA_WORKFLOWS = {
     acled: {
       workflowFile: "fetch_acled_africa.yml",
@@ -1000,6 +1149,7 @@
   let progressValue = 0;
   let stepTimer = 0;
   let activeFetchContext = null;
+  let latestWeatherBundle = null;
 
   window.addEventListener("load", () => {
     show("passwordScreen");
@@ -1533,6 +1683,8 @@
       "fetchOpenSkyScreen",
       "fetchTravelAdvisoriesScreen",
       "travelResultsScreen",
+      "fetchWeatherScreen",
+      "weatherResultsScreen",
       "loadingScreen",
       "resultsScreen",
       "africaResultsScreen"
@@ -1604,10 +1756,12 @@
     document.getElementById("unhcrCountryInput").value = "";
     document.getElementById("airportInput").value = "";
     document.getElementById("daysBackInput").value = "7";
+    document.getElementById("weatherCountryInput").value = "";
     hideError("fetchError");
     hideError("allAfricaError");
     hideError("unhcrError");
     hideError("openSkyError");
+    hideError("weatherFetchError");
   }
 
   function hideBreakdownSections() {
@@ -1776,6 +1930,431 @@
 
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  function normalizeWhitespace(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function normalizeSearchText(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function escapeRegExp(value) {
+    return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function truncateText(value, maxLength) {
+    var text = normalizeWhitespace(value);
+    if (!text || text.length <= maxLength) return text;
+    return text.slice(0, maxLength - 1).trim() + "...";
+  }
+
+  function numberOrNull(value) {
+    var number = Number(value);
+    return Number.isFinite(number) ? number : null;
+  }
+
+  function formatDecimal(value, digits) {
+    if (value === null || value === undefined || !Number.isFinite(Number(value))) return "N/A";
+    return Number(value).toFixed(digits == null ? 1 : digits);
+  }
+
+  function formatShortDate(value) {
+    if (!value) return "Unknown";
+    var date = new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
+    return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+  }
+
+  function getCountrySearchTerms(country) {
+    var base = normalizeSearchText(country);
+    var aliases = WEATHER_COUNTRY_ALIASES[base] || [];
+    return [base].concat(aliases.map(normalizeSearchText)).filter(Boolean);
+  }
+
+  function textMatchesCountry(text, country) {
+    var haystack = normalizeSearchText(text);
+    if (!haystack) return false;
+    return getCountrySearchTerms(country).some(function(term) {
+      return haystack.indexOf(term) !== -1;
+    });
+  }
+
+  function pickBestGeocodeResult(results, country) {
+    var searchTerms = getCountrySearchTerms(country);
+    return (results || []).map(function(result) {
+      var name = normalizeSearchText(result.name || "");
+      var countryName = normalizeSearchText(result.country || "");
+      var featureCode = String(result.feature_code || "").toUpperCase();
+      var score = 0;
+      if (searchTerms.indexOf(name) !== -1) score += 6;
+      if (searchTerms.indexOf(countryName) !== -1) score += 5;
+      if (featureCode.indexOf("PCL") === 0 || featureCode === "PCLI") score += 4;
+      if (result.country_code) score += 1;
+      return { result: result, score: score };
+    }).sort(function(left, right) {
+      return right.score - left.score;
+    })[0];
+  }
+
+  async function geocodeCountry(country) {
+    var url = "https://geocoding-api.open-meteo.com/v1/search?count=10&language=en&format=json&name=" + encodeURIComponent(country);
+    var json = await fetchJsonWithFallback(url);
+    var results = Array.isArray(json.results) ? json.results : [];
+    if (!results.length) throw new Error("Country not found in geocoding service.");
+
+    var selected = pickBestGeocodeResult(results, country);
+    if (!selected || !selected.result) throw new Error("Country could not be matched to coordinates.");
+
+    return {
+      query: country,
+      name: selected.result.name || country,
+      country: selected.result.country || country,
+      countryCode: selected.result.country_code || "",
+      latitude: Number(selected.result.latitude),
+      longitude: Number(selected.result.longitude)
+    };
+  }
+
+  function buildWeatherCardSkeleton(source) {
+    return (
+      '<div class="weather-card" id="' + source.id + '">' +
+        '<div class="weather-card-header">' +
+          '<div class="weather-source">' + escapeHtml(source.name) + '</div>' +
+          '<span class="weather-status info">Loading</span>' +
+        '</div>' +
+        '<div class="weather-summary">Fetching live source data...</div>' +
+      '</div>'
+    );
+  }
+
+  async function runWeatherMonitoring() {
+    var country = (document.getElementById("weatherCountryInput").value || "").trim();
+    if (!country) {
+      showError("weatherFetchError", "Please enter a country name.");
+      return;
+    }
+
+    hideError("weatherFetchError");
+
+    var location;
+    try {
+      location = await geocodeCountry(country);
+    } catch (error) {
+      showError("weatherFetchError", error.message || "Unable to locate that country.");
+      return;
+    }
+
+    document.getElementById("weatherResultTitle").textContent = "Weather and Severe Events: " + country;
+    document.getElementById("weatherResultMeta").textContent = "Using country-level coordinates near " + location.name + " (" + formatDecimal(location.latitude, 2) + ", " + formatDecimal(location.longitude, 2) + ").";
+
+    var sources = [
+      { id: "weather-flood", name: "GloFAS Flood Forecasting", fn: function() { return fetchFloodForecast(location); } },
+      { id: "weather-gdacs", name: "GDACS", fn: function() { return fetchGDACSAlerts(country); } },
+      { id: "weather-rsmc", name: "RSMC / WMO Severe Weather", fn: function() { return fetchRSMCWarnings(country); } },
+      { id: "weather-cams", name: "CAMS Air Quality", fn: function() { return fetchCAMSOutlook(location); } },
+      { id: "weather-icpac", name: "ICPAC / IGAD", fn: function() { return fetchICPACOutlook(country); } }
+    ];
+
+    latestWeatherBundle = {
+      country: country,
+      generated_at: new Date().toISOString(),
+      location: location,
+      sources: []
+    };
+
+    document.getElementById("weatherGrid").innerHTML = sources.map(buildWeatherCardSkeleton).join("");
+    show("weatherResultsScreen");
+
+    var jobs = sources.map(function(source) {
+      return source.fn()
+        .then(function(data) {
+          renderWeatherCard(source.id, data, null);
+          latestWeatherBundle.sources.push({ source: source.name, status: "ok", data: data });
+        })
+        .catch(function(error) {
+          var message = error && error.message ? error.message : String(error);
+          renderWeatherCard(source.id, null, message);
+          latestWeatherBundle.sources.push({ source: source.name, status: "error", error: message });
+        });
+    });
+
+    await Promise.allSettled(jobs);
+    latestWeatherBundle.generated_at = new Date().toISOString();
+  }
+
+  function renderWeatherCard(id, data, error) {
+    var element = document.getElementById(id);
+    if (!element) return;
+
+    if (error) {
+      element.innerHTML = [
+        '<div class="weather-card-header">',
+        '<div class="weather-source">' + escapeHtml(element.querySelector(".weather-source") ? element.querySelector(".weather-source").textContent : id) + '</div>',
+        '<span class="weather-status info">Unavailable</span>',
+        '</div>',
+        '<div class="weather-error">' + escapeHtml(error) + '</div>'
+      ].join("");
+      return;
+    }
+
+    var bullets = Array.isArray(data.bullets) ? data.bullets.filter(Boolean).slice(0, 4) : [];
+    element.innerHTML = [
+      '<div class="weather-card-header">',
+      '<div class="weather-source">' + escapeHtml(data.source || "Weather Source") + '</div>',
+      '<span class="weather-status ' + escapeHtml(data.statusTone || "info") + '">' + escapeHtml(data.statusLabel || "Update") + '</span>',
+      '</div>',
+      '<div class="weather-headline">' + escapeHtml(data.headline || "Latest weather update") + '</div>',
+      '<div class="weather-summary">' + escapeHtml(data.summary || "No summary available.") + '</div>',
+      bullets.length ? '<ul class="weather-points">' + bullets.map(function(point) { return '<li>' + escapeHtml(point) + '</li>'; }).join("") + '</ul>' : '',
+      '<div class="weather-meta">Updated: ' + escapeHtml(data.updatedAt || "Not available") + '</div>',
+      data.url ? '<div><a class="weather-link" href="' + escapeHtml(data.url) + '" target="_blank" rel="noopener noreferrer">View source -></a></div>' : ''
+    ].join("");
+  }
+
+  function classifyFloodRisk(ratio) {
+    if (ratio !== null && ratio >= 1.5) return { label: "High", tone: "high" };
+    if (ratio !== null && ratio >= 1.2) return { label: "Watch", tone: "watch" };
+    return { label: "Low", tone: "low" };
+  }
+
+  async function fetchFloodForecast(location) {
+    var url = "https://flood-api.open-meteo.com/v1/flood?latitude=" + encodeURIComponent(location.latitude)
+      + "&longitude=" + encodeURIComponent(location.longitude)
+      + "&daily=river_discharge,river_discharge_mean,river_discharge_max"
+      + "&forecast_days=14";
+    var json = await fetchJsonWithFallback(url);
+    var daily = json.daily || {};
+    var times = Array.isArray(daily.time) ? daily.time : [];
+    var discharge = Array.isArray(daily.river_discharge_max) ? daily.river_discharge_max : (Array.isArray(daily.river_discharge) ? daily.river_discharge : []);
+    var mean = Array.isArray(daily.river_discharge_mean) ? daily.river_discharge_mean : [];
+    if (!times.length || !discharge.length) {
+      throw new Error("Flood forecast is unavailable for this location.");
+    }
+
+    var peakIndex = 0;
+    for (var i = 1; i < discharge.length; i += 1) {
+      if (Number(discharge[i] || 0) > Number(discharge[peakIndex] || 0)) peakIndex = i;
+    }
+
+    var peak = numberOrNull(discharge[peakIndex]);
+    var baseline = numberOrNull(mean[peakIndex]);
+    var ratio = peak !== null && baseline !== null && baseline > 0 ? peak / baseline : null;
+    var classification = classifyFloodRisk(ratio);
+
+    return {
+      source: "GloFAS Flood Forecasting",
+      statusLabel: classification.label,
+      statusTone: classification.tone,
+      headline: peak !== null ? "Peak modeled river discharge expected on " + formatShortDate(times[peakIndex]) + "." : "Flood signal unavailable.",
+      summary: peak !== null
+        ? "Open-Meteo flood guidance shows a peak discharge of " + formatDecimal(peak, 1) + " m3/s" + (ratio !== null ? ", about " + formatDecimal(ratio, 2) + "x the modeled mean." : ".")
+        : "No peak discharge value was returned.",
+      bullets: [
+        "Forecast horizon: 14 days.",
+        peak !== null ? "Peak discharge: " + formatDecimal(peak, 1) + " m3/s on " + formatShortDate(times[peakIndex]) + "." : null,
+        baseline !== null ? "Modeled mean discharge on peak day: " + formatDecimal(baseline, 1) + " m3/s." : "No mean discharge baseline was returned.",
+        "Coordinates used: " + formatDecimal(location.latitude, 2) + ", " + formatDecimal(location.longitude, 2) + "."
+      ],
+      updatedAt: formatIsoDate(new Date().toISOString()),
+      url: "https://open-meteo.com/en/docs/flood-api"
+    };
+  }
+
+  function extractUpdateLabel(text) {
+    var match = String(text || "").match(/Update\s+(\d{1,2}\s+\w+\s+\d{2}:\d{2})/i);
+    return match ? match[1] + " UTC" : null;
+  }
+
+  async function fetchGDACSAlerts(country) {
+    var url = "https://new.gdacs.org/alerts";
+    var html = await fetchTextWithFallback(url);
+    var doc = new DOMParser().parseFromString(html, "text/html");
+    var anchors = Array.from(doc.querySelectorAll('a[href*="/event/"]'));
+    var matches = [];
+
+    anchors.forEach(function(anchor) {
+      var href = anchor.getAttribute("href");
+      if (!href) return;
+      var absoluteUrl = new URL(href, "https://new.gdacs.org").href;
+      if (matches.some(function(item) { return item.url === absoluteUrl; })) return;
+
+      var title = normalizeWhitespace(anchor.textContent);
+      var container = anchor;
+      var contextText = title;
+      for (var depth = 0; depth < 5 && container && container.parentElement; depth += 1) {
+        container = container.parentElement;
+        var candidate = normalizeWhitespace(container.textContent);
+        if (candidate.length >= title.length && candidate.length <= 360) {
+          contextText = candidate;
+        }
+      }
+
+      if (!textMatchesCountry(contextText, country)) return;
+      matches.push({
+        title: title,
+        excerpt: contextText,
+        url: absoluteUrl,
+        updatedAt: extractUpdateLabel(contextText)
+      });
+    });
+
+    if (!matches.length) {
+      return {
+        source: "GDACS",
+        statusLabel: "Info",
+        statusTone: "info",
+        headline: "No current GDACS event found for " + country + ".",
+        summary: "GDACS did not expose a current country-matched event on the public alerts page during this fetch.",
+        bullets: ["Public alerts page checked live.", "This card matches only country-level mentions on current GDACS events."],
+        updatedAt: formatIsoDate(new Date().toISOString()),
+        url: url
+      };
+    }
+
+    return {
+      source: "GDACS",
+      statusLabel: matches.length > 1 ? "Watch" : "Low",
+      statusTone: matches.length > 1 ? "watch" : "low",
+      headline: matches.length + " current GDACS event" + (matches.length === 1 ? "" : "s") + " mention " + country + ".",
+      summary: truncateText(matches[0].excerpt, 190),
+      bullets: matches.slice(0, 3).map(function(match) {
+        return truncateText(match.title + (match.updatedAt ? " | " + match.updatedAt : ""), 120);
+      }),
+      updatedAt: matches[0].updatedAt || formatIsoDate(new Date().toISOString()),
+      url: matches[0].url || url
+    };
+  }
+
+  async function fetchRSMCWarnings(country) {
+    var url = "https://severeweather.wmo.int/";
+    var html = await fetchTextWithFallback(url);
+    var doc = new DOMParser().parseFromString(html, "text/html");
+    var links = Array.from(doc.querySelectorAll('a[href^="javascript:getEffectiveWarningByMember"]'));
+    var match = links.find(function(link) {
+      return textMatchesCountry(link.textContent, country);
+    });
+
+    if (!match) {
+      throw new Error("No WMO severe weather member row matched this country.");
+    }
+
+    var text = normalizeWhitespace(match.textContent);
+    var parsed = text.match(/^(.*?)\s+(\d+)\s+Region\s+([IVX]+)\s*\|\s*(.*)$/i);
+    var warningCount = parsed ? Number(parsed[2]) : 0;
+    var authority = parsed ? parsed[4] : "National meteorological service";
+    var tone = warningCount >= 5 ? "high" : warningCount >= 2 ? "watch" : warningCount >= 1 ? "low" : "info";
+    var label = warningCount >= 5 ? "High" : warningCount >= 2 ? "Watch" : warningCount >= 1 ? "Low" : "Info";
+
+    return {
+      source: "RSMC / WMO Severe Weather",
+      statusLabel: label,
+      statusTone: tone,
+      headline: warningCount + " active official warning" + (warningCount === 1 ? "" : "s") + " listed for " + country + ".",
+      summary: authority + " is the listed warning authority for this country on WMO's Severe Weather Information Centre.",
+      bullets: [
+        "Authority: " + authority + ".",
+        parsed ? "WMO region: " + parsed[3] + "." : null,
+        "Counts reflect currently listed CAP warnings on the WMO severe weather portal."
+      ],
+      updatedAt: formatIsoDate(new Date().toISOString()),
+      url: url
+    };
+  }
+
+  function classifyAqi(value) {
+    if (value !== null && value >= 100) return { label: "High", tone: "high" };
+    if (value !== null && value >= 50) return { label: "Watch", tone: "watch" };
+    return { label: "Low", tone: "low" };
+  }
+
+  async function fetchCAMSOutlook(location) {
+    var url = "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + encodeURIComponent(location.latitude)
+      + "&longitude=" + encodeURIComponent(location.longitude)
+      + "&hourly=european_aqi,pm2_5,pm10,dust"
+      + "&forecast_days=3";
+    var json = await fetchJsonWithFallback(url);
+    var hourly = json.hourly || {};
+    var times = Array.isArray(hourly.time) ? hourly.time : [];
+    var aqi = Array.isArray(hourly.european_aqi) ? hourly.european_aqi : [];
+    var dust = Array.isArray(hourly.dust) ? hourly.dust : [];
+    var pm25 = Array.isArray(hourly.pm2_5) ? hourly.pm2_5 : [];
+    if (!times.length || !aqi.length) {
+      throw new Error("Air quality forecast is unavailable for this location.");
+    }
+
+    var maxIndex = 0;
+    for (var i = 1; i < aqi.length; i += 1) {
+      if (Number(aqi[i] || 0) > Number(aqi[maxIndex] || 0)) maxIndex = i;
+    }
+
+    var maxAqi = numberOrNull(aqi[maxIndex]);
+    var maxDust = dust.length ? Math.max.apply(null, dust.map(function(value) { return Number(value || 0); })) : null;
+    var maxPm25 = pm25.length ? Math.max.apply(null, pm25.map(function(value) { return Number(value || 0); })) : null;
+    var classification = classifyAqi(maxAqi);
+
+    return {
+      source: "CAMS Air Quality",
+      statusLabel: classification.label,
+      statusTone: classification.tone,
+      headline: maxAqi !== null ? "Peak European AQI reaches " + formatDecimal(maxAqi, 0) + " within the next 72 hours." : "AQI signal unavailable.",
+      summary: "Open-Meteo's air quality endpoint, backed by CAMS forecasts, shows the strongest air quality signal near " + formatShortDate(times[maxIndex]) + ".",
+      bullets: [
+        maxAqi !== null ? "Peak European AQI: " + formatDecimal(maxAqi, 0) + "." : null,
+        maxPm25 !== null ? "Peak PM2.5: " + formatDecimal(maxPm25, 1) + " ug/m3." : null,
+        maxDust !== null ? "Peak dust: " + formatDecimal(maxDust, 1) + " ug/m3." : null,
+        "Forecast horizon: 72 hours."
+      ],
+      updatedAt: formatIsoDate(new Date().toISOString()),
+      url: "https://open-meteo.com/en/docs/air-quality-api"
+    };
+  }
+
+  async function fetchICPACOutlook(country) {
+    var url = "https://www.icpac.net/weekly-forecast/";
+    var text = htmlToText(await fetchTextWithFallback(url));
+    var sentences = text.replace(/([.!?])\s+/g, "$1\n").split(/\n+/).map(normalizeWhitespace).filter(Boolean);
+    var matches = sentences.filter(function(sentence) {
+      return textMatchesCountry(sentence, country);
+    });
+    var dateMatch = text.match(/(\d{1,2}\s+\w+\s*-\s*\d{1,2}\s+\w+\s+\d{4})/i);
+    var severeSignals = matches.filter(function(sentence) {
+      return /(flood|heavy rainfall|heat stress|strong wind|drought|dry spell)/i.test(sentence);
+    });
+
+    if (!matches.length) {
+      return {
+        source: "ICPAC / IGAD",
+        statusLabel: "Info",
+        statusTone: "info",
+        headline: "No direct ICPAC weekly forecast mention found for " + country + ".",
+        summary: "ICPAC's latest weekly forecast remains regional, with no direct country string match in the current text.",
+        bullets: [dateMatch ? "Latest ICPAC weekly window: " + dateMatch[1] + "." : "Latest ICPAC window not parsed.", "This source is useful mainly for Greater Horn of Africa countries."],
+        updatedAt: formatIsoDate(new Date().toISOString()),
+        url: url
+      };
+    }
+
+    return {
+      source: "ICPAC / IGAD",
+      statusLabel: severeSignals.length ? "Watch" : "Low",
+      statusTone: severeSignals.length ? "watch" : "low",
+      headline: "ICPAC's latest weekly outlook mentions " + country + ".",
+      summary: truncateText(matches[0], 190),
+      bullets: [
+        dateMatch ? "Forecast window: " + dateMatch[1] + "." : null,
+        truncateText(matches[0], 130),
+        matches[1] ? truncateText(matches[1], 130) : null
+      ],
+      updatedAt: formatIsoDate(new Date().toISOString()),
+      url: url
+    };
   }
 
   function getWorkflowMissingMessage(workflowFile) {
