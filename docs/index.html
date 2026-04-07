@@ -3083,66 +3083,137 @@
         .slice(0, 5)
         .join(", ");
 
-      var detailBlocks = [
-        {
-          title: "Key ICPAC Risk Signals",
-          lines: [
-            "Drought risk: " + droughtRisk + (droughtLatest ? " (" + formatLayerPeriod(droughtLatest.layer) + ")" : ""),
-            "Heavy rainfall risk: " + heavyRainRisk + (precipitationLatest ? " (" + formatLayerPeriod(precipitationLatest.layer) + ")" : ""),
-            "Crop conditions: " + cropConditions + (cropLatest ? " (" + (cropLatest.layer.name || cropLatest.dataset.name || "Latest crop layer") + ")" : ""),
-            "Heat stress risk: " + heatStressRisk + (heatLatest ? " (" + formatLayerPeriod(heatLatest.layer) + ")" : "")
-          ]
-        },
-        {
-          title: "Agricultural & Hazard Monitoring",
-          lines: [
-            "Agricultural impacts: " + agriculturalStatus + " (" + agriculturalImpactDatasets.length + " datasets).",
-            "Cyclone & severe weather: " + cycloneRisk + (cycloneDatasets.length ? " (" + cycloneDatasets.length + " tracking dataset(s))." : "."),
-            "Disease outbreak: " + diseaseRisk + (diseaseOutbreakDatasets.length ? " (" + diseaseOutbreakDatasets.length + " dataset(s))." : ".")
-          ]
-        },
-        {
-          title: "Drought Monitoring",
-          lines: [
-            "Drought-oriented datasets published: " + droughtDatasets.length + ".",
-            droughtLatest ? "Latest drought layer: " + (droughtLatest.layer.name || droughtLatest.dataset.name || "Dataset") + " (" + formatLayerPeriod(droughtLatest.layer) + ")." : "No drought layer timing could be parsed from current payload."
-          ]
-        },
-        {
-          title: "Flood and Wet-Risk Signals",
-          lines: [
-            "Precipitation forecast datasets published: " + precipitationForecastDatasets.length + ".",
-            "Above-normal precipitation forecast layers: " + aboveNormalForecastLayers.length + ".",
-            floodNamedDatasets.length ? "Flood-named datasets: " + floodNamedDatasets.length + "." : "No dataset explicitly named \"flood\" in the current catalog."
-          ]
-        },
-        {
-          title: "Coverage and Relevance",
-          lines: [
-            isEastAfricaFocus ? country + " is within the core ICPAC East Africa focus region." : country + " is outside ICPAC's core East Africa focus; results remain regional indicators.",
-            "Categories available now include: " + (categorySummary || "not listed") + "."
-          ]
+      // Build threat-focused detail blocks (simplified: threats/worries only with dates)
+      var threatList = [];
+
+      // Drought threats
+      if (droughtLatest) {
+        var droughtSeverity = droughtRisk === "High" ? "🔴 ACTIVE DROUGHT" : droughtRisk === "Watch" ? "🟡 DROUGHT WATCH" : "🟢 Low drought risk";
+        threatList.push({
+          threat: droughtSeverity,
+          details: "Latest: " + formatLayerPeriod(droughtLatest.layer),
+          source: "Droughtwatch"
+        });
+      }
+
+      // Rainfall/flood threats
+      if (precipitationLatest && aboveNormalForecastLayers.length > 0) {
+        var rainSeverity = heavyRainRisk === "High" ? "🔴 HEAVY RAINFALL ALERT" : "🟡 ABOVE-NORMAL RAINFALL";
+        threatList.push({
+          threat: rainSeverity,
+          details: "Forecast: " + formatLayerPeriod(precipitationLatest.layer) + " (" + aboveNormalForecastLayers.length + " above-normal layers)",
+          source: "Droughtwatch"
+        });
+      }
+
+      // Heat stress threats
+      if (heatLatest && aboveNormalTempLayers.length > 0) {
+        var heatSeverity = heatStressRisk === "High" ? "🔴 HEAT STRESS ALERT" : "🟡 ABOVE-NORMAL TEMPERATURES";
+        threatList.push({
+          threat: heatSeverity,
+          details: "Forecast: " + formatLayerPeriod(heatLatest.layer),
+          source: "Droughtwatch"
+        });
+      }
+
+      // Agricultural/crop threats
+      if (agriculturalImpactDatasets.length > 0) {
+        threatList.push({
+          threat: agriLatest ? "🚜 Agricultural Status: Monitoring Active" : "🚜 Agricultural monitoring",
+          details: agriLatest ? "Latest: " + (agriLatest.layer.name || agriLatest.dataset.name || "Crop/forage conditions") : agriculturalImpactDatasets.length + " agricultural datasets active",
+          source: "EA Hazards Watch"
+        });
+      }
+
+      // Exceptional rainfall events
+      var exceptionalRainfallDatasets = datasetList.filter(function(dataset) {
+        var text = (dataset && dataset.name ? dataset.name : "");
+        return /exceptional|extreme.*rainfall|extremely.*heavy/i.test(text);
+      });
+      if (exceptionalRainfallDatasets.length > 0) {
+        var exRainLatest = pickLatestLayer(exceptionalRainfallDatasets);
+        if (exRainLatest) {
+          threatList.push({
+            threat: "🌊 EXCEPTIONAL RAINFALL EVENT",
+            details: exRainLatest.layer.name + " (via " + (exRainLatest.dataset.name || "Event dataset") + ")",
+            source: "EA Hazards Watch"
+          });
         }
-      ];
+      }
+
+      // Disease/pest outbreak threats
+      if (diseaseOutbreakDatasets.length > 0) {
+        var diseaseLatest = pickLatestLayer(diseaseOutbreakDatasets);
+        threatList.push({
+          threat: diseaseLatest ? "🦠 Disease Outbreak Probability" : "🦠 Disease monitoring active",
+          details: diseaseLatest ? "Status: " + (diseaseLatest.layer.name || "Outbreak risk") : diseaseOutbreakDatasets.length + " outbreak dataset(s)",
+          source: "EA Hazards Watch"
+        });
+      }
+
+      // Disaster displacements
+      var displacementDatasets = datasetList.filter(function(dataset) {
+        var text = (dataset && dataset.name ? dataset.name : "");
+        return /displacement|humanitarian/i.test(text);
+      });
+      if (displacementDatasets.length > 0) {
+        var dispLatest = pickLatestLayer(displacementDatasets);
+        if (dispLatest) {
+          threatList.push({
+            threat: "🚨 Disaster-Induced Displacements",
+            details: dispLatest.layer.name,
+            source: "EA Hazards Watch"
+          });
+        }
+      }
+
+      // Build detail blocks from threat list
+      var detailBlocks = [];
+      
+      if (threatList.length > 0) {
+        var threatLines = threatList.map(function(t) {
+          return t.threat + " — " + t.details + " [" + t.source + "]";
+        });
+        detailBlocks.push({
+          title: "🎯 Active Threats & Worries",
+          lines: threatLines
+        });
+      } else {
+        detailBlocks.push({
+          title: "📊 Current Status",
+          lines: [
+            "No significant threats detected in current ICPAC data.",
+            "Operational monitoring remains active across Droughtwatch and EA Hazards Watch systems."
+          ]
+        });
+      }
+
+      // Data source attribution block
+      detailBlocks.push({
+        title: "📡 Data Sources",
+        lines: [
+          "Droughtwatch: Drought, precipitation/temperature forecasts, vegetation, soil moisture conditions",
+          "EA Hazards Watch: Agricultural impacts, rainfall/temperature probabilities, disease outbreaks, displacements",
+          "Coverage: East Africa region (Kenya, Ethiopia, Uganda, Tanzania, Somalia, Sudan, South Sudan, Rwanda, Burundi, Djibouti, Eritrea, Comoros)"
+        ]
+      });
 
       return {
         source: "ICPAC (Droughtwatch + EA Hazards Watch)",
         statusLabel: statusLabel,
         statusTone: statusTone,
         dataMode: modeLabel.indexOf("live ICPAC") !== -1 ? "Live API" : "Cached Snapshot",
-        headline: "Integrated ICPAC climate and hazard monitoring active for East Africa.",
-        summary: precipitationLatest
-          ? "Latest precipitation outlook layer: " + (precipitationLatest.layer.name || precipitationLatest.dataset.name || "Forecast layer") + " (" + formatLayerPeriod(precipitationLatest.layer) + ")."
-          : "ICPAC catalog confirms active drought and climate monitoring layers, but latest precipitation timing was not parsed.",
+        headline: "ICPAC threat assessment for East Africa",
+        summary: threatList.length > 0 
+          ? "⚠️ " + threatList.length + " threat(s) identified in current ICPAC monitoring"
+          : "✅ No significant threats detected in current ICPAC data",
         bullets: [
           modeLabel,
-          "Risk snapshot - Drought: " + droughtRisk + ", Heavy rainfall: " + heavyRainRisk + ", Crop conditions: " + cropConditions + ", Heat stress: " + heatStressRisk + ".",
-          agriculturalImpactDatasets.length ? "Agricultural monitoring active (" + agriculturalImpactDatasets.length + " datasets); " + agriculturalStatus + "." : "Agricultural impact datasets not currently available.",
-          cycloneDatasets.length ? "Cyclone tracking active (" + cycloneDatasets.length + " dataset(s))." : "No active cyclone data.",
-          diseaseOutbreakDatasets.length ? "Disease outbreak monitoring active (" + diseaseOutbreakDatasets.length + " dataset(s))." : "Disease outbreak datasets not active.",
-          snapshotTimestamp ? "Cached snapshot generated: " + formatIsoDate(snapshotTimestamp) + "." : null,
-          "Use above-normal precipitation outlooks as flood-early-warning context; combine with local hydrology and river forecasts.",
-          "For non-East-Africa countries, this source is regional context rather than country-specific hazard certainty."
+          threatList.length > 0 
+            ? "Active threats include: " + threatList.map(function(t) { return t.threat.replace(/[🔴🟡🟢🚜🌊🦠🚨]/g, '').trim(); }).join(", ") + "."
+            : "All monitored indicators within normal ranges.",
+          "Data includes: current conditions (10-day/monthly) + seasonal forecasts + agricultural impacts + exceptional events.",
+          "Sources: Droughtwatch (" + droughtDatasets.length + " drought datasets) + EA Hazards Watch (" + agriculturalImpactDatasets.length + " ag datasets, exceptional rainfall, disease)."
         ].filter(Boolean),
         detailBlocks: detailBlocks,
         updatedAt: formatIsoDate(new Date().toISOString()),
