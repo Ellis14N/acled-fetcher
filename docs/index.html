@@ -657,16 +657,23 @@
       white-space: nowrap;
     }
 
-    .weather-status.high {
+    .weather-status.high,
+    .weather-status.alert {
       background: rgba(185, 28, 28, 0.2);
       color: #fecaca;
       border: 1px solid rgba(248, 113, 113, 0.28);
     }
 
-    .weather-status.watch {
+    .weather-status.warning {
       background: rgba(180, 83, 9, 0.2);
       color: #fcd34d;
       border: 1px solid rgba(251, 191, 36, 0.28);
+    }
+
+    .weather-status.watch {
+      background: rgba(161, 98, 7, 0.16);
+      color: #fde68a;
+      border: 1px solid rgba(250, 204, 21, 0.24);
     }
 
     .weather-status.low {
@@ -1866,7 +1873,8 @@
   function normalizeWindowDate(value, fallback) {
     const text = String(value || "").trim();
     if (!text || text.toLowerCase() === "unknown") return fallback;
-    return text;
+    var formatted = formatStandardDate(text);
+    return formatted === "Unknown" ? text : formatted;
   }
 
   function sumEventTypes(target, source) {
@@ -1970,18 +1978,24 @@
     return Number(value || 0).toLocaleString();
   }
 
-  function formatIsoDate(value) {
+  function formatStandardDate(value) {
     if (!value) return "Unknown";
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return String(value);
-    return date.toLocaleString();
+    var date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "Unknown";
+    var day = String(date.getDate()).padStart(2, "0");
+    var month = date.toLocaleString("en-US", { month: "long" }).toUpperCase();
+    var year = String(date.getFullYear());
+    return day + " - " + month + " - " + year;
+  }
+
+  function formatIsoDate(value) {
+    var formatted = formatStandardDate(value);
+    return formatted === "Unknown" ? String(value || "Unknown") : formatted;
   }
 
   function formatIsoDateShort(value) {
-    if (!value) return 'Unknown';
-    var d = new Date(value);
-    if (isNaN(d.getTime())) return String(value);
-    return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+    var formatted = formatStandardDate(value);
+    return formatted === "Unknown" ? String(value || "Unknown") : formatted;
   }
 
   function formatPopPeriod(rec) {
@@ -2047,10 +2061,8 @@
   }
 
   function formatShortDate(value) {
-    if (!value) return "Unknown";
-    var date = new Date(value);
-    if (Number.isNaN(date.getTime())) return String(value);
-    return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+    var formatted = formatStandardDate(value);
+    return formatted === "Unknown" ? String(value || "Unknown") : formatted;
   }
 
   function formatDurationDays(startValue, endValue) {
@@ -2920,6 +2932,7 @@
   async function fetchICPACOutlook(country) {
     var categoriesUrl = "https://droughtwatch.icpac.net/api/categories/";
     var datasetsUrl = "https://droughtwatch.icpac.net/api/datasets/";
+    var eaHazardsDatasetsUrl = "https://eahazardswatch.icpac.net/api/datasets";
     var snapshotUrl = "https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/main/data/icpac_droughtwatch_snapshot.json";
     var eastAfricaCountries = [
       "burundi", "comoros", "djibouti", "eritrea", "ethiopia", "kenya",
@@ -3056,26 +3069,9 @@
         }));
       }, []);
 
-      var droughtRisk = droughtDatasets.length ? (droughtDatasets.length >= 3 ? "High" : "Watch") : "Low";
-      var heavyRainRisk = aboveNormalForecastLayers.length ? (aboveNormalForecastLayers.length >= 2 ? "High" : "Watch") : "Low";
-      var heatStressRisk = aboveNormalTempLayers.length ? (aboveNormalTempLayers.length >= 2 ? "High" : "Watch") : (heatStressDatasets.length ? "Watch" : "Low");
-      var cropConditions = cropConditionDatasets.length ? "Monitoring available" : "Limited";
-      var agriculturalStatus = agriculturalImpactDatasets.length ? "Active monitoring" : "Not available";
-      var cycloneRisk = cycloneDatasets.length ? "Tracking active" : "No active threats";
-      var diseaseRisk = diseaseOutbreakDatasets.length ? "Monitoring active" : "Not available";
-
-      var scoreMap = { Low: 1, Watch: 2, High: 3 };
-      var maxScore = Math.max(scoreMap[droughtRisk] || 1, scoreMap[heavyRainRisk] || 1, scoreMap[heatStressRisk] || 1);
-
-      var statusTone = "low";
-      var statusLabel = "Low";
-      if (maxScore >= 3) {
-        statusTone = "high";
-        statusLabel = "High";
-      } else if (maxScore >= 2 || floodNamedDatasets.length) {
-        statusTone = "watch";
-        statusLabel = "Watch";
-      }
+      var droughtRisk = droughtDatasets.length ? (droughtDatasets.length >= 3 ? "Alert" : "Watch") : "Watch";
+      var heavyRainRisk = aboveNormalForecastLayers.length ? (aboveNormalForecastLayers.length >= 2 ? "Warning" : "Watch") : "Watch";
+      var heatStressRisk = aboveNormalTempLayers.length ? (aboveNormalTempLayers.length >= 2 ? "Warning" : "Watch") : (heatStressDatasets.length ? "Watch" : "Watch");
 
       var categorySummary = categoryList
         .map(function(category) { return category && category.title ? category.title : null; })
@@ -3083,120 +3079,244 @@
         .slice(0, 5)
         .join(", ");
 
-      // Build threat-focused detail blocks (simplified: threats/worries only with dates)
-      var threatList = [];
-
-      // Drought threats
-      if (droughtLatest) {
-        var droughtSeverity = droughtRisk === "High" ? "🔴 ACTIVE DROUGHT" : droughtRisk === "Watch" ? "🟡 DROUGHT WATCH" : "🟢 Low drought risk";
-        threatList.push({
-          threat: droughtSeverity,
-          details: "Latest: " + formatLayerPeriod(droughtLatest.layer),
-          source: "Droughtwatch"
-        });
-      }
-
-      // Rainfall/flood threats
-      if (precipitationLatest && aboveNormalForecastLayers.length > 0) {
-        var rainSeverity = heavyRainRisk === "High" ? "🔴 HEAVY RAINFALL ALERT" : "🟡 ABOVE-NORMAL RAINFALL";
-        threatList.push({
-          threat: rainSeverity,
-          details: "Forecast: " + formatLayerPeriod(precipitationLatest.layer) + " (" + aboveNormalForecastLayers.length + " above-normal layers)",
-          source: "Droughtwatch"
-        });
-      }
-
-      // Heat stress threats
-      if (heatLatest && aboveNormalTempLayers.length > 0) {
-        var heatSeverity = heatStressRisk === "High" ? "🔴 HEAT STRESS ALERT" : "🟡 ABOVE-NORMAL TEMPERATURES";
-        threatList.push({
-          threat: heatSeverity,
-          details: "Forecast: " + formatLayerPeriod(heatLatest.layer),
-          source: "Droughtwatch"
-        });
-      }
-
-      // Agricultural/crop threats
-      if (agriculturalImpactDatasets.length > 0) {
-        threatList.push({
-          threat: agriLatest ? "🚜 Agricultural Status: Monitoring Active" : "🚜 Agricultural monitoring",
-          details: agriLatest ? "Latest: " + (agriLatest.layer.name || agriLatest.dataset.name || "Crop/forage conditions") : agriculturalImpactDatasets.length + " agricultural datasets active",
-          source: "EA Hazards Watch"
-        });
-      }
-
-      // Exceptional rainfall events
-      var exceptionalRainfallDatasets = datasetList.filter(function(dataset) {
-        var text = (dataset && dataset.name ? dataset.name : "");
-        return /exceptional|extreme.*rainfall|extremely.*heavy/i.test(text);
-      });
-      if (exceptionalRainfallDatasets.length > 0) {
-        var exRainLatest = pickLatestLayer(exceptionalRainfallDatasets);
-        if (exRainLatest) {
-          threatList.push({
-            threat: "🌊 EXCEPTIONAL RAINFALL EVENT",
-            details: exRainLatest.layer.name + " (via " + (exRainLatest.dataset.name || "Event dataset") + ")",
-            source: "EA Hazards Watch"
-          });
-        }
-      }
-
-      // Disease/pest outbreak threats
-      if (diseaseOutbreakDatasets.length > 0) {
-        var diseaseLatest = pickLatestLayer(diseaseOutbreakDatasets);
-        threatList.push({
-          threat: diseaseLatest ? "🦠 Disease Outbreak Probability" : "🦠 Disease monitoring active",
-          details: diseaseLatest ? "Status: " + (diseaseLatest.layer.name || "Outbreak risk") : diseaseOutbreakDatasets.length + " outbreak dataset(s)",
-          source: "EA Hazards Watch"
-        });
-      }
-
-      // Disaster displacements
-      var displacementDatasets = datasetList.filter(function(dataset) {
-        var text = (dataset && dataset.name ? dataset.name : "");
-        return /displacement|humanitarian/i.test(text);
-      });
-      if (displacementDatasets.length > 0) {
-        var dispLatest = pickLatestLayer(displacementDatasets);
-        if (dispLatest) {
-          threatList.push({
-            threat: "🚨 Disaster-Induced Displacements",
-            details: dispLatest.layer.name,
-            source: "EA Hazards Watch"
-          });
-        }
-      }
-
-      // Build detail blocks from threat list
-      var detailBlocks = [];
+          // ===== ICPAC Severity Framework =====
+          // Watch (🟨): Early warning stage - emerging conditions
+          // Warning (🟧): Escalation - moderate conditions, impacts possible
+          // Alert (🔴): Critical - severe conditions, significant impacts likely
       
-      if (threatList.length > 0) {
-        var threatLines = threatList.map(function(t) {
-          return t.threat + " — " + t.details + " [" + t.source + "]";
-        });
-        detailBlocks.push({
-          title: "🎯 Active Threats & Worries",
-          lines: threatLines
-        });
-      } else {
-        detailBlocks.push({
-          title: "📊 Current Status",
-          lines: [
-            "No significant threats detected in current ICPAC data.",
-            "Operational monitoring remains active across Droughtwatch and EA Hazards Watch systems."
-          ]
-        });
-      }
+          var threats = [];
 
-      // Data source attribution block
-      detailBlocks.push({
-        title: "📡 Data Sources",
-        lines: [
-          "Droughtwatch: Drought, precipitation/temperature forecasts, vegetation, soil moisture conditions",
-          "EA Hazards Watch: Agricultural impacts, rainfall/temperature probabilities, disease outbreaks, displacements",
-          "Coverage: East Africa region (Kenya, Ethiopia, Uganda, Tanzania, Somalia, Sudan, South Sudan, Rwanda, Burundi, Djibouti, Eritrea, Comoros)"
-        ]
-      });
+          // ===== DROUGHT THREATS =====
+          var droughtDatasets = datasetList.filter(function(dataset) {
+            var name = String(dataset && dataset.name || "").toLowerCase();
+            return /drought|cdi|recovery class|hydrological drought/i.test(name);
+          });
+
+          if (droughtDatasets.length > 0) {
+            var droughtLatest = pickLatestLayer(droughtDatasets);
+            if (droughtLatest) {
+              var droughtLayers = droughtDatasets.reduce(function(acc, ds) {
+                return acc.concat(Array.isArray(ds.layers) ? ds.layers : []);
+              }, []);
+
+              var recoveryLayers = droughtLayers.filter(function(l) {
+                return /recovery|normal/i.test(l.name || "");
+              });
+              var activeDrought = droughtLayers.filter(function(l) {
+                return /current|monthly|seasonal/i.test(l.name || "") && !/recovery/i.test(l.name || "");
+              });
+
+              var droughtSeverity = recoveryLayers.length > activeDrought.length 
+                ? "Watch" 
+                : activeDrought.length >= 2 ? "Alert" : "Warning";
+
+              threats.push({
+                category: "Drought Conditions",
+                severity: droughtSeverity,
+                datasets: droughtDatasets.map(function(ds) { return ds.name; }).join(", "),
+                latestDate: formatLayerPeriod(droughtLatest.layer),
+                details: droughtLatest.dataset.name
+              });
+            }
+          }
+
+          // ===== RAINFALL & FLOOD THREATS =====
+          var rainfallForecastDatasets = datasetList.filter(function(dataset) {
+            var name = String(dataset && dataset.name || "").toLowerCase();
+            return /precipitation|rainfall|flood|exceptional rainfall/i.test(name);
+          });
+
+          var exceptionalRainfallDatasets = rainfallForecastDatasets.filter(function(ds) {
+            return /exceptional|extreme/i.test(ds.name || "");
+          });
+
+          var aboveNormalRainfallLayers = rainfallForecastDatasets.reduce(function(acc, dataset) {
+            var layers = Array.isArray(dataset.layers) ? dataset.layers : [];
+            return acc.concat(layers.filter(function(layer) {
+              return /(above\s*normal|above-normal|_above|warning|alert)/i.test((layer.name || "") + (layer.slug || ""));
+            }));
+          }, []);
+
+          if (rainfallForecastDatasets.length > 0) {
+            var rainfallLatest = pickLatestLayer(rainfallForecastDatasets);
+            if (rainfallLatest) {
+              var rainSeverity = exceptionalRainfallDatasets.length > 0 
+                ? "Alert" 
+                : aboveNormalRainfallLayers.length >= 3 ? "Warning" : "Watch";
+
+              threats.push({
+                category: "Rainfall & Flood Risk",
+                severity: rainSeverity,
+                datasets: rainfallForecastDatasets.length + " rainfall dataset(s) active",
+                latestDate: formatLayerPeriod(rainfallLatest.layer),
+                details: (exceptionalRainfallDatasets.length > 0 ? "Exceptional rainfall detected. " : "") + 
+                         (aboveNormalRainfallLayers.length > 0 ? aboveNormalRainfallLayers.length + " above-normal forecast layers" : "Within normal range")
+              });
+            }
+          }
+
+          // ===== TEMPERATURE & HEAT STRESS THREATS =====
+          var temperatureDatasets = datasetList.filter(function(dataset) {
+            var name = String(dataset && dataset.name || "").toLowerCase();
+            return /temperature|heat|stress|anomaly/i.test(name);
+          });
+
+          var aboveNormalTempLayers = temperatureDatasets.reduce(function(acc, dataset) {
+            var layers = Array.isArray(dataset.layers) ? dataset.layers : [];
+            return acc.concat(layers.filter(function(layer) {
+              return /(above\s*normal|above-normal|above_|_above|warning|alert|high)/i.test((layer.name || "") + (layer.slug || ""));
+            }));
+          }, []);
+
+          if (temperatureDatasets.length > 0) {
+            var tempLatest = pickLatestLayer(temperatureDatasets);
+            if (tempLatest) {
+              var tempSeverity = aboveNormalTempLayers.length >= 3 
+                ? "Alert" 
+                : aboveNormalTempLayers.length >= 1 ? "Warning" : "Watch";
+
+              threats.push({
+                category: "Temperature & Heat Stress",
+                severity: tempSeverity,
+                datasets: temperatureDatasets.length + " temperature dataset(s) active",
+                latestDate: formatLayerPeriod(tempLatest.layer),
+                details: aboveNormalTempLayers.length > 0 
+                  ? aboveNormalTempLayers.length + " above-normal temperature forecast layer(s)"
+                  : "Within normal range"
+              });
+            }
+          }
+
+          // ===== SOIL MOISTURE & VEGETATION STRESS =====
+          var soilMoistureDatasets = datasetList.filter(function(dataset) {
+            var name = String(dataset && dataset.name || "").toLowerCase();
+            return /soil\s*moisture|moisture\s*anomaly/i.test(name);
+          });
+
+          var vegetationStressDatasets = datasetList.filter(function(dataset) {
+            var name = String(dataset && dataset.name || "").toLowerCase();
+            return /vegetation|condition|anomaly|stress|vci|ndvi/i.test(name);
+          });
+
+          if (soilMoistureDatasets.length > 0 || vegetationStressDatasets.length > 0) {
+            var soilLatest = pickLatestLayer(soilMoistureDatasets);
+            var vegLatest = pickLatestLayer(vegetationStressDatasets);
+            var latest = soilLatest || vegLatest;
+
+            if (latest) {
+              var soilVegSeverity = vegetationStressDatasets.length > soilMoistureDatasets.length 
+                ? "Alert" 
+                : soilMoistureDatasets.length > 0 ? "Warning" : "Watch";
+
+              threats.push({
+                category: "Soil Moisture & Vegetation Stress",
+                severity: soilVegSeverity,
+                datasets: (soilMoistureDatasets.length > 0 ? soilMoistureDatasets.length + " soil moisture, " : "") + 
+                          (vegetationStressDatasets.length > 0 ? vegetationStressDatasets.length + " vegetation" : "") + " dataset(s)",
+                latestDate: formatLayerPeriod(latest.layer),
+                details: "Combined monitoring of agricultural stress indicators"
+              });
+            }
+          }
+
+          // ===== AGRICULTURAL IMPACTS =====
+          var agriculturalDatasets = datasetList.filter(function(dataset) {
+            var name = String(dataset && dataset.name || "").toLowerCase();
+            return /crop|pasture|forage|rangeland|agricultural impact/i.test(name);
+          });
+
+          var displacementDatasets = datasetList.filter(function(dataset) {
+            var name = String(dataset && dataset.name || "").toLowerCase();
+            return /displacement|humanitarian|disaster induced/i.test(name);
+          });
+
+          if (agriculturalDatasets.length > 0 || displacementDatasets.length > 0) {
+            var agriLatest = pickLatestLayer(agriculturalDatasets);
+            var dispLatest = pickLatestLayer(displacementDatasets);
+            var agriLatestOverall = agriLatest || dispLatest;
+
+            if (agriLatestOverall) {
+              var agriSeverity = displacementDatasets.length > 0 
+                ? "Alert" 
+                : agriculturalDatasets.length >= 3 ? "Warning" : "Watch";
+
+              threats.push({
+                category: "Agricultural & Livelihood Impacts",
+                severity: agriSeverity,
+                datasets: (agriculturalDatasets.length > 0 ? agriculturalDatasets.length + " crop/pasture, " : "") +
+                          (displacementDatasets.length > 0 ? displacementDatasets.length + " displacement" : "") + " dataset(s)",
+                latestDate: agriLatestOverall ? formatLayerPeriod(agriLatestOverall.layer) : "Current",
+                details: (agriculturalDatasets.length > 0 ? "Agricultural conditions monitored (crops, pasture, forage). " : "") +
+                         (displacementDatasets.length > 0 ? "Disaster-induced population displacements tracked." : "")
+              });
+            }
+          }
+
+          // ===== DISEASE & PEST THREATS =====
+          var diseaseDatasets = datasetList.filter(function(dataset) {
+            var name = String(dataset && dataset.name || "").toLowerCase();
+            return /disease|outbreak|locust|pest|probability/i.test(name);
+          });
+
+          if (diseaseDatasets.length > 0) {
+            var diseaseLatest = pickLatestLayer(diseaseDatasets);
+            if (diseaseLatest) {
+              threats.push({
+                category: "Disease & Pest Outbreaks",
+                severity: "Watch",
+                datasets: diseaseDatasets.length + " dataset(s)",
+                latestDate: formatLayerPeriod(diseaseLatest.layer),
+                details: "Active monitoring of outbreak probability and disease risk"
+              });
+            }
+          }
+
+          // ===== BUILD DETAIL BLOCKS =====
+          var detailBlocks = [];
+
+          // Main threat block
+          if (threats.length > 0) {
+            var threatLines = threats.map(function(t) {
+              var severityIcon = t.severity === "Alert" ? "🔴" : t.severity === "Warning" ? "🟧" : "🟨";
+              return severityIcon + " " + t.category + " (" + t.severity + ")\n" +
+                     "   Date: " + t.latestDate + "\n" +
+                     "   " + t.details;
+            });
+
+            detailBlocks.push({
+              title: "⚠️ Active and Forecasted Threats",
+              lines: threatLines
+            });
+          } else {
+            detailBlocks.push({
+              title: "📊 Current Status",
+              lines: ["No significant threats detected in current ICPAC monitoring data."]
+            });
+          }
+
+          // Data source and methodology block
+          detailBlocks.push({
+            title: "📡 Data Sources & Severity Scale",
+            lines: [
+              "🟨 WATCH — Early warning: emerging conditions, normal monitoring",
+              "🟧 WARNING — Escalation: moderate conditions requiring attention",
+              "🔴 ALERT — Critical: severe conditions, significant impacts likely",
+              "",
+              "Droughtwatch API: 35 datasets covering drought, precipitation, temperature, soil moisture, vegetation conditions (10-day, monthly, seasonal)",
+              "EA Hazards Watch API: 36 datasets covering agricultural impacts, rainfall forecasts, disease outbreaks, humanitarian impacts",
+              "IGAD GeoNode discovery feed: https://geonode.igad.int/catalogue/opensearch (catalog metadata and discoverability)",
+              "Geographic scope: East Africa (12 countries: Kenya, Ethiopia, Uganda, Tanzania, Somalia, Sudan, South Sudan, Rwanda, Burundi, Djibouti, Eritrea, Comoros)"
+            ]
+          });
+
+      var severityRank = { Watch: 1, Warning: 2, Alert: 3 };
+      var overallSeverity = threats.reduce(function(current, threat) {
+        if (!threat || !threat.severity) return current;
+        return (severityRank[threat.severity] || 0) > (severityRank[current] || 0) ? threat.severity : current;
+      }, "Watch");
+
+      var statusTone = overallSeverity === "Alert" ? "alert" : overallSeverity === "Warning" ? "warning" : "watch";
+      var statusLabel = overallSeverity;
 
       return {
         source: "ICPAC (Droughtwatch + EA Hazards Watch)",
@@ -3204,16 +3324,16 @@
         statusTone: statusTone,
         dataMode: modeLabel.indexOf("live ICPAC") !== -1 ? "Live API" : "Cached Snapshot",
         headline: "ICPAC threat assessment for East Africa",
-        summary: threatList.length > 0 
-          ? "⚠️ " + threatList.length + " threat(s) identified in current ICPAC monitoring"
-          : "✅ No significant threats detected in current ICPAC data",
+          summary: threats.length > 0 
+            ? "Threats detected across " + threats.length + " monitoring area(s): " + threats.map(function(t) { return t.category; }).join(", ")
+            : "✅ No significant threats at ALERT level",
         bullets: [
           modeLabel,
-          threatList.length > 0 
-            ? "Active threats include: " + threatList.map(function(t) { return t.threat.replace(/[🔴🟡🟢🚜🌊🦠🚨]/g, '').trim(); }).join(", ") + "."
+            threats.length > 0 
+              ? "Severity levels: " + threats.map(function(t) { return t.severity; }).join(", ")
             : "All monitored indicators within normal ranges.",
-          "Data includes: current conditions (10-day/monthly) + seasonal forecasts + agricultural impacts + exceptional events.",
-          "Sources: Droughtwatch (" + droughtDatasets.length + " drought datasets) + EA Hazards Watch (" + agriculturalImpactDatasets.length + " ag datasets, exceptional rainfall, disease)."
+            "Data includes: current conditions + seasonal/subseasonal forecasts + agricultural impacts + humanitarian indicators.",
+            "Full coverage from 71 datasets across both ICPAC systems (Droughtwatch: 35, EA Hazards Watch: 36)."
         ].filter(Boolean),
         detailBlocks: detailBlocks,
         updatedAt: formatIsoDate(new Date().toISOString()),
@@ -3222,15 +3342,40 @@
     };
 
     try {
-      var categories = await fetchJsonWithFallback(categoriesUrl);
-      var datasets = await fetchJsonWithFallback(datasetsUrl);
-      var categoryList = Array.isArray(categories) ? categories : [];
-      var datasetList = Array.isArray(datasets) ? datasets : [];
+      var liveCategories = [];
+      var liveDatasets = [];
+      var liveSourceLabels = [];
 
-      if (!datasetList.length) {
-        throw new Error("ICPAC Drought Watch datasets are not currently available.");
+      try {
+        var categories = await fetchJsonWithFallback(categoriesUrl);
+        var datasets = await fetchJsonWithFallback(datasetsUrl);
+        var categoryList = Array.isArray(categories) ? categories : [];
+        var datasetList = Array.isArray(datasets) ? datasets : [];
+        if (datasetList.length) {
+          liveCategories = liveCategories.concat(categoryList);
+          liveDatasets = liveDatasets.concat(datasetList);
+          liveSourceLabels.push("Drought Watch");
+        }
+      } catch (_) {}
+
+      try {
+        var eaDatasets = await fetchJsonWithFallback(eaHazardsDatasetsUrl);
+        var eaDatasetList = Array.isArray(eaDatasets) ? eaDatasets : [];
+        if (eaDatasetList.length) {
+          liveDatasets = liveDatasets.concat(eaDatasetList);
+          liveSourceLabels.push("EA Hazards Watch");
+        }
+      } catch (_) {}
+
+      if (!liveDatasets.length) {
+        throw new Error("ICPAC live datasets are not currently available.");
       }
-      return buildIcpacCard(categoryList, datasetList, "Source uses live ICPAC Drought Watch API catalog and layer metadata.");
+
+      return buildIcpacCard(
+        liveCategories,
+        liveDatasets,
+        "Source uses live ICPAC APIs: " + (liveSourceLabels.length ? liveSourceLabels.join(" + ") : "unattributed live feed") + "."
+      );
     } catch (_) {
       try {
         var snapshot = await fetchJsonWithFallback(snapshotUrl);
@@ -3507,9 +3652,8 @@
 
   function formatDate(value) {
     if (!value) return null;
-    var d = new Date(value);
-    if (isNaN(d.getTime())) return String(value);
-    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+    var formatted = formatStandardDate(value);
+    return formatted === "Unknown" ? String(value) : formatted;
   }
 
   function translateFrenchDateToEnglish(dateStr) {
@@ -3538,6 +3682,8 @@
     });
 
     out = out.replace(/1er\s+/g, '1 ');
+    var parsed = new Date(out);
+    if (!isNaN(parsed.getTime())) return formatStandardDate(parsed);
     return out.replace(/\b\w/g, function(c) { return c.toUpperCase(); });
   }
 
