@@ -1,0 +1,14 @@
+{
+  "source": "IGAD/ICPAC email bulletin digest",
+  "updated_at": "2026-04-07T00:00:00Z",
+  "entries": [
+    {
+      "date": "2026-04-07",
+      "title": "Example bulletin headline",
+      "summary": "Example summary of an IGAD or ICPAC bulletin item relevant for regional hazards and impacts.",
+      "text": "Optional longer body text.",
+      "source_url": "https://www.icpac.net/",
+      "countries": ["Kenya", "Ethiopia"]
+    }
+  ]
+}

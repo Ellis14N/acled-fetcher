@@ -1043,7 +1043,10 @@
       <label for="weatherCountryInput">Country Name</label>
       <input type="text" id="weatherCountryInput" placeholder="e.g. Chad, Sudan, Kenya" autocomplete="off" />
       <div class="error" id="weatherFetchError"></div>
-      <button onclick="runWeatherMonitoring()">Fetch Weather and Severe Events</button>
+      <button onclick="runWeatherMonitoring('all')">Fetch Weather and Severe Events</button>
+      <div class="button-row">
+        <button class="btn-secondary" onclick="runWeatherMonitoring('acmad')">RCC ACMAD 10-Day Bulletin</button>
+      </div>
       <button class="btn-secondary" onclick="show('dashboardScreen')">Back to Dashboard</button>
     </div>
 
@@ -2207,7 +2210,7 @@
     );
   }
 
-  async function runWeatherMonitoring() {
+  async function runWeatherMonitoring(mode) {
     var country = (document.getElementById("weatherCountryInput").value || "").trim();
     if (!country) {
       showError("weatherFetchError", "Please enter a country name.");
@@ -2232,8 +2235,15 @@
       { id: "weather-gdacs", name: "GDACS", fn: function() { return fetchGDACSAlerts(country, location); } },
       { id: "weather-rsmc", name: "RSMC / WMO Severe Weather", fn: function() { return fetchRSMCWarnings(country); } },
       { id: "weather-cams", name: "CAMS Air Quality", fn: function() { return fetchCAMSOutlook(location); } },
-      { id: "weather-icpac", name: "ICPAC / IGAD", fn: function() { return fetchICPACOutlook(country); } }
+      { id: "weather-icpac", name: "ICPAC / IGAD", fn: function() { return fetchICPACOutlook(country); } },
+      { id: "weather-acmad", name: "RCC ACMAD Decadal Bulletin", fn: function() { return fetchACMADDecadalBulletin(country); } },
+      { id: "weather-diem", name: "FAO DIEM Monitoring", fn: function() { return fetchDIEMMonitoring(country, location); } }
     ];
+
+    var activeMode = String(mode || "all").toLowerCase();
+    if (activeMode === "acmad") {
+      sources = sources.filter(function(source) { return source.id === "weather-acmad"; });
+    }
 
     latestWeatherBundle = {
       country: country,
@@ -2248,6 +2258,12 @@
     var jobs = sources.map(function(source) {
       return source.fn()
         .then(function(data) {
+          if (data && data.skipDisplay) {
+            var node = document.getElementById(source.id);
+            if (node && node.parentNode) node.parentNode.removeChild(node);
+            latestWeatherBundle.sources.push({ source: source.name, status: "skipped", reason: data.skipReason || "No recent country data" });
+            return;
+          }
           renderWeatherCard(source.id, data, null);
           latestWeatherBundle.sources.push({ source: source.name, status: "ok", data: data });
         })
@@ -2260,6 +2276,11 @@
 
     await Promise.allSettled(jobs);
     latestWeatherBundle.generated_at = new Date().toISOString();
+
+    var weatherGrid = document.getElementById("weatherGrid");
+    if (weatherGrid && !weatherGrid.children.length) {
+      weatherGrid.innerHTML = '<div class="weather-card"><div class="weather-card-header"><div class="weather-source">No recent source data</div><span class="weather-status info">Info</span></div><div class="weather-summary">No recent country-specific records were available for the selected source and time window.</div></div>';
+    }
   }
 
   function renderWeatherCard(id, data, error) {
@@ -2279,6 +2300,9 @@
 
     var bullets = Array.isArray(data.bullets) ? data.bullets.filter(Boolean).slice(0, 8) : [];
     var detailBlocks = Array.isArray(data.detailBlocks) ? data.detailBlocks.slice(0, 5) : [];
+    var sourceLinks = Array.isArray(data.sourceLinks) ? data.sourceLinks.filter(function(link) {
+      return link && link.url;
+    }).slice(0, 6) : [];
     var detailBlocksHtml = detailBlocks.length
       ? '<div class="weather-event-list">' + detailBlocks.map(function(block) {
           var lines = Array.isArray(block.lines) ? block.lines.filter(Boolean) : [];
@@ -2312,7 +2336,10 @@
       detailBlocksHtml,
       bullets.length ? '<ul class="weather-points">' + bullets.map(function(point) { return '<li>' + escapeHtml(point) + '</li>'; }).join("") + '</ul>' : '',
       '<div class="weather-meta">Updated: ' + escapeHtml(data.updatedAt || "Not available") + '</div>',
-      data.url ? '<div><a class="weather-link" href="' + escapeHtml(data.url) + '" target="_blank" rel="noopener noreferrer">View source -></a></div>' : ''
+      data.url ? '<div><a class="weather-link" href="' + escapeHtml(data.url) + '" target="_blank" rel="noopener noreferrer">View source -></a></div>' : '',
+      sourceLinks.length ? sourceLinks.map(function(link) {
+        return '<div><a class="weather-link" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener noreferrer">View source: ' + escapeHtml(link.label || 'Document') + ' -></a></div>';
+      }).join('') : ''
     ].join("");
   }
 
@@ -2666,6 +2693,8 @@
     var url = "https://www.gdacs.org/gdacsapi/api/Events/geteventlist/SEARCH";
     var json = await fetchJsonWithFallback(url);
     var features = Array.isArray(json.features) ? json.features : [];
+    var rssUrl = "https://www.gdacs.org/xml/rss.xml";
+    var capUrl = "https://www.gdacs.org/xml/gdacs_cap.xml";
 
     var hazardLabels = {
       EQ: "Earthquakes",
@@ -2679,8 +2708,179 @@
     var levelPriority = { red: 3, orange: 2, green: 1 };
     var hazardKeys = Object.keys(hazardLabels);
     var countryIso2 = String(location && location.countryCode ? location.countryCode : "").toUpperCase();
+    var africaIso2 = [
+      "DZ", "AO", "BJ", "BW", "BF", "BI", "CV", "CM", "CF", "TD", "KM", "CD", "CG", "CI", "DJ", "EG", "GQ", "ER", "SZ", "ET",
+      "GA", "GM", "GH", "GN", "GW", "KE", "LS", "LR", "LY", "MG", "MW", "ML", "MR", "MU", "MA", "MZ", "NA", "NE", "NG", "RW",
+      "ST", "SN", "SC", "SL", "SO", "ZA", "SS", "SD", "TZ", "TG", "TN", "UG", "ZM", "ZW"
+    ];
     var now = Date.now();
+    var today = new Date();
+    var startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     var recentWindowMs = 14 * 24 * 60 * 60 * 1000;
+    var windowStartMs = startOfToday.getTime() - recentWindowMs;
+
+    if (countryIso2 && africaIso2.indexOf(countryIso2) === -1) {
+      return {
+        source: "GDACS Multi-Hazard Alerts",
+        statusLabel: "Low",
+        statusTone: "low",
+        headline: "GDACS Africa filter is enabled.",
+        summary: "The selected country is outside the 54 African countries currently tracked for GDACS.",
+        bullets: [
+          "Scope: only African countries are included in GDACS monitoring.",
+          "Window: current and recent events over the last 14 days, anchored to today.",
+          "Tip: select one of the 54 African countries to view GDACS events."
+        ],
+        updatedAt: formatIsoDate(new Date().toISOString()),
+        url: "https://www.gdacs.org/"
+      };
+    }
+
+    var parseDdMmYyyyToIso = function(value) {
+      var text = String(value || "").trim();
+      var match = text.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+      if (!match) return null;
+      return match[3] + "-" + match[2] + "-" + match[1] + "T00:00:00";
+    };
+
+    var decodeXmlEntities = function(value) {
+      return String(value || "")
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&#x2F;/gi, "/");
+    };
+
+    var parseQueryParam = function(urlValue, key) {
+      var safe = String(urlValue || "").replace(/&amp;/g, "&");
+      var match = safe.match(new RegExp("[?&]" + key + "=([^&]+)", "i"));
+      return match ? decodeURIComponent(match[1]) : "";
+    };
+
+    var extractTagValue = function(block, tagName) {
+      var pattern = new RegExp("<" + tagName + "[^>]*>([\\s\\S]*?)</" + tagName + ">", "i");
+      var match = String(block || "").match(pattern);
+      return match ? normalizeWhitespace(decodeXmlEntities(match[1])) : "";
+    };
+
+    var extractCapParameterValue = function(block, valueName) {
+      var escapedName = escapeRegExp(String(valueName || ""));
+      var pattern = new RegExp(
+        "<cap:parameter>[\\s\\S]*?<cap:valueName>\\s*" + escapedName + "\\s*</cap:valueName>[\\s\\S]*?<cap:value>([\\s\\S]*?)</cap:value>[\\s\\S]*?</cap:parameter>",
+        "i"
+      );
+      var match = String(block || "").match(pattern);
+      return match ? normalizeWhitespace(decodeXmlEntities(match[1])) : "";
+    };
+
+    var toIsoOrNull = function(value) {
+      var text = normalizeWhitespace(value);
+      if (!text) return null;
+      var directMs = new Date(text).getTime();
+      if (!Number.isNaN(directMs)) return new Date(directMs).toISOString();
+      var ddmm = parseDdMmYyyyToIso(text);
+      if (!ddmm) return null;
+      var ddmmMs = new Date(ddmm).getTime();
+      return Number.isNaN(ddmmMs) ? null : new Date(ddmmMs).toISOString();
+    };
+
+    var pickRelevantEventDateMs = function(fromIso, toIso, modifiedIso) {
+      var toMs = new Date(toIso || 0).getTime();
+      if (!Number.isNaN(toMs)) return toMs;
+      var fromMs = new Date(fromIso || 0).getTime();
+      if (!Number.isNaN(fromMs)) return fromMs;
+      var modifiedMs = new Date(modifiedIso || 0).getTime();
+      return Number.isNaN(modifiedMs) ? NaN : modifiedMs;
+    };
+
+    var parseGdacsXmlFeedEvents = async function(feedUrl, sourceName) {
+      try {
+        var xml = await fetchTextWithFallback(feedUrl);
+        var raw = String(xml || "");
+        if (!raw) return [];
+
+        var items = [];
+        var itemRegex = /<item>([\s\S]*?)<\/item>/gi;
+        var itemMatch;
+        while ((itemMatch = itemRegex.exec(raw))) {
+          items.push(itemMatch[1] || "");
+        }
+
+        var output = [];
+        items.forEach(function(item) {
+          var title = extractTagValue(item, "title");
+          var description = extractTagValue(item, "description");
+          var link = extractTagValue(item, "link");
+          var pubDate = extractTagValue(item, "pubDate");
+          var eventType = String(
+            extractTagValue(item, "gdacs:eventtype")
+            || extractCapParameterValue(item, "eventtype")
+            || parseQueryParam(link, "eventtype")
+            || ""
+          ).toUpperCase();
+          var eventId = extractTagValue(item, "gdacs:eventid") || extractCapParameterValue(item, "eventid") || parseQueryParam(link, "eventid");
+          var episodeId = extractTagValue(item, "gdacs:episodeid") || extractCapParameterValue(item, "currentepisodeid") || parseQueryParam(link, "episodeid");
+          var alertLevelRaw = extractTagValue(item, "gdacs:alertlevel") || extractCapParameterValue(item, "alertlevel") || "Green";
+          var alertLevel = String(alertLevelRaw || "").toLowerCase();
+          var countryValue = extractTagValue(item, "gdacs:country") || extractCapParameterValue(item, "country");
+          var severityText = extractTagValue(item, "gdacs:severity") || extractCapParameterValue(item, "severity");
+          var isCurrentRaw = extractTagValue(item, "gdacs:iscurrent");
+          var isCurrent = String(isCurrentRaw || "").toLowerCase() === "true";
+          var fromIso = toIsoOrNull(extractTagValue(item, "gdacs:fromdate") || extractCapParameterValue(item, "fromdate"));
+          var toIso = toIsoOrNull(extractTagValue(item, "gdacs:todate") || extractCapParameterValue(item, "todate"));
+          var modifiedIso = toIsoOrNull(extractTagValue(item, "gdacs:datemodified") || extractCapParameterValue(item, "datemodified") || pubDate) || new Date().toISOString();
+
+          if (!link) {
+            var capWebLink = extractTagValue(item, "cap:web") || extractCapParameterValue(item, "link");
+            if (capWebLink) link = capWebLink;
+          }
+
+          if (hazardKeys.indexOf(eventType) === -1) return;
+          if (!(alertLevel === "green" || alertLevel === "orange" || alertLevel === "red")) return;
+
+          var textBlob = [title, description, countryValue].join(" ");
+          if (!textMatchesCountry(textBlob, country)) return;
+
+          var anchorDateMs = pickRelevantEventDateMs(fromIso, toIso, modifiedIso);
+          var inRecentWindow = !Number.isNaN(anchorDateMs) && anchorDateMs >= windowStartMs && anchorDateMs <= now;
+          if (!isCurrent && !inRecentWindow) return;
+
+          var reportUrl = link;
+          if (!/report\.aspx/i.test(reportUrl) && eventId && eventType) {
+            reportUrl = "https://www.gdacs.org/report.aspx?eventid=" + encodeURIComponent(eventId) + (episodeId ? "&episodeid=" + encodeURIComponent(episodeId) : "") + "&eventtype=" + encodeURIComponent(eventType);
+          }
+
+          output.push({
+            properties: {
+              eventid: eventId ? String(eventId) : (sourceName + "-" + title + "-" + modifiedIso),
+              episodeid: episodeId || "",
+              eventtype: eventType,
+              alertlevel: alertLevel,
+              iscurrent: isCurrent ? "true" : "false",
+              name: title || (eventType + " event"),
+              description: description || title || "",
+              country: countryValue || country,
+              fromdate: fromIso,
+              todate: toIso || fromIso,
+              datemodified: modifiedIso,
+              affectedcountries: countryIso2 ? [{ iso2: countryIso2, countryname: country }] : [],
+              severitydata: severityText ? { severitytext: severityText } : null,
+              source: sourceName,
+              url: reportUrl ? { report: reportUrl } : null
+            }
+          });
+        });
+
+        return output;
+      } catch (_) {
+        return [];
+      }
+    };
+
+    var rssFeedEvents = await parseGdacsXmlFeedEvents(rssUrl, "GDACS RSS");
+    var capFeedEvents = await parseGdacsXmlFeedEvents(capUrl, "GDACS CAP");
 
     var activeCountryEvents = features.filter(function(feature) {
       var properties = feature && feature.properties ? feature.properties : {};
@@ -2693,23 +2893,52 @@
       var toDateValue = properties.todate || properties.fromdate;
       var toDateMs = new Date(toDateValue).getTime();
       var isCurrent = String(properties.iscurrent || "").toLowerCase() === "true";
-      var isOngoingOrRecent = !Number.isNaN(toDateMs) && toDateMs >= (now - recentWindowMs);
+      var isOngoingOrRecent = !Number.isNaN(toDateMs) && toDateMs >= windowStartMs;
       if (!isCurrent && !isOngoingOrRecent) return false;
 
       var affected = Array.isArray(properties.affectedcountries) ? properties.affectedcountries : [];
-      var matchesIso = countryIso2 && affected.some(function(item) {
+      var africanAffected = affected.filter(function(item) {
+        var iso = String(item && item.iso2 || "").toUpperCase();
+        return iso && africaIso2.indexOf(iso) !== -1;
+      });
+
+      var matchesIso = countryIso2 && africanAffected.some(function(item) {
         return String(item && item.iso2 || "").toUpperCase() === countryIso2;
       });
 
       if (matchesIso) return true;
 
+      // If we have a reliable ISO2 country code from geocoding, avoid loose text matching
+      // that can cause false positives like Guinea vs Papua New Guinea.
+      if (countryIso2) return false;
+
       var fallbackText = [properties.country, properties.name, properties.description].join(" ");
       return textMatchesCountry(fallbackText, country);
     });
 
+    var mergedCountryEvents = activeCountryEvents.concat(rssFeedEvents, capFeedEvents);
+    var dedupedCountryEvents = [];
+    var seenEventKeys = {};
+    mergedCountryEvents.forEach(function(feature) {
+      var properties = feature && feature.properties ? feature.properties : {};
+      var normalizedReportUrl = String(properties.url && properties.url.report ? properties.url.report : "")
+        .replace(/&amp;/g, "&")
+        .replace(/\s+/g, "")
+        .toLowerCase();
+      var hasStableId = properties.eventid && !/^GDACS\s+(RSS|CAP)-/i.test(String(properties.eventid));
+      var key = hasStableId
+        ? String(properties.eventtype || "") + "|" + String(properties.eventid || "") + "|" + String(properties.episodeid || "")
+        : (normalizedReportUrl
+          ? String(properties.eventtype || "") + "|url|" + normalizedReportUrl
+          : String(properties.eventtype || "") + "|" + String(properties.fromdate || "") + "|" + String(properties.name || ""));
+      if (seenEventKeys[key]) return;
+      seenEventKeys[key] = true;
+      dedupedCountryEvents.push(feature);
+    });
+
     var eventsByHazard = {};
     hazardKeys.forEach(function(key) { eventsByHazard[key] = []; });
-    activeCountryEvents.forEach(function(feature) {
+    dedupedCountryEvents.forEach(function(feature) {
       var properties = feature && feature.properties ? feature.properties : {};
       var eventType = String(properties.eventtype || "").toUpperCase();
       if (eventsByHazard[eventType]) eventsByHazard[eventType].push(properties);
@@ -2723,7 +2952,7 @@
       };
     });
 
-    var totalActive = activeCountryEvents.length;
+    var totalActive = dedupedCountryEvents.length;
     var topHazards = hazardCounts.filter(function(item) { return item.count > 0; });
 
     if (!totalActive) {
@@ -2743,7 +2972,7 @@
       };
     }
 
-    var sortedActive = activeCountryEvents.slice().sort(function(left, right) {
+    var sortedActive = dedupedCountryEvents.slice().sort(function(left, right) {
       var leftDate = new Date((left.properties && left.properties.datemodified) || 0).getTime();
       var rightDate = new Date((right.properties && right.properties.datemodified) || 0).getTime();
       if (rightDate !== leftDate) return rightDate - leftDate;
@@ -2767,10 +2996,13 @@
       var properties = item && item.properties ? item.properties : {};
       var impactMetrics = extractDeathDisplaced(properties);
       var affectedCountries = Array.isArray(properties.affectedcountries) && properties.affectedcountries.length
-        ? properties.affectedcountries.map(function(countryItem) {
+        ? properties.affectedcountries.filter(function(countryItem) {
+            var iso = String(countryItem && countryItem.iso2 || "").toUpperCase();
+            return iso && africaIso2.indexOf(iso) !== -1;
+          }).map(function(countryItem) {
             return countryItem && countryItem.countryname ? countryItem.countryname : null;
           }).filter(Boolean).join(", ")
-        : (properties.country || "Not specified");
+        : "Not specified within Africa";
       var startDate = formatShortDate(properties.fromdate);
       var duration = formatDurationDays(properties.fromdate, properties.todate);
       var impact = (properties.severitydata && properties.severitydata.severitytext)
@@ -2798,6 +3030,8 @@
       bullets: [
         "Latest alert: " + (latest.name || latest.description || "Unknown event") + " | Level " + (latest.alertlevel || "Unknown") + ".",
         "Hazard totals (Green/Orange/Red) - EQ (Earthquakes): " + eventsByHazard.EQ.length + ", TC (Tropical Cyclones): " + eventsByHazard.TC.length + ", FL (Floods): " + eventsByHazard.FL.length + ", VO (Volcanoes): " + eventsByHazard.VO.length + ", DR (Droughts): " + eventsByHazard.DR.length + ", WF (Forest Fires): " + eventsByHazard.WF.length + ".",
+        (rssFeedEvents.length || capFeedEvents.length) ? ("Feed supplements added: RSS (" + rssFeedEvents.length + "), CAP (" + capFeedEvents.length + ").") : null,
+        "Time scope: current and recent events in the last 14 days, anchored from today.",
         hasForecastingSignal ? "Forecasting-related alerts present: Tropical Cyclones, Floods, Droughts." : "No active forecasting-related hazard alerts currently listed.",
         latest.url && latest.url.report ? "Latest GDACS report available via source link." : null
       ],
@@ -2929,11 +3163,265 @@
     };
   }
 
+  async function fetchACMADDecadalBulletin(country) {
+    var sourceUrl = "https://rcc.acmad.org/dacadebulletin.php";
+    var html = await fetchTextWithFallback(sourceUrl);
+    var text = htmlToText(html);
+
+    var findLink = function(pattern) {
+      var match = String(html || "").match(pattern);
+      if (!match || !match[1]) return null;
+      try {
+        return new URL(match[1], sourceUrl).href;
+      } catch (_) {
+        return match[1];
+      }
+    };
+
+    var bulletinPdf = findLink(/href=["']([^"']*Bull_dek\.pdf[^"']*)["']/i);
+    var technicalNotePdf = findLink(/href=["']([^"']*Dek_Tech_Note\.pdf[^"']*)["']/i);
+    var highlightsPdf = findLink(/href=["']([^"']*HIGHLIHTS_DEKAD\.pdf[^"']*)["']/i)
+      || findLink(/src=["']([^"']*HIGHLIHTS_DEKAD\.pdf[^"']*)["']/i);
+
+    var cleanAcmadLine = function(line) {
+      var out = normalizeWhitespace(String(line || ""));
+      out = out.replace(/\s+([,.;:!?])/g, "$1");
+      out = out.replace(/\(\s+/g, "(").replace(/\s+\)/g, ")");
+      out = out.replace(/\s{2,}/g, " ");
+      out = translateFrenchSnippetToEnglish(out);
+      out = normalizeWhitespace(out);
+      if (!out) return out;
+      return out.charAt(0).toUpperCase() + out.slice(1);
+    };
+
+    var fetchPdfDigest = async function(pdfUrl) {
+      if (!pdfUrl) return { text: "", reportingPeriod: null, issueDate: null, highlights: [] };
+      try {
+        var normalized = String(pdfUrl).replace(/^https?:\/\//i, "");
+        var proxyUrl = "https://r.jina.ai/http://" + normalized;
+        var markdown = await fetchTextWithFallback(proxyUrl);
+        var text = normalizeWhitespace(String(markdown || ""));
+
+        var reportingPeriodMatch = text.match(/REPORTING\s*PERIOD\s*:?\s*([^\n\.]+)/i);
+        var issueDateMatch = text.match(/ISSUE\s*DATE\s*:?\s*([^\n\.]+)/i);
+
+        var lines = String(markdown || "").split(/\n+/).map(normalizeWhitespace).filter(Boolean);
+        var signalLines = lines.filter(function(line) {
+          return /(outlook|rainfall|precipitation|temperature|dry|wet|flood|drought|above-average|below-average)/i.test(line);
+        });
+
+        var countryLines = signalLines.filter(function(line) { return textMatchesCountry(line, country); });
+        var highlights = (countryLines.length ? countryLines : signalLines)
+          .map(cleanAcmadLine)
+          .filter(Boolean)
+          .slice(0, 3);
+
+        var reportingPeriod = reportingPeriodMatch ? cleanAcmadLine(reportingPeriodMatch[1]) : null;
+        var issueDate = issueDateMatch ? cleanAcmadLine(issueDateMatch[1]) : null;
+        if (issueDate) issueDate = translateFrenchDateToEnglish(issueDate);
+
+        return {
+          text: text,
+          reportingPeriod: reportingPeriod,
+          issueDate: issueDate,
+          highlights: highlights
+        };
+      } catch (_) {
+        return { text: "", reportingPeriod: null, issueDate: null, highlights: [] };
+      }
+    };
+
+    var bulletinDigest = await fetchPdfDigest(bulletinPdf);
+    var technicalDigest = await fetchPdfDigest(technicalNotePdf);
+
+    var countryMentionedInPdfs = textMatchesCountry(bulletinDigest.text, country) || textMatchesCountry(technicalDigest.text, country);
+    var countryMentioned = countryMentionedInPdfs || textMatchesCountry(text, country);
+
+    var statusLabel = countryMentioned ? "Watch" : "Info";
+    var statusTone = countryMentioned ? "watch" : "info";
+
+    var topHighlights = [];
+    if (bulletinDigest.highlights && bulletinDigest.highlights.length) {
+      topHighlights = topHighlights.concat(bulletinDigest.highlights);
+    }
+    if (technicalDigest.highlights && technicalDigest.highlights.length) {
+      topHighlights = topHighlights.concat(technicalDigest.highlights);
+    }
+    topHighlights = topHighlights.slice(0, 4);
+
+    return {
+      source: "RCC ACMAD 10-Day Climate Diagnostic Bulletin",
+      statusLabel: statusLabel,
+      statusTone: statusTone,
+      headline: "ACMAD 10-day climate diagnostic bulletin is available.",
+      summary: countryMentioned
+        ? "Country or regional signal was detected in ACMAD bulletin and technical note text."
+        : "ACMAD publishes regional 10-day diagnostics. Country-specific references may appear in maps rather than explicit text.",
+      bullets: [
+        "Product type: 10-day climate diagnostic bulletin (regional Africa focus).",
+        bulletinDigest.reportingPeriod ? "Reporting period: " + bulletinDigest.reportingPeriod + "." : null,
+        bulletinDigest.issueDate ? "Issue date: " + bulletinDigest.issueDate + "." : null,
+        topHighlights.length ? "Bulletin text extraction succeeded. Key climate context lines are included below." : "Could not extract climate context lines from the current PDF documents.",
+        "Regional bulletin context should be used alongside country-level sources for operational decisions."
+      ],
+      detailBlocks: [
+        {
+          title: "Extracted Bulletin Context",
+          lines: topHighlights.length ? topHighlights : ["No extractable weather/agriculture context lines found in current PDF text."]
+        }
+      ],
+      sourceLinks: [
+        bulletinPdf ? { label: "ACMAD Bulletin PDF", url: bulletinPdf } : null,
+        technicalNotePdf ? { label: "ACMAD Technical Note PDF", url: technicalNotePdf } : null,
+        highlightsPdf ? { label: "ACMAD Highlights PDF", url: highlightsPdf } : null
+      ].filter(Boolean),
+      updatedAt: formatIsoDate(new Date().toISOString()),
+      url: bulletinPdf || sourceUrl
+    };
+  }
+
+  async function fetchDIEMMonitoring(country, location) {
+    var serviceUrl = "https://services5.arcgis.com/sjP4Ugu5s0dZWLjd/arcgis/rest/services/OER_Monitoring_System_View/FeatureServer/0/query";
+    var countryNameUpper = String(country || "").trim().toUpperCase().replace(/'/g, "''");
+    var iso3 = null;
+
+    try {
+      var iso2 = String(location && location.countryCode ? location.countryCode : "").toLowerCase();
+      if (iso2) {
+        var countryMeta = await fetchJsonWithFallback("https://restcountries.com/v3.1/alpha/" + encodeURIComponent(iso2) + "?fields=cca3");
+        if (Array.isArray(countryMeta) && countryMeta[0] && countryMeta[0].cca3) {
+          iso3 = String(countryMeta[0].cca3).toUpperCase();
+        }
+      }
+    } catch (_) {}
+
+    var whereClauses = ["UPPER(admin0_name_en) = '" + countryNameUpper + "'"];
+    if (iso3) whereClauses.push("admin0_isocode = '" + iso3 + "'");
+
+    var queryOne = async function(whereClause) {
+      var url = serviceUrl
+        + "?f=json"
+        + "&where=" + encodeURIComponent(whereClause)
+        + "&outFields=" + encodeURIComponent("admin0_name_en,admin0_isocode,round,validation_date,coll_start_date,coll_end_date,survey_outdated,round_validated,shocks_highlights,crop_highlights,shocks_dashboard,crop_dashboard,shocks_recommendations,crop_recommendations,country_brief_link")
+        + "&orderByFields=" + encodeURIComponent("validation_date DESC")
+        + "&resultRecordCount=8"
+        + "&returnGeometry=false";
+      return fetchJsonWithFallback(url);
+    };
+
+    var features = [];
+    for (var i = 0; i < whereClauses.length; i += 1) {
+      try {
+        var payload = await queryOne(whereClauses[i]);
+        var rows = Array.isArray(payload && payload.features) ? payload.features : [];
+        if (rows.length) {
+          features = rows;
+          break;
+        }
+      } catch (_) {}
+    }
+
+    if (!features.length) {
+      return { skipDisplay: true, skipReason: "No DIEM monitoring country records" };
+    }
+
+    var now = Date.now();
+    var recentMs = 31 * 24 * 60 * 60 * 1000;
+    var recentFeatures = features.filter(function(feature) {
+      var attrs = feature && feature.attributes ? feature.attributes : {};
+      var validation = Number(attrs.validation_date || 0);
+      var end = Number(attrs.coll_end_date || 0);
+      return (validation && validation >= (now - recentMs)) || (end && end >= (now - recentMs));
+    });
+
+    if (!recentFeatures.length) {
+      return { skipDisplay: true, skipReason: "No DIEM records in the past month" };
+    }
+
+    var relevantRecords = recentFeatures.map(function(feature) {
+      var attrs = feature && feature.attributes ? feature.attributes : {};
+      var findingsText = [
+        attrs.shocks_highlights,
+        attrs.crop_highlights,
+        attrs.shocks_recommendations,
+        attrs.crop_recommendations
+      ].filter(Boolean).join(" ");
+      var weatherSignal = /(drought|flood|rain|storm|cyclone|heat|dry spell|weather|precipitation)/i.test(findingsText);
+      var foodSignal = /(crop|harvest|livestock|pasture|forage|food|agricultur|seed|fertilizer|market|price)/i.test(findingsText);
+      var validated = String(attrs.round_validated || "").toLowerCase() !== "no";
+      var outdated = String(attrs.survey_outdated || "").toLowerCase() === "yes";
+      return {
+        attrs: attrs,
+        findingsText: findingsText,
+        weatherSignal: weatherSignal,
+        foodSignal: foodSignal,
+        validated: validated,
+        outdated: outdated,
+        relevanceScore: (weatherSignal ? 2 : 0) + (foodSignal ? 2 : 0) + (validated ? 1 : 0) - (outdated ? 2 : 0)
+      };
+    }).filter(function(record) {
+      return (record.weatherSignal || record.foodSignal) && record.validated && !record.outdated;
+    }).sort(function(left, right) {
+      var lDate = Number(left.attrs.validation_date || left.attrs.coll_end_date || 0);
+      var rDate = Number(right.attrs.validation_date || right.attrs.coll_end_date || 0);
+      if (rDate !== lDate) return rDate - lDate;
+      return right.relevanceScore - left.relevanceScore;
+    });
+
+    if (!relevantRecords.length) {
+      return { skipDisplay: true, skipReason: "No recent weather/agriculture-relevant DIEM records" };
+    }
+
+    var latest = relevantRecords[0].attrs || {};
+    var findingsText = relevantRecords[0].findingsText;
+    var weatherSignal = relevantRecords[0].weatherSignal;
+    var foodSignal = relevantRecords[0].foodSignal;
+
+    var statusLabel = weatherSignal && foodSignal ? "Warning" : (weatherSignal || foodSignal ? "Watch" : "Info");
+    var statusTone = statusLabel === "Warning" ? "warning" : (statusLabel === "Watch" ? "watch" : "info");
+
+    var countryPage = latest.admin0_isocode
+      ? "https://data-in-emergencies.fao.org/pages/monitoring-country-specific/?id:c46alxin9:query:page=Indicators&id:c46alxin9:query:data_filter=dataSource_20-0:admin0_isocode%3D%27" + encodeURIComponent(String(latest.admin0_isocode)) + "%27"
+      : "https://data-in-emergencies.fao.org/pages/monitoring";
+
+    return {
+      source: "FAO DIEM Monitoring",
+      statusLabel: statusLabel,
+      statusTone: statusTone,
+      headline: "Recent DIEM monitoring results available for " + (latest.admin0_name_en || country) + ".",
+      summary: truncateText(findingsText || "DIEM survey round published with monitoring highlights.", 220),
+      bullets: [
+        "Survey round: " + (latest.round || "Unknown") + ".",
+        "Validation date: " + formatIsoDate(latest.validation_date) + ".",
+        latest.coll_start_date && latest.coll_end_date
+          ? "Collection period: " + formatIsoDate(latest.coll_start_date) + " to " + formatIsoDate(latest.coll_end_date) + "."
+          : null,
+        "Filtering rule: only validated, not-outdated, recent (<= 31 days) records with weather or agriculture relevance are shown.",
+        weatherSignal ? "Recent weather-related impacts/signals are referenced in survey highlights." : "No explicit recent weather signal found in summary text.",
+        foodSignal ? "Food/agriculture impact context detected (crop/food/livelihood references)." : "Food/agriculture context not explicit in summary fields."
+      ].filter(Boolean),
+      detailBlocks: [
+        {
+          title: "DIEM Highlights (Recent)",
+          lines: [
+            latest.shocks_highlights ? "Shocks: " + truncateText(latest.shocks_highlights, 180) : "Shocks: not reported",
+            latest.crop_highlights ? "Crop/Food: " + truncateText(latest.crop_highlights, 180) : "Crop/Food: not reported",
+            latest.shocks_dashboard ? "Shocks dashboard: " + latest.shocks_dashboard : null,
+            latest.crop_dashboard ? "Crop dashboard: " + latest.crop_dashboard : null
+          ].filter(Boolean)
+        }
+      ],
+      updatedAt: formatIsoDate(latest.validation_date || new Date().toISOString()),
+      url: countryPage
+    };
+  }
+
   async function fetchICPACOutlook(country) {
     var categoriesUrl = "https://droughtwatch.icpac.net/api/categories/";
     var datasetsUrl = "https://droughtwatch.icpac.net/api/datasets/";
     var eaHazardsDatasetsUrl = "https://eahazardswatch.icpac.net/api/datasets";
     var snapshotUrl = "https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/main/data/icpac_droughtwatch_snapshot.json";
+    var igadEmailDigestUrl = "https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/main/data/igad_email_digest.json";
     var eastAfricaCountries = [
       "burundi", "comoros", "djibouti", "eritrea", "ethiopia", "kenya",
       "rwanda", "somalia", "south sudan", "sudan", "tanzania", "uganda"
@@ -2977,9 +3465,37 @@
       var season = normalizeWhitespace(String(layer.end_season || "").replace(/_/g, "-"));
       var month = normalizeWhitespace(String(layer.end_month || ""));
       var dekad = normalizeWhitespace(String(layer.end_dekad || ""));
-      if (season) return (year ? year + " " : "") + season;
-      if (month && dekad) return (year ? year + " " : "") + month + " dekad " + dekad;
-      if (month) return (year ? year + " " : "") + month;
+      var monthNumber = parseMonth(month);
+      var monthNames = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      var monthLabel = monthNumber >= 1 && monthNumber <= 12 ? monthNames[monthNumber] : month;
+      var dekadNumber = Number(dekad);
+      var dekadIndex = 0;
+
+      // ICPAC layers often encode dekad as 01/11/21 (start day) or 1/2/3 (index)
+      if (Number.isFinite(dekadNumber)) {
+        if (dekadNumber === 1 || dekadNumber === 2 || dekadNumber === 3) {
+          dekadIndex = dekadNumber;
+        } else if (dekadNumber === 1 || dekadNumber === 11 || dekadNumber === 21) {
+          dekadIndex = dekadNumber === 1 ? 1 : (dekadNumber === 11 ? 2 : 3);
+        } else if (dekadNumber === 10 || dekadNumber === 20 || dekadNumber === 30 || dekadNumber === 31) {
+          dekadIndex = dekadNumber === 10 ? 1 : (dekadNumber === 20 ? 2 : 3);
+        }
+      }
+
+      if (season) return season + (year ? " - " + year : "");
+
+      if (monthLabel && dekadIndex && year) {
+        var y = Number(year);
+        var lastDay = Number.isFinite(y) && monthNumber ? new Date(y, monthNumber, 0).getDate() : 30;
+        var rangeStart = dekadIndex === 1 ? 1 : (dekadIndex === 2 ? 11 : 21);
+        var rangeEnd = dekadIndex === 1 ? 10 : (dekadIndex === 2 ? 20 : lastDay);
+        var startLabel = String(rangeStart).padStart(2, "0");
+        var endLabel = String(rangeEnd).padStart(2, "0");
+        return "Dekad " + dekadIndex + " (" + startLabel + "-" + endLabel + ") - " + monthLabel + " - " + year;
+      }
+
+      if (monthLabel && dekad) return "Dekad " + dekad + " - " + monthLabel + (year ? " - " + year : "");
+      if (monthLabel) return monthLabel + (year ? " - " + year : "");
       return year || "Unknown";
     };
 
@@ -2996,7 +3512,7 @@
       return best;
     };
 
-    var buildIcpacCard = function(categoryList, datasetList, modeLabel, snapshotTimestamp) {
+    var buildIcpacCard = function(categoryList, datasetList, modeLabel, snapshotTimestamp, igadContext) {
       var droughtDatasets = datasetList.filter(function(dataset) {
         var category = String(dataset && dataset.category || "").toLowerCase();
         var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
@@ -3115,7 +3631,9 @@
                 severity: droughtSeverity,
                 datasets: droughtDatasets.map(function(ds) { return ds.name; }).join(", "),
                 latestDate: formatLayerPeriod(droughtLatest.layer),
-                details: droughtLatest.dataset.name
+                details: droughtLatest.dataset.name,
+                trigger: activeDrought.length + " active drought layer(s), " + recoveryLayers.length + " recovery/normal layer(s)",
+                source: "Drought Watch"
               });
             }
           }
@@ -3150,7 +3668,11 @@
                 datasets: rainfallForecastDatasets.length + " rainfall dataset(s) active",
                 latestDate: formatLayerPeriod(rainfallLatest.layer),
                 details: (exceptionalRainfallDatasets.length > 0 ? "Exceptional rainfall detected. " : "") + 
-                         (aboveNormalRainfallLayers.length > 0 ? aboveNormalRainfallLayers.length + " above-normal forecast layers" : "Within normal range")
+                         (aboveNormalRainfallLayers.length > 0 ? aboveNormalRainfallLayers.length + " above-normal forecast layers" : "Within normal range"),
+                trigger: exceptionalRainfallDatasets.length > 0
+                  ? "Exceptional Rainfall dataset present"
+                  : aboveNormalRainfallLayers.length + " above-normal rainfall layers",
+                source: exceptionalRainfallDatasets.length > 0 ? "EA Hazards Watch + Drought Watch" : "Drought Watch"
               });
             }
           }
@@ -3182,7 +3704,11 @@
                 latestDate: formatLayerPeriod(tempLatest.layer),
                 details: aboveNormalTempLayers.length > 0 
                   ? aboveNormalTempLayers.length + " above-normal temperature forecast layer(s)"
-                  : "Within normal range"
+                  : "Within normal range",
+                trigger: aboveNormalTempLayers.length > 0
+                  ? "Above-normal forecast classes detected"
+                  : "Temperature anomaly monitoring active",
+                source: "Drought Watch + EA Hazards Watch"
               });
             }
           }
@@ -3214,7 +3740,9 @@
                 datasets: (soilMoistureDatasets.length > 0 ? soilMoistureDatasets.length + " soil moisture, " : "") + 
                           (vegetationStressDatasets.length > 0 ? vegetationStressDatasets.length + " vegetation" : "") + " dataset(s)",
                 latestDate: formatLayerPeriod(latest.layer),
-                details: "Combined monitoring of agricultural stress indicators"
+                details: "Combined monitoring of agricultural stress indicators",
+                trigger: "Vegetation and soil moisture anomalies jointly tracked",
+                source: "Drought Watch"
               });
             }
           }
@@ -3247,7 +3775,11 @@
                           (displacementDatasets.length > 0 ? displacementDatasets.length + " displacement" : "") + " dataset(s)",
                 latestDate: agriLatestOverall ? formatLayerPeriod(agriLatestOverall.layer) : "Current",
                 details: (agriculturalDatasets.length > 0 ? "Agricultural conditions monitored (crops, pasture, forage). " : "") +
-                         (displacementDatasets.length > 0 ? "Disaster-induced population displacements tracked." : "")
+                         (displacementDatasets.length > 0 ? "Disaster-induced population displacements tracked." : ""),
+                trigger: displacementDatasets.length > 0
+                  ? "Displacement/humanitarian impact dataset present"
+                  : "Crop/forage/rangeland condition monitoring active",
+                source: "EA Hazards Watch"
               });
             }
           }
@@ -3266,7 +3798,9 @@
                 severity: "Watch",
                 datasets: diseaseDatasets.length + " dataset(s)",
                 latestDate: formatLayerPeriod(diseaseLatest.layer),
-                details: "Active monitoring of outbreak probability and disease risk"
+                details: "Active monitoring of outbreak probability and disease risk",
+                trigger: "Outbreak Probability layer available",
+                source: "EA Hazards Watch"
               });
             }
           }
@@ -3280,7 +3814,9 @@
               var severityIcon = t.severity === "Alert" ? "🔴" : t.severity === "Warning" ? "🟧" : "🟨";
               return severityIcon + " " + t.category + " (" + t.severity + ")\n" +
                      "   Date: " + t.latestDate + "\n" +
-                     "   " + t.details;
+                     "   Context: " + t.details + "\n" +
+                     "   Trigger: " + (t.trigger || "Signal threshold reached") + "\n" +
+                     "   Source: " + (t.source || "ICPAC");
             });
 
             detailBlocks.push({
@@ -3308,6 +3844,17 @@
               "Geographic scope: East Africa (12 countries: Kenya, Ethiopia, Uganda, Tanzania, Somalia, Sudan, South Sudan, Rwanda, Burundi, Djibouti, Eritrea, Comoros)"
             ]
           });
+
+          if (igadContext && igadContext.summary) {
+            detailBlocks.push({
+              title: "📬 IGAD / ICPAC Bulletin Context",
+              lines: [
+                igadContext.summary,
+                igadContext.updatedAt ? "Bulletin date: " + formatIsoDate(igadContext.updatedAt) : "Bulletin date: Unknown",
+                igadContext.source ? "Source: " + igadContext.source : "Source: IGAD/ICPAC bulletin digest"
+              ]
+            });
+          }
 
       var severityRank = { Watch: 1, Warning: 2, Alert: 3 };
       var overallSeverity = threats.reduce(function(current, threat) {
@@ -3341,6 +3888,30 @@
       };
     };
 
+    var fetchIgadEmailContext = async function(targetCountry) {
+      try {
+        var digest = await fetchJsonWithFallback(igadEmailDigestUrl);
+        if (!digest || typeof digest !== "object") return null;
+
+        var entries = Array.isArray(digest.entries) ? digest.entries : [];
+        var countryEntries = entries.filter(function(entry) {
+          var text = [entry && entry.title, entry && entry.summary, entry && entry.text].filter(Boolean).join(" ");
+          return textMatchesCountry(text, targetCountry);
+        });
+
+        var chosen = countryEntries[0] || entries[0];
+        if (!chosen) return null;
+
+        return {
+          summary: truncateText(chosen.summary || chosen.title || chosen.text || "IGAD bulletin available.", 220),
+          updatedAt: chosen.date || chosen.published_at || digest.updated_at,
+          source: chosen.source_url || digest.source || "IGAD / ICPAC mailing digest"
+        };
+      } catch (_) {
+        return null;
+      }
+    };
+
     try {
       var liveCategories = [];
       var liveDatasets = [];
@@ -3371,10 +3942,13 @@
         throw new Error("ICPAC live datasets are not currently available.");
       }
 
+      var igadContext = await fetchIgadEmailContext(country);
       return buildIcpacCard(
         liveCategories,
         liveDatasets,
-        "Source uses live ICPAC APIs: " + (liveSourceLabels.length ? liveSourceLabels.join(" + ") : "unattributed live feed") + "."
+        "Source uses live ICPAC APIs: " + (liveSourceLabels.length ? liveSourceLabels.join(" + ") : "unattributed live feed") + ".",
+        null,
+        igadContext
       );
     } catch (_) {
       try {
@@ -3406,11 +3980,13 @@
         }
         
         if (allDatasets.length) {
+          var igadSnapshotContext = await fetchIgadEmailContext(country);
           return buildIcpacCard(
             allCategories,
             allDatasets,
             "Source uses cached ICPAC combined snapshot (Droughtwatch + EA Hazards Watch) from GitHub Actions fallback.",
-            snapshotFetchedAt
+            snapshotFetchedAt,
+            igadSnapshotContext
           );
         }
       } catch (_) {}
