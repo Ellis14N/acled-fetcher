@@ -4492,6 +4492,10 @@
   function normalizeCountrySlug(country) {
     var key = (country || '').toLowerCase().trim();
     var map = {
+      'congo': 'congo',
+      'republic of congo': 'congo',
+      'republic of the congo': 'congo',
+      'congo brazzaville': 'congo',
       'dr congo': 'democratic-republic-of-the-congo',
       'drc': 'democratic-republic-of-the-congo',
       'democratic republic of congo': 'democratic-republic-of-the-congo',
@@ -4504,6 +4508,79 @@
     };
     if (map[key]) return map[key];
     return key.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  }
+
+  function normalizeCountryNameKey(value) {
+    return normalizeSearchText(value).replace(/^the\s+/, '').trim();
+  }
+
+  const TRAVEL_COUNTRY_VARIATIONS = {
+    "republic of the congo": {
+      aliases: ["congo", "republic of congo", "congo brazzaville", "roc"],
+      fcdoSlugs: ["congo"],
+      frenchSlugs: ["republique-du-congo", "congo"],
+      dfatNames: ["Republic of the Congo", "Congo, Republic of", "Congo (Republic of the Congo)", "Congo-Brazzaville"],
+      stateDeptNames: ["Congo (Brazzaville)", "Republic of the Congo", "Congo"]
+    },
+    "democratic republic of the congo": {
+      aliases: ["drc", "dr congo", "congo kinshasa", "democratic republic of congo"],
+      fcdoSlugs: ["democratic-republic-of-the-congo"],
+      frenchSlugs: ["republique-democratique-du-congo"],
+      dfatNames: ["Democratic Republic of the Congo", "Congo, Democratic Republic of", "DR Congo"],
+      stateDeptNames: ["Congo (Kinshasa)", "Democratic Republic of the Congo", "DRC"]
+    },
+    "ivory coast": {
+      aliases: ["cote d'ivoire", "cote d ivoire", "côte d'ivoire"],
+      fcdoSlugs: ["cote-divoire"],
+      frenchSlugs: ["cote-d-ivoire"],
+      dfatNames: ["Côte d'Ivoire", "Cote d'Ivoire", "Ivory Coast"],
+      stateDeptNames: ["Cote d'Ivoire", "Ivory Coast"]
+    },
+    "central african republic": {
+      aliases: ["car", "republique centrafricaine"],
+      fcdoSlugs: ["central-african-republic"],
+      frenchSlugs: ["republique-centrafricaine"],
+      dfatNames: ["Central African Republic"],
+      stateDeptNames: ["Central African Republic"]
+    }
+  };
+
+  function resolveTravelCountryProfile(country) {
+    var raw = normalizeWhitespace(country || '');
+    var key = normalizeCountryNameKey(raw);
+    var canonical = raw;
+    var profile = null;
+
+    Object.keys(TRAVEL_COUNTRY_VARIATIONS).some(function(canonicalName) {
+      var config = TRAVEL_COUNTRY_VARIATIONS[canonicalName] || {};
+      var candidates = [canonicalName].concat(config.aliases || []).map(normalizeCountryNameKey);
+      if (candidates.indexOf(key) === -1) return false;
+      canonical = canonicalName;
+      profile = config;
+      return true;
+    });
+
+    var canonicalLabel = canonical.split(' ').map(function(part) {
+      return part ? part.charAt(0).toUpperCase() + part.slice(1) : part;
+    }).join(' ');
+
+    var aliases = profile ? [canonical].concat(profile.aliases || []) : [raw];
+    var normalizedAliasSet = {};
+    aliases.forEach(function(value) {
+      var normalized = normalizeCountryNameKey(value);
+      if (normalized) normalizedAliasSet[normalized] = true;
+    });
+
+    var normalizedAliases = Object.keys(normalizedAliasSet);
+    return {
+      input: raw,
+      canonicalName: canonicalLabel,
+      normalizedAliases: normalizedAliases,
+      fcdoSlugs: profile && profile.fcdoSlugs && profile.fcdoSlugs.length ? profile.fcdoSlugs.slice() : [normalizeCountrySlug(raw)],
+      frenchSlugs: profile && profile.frenchSlugs && profile.frenchSlugs.length ? profile.frenchSlugs.slice() : [normalizeCountrySlug(raw)],
+      dfatNames: profile && profile.dfatNames && profile.dfatNames.length ? profile.dfatNames.slice() : [raw],
+      stateDeptNames: profile && profile.stateDeptNames && profile.stateDeptNames.length ? profile.stateDeptNames.slice() : [raw]
+    };
   }
 
   // UK FCDO: API parser
@@ -4565,12 +4642,21 @@
   }
 
   async function fetchFCDO(country) {
-    var slug = normalizeCountrySlug(country);
-    var resp = await fetch('https://www.gov.uk/api/content/foreign-travel-advice/' + slug);
-    if (resp.status === 404) throw new Error('No FCDO page found for "' + country + '"');
-    if (!resp.ok) throw new Error('FCDO API error: HTTP ' + resp.status);
-    var json = await resp.json();
-    return parseFCDOApiResponse(json, country, slug);
+    var profile = resolveTravelCountryProfile(country);
+    var lastStatus = 0;
+
+    for (var i = 0; i < profile.fcdoSlugs.length; i += 1) {
+      var slug = profile.fcdoSlugs[i];
+      var resp = await fetch('https://www.gov.uk/api/content/foreign-travel-advice/' + slug);
+      lastStatus = resp.status;
+      if (resp.status === 404) continue;
+      if (!resp.ok) throw new Error('FCDO API error: HTTP ' + resp.status);
+      var json = await resp.json();
+      return parseFCDOApiResponse(json, profile.canonicalName || country, slug);
+    }
+
+    if (lastStatus === 404) throw new Error('No FCDO page found for "' + (profile.canonicalName || country) + '"');
+    throw new Error('FCDO API error: HTTP ' + (lastStatus || 'unknown'));
   }
 
   // US State Department: ArcGIS parser
@@ -4605,21 +4691,34 @@
   }
 
   async function fetchStateDept(country) {
-    var sqlWhere = "Country_Name = '" + country.replace(/'/g, "''") + "'";
-    var arcgisUrl = 'https://gis.state.gov/arcgis/rest/services/travel/Travel/MapServer/0/query'
-      + '?f=json&where=' + encodeURIComponent(sqlWhere)
-      + '&outFields=*';
+    var profile = resolveTravelCountryProfile(country);
+
+    var buildArcgisUrl = function(countryName) {
+      var sqlWhere = "Country_Name = '" + String(countryName || '').replace(/'/g, "''") + "'";
+      return 'https://gis.state.gov/arcgis/rest/services/travel/Travel/MapServer/0/query'
+        + '?f=json&where=' + encodeURIComponent(sqlWhere)
+        + '&outFields=*';
+    };
 
     try {
-      var json = await fetchJsonWithFallback(arcgisUrl);
-      return parseStateDeptArcgisResponse(json, country);
+      for (var i = 0; i < profile.stateDeptNames.length; i += 1) {
+        var json = await fetchJsonWithFallback(buildArcgisUrl(profile.stateDeptNames[i]));
+        if (json && Array.isArray(json.features) && json.features.length) {
+          return parseStateDeptArcgisResponse(json, profile.canonicalName || country);
+        }
+      }
+      throw new Error('Country not found in State Department data');
     } catch (_) {
       // Fallback to the public advisory index page when ArcGIS is blocked.
       var indexUrl = 'https://travel.state.gov/en/international-travel/travel-advisories.html';
       var pageText = htmlToText(await fetchTextWithFallback(indexUrl));
-      var countryEsc = country.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      var re = new RegExp(countryEsc + '[\\s\\S]{0,180}?Level\\s*[1-4]', 'i');
-      var hit = pageText.match(re);
+      var hit = null;
+      for (var j = 0; j < profile.stateDeptNames.length; j += 1) {
+        var countryEsc = String(profile.stateDeptNames[j] || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var re = new RegExp(countryEsc + '[\\s\\S]{0,180}?Level\\s*[1-4]', 'i');
+        hit = pageText.match(re);
+        if (hit) break;
+      }
       if (!hit) throw new Error('Country not found on US State advisory page');
       var levelMatch = hit[0].match(/Level\s*([1-4])/i);
       var level = levelMatch ? parseInt(levelMatch[1], 10) : 0;
@@ -4632,7 +4731,7 @@
       return {
         level: level,
         levelText: map[level] || 'Advisory level unavailable',
-        advisory: 'US State Department ' + (map[level] || 'advisory') + ' for ' + country + '.',
+        advisory: 'US State Department ' + (map[level] || 'advisory') + ' for ' + (profile.canonicalName || country) + '.',
         stillCurrentAt: formatDate(new Date()),
         updatedAt: null,
         primaryDriver: extractPrimaryDriver(hit[0]),
@@ -4642,16 +4741,21 @@
   }
 
   // Australian DFAT: destinations page parser + country page parser
-  function parseDFATDestinationsHtml(html, country) {
+  function parseDFATDestinationsHtml(html, countryProfile) {
     var doc = new DOMParser().parseFromString(html, 'text/html');
     var rows = doc.querySelectorAll('tr');
-    var target = (country || '').toLowerCase().trim();
+    var targets = (countryProfile && countryProfile.dfatNames && countryProfile.dfatNames.length ? countryProfile.dfatNames : [countryProfile && countryProfile.input ? countryProfile.input : ''])
+      .map(normalizeCountryNameKey)
+      .filter(Boolean);
+    var targetSet = {};
+    targets.forEach(function(name) { targetSet[name] = true; });
 
     for (var i = 0; i < rows.length; i++) {
       var cells = rows[i].querySelectorAll('td');
       if (cells.length < 4) continue;
       var name = (cells[0].textContent || '').replace(/\s+/g, ' ').trim();
-      if (name.toLowerCase() !== target) continue;
+      var normalizedName = normalizeCountryNameKey(name);
+      if (!targetSet[normalizedName]) continue;
 
       var linkEl = cells[0].querySelector('a[href*="/destinations/"]');
       return {
@@ -4675,10 +4779,11 @@
   }
 
   async function fetchAusDFAT(country) {
+    var profile = resolveTravelCountryProfile(country);
     var listUrl = 'https://www.smartraveller.gov.au/destinations';
     var listHtml = await fetchTextWithFallback(listUrl);
 
-    var parsedList = parseDFATDestinationsHtml(listHtml, country);
+    var parsedList = parseDFATDestinationsHtml(listHtml, profile);
     var detail = { advisorySentence: null, primaryDriver: null };
 
     if (parsedList.href) {
@@ -4742,52 +4847,64 @@
   }
 
   async function fetchFrenchMEAE(country) {
-    var slugMap = {
-      'chad': 'tchad',
-      'south sudan': 'soudan-du-sud',
-      'morocco': 'maroc',
-      'algeria': 'algerie',
-      'tunisia': 'tunisie',
-      'mali': 'mali',
-      'sudan': 'soudan',
-      'niger': 'niger',
-      'burkina faso': 'burkina-faso',
-      'ivory coast': 'cote-d-ivoire',
-      "cote d'ivoire": 'cote-d-ivoire',
-      'dr congo': 'republique-democratique-du-congo',
-      'drc': 'republique-democratique-du-congo',
-      'democratic republic of the congo': 'republique-democratique-du-congo',
-      'central african republic': 'republique-centrafricaine',
-      'car': 'republique-centrafricaine',
+    var profile = resolveTravelCountryProfile(country);
+    var pageCandidates = [];
+    profile.frenchSlugs.forEach(function(slug) {
+      if (!slug) return;
+      pageCandidates.push('https://www.diplomatie.gouv.fr/fr/information-par-pays/' + slug + '/conseils-aux-voyageurs-securite');
+      pageCandidates.push('https://www.diplomatie.gouv.fr/fr/information-par-pays/' + slug + '/conseils-aux-voyageurs-securite/');
+      pageCandidates.push('https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/' + slug + '/');
+    });
+
+    var looksLikeCountrySecurityPage = function(html, targetSlug) {
+      var raw = String(html || '').toLowerCase();
+      var expected = ('information-par-pays/' + targetSlug + '/conseils-aux-voyageurs-securite').toLowerCase();
+      if (raw.indexOf(expected) !== -1) return true;
+      return raw.indexOf('conseils-aux-voyageurs-securite') !== -1 && raw.indexOf(('information-par-pays/' + targetSlug + '/').toLowerCase()) !== -1;
     };
 
-    var key = (country || '').toLowerCase().trim();
-    var slug = slugMap[key] || key.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    var pageUrl = 'https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/conseils-par-pays-destination/' + slug + '/';
-
     try {
-      var html = await fetchTextWithFallback(pageUrl);
-      if (html.length < 2000) throw new Error('Short response');
-      return parseFrenchMEAEHtml(html, country, pageUrl);
+      for (var i = 0; i < pageCandidates.length; i += 1) {
+        var pageUrl = pageCandidates[i];
+        var html = await fetchTextWithFallback(pageUrl);
+        if (html.length < 1200) continue;
+        var slugMatch = pageUrl.match(/information-par-pays\/([^\/]+)\//i);
+        var candidateSlug = slugMatch && slugMatch[1] ? slugMatch[1] : '';
+        if (candidateSlug && !looksLikeCountrySecurityPage(html, candidateSlug)) continue;
+        return parseFrenchMEAEHtml(html, profile.canonicalName || country, pageUrl);
+      }
+      throw new Error('Country security advisory page not found');
     } catch (_) {
-      // Fallback to the two pages the user provided.
+      // Fallback to aggregate pages if the country security page is temporarily unreachable.
       var mainUrl = 'https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/';
       var latestUrl = 'https://www.diplomatie.gouv.fr/fr/conseils-aux-voyageurs/dernieres-minutes/';
       var latestText = htmlToText(await fetchTextWithFallback(latestUrl));
-      var countryEsc = country.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      var hitRe = new RegExp(countryEsc + '[\\s\\S]{0,220}?(Situation sécuritaire|Vigilance|Publié le|Actualisé le)', 'i');
-      var hit = latestText.match(hitRe);
+      var normalizedLatestText = normalizeSearchText(latestText);
+      var hit = null;
+      for (var j = 0; j < profile.normalizedAliases.length; j += 1) {
+        var alias = profile.normalizedAliases[j] || '';
+        if (!alias) continue;
+        if (normalizedLatestText.indexOf(alias) !== -1) {
+          hit = [alias];
+        }
+        if (hit) break;
+      }
       if (!hit) {
         var mainText = htmlToText(await fetchTextWithFallback(mainUrl));
-        if (!new RegExp(countryEsc, 'i').test(mainText)) {
+        var normalizedMainText = normalizeSearchText(mainText);
+        var foundAlias = profile.normalizedAliases.some(function(alias) {
+          if (!alias) return false;
+          return normalizedMainText.indexOf(alias) !== -1;
+        });
+        if (!foundAlias) {
           throw new Error('Country not found on French advisory pages');
         }
       }
-      var snippet = hit ? hit[0] : country;
+      var snippet = hit ? hit[0] : (profile.canonicalName || country);
       return {
         level: /formellement\s+d[eé]conseill[eé]/i.test(snippet) ? 4 : (/vigilance\s+renforc[eé]e/i.test(snippet) ? 2 : 0),
         levelText: /formellement\s+d[eé]conseill[eé]/i.test(snippet) ? 'Formally advised against' : (/vigilance\s+renforc[eé]e/i.test(snippet) ? 'Enhanced vigilance' : 'See advisory page'),
-        advisory: translateFrenchSnippetToEnglish(snippet) || ('MEAE advisory available for ' + country + '. See latest notice.'),
+        advisory: translateFrenchSnippetToEnglish(snippet) || ('MEAE advisory available for ' + (profile.canonicalName || country) + '. See latest notice.'),
         stillCurrentAt: formatDate(new Date()),
         updatedAt: null,
         primaryDriver: extractPrimaryDriver(snippet),
