@@ -1,4 +1,4 @@
-name: Refresh ICPAC Drought Snapshot
+name: Refresh ICPAC Combined Snapshot (Droughtwatch + EA Hazards Watch)
 
 on:
   workflow_dispatch:

@@ -696,6 +696,16 @@
       line-height: 1.6;
     }
 
+    .weather-mode {
+      font-size: 12px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      background: rgba(71, 85, 105, 0.18);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 8px;
+      padding: 6px 8px;
+    }
+
     .weather-points {
       padding-left: 18px;
       display: grid;
@@ -2286,6 +2296,7 @@
       '</div>',
       '<div class="weather-headline">' + escapeHtml(data.headline || "Latest weather update") + '</div>',
       '<div class="weather-summary">' + escapeHtml(data.summary || "No summary available.") + '</div>',
+      data.dataMode ? '<div class="weather-mode">Data mode: ' + escapeHtml(data.dataMode) + '</div>' : '',
       detailBlocksHtml,
       bullets.length ? '<ul class="weather-points">' + bullets.map(function(point) { return '<li>' + escapeHtml(point) + '</li>'; }).join("") + '</ul>' : '',
       '<div class="weather-meta">Updated: ' + escapeHtml(data.updatedAt || "Not available") + '</div>',
@@ -2990,8 +3001,44 @@
         return /flood/i.test(text);
       });
 
+      var cropConditionDatasets = datasetList.filter(function(dataset) {
+        var category = String(dataset && dataset.category || "").toLowerCase();
+        var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
+        return category === "vegetation-condition"
+          || category === "vegetation_response"
+          || /(crop|cropland|rangeland|vegetation condition|vegetation response|vci|ndvi)/i.test(text);
+      });
+
+      var heatStressDatasets = datasetList.filter(function(dataset) {
+        var category = String(dataset && dataset.category || "").toLowerCase();
+        var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
+        return category === "temperature-forecasts"
+          || category === "temperature-conditions"
+          || /(heat\s*stress|temperature\s*forecast|temp_forecast|temperature condition)/i.test(text);
+      });
+
+      var agriculturalImpactDatasets = datasetList.filter(function(dataset) {
+        var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
+        return /crops?\s*condition|rangeland|forage|pasture/i.test(text);
+      });
+
+      var cycloneDatasets = datasetList.filter(function(dataset) {
+        var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
+        return /cyclone|tropical storm/i.test(text);
+      });
+
+      var diseaseOutbreakDatasets = datasetList.filter(function(dataset) {
+        var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
+        return /disease|outbreak|locust/i.test(text);
+      });
+
       var droughtLatest = pickLatestLayer(droughtDatasets);
       var precipitationLatest = pickLatestLayer(precipitationForecastDatasets);
+      var cropLatest = pickLatestLayer(cropConditionDatasets);
+      var heatLatest = pickLatestLayer(heatStressDatasets);
+      var agriLatest = pickLatestLayer(agriculturalImpactDatasets);
+      var cycloneLatest = pickLatestLayer(cycloneDatasets);
+      var diseaseLatest = pickLatestLayer(diseaseOutbreakDatasets);
 
       var aboveNormalForecastLayers = precipitationForecastDatasets.reduce(function(acc, dataset) {
         var layers = Array.isArray(dataset.layers) ? dataset.layers : [];
@@ -3001,9 +3048,31 @@
         }));
       }, []);
 
+      var aboveNormalTempLayers = heatStressDatasets.reduce(function(acc, dataset) {
+        var layers = Array.isArray(dataset.layers) ? dataset.layers : [];
+        return acc.concat(layers.filter(function(layer) {
+          var nameSlug = (layer && layer.name ? layer.name : "") + " " + (layer && layer.slug ? layer.slug : "");
+          return /(above\s*normal|_above|above_)/i.test(nameSlug);
+        }));
+      }, []);
+
+      var droughtRisk = droughtDatasets.length ? (droughtDatasets.length >= 3 ? "High" : "Watch") : "Low";
+      var heavyRainRisk = aboveNormalForecastLayers.length ? (aboveNormalForecastLayers.length >= 2 ? "High" : "Watch") : "Low";
+      var heatStressRisk = aboveNormalTempLayers.length ? (aboveNormalTempLayers.length >= 2 ? "High" : "Watch") : (heatStressDatasets.length ? "Watch" : "Low");
+      var cropConditions = cropConditionDatasets.length ? "Monitoring available" : "Limited";
+      var agriculturalStatus = agriculturalImpactDatasets.length ? "Active monitoring" : "Not available";
+      var cycloneRisk = cycloneDatasets.length ? "Tracking active" : "No active threats";
+      var diseaseRisk = diseaseOutbreakDatasets.length ? "Monitoring active" : "Not available";
+
+      var scoreMap = { Low: 1, Watch: 2, High: 3 };
+      var maxScore = Math.max(scoreMap[droughtRisk] || 1, scoreMap[heavyRainRisk] || 1, scoreMap[heatStressRisk] || 1);
+
       var statusTone = "low";
       var statusLabel = "Low";
-      if (droughtDatasets.length || aboveNormalForecastLayers.length || floodNamedDatasets.length) {
+      if (maxScore >= 3) {
+        statusTone = "high";
+        statusLabel = "High";
+      } else if (maxScore >= 2 || floodNamedDatasets.length) {
         statusTone = "watch";
         statusLabel = "Watch";
       }
@@ -3015,6 +3084,23 @@
         .join(", ");
 
       var detailBlocks = [
+        {
+          title: "Key ICPAC Risk Signals",
+          lines: [
+            "Drought risk: " + droughtRisk + (droughtLatest ? " (" + formatLayerPeriod(droughtLatest.layer) + ")" : ""),
+            "Heavy rainfall risk: " + heavyRainRisk + (precipitationLatest ? " (" + formatLayerPeriod(precipitationLatest.layer) + ")" : ""),
+            "Crop conditions: " + cropConditions + (cropLatest ? " (" + (cropLatest.layer.name || cropLatest.dataset.name || "Latest crop layer") + ")" : ""),
+            "Heat stress risk: " + heatStressRisk + (heatLatest ? " (" + formatLayerPeriod(heatLatest.layer) + ")" : "")
+          ]
+        },
+        {
+          title: "Agricultural & Hazard Monitoring",
+          lines: [
+            "Agricultural impacts: " + agriculturalStatus + " (" + agriculturalImpactDatasets.length + " datasets).",
+            "Cyclone & severe weather: " + cycloneRisk + (cycloneDatasets.length ? " (" + cycloneDatasets.length + " tracking dataset(s))." : "."),
+            "Disease outbreak: " + diseaseRisk + (diseaseOutbreakDatasets.length ? " (" + diseaseOutbreakDatasets.length + " dataset(s))." : ".")
+          ]
+        },
         {
           title: "Drought Monitoring",
           lines: [
@@ -3040,15 +3126,20 @@
       ];
 
       return {
-        source: "ICPAC Drought Watch (IGAD-IPAC)",
+        source: "ICPAC (Droughtwatch + EA Hazards Watch)",
         statusLabel: statusLabel,
         statusTone: statusTone,
-        headline: "Near-real-time ICPAC climate monitoring is active for East Africa.",
+        dataMode: modeLabel.indexOf("live ICPAC") !== -1 ? "Live API" : "Cached Snapshot",
+        headline: "Integrated ICPAC climate and hazard monitoring active for East Africa.",
         summary: precipitationLatest
           ? "Latest precipitation outlook layer: " + (precipitationLatest.layer.name || precipitationLatest.dataset.name || "Forecast layer") + " (" + formatLayerPeriod(precipitationLatest.layer) + ")."
           : "ICPAC catalog confirms active drought and climate monitoring layers, but latest precipitation timing was not parsed.",
         bullets: [
           modeLabel,
+          "Risk snapshot - Drought: " + droughtRisk + ", Heavy rainfall: " + heavyRainRisk + ", Crop conditions: " + cropConditions + ", Heat stress: " + heatStressRisk + ".",
+          agriculturalImpactDatasets.length ? "Agricultural monitoring active (" + agriculturalImpactDatasets.length + " datasets); " + agriculturalStatus + "." : "Agricultural impact datasets not currently available.",
+          cycloneDatasets.length ? "Cyclone tracking active (" + cycloneDatasets.length + " dataset(s))." : "No active cyclone data.",
+          diseaseOutbreakDatasets.length ? "Disease outbreak monitoring active (" + diseaseOutbreakDatasets.length + " dataset(s))." : "Disease outbreak datasets not active.",
           snapshotTimestamp ? "Cached snapshot generated: " + formatIsoDate(snapshotTimestamp) + "." : null,
           "Use above-normal precipitation outlooks as flood-early-warning context; combine with local hydrology and river forecasts.",
           "For non-East-Africa countries, this source is regional context rather than country-specific hazard certainty."
@@ -3072,14 +3163,38 @@
     } catch (_) {
       try {
         var snapshot = await fetchJsonWithFallback(snapshotUrl);
-        var snapshotCategories = Array.isArray(snapshot && snapshot.categories) ? snapshot.categories : [];
-        var snapshotDatasets = Array.isArray(snapshot && snapshot.datasets) ? snapshot.datasets : [];
-        if (snapshotDatasets.length) {
+        var allDatasets = [];
+        var allCategories = [];
+        var snapshotFetchedAt = snapshot && snapshot.fetched_at_utc;
+        
+        // Merge datasets from both ICPAC sources (if new combined structure exists)
+        if (snapshot && snapshot.sources) {
+          if (snapshot.sources.droughtwatch && Array.isArray(snapshot.sources.droughtwatch.datasets)) {
+            allDatasets = allDatasets.concat(snapshot.sources.droughtwatch.datasets);
+            if (Array.isArray(snapshot.sources.droughtwatch.categories)) {
+              allCategories = allCategories.concat(snapshot.sources.droughtwatch.categories);
+            }
+          }
+          if (snapshot.sources.ea_hazards_watch && Array.isArray(snapshot.sources.ea_hazards_watch.datasets)) {
+            allDatasets = allDatasets.concat(snapshot.sources.ea_hazards_watch.datasets);
+            if (Array.isArray(snapshot.sources.ea_hazards_watch.categories)) {
+              allCategories = allCategories.concat(snapshot.sources.ea_hazards_watch.categories);
+            }
+          }
+        }
+        // Fallback to old snapshot structure if new structure doesn't exist
+        else if (snapshot) {
+          allDatasets = Array.isArray(snapshot.datasets) ? snapshot.datasets : [];
+          allCategories = Array.isArray(snapshot.categories) ? snapshot.categories : [];
+          snapshotFetchedAt = snapshot && (snapshot.fetched_at_utc || snapshot.generated_at || snapshot.fetched_at);
+        }
+        
+        if (allDatasets.length) {
           return buildIcpacCard(
-            snapshotCategories,
-            snapshotDatasets,
-            "Source uses cached ICPAC Drought Watch snapshot from GitHub Actions fallback.",
-            snapshot && (snapshot.fetched_at_utc || snapshot.generated_at || snapshot.fetched_at)
+            allCategories,
+            allDatasets,
+            "Source uses cached ICPAC combined snapshot (Droughtwatch + EA Hazards Watch) from GitHub Actions fallback.",
+            snapshotFetchedAt
           );
         }
       } catch (_) {}
@@ -3099,6 +3214,7 @@
           source: "ICPAC / IGAD",
           statusLabel: severeSignals.length ? "Watch" : "Info",
           statusTone: severeSignals.length ? "watch" : "info",
+          dataMode: "Weekly Fallback",
           headline: matches.length ? "ICPAC weekly forecast mentions " + country + "." : "ICPAC weekly forecast available (regional context).",
           summary: matches.length ? truncateText(matches[0], 180) : "Drought Watch API is temporarily unreachable from this network path; showing weekly ICPAC narrative fallback.",
           bullets: [
@@ -3111,15 +3227,16 @@
         };
       } catch (_) {
         return {
-          source: "ICPAC Drought Watch (IGAD-IPAC)",
+          source: "ICPAC (Droughtwatch + EA Hazards Watch)",
           statusLabel: "Info",
           statusTone: "info",
-          headline: "ICPAC live API temporarily unreachable.",
-          summary: "Unable to load ICPAC JSON data from available network routes in this browser session.",
+          dataMode: "Unavailable",
+          headline: "ICPAC live APIs temporarily unreachable.",
+          summary: "Unable to load ICPAC JSON data from Droughtwatch or EA Hazards Watch in this browser session.",
           bullets: [
             "Reason: upstream certificate/proxy restrictions can cause non-JSON HTML responses.",
             "Other weather sources continue to run normally.",
-            "Open ICPAC directly via source link while this route is unavailable."
+            "Open ICPAC directly via source links while this route is unavailable."
           ],
           updatedAt: formatIsoDate(new Date().toISOString()),
           url: "https://droughtwatch.icpac.net/"
