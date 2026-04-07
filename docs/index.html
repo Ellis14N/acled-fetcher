@@ -693,6 +693,65 @@
       line-height: 1.55;
     }
 
+    .weather-event-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .weather-event-block {
+      border: 1px solid rgba(90, 107, 143, 0.26);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(14, 20, 32, 0.78);
+      display: grid;
+      gap: 6px;
+    }
+
+    .weather-event-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #dbe6f7;
+      line-height: 1.45;
+    }
+
+    .weather-event-line {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .weather-event-dropdown {
+      border: 1px solid rgba(90, 107, 143, 0.26);
+      border-radius: 12px;
+      background: rgba(14, 20, 32, 0.78);
+      overflow: hidden;
+    }
+
+    .weather-event-dropdown > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #dbe6f7;
+      background: rgba(24, 33, 50, 0.88);
+      border-bottom: 1px solid rgba(90, 107, 143, 0.2);
+    }
+
+    .weather-event-dropdown > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .weather-event-dropdown[open] > summary {
+      color: #eef4ff;
+    }
+
+    .weather-event-dropdown-body {
+      display: grid;
+      gap: 6px;
+      padding: 10px 12px;
+    }
+
     .weather-link {
       color: #b9b0ff;
       text-decoration: none;
@@ -1972,6 +2031,86 @@
     return date.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
   }
 
+  function formatDurationDays(startValue, endValue) {
+    var start = new Date(startValue);
+    var end = new Date(endValue);
+    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return "Unknown";
+    var ms = end.getTime() - start.getTime();
+    var days = Math.max(1, Math.round(ms / 86400000));
+    return days + " day" + (days === 1 ? "" : "s");
+  }
+
+  function firstRegexMetric(text, patterns) {
+    var source = String(text || "");
+    for (var i = 0; i < patterns.length; i += 1) {
+      var match = source.match(patterns[i]);
+      if (match && match[1]) {
+        var value = String(match[1]).replace(/,/g, "").trim();
+        if (/^\d+(?:\.\d+)?$/.test(value)) return value;
+      }
+    }
+    return null;
+  }
+
+  function lookupNumericImpactField(properties, keyPatterns) {
+    if (!properties || typeof properties !== "object") return null;
+
+    var keys = Object.keys(properties);
+    for (var i = 0; i < keys.length; i += 1) {
+      var key = keys[i];
+      var keyLower = key.toLowerCase();
+      var matchesKey = keyPatterns.some(function(pattern) { return pattern.test(keyLower); });
+      if (!matchesKey) continue;
+
+      var value = properties[key];
+      if (typeof value === "number" && Number.isFinite(value) && value > 0) {
+        return String(Math.round(value));
+      }
+      if (typeof value === "string") {
+        var cleaned = value.replace(/,/g, "").trim();
+        if (/^\d+(?:\.\d+)?$/.test(cleaned) && Number(cleaned) > 0) return cleaned;
+      }
+    }
+
+    return null;
+  }
+
+  function extractDeathDisplaced(properties) {
+    var textBlob = [
+      properties && properties.htmldescription,
+      properties && properties.description,
+      properties && properties.name,
+      properties && properties.severitydata && properties.severitydata.severitytext
+    ].filter(Boolean).join(" ");
+
+    var death = lookupNumericImpactField(properties, [/death/, /fatal/, /killed/]);
+    if (!death && properties && properties.severitydata) {
+      death = lookupNumericImpactField(properties.severitydata, [/death/, /fatal/, /killed/]);
+    }
+    if (!death) {
+      death = firstRegexMetric(textBlob, [
+        /(\d[\d,.]*)\s*(?:deaths?|dead|fatalit(?:y|ies)|killed)/i,
+        /(?:deaths?|fatalit(?:y|ies)|killed)\D{0,12}(\d[\d,.]*)/i
+      ]);
+    }
+
+    var displaced = lookupNumericImpactField(properties, [/displac/, /evacuat/, /homeless/, /idp/]);
+    if (!displaced && properties && properties.severitydata) {
+      displaced = lookupNumericImpactField(properties.severitydata, [/displac/, /evacuat/, /homeless/, /idp/]);
+    }
+    if (!displaced) {
+      displaced = firstRegexMetric(textBlob, [
+        /(\d[\d,.]*)\s*(?:people\s+)?(?:displaced|evacuated|homeless|idps?)/i,
+        /(?:displaced|evacuated|homeless|idps?)\D{0,14}(\d[\d,.]*)/i
+      ]);
+    }
+
+    return {
+      death: death || "Not reported",
+      displaced: displaced || "Not reported"
+    };
+  }
+
   function getCountrySearchTerms(country) {
     var base = normalizeSearchText(country);
     var aliases = WEATHER_COUNTRY_ALIASES[base] || [];
@@ -2056,7 +2195,7 @@
 
     var sources = [
       { id: "weather-flood", name: "GloFAS Flood Forecasting", fn: function() { return fetchFloodForecast(location); } },
-      { id: "weather-gdacs", name: "GDACS", fn: function() { return fetchGDACSAlerts(country); } },
+      { id: "weather-gdacs", name: "GDACS", fn: function() { return fetchGDACSAlerts(country, location); } },
       { id: "weather-rsmc", name: "RSMC / WMO Severe Weather", fn: function() { return fetchRSMCWarnings(country); } },
       { id: "weather-cams", name: "CAMS Air Quality", fn: function() { return fetchCAMSOutlook(location); } },
       { id: "weather-icpac", name: "ICPAC / IGAD", fn: function() { return fetchICPACOutlook(country); } }
@@ -2104,7 +2243,30 @@
       return;
     }
 
-    var bullets = Array.isArray(data.bullets) ? data.bullets.filter(Boolean).slice(0, 4) : [];
+    var bullets = Array.isArray(data.bullets) ? data.bullets.filter(Boolean).slice(0, 8) : [];
+    var detailBlocks = Array.isArray(data.detailBlocks) ? data.detailBlocks.slice(0, 5) : [];
+    var detailBlocksHtml = detailBlocks.length
+      ? '<div class="weather-event-list">' + detailBlocks.map(function(block) {
+          var lines = Array.isArray(block.lines) ? block.lines.filter(Boolean) : [];
+          if (block.dropdown) {
+            return (
+              '<details class="weather-event-dropdown">'
+              + '<summary>' + escapeHtml(block.title || 'Event') + '</summary>'
+              + '<div class="weather-event-dropdown-body">'
+              + lines.map(function(line) { return '<div class="weather-event-line">' + escapeHtml(line) + '</div>'; }).join('')
+              + '</div>'
+              + '</details>'
+            );
+          }
+          return (
+            '<div class="weather-event-block">'
+            + '<div class="weather-event-title">' + escapeHtml(block.title || 'Event') + '</div>'
+            + lines.map(function(line) { return '<div class="weather-event-line">' + escapeHtml(line) + '</div>'; }).join('')
+            + '</div>'
+          );
+        }).join('') + '</div>'
+      : '';
+
     element.innerHTML = [
       '<div class="weather-card-header">',
       '<div class="weather-source">' + escapeHtml(data.source || "Weather Source") + '</div>',
@@ -2112,21 +2274,80 @@
       '</div>',
       '<div class="weather-headline">' + escapeHtml(data.headline || "Latest weather update") + '</div>',
       '<div class="weather-summary">' + escapeHtml(data.summary || "No summary available.") + '</div>',
+      detailBlocksHtml,
       bullets.length ? '<ul class="weather-points">' + bullets.map(function(point) { return '<li>' + escapeHtml(point) + '</li>'; }).join("") + '</ul>' : '',
       '<div class="weather-meta">Updated: ' + escapeHtml(data.updatedAt || "Not available") + '</div>',
       data.url ? '<div><a class="weather-link" href="' + escapeHtml(data.url) + '" target="_blank" rel="noopener noreferrer">View source -></a></div>' : ''
     ].join("");
   }
 
-  function classifyFloodRisk(ratio) {
-    if (ratio !== null && ratio >= 1.5) return { label: "High", tone: "high" };
-    if (ratio !== null && ratio >= 1.2) return { label: "Watch", tone: "watch" };
+  function classifyFloodRisk(ratio, discharge) {
+    if (discharge === null || discharge < 10) return { label: "Low", tone: "low" };
+    if (ratio !== null && ratio >= 1.4) return { label: "High", tone: "high" };
+    if (ratio !== null && ratio >= 1.15) return { label: "Watch", tone: "watch" };
+    if (ratio === null && discharge >= 40) return { label: "Watch", tone: "watch" };
     return { label: "Low", tone: "low" };
   }
 
-  async function fetchFloodForecast(location) {
-    var url = "https://flood-api.open-meteo.com/v1/flood?latitude=" + encodeURIComponent(location.latitude)
-      + "&longitude=" + encodeURIComponent(location.longitude)
+  async function getCountryBoundingBox(country) {
+    var url = "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=" + encodeURIComponent(country);
+    var json = await fetchJsonWithFallback(url);
+    if (!Array.isArray(json) || !json.length || !Array.isArray(json[0].boundingbox)) return null;
+    var bounds = json[0].boundingbox;
+    if (bounds.length < 4) return null;
+    var south = Number(bounds[0]);
+    var north = Number(bounds[1]);
+    var west = Number(bounds[2]);
+    var east = Number(bounds[3]);
+    if (![south, north, west, east].every(function(value) { return Number.isFinite(value); })) return null;
+    return { south: south, north: north, west: west, east: east };
+  }
+
+  function buildDirectionalZone(baseLat, baseLon, targetLat, targetLon) {
+    var ns = targetLat - baseLat;
+    var ew = targetLon - baseLon;
+    var northSouth = Math.abs(ns) < 0.35 ? "central" : (ns > 0 ? "northern" : "southern");
+    var eastWest = Math.abs(ew) < 0.35 ? "central" : (ew > 0 ? "eastern" : "western");
+
+    if (northSouth === "central" && eastWest === "central") return "central";
+    if (northSouth === "central") return eastWest;
+    if (eastWest === "central") return northSouth;
+    return northSouth + "-" + eastWest;
+  }
+
+  function buildFloodProbePoints(location, bounds) {
+    if (!bounds) {
+      return [
+        { key: "central", label: "central", lat: location.latitude, lon: location.longitude },
+        { key: "north", label: "northern", lat: location.latitude + 1.2, lon: location.longitude },
+        { key: "south", label: "southern", lat: location.latitude - 1.2, lon: location.longitude },
+        { key: "east", label: "eastern", lat: location.latitude, lon: location.longitude + 1.2 },
+        { key: "west", label: "western", lat: location.latitude, lon: location.longitude - 1.2 }
+      ];
+    }
+
+    var latSpan = Math.max(bounds.north - bounds.south, 0.1);
+    var lonSpan = Math.max(bounds.east - bounds.west, 0.1);
+    var centerLat = location.latitude;
+    var centerLon = location.longitude;
+
+    var northLat = Math.min(bounds.north - latSpan * 0.18, centerLat + latSpan * 0.22);
+    var southLat = Math.max(bounds.south + latSpan * 0.18, centerLat - latSpan * 0.22);
+    var eastLon = Math.min(bounds.east - lonSpan * 0.18, centerLon + lonSpan * 0.22);
+    var westLon = Math.max(bounds.west + lonSpan * 0.18, centerLon - lonSpan * 0.22);
+
+    return [
+      { key: "central", label: "central", lat: centerLat, lon: centerLon },
+      { key: "north", label: buildDirectionalZone(centerLat, centerLon, northLat, centerLon), lat: northLat, lon: centerLon },
+      { key: "south", label: buildDirectionalZone(centerLat, centerLon, southLat, centerLon), lat: southLat, lon: centerLon },
+      { key: "east", label: buildDirectionalZone(centerLat, centerLon, centerLat, eastLon), lat: centerLat, lon: eastLon },
+      { key: "west", label: buildDirectionalZone(centerLat, centerLon, centerLat, westLon), lat: centerLat, lon: westLon }
+    ];
+  }
+
+  async function fetchFloodSignalAtPoint(lat, lon) {
+    var url = "https://flood-api.open-meteo.com/v1/flood?latitude=" + encodeURIComponent(lat)
+      + "&longitude=" + encodeURIComponent(lon)
       + "&daily=river_discharge,river_discharge_mean,river_discharge_max"
       + "&forecast_days=14";
     var json = await fetchJsonWithFallback(url);
@@ -2135,31 +2356,138 @@
     var discharge = Array.isArray(daily.river_discharge_max) ? daily.river_discharge_max : (Array.isArray(daily.river_discharge) ? daily.river_discharge : []);
     var mean = Array.isArray(daily.river_discharge_mean) ? daily.river_discharge_mean : [];
     if (!times.length || !discharge.length) {
-      throw new Error("Flood forecast is unavailable for this location.");
+      throw new Error("No flood data returned for probe point.");
     }
 
-    var peakIndex = 0;
-    for (var i = 1; i < discharge.length; i += 1) {
-      if (Number(discharge[i] || 0) > Number(discharge[peakIndex] || 0)) peakIndex = i;
+    var records = times.map(function(time, index) {
+      var d = numberOrNull(discharge[index]);
+      var m = numberOrNull(mean[index]);
+      var ratio = d !== null && m !== null && m > 0 ? d / m : null;
+      var risk = classifyFloodRisk(ratio, d);
+      return {
+        time: time,
+        discharge: d,
+        ratio: ratio,
+        risk: risk
+      };
+    }).filter(function(record) {
+      return record.discharge !== null;
+    });
+
+    if (!records.length) {
+      throw new Error("No usable flood values returned for probe point.");
     }
 
-    var peak = numberOrNull(discharge[peakIndex]);
-    var baseline = numberOrNull(mean[peakIndex]);
-    var ratio = peak !== null && baseline !== null && baseline > 0 ? peak / baseline : null;
-    var classification = classifyFloodRisk(ratio);
+    var highDays = records.filter(function(record) { return record.risk.label === "High"; });
+    var watchDays = records.filter(function(record) { return record.risk.label === "Watch"; });
+    var elevatedDays = highDays.length ? highDays : watchDays;
+
+    var peakRecord = records[0];
+    for (var i = 1; i < records.length; i += 1) {
+      if (Number(records[i].discharge || 0) > Number(peakRecord.discharge || 0)) peakRecord = records[i];
+    }
+
+    var pointRisk = highDays.length
+      ? { label: "High", tone: "high" }
+      : watchDays.length
+        ? { label: "Watch", tone: "watch" }
+        : { label: "Low", tone: "low" };
+
+    return {
+      statusLabel: pointRisk.label,
+      statusTone: pointRisk.tone,
+      hasElevatedSignal: elevatedDays.length > 0,
+      riskStart: elevatedDays.length ? elevatedDays[0].time : null,
+      riskEnd: elevatedDays.length ? elevatedDays[elevatedDays.length - 1].time : null,
+      latestTime: records[records.length - 1].time,
+      peakDischarge: peakRecord.discharge
+    };
+  }
+
+  async function fetchFloodForecast(location) {
+    var bounds = null;
+    try {
+      bounds = await getCountryBoundingBox(location.country || location.query || location.name);
+    } catch (_) {
+      bounds = null;
+    }
+
+    var probePoints = buildFloodProbePoints(location, bounds);
+    var probeResults = await Promise.allSettled(probePoints.map(function(point) {
+      return fetchFloodSignalAtPoint(point.lat, point.lon).then(function(signal) {
+        return {
+          key: point.key,
+          label: point.label,
+          lat: point.lat,
+          lon: point.lon,
+          signal: signal
+        };
+      });
+    }));
+
+    var successfulProbes = probeResults.filter(function(result) { return result.status === "fulfilled"; }).map(function(result) { return result.value; });
+    if (!successfulProbes.length) {
+      throw new Error("Flood forecast is unavailable for this country at this time.");
+    }
+
+    var elevatedZones = successfulProbes.filter(function(point) {
+      return point.signal && point.signal.hasElevatedSignal;
+    });
+
+    elevatedZones.sort(function(left, right) {
+      var leftScore = left.signal.statusLabel === "High" ? 2 : left.signal.statusLabel === "Watch" ? 1 : 0;
+      var rightScore = right.signal.statusLabel === "High" ? 2 : right.signal.statusLabel === "Watch" ? 1 : 0;
+      return rightScore - leftScore;
+    });
+
+    var latestTimes = successfulProbes
+      .map(function(point) { return point.signal && point.signal.latestTime ? point.signal.latestTime : null; })
+      .filter(Boolean)
+      .sort();
+    var latestForecastTime = latestTimes.length ? latestTimes[latestTimes.length - 1] : null;
+
+    var hasHigh = elevatedZones.some(function(point) { return point.signal.statusLabel === "High"; });
+    var classification = hasHigh
+      ? { label: "High", tone: "high" }
+      : elevatedZones.length
+        ? { label: "Watch", tone: "watch" }
+        : { label: "Low", tone: "low" };
+
+    var startRisk = elevatedZones.length ? elevatedZones[0].signal.riskStart : null;
+    var endRisk = elevatedZones.length ? elevatedZones[0].signal.riskEnd : null;
+
+    var headline;
+    var summary;
+    if (classification.label === "High") {
+      headline = "Flood prediction likely in the next 14 days.";
+      summary = "GloFAS-based forecast indicates elevated flood risk over parts of the country from " + formatShortDate(startRisk) + " to " + formatShortDate(endRisk) + ".";
+    } else if (classification.label === "Watch") {
+      headline = "Flood risk forecasted; monitor closely.";
+      summary = "GloFAS-based forecast shows a watch-level signal over parts of the country from " + formatShortDate(startRisk) + " to " + formatShortDate(endRisk) + ".";
+    } else {
+      headline = "No flood prediction likely in the next 14 days.";
+      summary = "Most recent GloFAS-based forecast shows no elevated flood signal for this country-level location.";
+    }
+
+    var whereBullets = elevatedZones.slice(0, 3).map(function(point) {
+      var zoneText = point.label === "central" ? "central" : point.label;
+      var windowText = point.signal.riskStart && point.signal.riskEnd
+        ? formatShortDate(point.signal.riskStart) + " to " + formatShortDate(point.signal.riskEnd)
+        : "next 14 days";
+      return zoneText + " zone: " + point.signal.statusLabel + " signal (" + windowText + ").";
+    });
 
     return {
       source: "GloFAS Flood Forecasting",
       statusLabel: classification.label,
       statusTone: classification.tone,
-      headline: peak !== null ? "Peak modeled river discharge expected on " + formatShortDate(times[peakIndex]) + "." : "Flood signal unavailable.",
-      summary: peak !== null
-        ? "Open-Meteo flood guidance shows a peak discharge of " + formatDecimal(peak, 1) + " m3/s" + (ratio !== null ? ", about " + formatDecimal(ratio, 2) + "x the modeled mean." : ".")
-        : "No peak discharge value was returned.",
+      headline: headline,
+      summary: summary,
       bullets: [
-        "Forecast horizon: 14 days.",
-        peak !== null ? "Peak discharge: " + formatDecimal(peak, 1) + " m3/s on " + formatShortDate(times[peakIndex]) + "." : null,
-        baseline !== null ? "Modeled mean discharge on peak day: " + formatDecimal(baseline, 1) + " m3/s." : "No mean discharge baseline was returned.",
+        elevatedZones.length ? "Flood signal expected over GloFAS river network in: " + elevatedZones.slice(0, 3).map(function(point) { return point.label; }).join(", ") + "." : "No flood signal location identified over the sampled GloFAS river network points.",
+        whereBullets[0] || null,
+        whereBullets[1] || null,
+        "Latest forecast day checked: " + formatShortDate(latestForecastTime) + ".",
         "Coordinates used: " + formatDecimal(location.latitude, 2) + ", " + formatDecimal(location.longitude, 2) + "."
       ],
       updatedAt: formatIsoDate(new Date().toISOString()),
@@ -2172,97 +2500,320 @@
     return match ? match[1] + " UTC" : null;
   }
 
-  async function fetchGDACSAlerts(country) {
-    var url = "https://new.gdacs.org/alerts";
-    var html = await fetchTextWithFallback(url);
-    var doc = new DOMParser().parseFromString(html, "text/html");
-    var anchors = Array.from(doc.querySelectorAll('a[href*="/event/"]'));
-    var matches = [];
+  function parseRsmcField(pattern, text) {
+    var match = String(text || "").match(pattern);
+    return match && match[1] ? normalizeWhitespace(match[1]) : null;
+  }
 
-    anchors.forEach(function(anchor) {
-      var href = anchor.getAttribute("href");
-      if (!href) return;
-      var absoluteUrl = new URL(href, "https://new.gdacs.org").href;
-      if (matches.some(function(item) { return item.url === absoluteUrl; })) return;
-
-      var title = normalizeWhitespace(anchor.textContent);
-      var container = anchor;
-      var contextText = title;
-      for (var depth = 0; depth < 5 && container && container.parentElement; depth += 1) {
-        container = container.parentElement;
-        var candidate = normalizeWhitespace(container.textContent);
-        if (candidate.length >= title.length && candidate.length <= 360) {
-          contextText = candidate;
-        }
-      }
-
-      if (!textMatchesCountry(contextText, country)) return;
-      matches.push({
-        title: title,
-        excerpt: contextText,
-        url: absoluteUrl,
-        updatedAt: extractUpdateLabel(contextText)
+  function parseRsmcForecastSteps(text) {
+    var steps = [];
+    var re = /(\d{1,3})H:\s*(\d{4}\/\d{2}\/\d{2}\s+\d{2}\s*UTC):\s*([0-9.]+\s*[NS]\s*\/\s*[0-9.]+\s*[EW]),\s*VENT MAX=\s*([0-9]{2,3})\s*KT,\s*([^\n]+)/g;
+    var match;
+    while ((match = re.exec(String(text || ""))) !== null) {
+      steps.push({
+        hour: match[1],
+        valid: normalizeWhitespace(match[2]),
+        position: normalizeWhitespace(match[3]),
+        windKt: match[4],
+        stage: normalizeWhitespace(match[5])
       });
+    }
+    return steps;
+  }
+
+  function parseRsmcCoordinatePair(text) {
+    var match = String(text || "").match(/([0-9.]+)\s*([NS])\s*\/\s*([0-9.]+)\s*([EW])/i);
+    if (!match) return null;
+    var lat = Number(match[1]);
+    var lon = Number(match[3]);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+    if (String(match[2]).toUpperCase() === "S") lat = -lat;
+    if (String(match[4]).toUpperCase() === "W") lon = -lon;
+    return { lat: lat, lon: lon };
+  }
+
+  function greatCircleKm(left, right) {
+    var toRad = function(value) { return value * Math.PI / 180; };
+    var dLat = toRad(right.lat - left.lat);
+    var dLon = toRad(right.lon - left.lon);
+    var lat1 = toRad(left.lat);
+    var lat2 = toRad(right.lat);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+      + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return 6371 * c;
+  }
+
+  function inferRsmcImpactedCountries(rawText, currentPosition, forecastSteps) {
+    var knownCountries = [
+      { name: "Madagascar", lat: -18.9, lon: 47.5 },
+      { name: "Mauritius", lat: -20.2, lon: 57.5 },
+      { name: "Reunion", lat: -21.1, lon: 55.5 },
+      { name: "Comoros", lat: -11.7, lon: 43.3 },
+      { name: "Mayotte", lat: -12.8, lon: 45.2 },
+      { name: "Seychelles", lat: -4.6, lon: 55.5 },
+      { name: "Mozambique", lat: -18.7, lon: 35.5 },
+      { name: "Tanzania", lat: -6.3, lon: 34.9 },
+      { name: "Kenya", lat: -1.3, lon: 36.8 },
+      { name: "South Africa", lat: -29.0, lon: 24.0 }
+    ];
+
+    var points = [];
+    if (currentPosition) points.push(currentPosition);
+    forecastSteps.forEach(function(step) {
+      var point = parseRsmcCoordinatePair(step.position);
+      if (point) points.push(point);
     });
 
-    if (!matches.length) {
+    var explicitMentions = knownCountries.filter(function(country) {
+      return textMatchesCountry(rawText, country.name);
+    }).map(function(country) { return country.name; });
+
+    if (!points.length) {
+      return explicitMentions;
+    }
+
+    var nearTrack = knownCountries.filter(function(country) {
+      return points.some(function(point) {
+        return greatCircleKm(point, { lat: country.lat, lon: country.lon }) <= 700;
+      });
+    }).map(function(country) { return country.name; });
+
+    var merged = explicitMentions.concat(nearTrack);
+    var unique = [];
+    merged.forEach(function(name) {
+      if (unique.indexOf(name) === -1) unique.push(name);
+    });
+    return unique;
+  }
+
+  function classifyRsmcRisk(systemType, maxWindKt, impactText) {
+    var wind = Number(maxWindKt || 0);
+    var type = String(systemType || "").toLowerCase();
+    var impact = String(impactText || "").toLowerCase();
+
+    if (/(no\s+significant\s+impact|nil)/.test(impact) && wind < 50) return { label: "Low", tone: "low" };
+    if (wind >= 64 || /(intense|cyclone)/.test(type)) return { label: "High", tone: "high" };
+    if (wind >= 35 || /(storm|depression)/.test(type)) return { label: "Watch", tone: "watch" };
+    return { label: "Low", tone: "low" };
+  }
+
+  async function fetchGDACSAlerts(country, location) {
+    var url = "https://www.gdacs.org/gdacsapi/api/Events/geteventlist/SEARCH";
+    var json = await fetchJsonWithFallback(url);
+    var features = Array.isArray(json.features) ? json.features : [];
+
+    var hazardLabels = {
+      EQ: "Earthquakes",
+      TC: "Tropical Cyclones",
+      FL: "Floods",
+      VO: "Volcanoes",
+      DR: "Droughts",
+      WF: "Forest Fires"
+    };
+
+    var levelPriority = { red: 3, orange: 2, green: 1 };
+    var hazardKeys = Object.keys(hazardLabels);
+    var countryIso2 = String(location && location.countryCode ? location.countryCode : "").toUpperCase();
+    var now = Date.now();
+    var recentWindowMs = 14 * 24 * 60 * 60 * 1000;
+
+    var activeCountryEvents = features.filter(function(feature) {
+      var properties = feature && feature.properties ? feature.properties : {};
+      var eventType = String(properties.eventtype || "").toUpperCase();
+      if (hazardKeys.indexOf(eventType) === -1) return false;
+
+      var alertLevel = String(properties.alertlevel || "").toLowerCase();
+      if (!(alertLevel === "green" || alertLevel === "orange" || alertLevel === "red")) return false;
+
+      var toDateValue = properties.todate || properties.fromdate;
+      var toDateMs = new Date(toDateValue).getTime();
+      var isCurrent = String(properties.iscurrent || "").toLowerCase() === "true";
+      var isOngoingOrRecent = !Number.isNaN(toDateMs) && toDateMs >= (now - recentWindowMs);
+      if (!isCurrent && !isOngoingOrRecent) return false;
+
+      var affected = Array.isArray(properties.affectedcountries) ? properties.affectedcountries : [];
+      var matchesIso = countryIso2 && affected.some(function(item) {
+        return String(item && item.iso2 || "").toUpperCase() === countryIso2;
+      });
+
+      if (matchesIso) return true;
+
+      var fallbackText = [properties.country, properties.name, properties.description].join(" ");
+      return textMatchesCountry(fallbackText, country);
+    });
+
+    var eventsByHazard = {};
+    hazardKeys.forEach(function(key) { eventsByHazard[key] = []; });
+    activeCountryEvents.forEach(function(feature) {
+      var properties = feature && feature.properties ? feature.properties : {};
+      var eventType = String(properties.eventtype || "").toUpperCase();
+      if (eventsByHazard[eventType]) eventsByHazard[eventType].push(properties);
+    });
+
+    var hazardCounts = hazardKeys.map(function(key) {
       return {
-        source: "GDACS",
-        statusLabel: "Info",
-        statusTone: "info",
-        headline: "No current GDACS event found for " + country + ".",
-        summary: "GDACS did not expose a current country-matched event on the public alerts page during this fetch.",
-        bullets: ["Public alerts page checked live.", "This card matches only country-level mentions on current GDACS events."],
+        key: key,
+        label: hazardLabels[key],
+        count: eventsByHazard[key].length
+      };
+    });
+
+    var totalActive = activeCountryEvents.length;
+    var topHazards = hazardCounts.filter(function(item) { return item.count > 0; });
+
+    if (!totalActive) {
+      return {
+        source: "GDACS Multi-Hazard Alerts",
+        statusLabel: "Low",
+        statusTone: "low",
+        headline: "No active GDACS disaster alerts found for " + country + ".",
+        summary: "Latest GDACS API search shows no currently active alerts for the selected country across Earthquakes, Tropical Cyclones, Floods, Volcanoes, Droughts, or Forest Fires.",
+        bullets: [
+          "Hazard coverage checked: Earthquakes, Tropical Cyclones, Floods, Volcanoes, Droughts, Forest Fires.",
+          "Data source: GDACS REST API active event search.",
+          "Forecasting note: active tropical cyclone/flood/drought alerts are forecast-model driven when present."
+        ],
         updatedAt: formatIsoDate(new Date().toISOString()),
-        url: url
+        url: "https://www.gdacs.org/gdacsapi/swagger/index.html"
       };
     }
 
+    var sortedActive = activeCountryEvents.slice().sort(function(left, right) {
+      var leftDate = new Date((left.properties && left.properties.datemodified) || 0).getTime();
+      var rightDate = new Date((right.properties && right.properties.datemodified) || 0).getTime();
+      if (rightDate !== leftDate) return rightDate - leftDate;
+      var leftLevel = String((left.properties && left.properties.alertlevel) || "").toLowerCase();
+      var rightLevel = String((right.properties && right.properties.alertlevel) || "").toLowerCase();
+      return (levelPriority[rightLevel] || 0) - (levelPriority[leftLevel] || 0);
+    });
+
+    var latest = sortedActive[0].properties || {};
+    var alertLevel = String(latest.alertlevel || "").toLowerCase();
+    var tone = alertLevel === "red" ? "high" : (alertLevel === "orange" ? "watch" : "low");
+    var label = alertLevel === "red" ? "High" : (alertLevel === "orange" ? "Watch" : "Low");
+
+    var forecastingHazards = ["TC", "FL", "DR"];
+    var hasForecastingSignal = sortedActive.some(function(item) {
+      var properties = item && item.properties ? item.properties : {};
+      return forecastingHazards.indexOf(String(properties.eventtype || "").toUpperCase()) !== -1;
+    });
+
+    var detailBlocks = sortedActive.slice(0, 3).map(function(item) {
+      var properties = item && item.properties ? item.properties : {};
+      var impactMetrics = extractDeathDisplaced(properties);
+      var affectedCountries = Array.isArray(properties.affectedcountries) && properties.affectedcountries.length
+        ? properties.affectedcountries.map(function(countryItem) {
+            return countryItem && countryItem.countryname ? countryItem.countryname : null;
+          }).filter(Boolean).join(", ")
+        : (properties.country || "Not specified");
+      var startDate = formatShortDate(properties.fromdate);
+      var duration = formatDurationDays(properties.fromdate, properties.todate);
+      var impact = (properties.severitydata && properties.severitydata.severitytext)
+        || properties.description
+        || "Impact details not specified";
+      return {
+        title: (properties.name || properties.description || "Event") + " (" + (properties.alertlevel || "Unknown") + ")",
+        lines: [
+          "Countries Impacted: " + affectedCountries,
+          "Start Date: " + startDate,
+          "Duration: " + duration,
+          "Impact: " + truncateText(impact, 130),
+          "Death: " + impactMetrics.death,
+          "Displaced: " + impactMetrics.displaced
+        ]
+      };
+    });
+
     return {
-      source: "GDACS",
-      statusLabel: matches.length > 1 ? "Watch" : "Low",
-      statusTone: matches.length > 1 ? "watch" : "low",
-      headline: matches.length + " current GDACS event" + (matches.length === 1 ? "" : "s") + " mention " + country + ".",
-      summary: truncateText(matches[0].excerpt, 190),
-      bullets: matches.slice(0, 3).map(function(match) {
-        return truncateText(match.title + (match.updatedAt ? " | " + match.updatedAt : ""), 120);
-      }),
-      updatedAt: matches[0].updatedAt || formatIsoDate(new Date().toISOString()),
-      url: matches[0].url || url
+      source: "GDACS Multi-Hazard Alerts",
+      statusLabel: label,
+      statusTone: tone,
+      headline: totalActive + " active GDACS disaster alert" + (totalActive === 1 ? "" : "s") + " for " + country + ".",
+      summary: "Current active hazards: " + topHazards.map(function(item) { return item.label + " (" + item.count + ")"; }).join(", ") + ".",
+      bullets: [
+        "Latest alert: " + (latest.name || latest.description || "Unknown event") + " | Level " + (latest.alertlevel || "Unknown") + ".",
+        "Hazard totals (Green/Orange/Red) - EQ: " + eventsByHazard.EQ.length + ", TC: " + eventsByHazard.TC.length + ", FL: " + eventsByHazard.FL.length + ", VO: " + eventsByHazard.VO.length + ", DR: " + eventsByHazard.DR.length + ", WF: " + eventsByHazard.WF.length + ".",
+        hasForecastingSignal ? "Forecasting-related alerts present (Tropical Cyclones/Floods/Droughts)." : "No active forecasting-related hazard alerts currently listed.",
+        "Top GDACS alerts are listed below with Countries Impacted, Start Date, Duration, Impact, Death, and Displaced.",
+        latest.url && latest.url.report ? "Latest GDACS report available via source link." : null
+      ],
+      detailBlocks: detailBlocks,
+      updatedAt: formatIsoDate(latest.datemodified || new Date().toISOString()),
+      url: latest.url && latest.url.report ? latest.url.report : "https://www.gdacs.org/gdacsapi/swagger/index.html"
     };
   }
 
   async function fetchRSMCWarnings(country) {
-    var url = "https://severeweather.wmo.int/";
-    var html = await fetchTextWithFallback(url);
-    var doc = new DOMParser().parseFromString(html, "text/html");
-    var links = Array.from(doc.querySelectorAll('a[href^="javascript:getEffectiveWarningByMember"]'));
-    var match = links.find(function(link) {
-      return textMatchesCountry(link.textContent, country);
-    });
-
-    if (!match) {
-      throw new Error("No WMO severe weather member row matched this country.");
+    var url = "https://tgftp.nws.noaa.gov/data/raw/wt/wtio30.fmee..txt";
+    var raw = await fetchTextWithFallback(url);
+    var text = String(raw || "").replace(/\r/g, "");
+    if (!/RSMC\s*\/\s*TROPICAL\s*CYCLONE\s*CENTER\s*\/\s*LA\s+REUNION/i.test(text)) {
+      throw new Error("RSMC La Reunion bulletin feed is unavailable.");
     }
 
-    var text = normalizeWhitespace(match.textContent);
-    var parsed = text.match(/^(.*?)\s+(\d+)\s+Region\s+([IVX]+)\s*\|\s*(.*)$/i);
-    var warningCount = parsed ? Number(parsed[2]) : 0;
-    var authority = parsed ? parsed[4] : "National meteorological service";
-    var tone = warningCount >= 5 ? "high" : warningCount >= 2 ? "watch" : warningCount >= 1 ? "low" : "info";
-    var label = warningCount >= 5 ? "High" : warningCount >= 2 ? "Watch" : warningCount >= 1 ? "Low" : "Info";
+    var warningNumber = parseRsmcField(/0\.A\s+WARNING\s+NUMBER:\s*([\s\S]*?)\n1\.A/i, text) || "Unknown";
+    var systemType = parseRsmcField(/1\.A\s+([^\n]+)/i, text) || "Tropical system";
+    var positionTime = parseRsmcField(/2\.A\s+POSITION\s+([^\n]+)\n\s*UTC:/i, text);
+    var positionCoords = parseRsmcField(/WITHIN\s+30\s+NM\s+RADIUS\s+OF\s+POINT\s+([^\n]+)/i, text);
+    var currentPosition = parseRsmcCoordinatePair(positionCoords || "");
+    var movementDirection = parseRsmcField(/MOVEMENT:\s*([^\n\d]+)\s*\d+\s*KT/i, text);
+    var movementSpeed = parseRsmcField(/MOVEMENT:\s*[^\n\d]+\s*(\d+)\s*KT/i, text);
+    var centralPressure = parseRsmcField(/4\.A\s+CENTRAL\s+PRESSURE:\s*(\d+)\s*HPA/i, text);
+    var maxWindKt = parseRsmcField(/5\.A\s+MAX\s+AVERAGE\s+WIND\s+SPEED\s*\(10\s*MN\):\s*(\d+)\s*KT/i, text);
+    var impactText = parseRsmcField(/(NO\s+SIGNIFICANT\s+IMPACT[^\n]*\.)/i, text)
+      || parseRsmcField(/2\.C\s+ADDITIONAL\s+INFORMATION:\s*([\s\S]*?)LAST\s+BULLETIN/i, text)
+      || "Impact details not explicitly stated in this bulletin.";
+
+    var forecastSteps = parseRsmcForecastSteps(text);
+    var risk = classifyRsmcRisk(systemType, maxWindKt, impactText);
+    var countryMentioned = textMatchesCountry(text, country);
+    var impactedCountries = inferRsmcImpactedCountries(text, currentPosition, forecastSteps);
+
+    var detailBlocks = [];
+    detailBlocks.push({
+      title: "Event 1: " + systemType + " - Current Analysis",
+      dropdown: true,
+      lines: [
+        "Warning Number: " + warningNumber,
+        "Position Time: " + (positionTime || "Unknown"),
+        "Current Position: " + (positionCoords || "Unknown"),
+        "Movement: " + (movementDirection ? movementDirection + (movementSpeed ? " " + movementSpeed + " kt" : "") : "Unknown"),
+        "Max Wind: " + (maxWindKt ? maxWindKt + " kt" : "Unknown"),
+        "Central Pressure: " + (centralPressure ? centralPressure + " hPa" : "Unknown"),
+        "Likely impacted countries (best effort): " + (impactedCountries.length ? impactedCountries.join(", ") : "None identified from current track.")
+      ]
+    });
+    forecastSteps.slice(0, 5).forEach(function(step, index) {
+      detailBlocks.push({
+        title: "Event " + (index + 2) + ": Forecast " + step.hour + "H",
+        dropdown: true,
+        lines: [
+          "Valid Time: " + step.valid,
+          "Forecast Position: " + step.position,
+          "Forecast Max Wind: " + step.windKt + " kt",
+          "System Stage: " + step.stage,
+          "Potential impacted countries (track proximity): " + (impactedCountries.length ? impactedCountries.join(", ") : "None identified")
+        ]
+      });
+    });
 
     return {
-      source: "RSMC / WMO Severe Weather",
-      statusLabel: label,
-      statusTone: tone,
-      headline: warningCount + " active official warning" + (warningCount === 1 ? "" : "s") + " listed for " + country + ".",
-      summary: authority + " is the listed warning authority for this country on WMO's Severe Weather Information Centre.",
+      source: "RSMC La Reunion Cyclone Bulletin",
+      statusLabel: risk.label,
+      statusTone: risk.tone,
+      headline: systemType + " bulletin active for the South-West Indian Ocean.",
+      summary: countryMentioned
+        ? "The selected country is mentioned in the latest RSMC La Reunion bulletin context."
+        : "Latest operational bulletin parsed successfully; selected country is not explicitly named in this bulletin text.",
       bullets: [
-        "Authority: " + authority + ".",
-        parsed ? "WMO region: " + parsed[3] + "." : null,
-        "Counts reflect currently listed CAP warnings on the WMO severe weather portal."
+        "Feed: WMO/NOAA raw operational bulletin (WTIO30 FMEE).",
+        "Most recent warning number: " + warningNumber + ".",
+        impactedCountries.length ? "Likely impacted countries (best effort): " + impactedCountries.join(", ") + "." : "Likely impacted countries could not be confidently inferred from this bulletin.",
+        "Impact statement: " + truncateText(impactText, 170),
+        forecastSteps.length ? "Forecast points parsed: " + forecastSteps.length + "." : "No forecast points were parsed from section 1.B."
       ],
+      detailBlocks: detailBlocks,
       updatedAt: formatIsoDate(new Date().toISOString()),
       url: url
     };
