@@ -490,13 +490,14 @@
     /* ── Travel Advisories ── */
     .advisory-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
       gap: 16px;
       margin: 20px 0;
       align-items: stretch;
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 1024px) {
       .advisory-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 480px) {
@@ -511,6 +512,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      height: 100%;
     }
 
     .advisory-card-header {
@@ -602,10 +604,19 @@
 
     .weather-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
       gap: 16px;
       margin: 20px 0;
       align-items: stretch;
+    }
+
+    @media (max-width: 1024px) {
+      .weather-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .weather-grid { grid-template-columns: 1fr; }
     }
 
     .weather-card {
@@ -616,6 +627,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      height: 100%;
     }
 
     .weather-card-header {
@@ -2544,7 +2556,7 @@
     return 6371 * c;
   }
 
-  function inferRsmcImpactedCountries(rawText, currentPosition, forecastSteps) {
+  function inferRsmcImpactedCountries(rawText, currentPosition, forecastSteps, selectedCountry) {
     var knownCountries = [
       { name: "Madagascar", lat: -18.9, lon: 47.5 },
       { name: "Mauritius", lat: -20.2, lon: 57.5 },
@@ -2557,6 +2569,20 @@
       { name: "Kenya", lat: -1.3, lon: 36.8 },
       { name: "South Africa", lat: -29.0, lon: 24.0 }
     ];
+
+    var adjacency = {
+      madagascar: ["Mozambique", "Comoros", "Mauritius", "Reunion", "South Africa", "Tanzania"],
+      mauritius: ["Reunion", "Madagascar"],
+      reunion: ["Mauritius", "Madagascar"],
+      comoros: ["Madagascar", "Mozambique", "Tanzania", "Mayotte", "Kenya"],
+      mayotte: ["Comoros", "Mozambique", "Madagascar", "Tanzania"],
+      seychelles: ["Comoros", "Tanzania", "Kenya", "Madagascar"],
+      mozambique: ["South Africa", "Tanzania", "Madagascar", "Comoros", "Mayotte"],
+      tanzania: ["Kenya", "Mozambique", "Comoros", "Mayotte", "Seychelles", "Madagascar"],
+      kenya: ["Tanzania", "Somalia", "Seychelles", "Comoros"],
+      south_africa: ["Mozambique", "Madagascar"],
+      somalia: ["Kenya", "Seychelles", "Tanzania"]
+    };
 
     var points = [];
     if (currentPosition) points.push(currentPosition);
@@ -2584,7 +2610,22 @@
     merged.forEach(function(name) {
       if (unique.indexOf(name) === -1) unique.push(name);
     });
-    return unique;
+
+    var selectedKey = normalizeSearchText(selectedCountry || "").replace(/\s+/g, "_");
+    var allowed = adjacency[selectedKey] || null;
+    if (!allowed) {
+      return unique.filter(function(name) {
+        return normalizeSearchText(name) === normalizeSearchText(selectedCountry || "");
+      });
+    }
+
+    var selectedLabel = selectedCountry ? normalizeWhitespace(selectedCountry) : "";
+    var allowedSet = allowed.map(function(name) { return normalizeSearchText(name); });
+    if (selectedLabel) allowedSet.push(normalizeSearchText(selectedLabel));
+
+    return unique.filter(function(name) {
+      return allowedSet.indexOf(normalizeSearchText(name)) !== -1;
+    });
   }
 
   function classifyRsmcRisk(systemType, maxWindKt, impactText) {
@@ -2733,9 +2774,8 @@
       summary: "Current active hazards: " + topHazards.map(function(item) { return item.label + " (" + item.count + ")"; }).join(", ") + ".",
       bullets: [
         "Latest alert: " + (latest.name || latest.description || "Unknown event") + " | Level " + (latest.alertlevel || "Unknown") + ".",
-        "Hazard totals (Green/Orange/Red) - EQ: " + eventsByHazard.EQ.length + ", TC: " + eventsByHazard.TC.length + ", FL: " + eventsByHazard.FL.length + ", VO: " + eventsByHazard.VO.length + ", DR: " + eventsByHazard.DR.length + ", WF: " + eventsByHazard.WF.length + ".",
-        hasForecastingSignal ? "Forecasting-related alerts present (Tropical Cyclones/Floods/Droughts)." : "No active forecasting-related hazard alerts currently listed.",
-        "Top GDACS alerts are listed below with Countries Impacted, Start Date, Duration, Impact, Death, and Displaced.",
+        "Hazard totals (Green/Orange/Red) - EQ (Earthquakes): " + eventsByHazard.EQ.length + ", TC (Tropical Cyclones): " + eventsByHazard.TC.length + ", FL (Floods): " + eventsByHazard.FL.length + ", VO (Volcanoes): " + eventsByHazard.VO.length + ", DR (Droughts): " + eventsByHazard.DR.length + ", WF (Forest Fires): " + eventsByHazard.WF.length + ".",
+        hasForecastingSignal ? "Forecasting-related alerts present: Tropical Cyclones, Floods, Droughts." : "No active forecasting-related hazard alerts currently listed.",
         latest.url && latest.url.report ? "Latest GDACS report available via source link." : null
       ],
       detailBlocks: detailBlocks,
@@ -2768,7 +2808,7 @@
     var forecastSteps = parseRsmcForecastSteps(text);
     var risk = classifyRsmcRisk(systemType, maxWindKt, impactText);
     var countryMentioned = textMatchesCountry(text, country);
-    var impactedCountries = inferRsmcImpactedCountries(text, currentPosition, forecastSteps);
+    var impactedCountries = inferRsmcImpactedCountries(text, currentPosition, forecastSteps, country);
 
     var detailBlocks = [];
     detailBlocks.push({
@@ -2785,8 +2825,10 @@
       ]
     });
     forecastSteps.slice(0, 5).forEach(function(step, index) {
+      var stageLabel = normalizeWhitespace(step.stage || "");
+      if (!stageLabel) return;
       detailBlocks.push({
-        title: "Event " + (index + 2) + ": Forecast " + step.hour + "H",
+        title: "Event " + (index + 2) + ": " + stageLabel + " (" + step.hour + "H)",
         dropdown: true,
         lines: [
           "Valid Time: " + step.valid,
@@ -2808,10 +2850,7 @@
         : "Latest operational bulletin parsed successfully; selected country is not explicitly named in this bulletin text.",
       bullets: [
         "Feed: WMO/NOAA raw operational bulletin (WTIO30 FMEE).",
-        "Most recent warning number: " + warningNumber + ".",
-        impactedCountries.length ? "Likely impacted countries (best effort): " + impactedCountries.join(", ") + "." : "Likely impacted countries could not be confidently inferred from this bulletin.",
-        "Impact statement: " + truncateText(impactText, 170),
-        forecastSteps.length ? "Forecast points parsed: " + forecastSteps.length + "." : "No forecast points were parsed from section 1.B."
+        impactedCountries.length ? "Likely impacted countries (best effort): " + impactedCountries.join(", ") + "." : "Likely impacted countries could not be confidently inferred from this bulletin."
       ],
       detailBlocks: detailBlocks,
       updatedAt: formatIsoDate(new Date().toISOString()),
@@ -2868,44 +2907,225 @@
   }
 
   async function fetchICPACOutlook(country) {
-    var url = "https://www.icpac.net/weekly-forecast/";
-    var text = htmlToText(await fetchTextWithFallback(url));
-    var sentences = text.replace(/([.!?])\s+/g, "$1\n").split(/\n+/).map(normalizeWhitespace).filter(Boolean);
-    var matches = sentences.filter(function(sentence) {
-      return textMatchesCountry(sentence, country);
-    });
-    var dateMatch = text.match(/(\d{1,2}\s+\w+\s*-\s*\d{1,2}\s+\w+\s+\d{4})/i);
-    var severeSignals = matches.filter(function(sentence) {
-      return /(flood|heavy rainfall|heat stress|strong wind|drought|dry spell)/i.test(sentence);
-    });
+    var categoriesUrl = "https://droughtwatch.icpac.net/api/categories/";
+    var datasetsUrl = "https://droughtwatch.icpac.net/api/datasets/";
+    var snapshotUrl = "https://raw.githubusercontent.com/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/main/data/icpac_droughtwatch_snapshot.json";
+    var eastAfricaCountries = [
+      "burundi", "comoros", "djibouti", "eritrea", "ethiopia", "kenya",
+      "rwanda", "somalia", "south sudan", "sudan", "tanzania", "uganda"
+    ];
+    var countryKey = normalizeSearchText(country);
+    var isEastAfricaFocus = eastAfricaCountries.indexOf(countryKey) !== -1;
 
-    if (!matches.length) {
-      return {
-        source: "ICPAC / IGAD",
-        statusLabel: "Info",
-        statusTone: "info",
-        headline: "No direct ICPAC weekly forecast mention found for " + country + ".",
-        summary: "ICPAC's latest weekly forecast remains regional, with no direct country string match in the current text.",
-        bullets: [dateMatch ? "Latest ICPAC weekly window: " + dateMatch[1] + "." : "Latest ICPAC window not parsed.", "This source is useful mainly for Greater Horn of Africa countries."],
-        updatedAt: formatIsoDate(new Date().toISOString()),
-        url: url
-      };
-    }
-
-    return {
-      source: "ICPAC / IGAD",
-      statusLabel: severeSignals.length ? "Watch" : "Low",
-      statusTone: severeSignals.length ? "watch" : "low",
-      headline: "ICPAC's latest weekly outlook mentions " + country + ".",
-      summary: truncateText(matches[0], 190),
-      bullets: [
-        dateMatch ? "Forecast window: " + dateMatch[1] + "." : null,
-        truncateText(matches[0], 130),
-        matches[1] ? truncateText(matches[1], 130) : null
-      ],
-      updatedAt: formatIsoDate(new Date().toISOString()),
-      url: url
+    var monthMap = {
+      jan: 1, january: 1,
+      feb: 2, february: 2,
+      mar: 3, march: 3,
+      apr: 4, april: 4,
+      may: 5,
+      jun: 6, june: 6,
+      jul: 7, july: 7,
+      aug: 8, august: 8,
+      sep: 9, sept: 9, september: 9,
+      oct: 10, october: 10,
+      nov: 11, november: 11,
+      dec: 12, december: 12
     };
+
+    var parseMonth = function(value) {
+      var text = String(value || "").trim().toLowerCase();
+      if (!text) return 0;
+      if (/^\d{1,2}$/.test(text)) return Number(text);
+      return monthMap[text] || monthMap[text.slice(0, 3)] || 0;
+    };
+
+    var layerRecencyKey = function(layer) {
+      if (!layer) return 0;
+      var year = Number(layer.end_year || 0);
+      var month = parseMonth(layer.end_month);
+      var dekad = Number(layer.end_dekad || 0);
+      return (year * 10000) + (month * 100) + dekad;
+    };
+
+    var formatLayerPeriod = function(layer) {
+      if (!layer) return "Unknown";
+      var year = layer.end_year ? String(layer.end_year) : "";
+      var season = normalizeWhitespace(String(layer.end_season || "").replace(/_/g, "-"));
+      var month = normalizeWhitespace(String(layer.end_month || ""));
+      var dekad = normalizeWhitespace(String(layer.end_dekad || ""));
+      if (season) return (year ? year + " " : "") + season;
+      if (month && dekad) return (year ? year + " " : "") + month + " dekad " + dekad;
+      if (month) return (year ? year + " " : "") + month;
+      return year || "Unknown";
+    };
+
+    var pickLatestLayer = function(datasetList) {
+      var best = null;
+      (datasetList || []).forEach(function(dataset) {
+        var layers = Array.isArray(dataset.layers) ? dataset.layers : [];
+        if (!layers.length) return;
+        var activeLayer = layers.find(function(layer) { return !!layer.active; }) || layers[0];
+        if (!best || layerRecencyKey(activeLayer) > layerRecencyKey(best.layer)) {
+          best = { dataset: dataset, layer: activeLayer };
+        }
+      });
+      return best;
+    };
+
+    var buildIcpacCard = function(categoryList, datasetList, modeLabel, snapshotTimestamp) {
+      var droughtDatasets = datasetList.filter(function(dataset) {
+        var category = String(dataset && dataset.category || "").toLowerCase();
+        var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
+        return category === "combined_drought" || /(drought|cdi|spi|soil moisture)/i.test(text);
+      });
+
+      var precipitationForecastDatasets = datasetList.filter(function(dataset) {
+        var category = String(dataset && dataset.category || "").toLowerCase();
+        var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
+        return category === "precipitation-forecasts" || /(precipitation forecast|rainfall forecast)/i.test(text);
+      });
+
+      var floodNamedDatasets = datasetList.filter(function(dataset) {
+        var text = (dataset && dataset.name ? dataset.name : "") + " " + (dataset && dataset.slug ? dataset.slug : "");
+        return /flood/i.test(text);
+      });
+
+      var droughtLatest = pickLatestLayer(droughtDatasets);
+      var precipitationLatest = pickLatestLayer(precipitationForecastDatasets);
+
+      var aboveNormalForecastLayers = precipitationForecastDatasets.reduce(function(acc, dataset) {
+        var layers = Array.isArray(dataset.layers) ? dataset.layers : [];
+        return acc.concat(layers.filter(function(layer) {
+          var nameSlug = (layer && layer.name ? layer.name : "") + " " + (layer && layer.slug ? layer.slug : "");
+          return /(above\s*normal|_above|above_)/i.test(nameSlug);
+        }));
+      }, []);
+
+      var statusTone = "low";
+      var statusLabel = "Low";
+      if (droughtDatasets.length || aboveNormalForecastLayers.length || floodNamedDatasets.length) {
+        statusTone = "watch";
+        statusLabel = "Watch";
+      }
+
+      var categorySummary = categoryList
+        .map(function(category) { return category && category.title ? category.title : null; })
+        .filter(Boolean)
+        .slice(0, 5)
+        .join(", ");
+
+      var detailBlocks = [
+        {
+          title: "Drought Monitoring",
+          lines: [
+            "Drought-oriented datasets published: " + droughtDatasets.length + ".",
+            droughtLatest ? "Latest drought layer: " + (droughtLatest.layer.name || droughtLatest.dataset.name || "Dataset") + " (" + formatLayerPeriod(droughtLatest.layer) + ")." : "No drought layer timing could be parsed from current payload."
+          ]
+        },
+        {
+          title: "Flood and Wet-Risk Signals",
+          lines: [
+            "Precipitation forecast datasets published: " + precipitationForecastDatasets.length + ".",
+            "Above-normal precipitation forecast layers: " + aboveNormalForecastLayers.length + ".",
+            floodNamedDatasets.length ? "Flood-named datasets: " + floodNamedDatasets.length + "." : "No dataset explicitly named \"flood\" in the current catalog."
+          ]
+        },
+        {
+          title: "Coverage and Relevance",
+          lines: [
+            isEastAfricaFocus ? country + " is within the core ICPAC East Africa focus region." : country + " is outside ICPAC's core East Africa focus; results remain regional indicators.",
+            "Categories available now include: " + (categorySummary || "not listed") + "."
+          ]
+        }
+      ];
+
+      return {
+        source: "ICPAC Drought Watch (IGAD-IPAC)",
+        statusLabel: statusLabel,
+        statusTone: statusTone,
+        headline: "Near-real-time ICPAC climate monitoring is active for East Africa.",
+        summary: precipitationLatest
+          ? "Latest precipitation outlook layer: " + (precipitationLatest.layer.name || precipitationLatest.dataset.name || "Forecast layer") + " (" + formatLayerPeriod(precipitationLatest.layer) + ")."
+          : "ICPAC catalog confirms active drought and climate monitoring layers, but latest precipitation timing was not parsed.",
+        bullets: [
+          modeLabel,
+          snapshotTimestamp ? "Cached snapshot generated: " + formatIsoDate(snapshotTimestamp) + "." : null,
+          "Use above-normal precipitation outlooks as flood-early-warning context; combine with local hydrology and river forecasts.",
+          "For non-East-Africa countries, this source is regional context rather than country-specific hazard certainty."
+        ].filter(Boolean),
+        detailBlocks: detailBlocks,
+        updatedAt: formatIsoDate(new Date().toISOString()),
+        url: "https://droughtwatch.icpac.net/"
+      };
+    };
+
+    try {
+      var categories = await fetchJsonWithFallback(categoriesUrl);
+      var datasets = await fetchJsonWithFallback(datasetsUrl);
+      var categoryList = Array.isArray(categories) ? categories : [];
+      var datasetList = Array.isArray(datasets) ? datasets : [];
+
+      if (!datasetList.length) {
+        throw new Error("ICPAC Drought Watch datasets are not currently available.");
+      }
+      return buildIcpacCard(categoryList, datasetList, "Source uses live ICPAC Drought Watch API catalog and layer metadata.");
+    } catch (_) {
+      try {
+        var snapshot = await fetchJsonWithFallback(snapshotUrl);
+        var snapshotCategories = Array.isArray(snapshot && snapshot.categories) ? snapshot.categories : [];
+        var snapshotDatasets = Array.isArray(snapshot && snapshot.datasets) ? snapshot.datasets : [];
+        if (snapshotDatasets.length) {
+          return buildIcpacCard(
+            snapshotCategories,
+            snapshotDatasets,
+            "Source uses cached ICPAC Drought Watch snapshot from GitHub Actions fallback.",
+            snapshot && (snapshot.fetched_at_utc || snapshot.generated_at || snapshot.fetched_at)
+          );
+        }
+      } catch (_) {}
+
+      try {
+        var weeklyUrl = "https://www.icpac.net/weekly-forecast/";
+        var text = htmlToText(await fetchTextWithFallback(weeklyUrl));
+        var sentences = text.replace(/([.!?])\s+/g, "$1\n").split(/\n+/).map(normalizeWhitespace).filter(Boolean);
+        var matches = sentences.filter(function(sentence) {
+          return textMatchesCountry(sentence, country);
+        });
+        var severeSignals = matches.filter(function(sentence) {
+          return /(flood|heavy rainfall|heat stress|strong wind|drought|dry spell)/i.test(sentence);
+        });
+
+        return {
+          source: "ICPAC / IGAD",
+          statusLabel: severeSignals.length ? "Watch" : "Info",
+          statusTone: severeSignals.length ? "watch" : "info",
+          headline: matches.length ? "ICPAC weekly forecast mentions " + country + "." : "ICPAC weekly forecast available (regional context).",
+          summary: matches.length ? truncateText(matches[0], 180) : "Drought Watch API is temporarily unreachable from this network path; showing weekly ICPAC narrative fallback.",
+          bullets: [
+            "Fallback mode: ICPAC weekly forecast text parser.",
+            severeSignals.length ? "Climate-risk keywords detected for the selected country context." : "No explicit severe keyword detected for the selected country in the latest fallback text.",
+            "If this persists, ICPAC API may be blocked by certificate/proxy restrictions."
+          ],
+          updatedAt: formatIsoDate(new Date().toISOString()),
+          url: weeklyUrl
+        };
+      } catch (_) {
+        return {
+          source: "ICPAC Drought Watch (IGAD-IPAC)",
+          statusLabel: "Info",
+          statusTone: "info",
+          headline: "ICPAC live API temporarily unreachable.",
+          summary: "Unable to load ICPAC JSON data from available network routes in this browser session.",
+          bullets: [
+            "Reason: upstream certificate/proxy restrictions can cause non-JSON HTML responses.",
+            "Other weather sources continue to run normally.",
+            "Open ICPAC directly via source link while this route is unavailable."
+          ],
+          updatedAt: formatIsoDate(new Date().toISOString()),
+          url: "https://droughtwatch.icpac.net/"
+        };
+      }
+    }
   }
 
   function getWorkflowMissingMessage(workflowFile) {
@@ -3208,31 +3428,62 @@
   }
 
   async function fetchJsonWithFallback(url, fetchOptions) {
-    var text;
+    function tryParseJsonPayload(text) {
+      try {
+        return JSON.parse(text);
+      } catch (_) {
+        // r.jina.ai and some proxies can prepend plain text lines before JSON.
+        var firstBrace = text.indexOf('{');
+        var firstBracket = text.indexOf('[');
+        var idx = -1;
+        if (firstBrace === -1) idx = firstBracket;
+        else if (firstBracket === -1) idx = firstBrace;
+        else idx = Math.min(firstBrace, firstBracket);
+        if (idx >= 0) {
+          try {
+            return JSON.parse(text.slice(idx));
+          } catch (_) {
+            return null;
+          }
+        }
+        return null;
+      }
+    }
+
     if (fetchOptions) {
       var directResp = await fetch(url, fetchOptions);
       if (!directResp.ok) {
         throw new Error('HTTP ' + directResp.status);
       }
-      text = await directResp.text();
-    } else {
-      text = await fetchTextWithFallback(url);
-    }
-    try {
-      return JSON.parse(text);
-    } catch (_) {
-      // r.jina.ai and some proxies can prepend plain text lines before JSON.
-      var firstBrace = text.indexOf('{');
-      var firstBracket = text.indexOf('[');
-      var idx = -1;
-      if (firstBrace === -1) idx = firstBracket;
-      else if (firstBracket === -1) idx = firstBrace;
-      else idx = Math.min(firstBrace, firstBracket);
-      if (idx > 0) {
-        return JSON.parse(text.slice(idx));
-      }
+      var directText = await directResp.text();
+      var directJson = tryParseJsonPayload(directText);
+      if (directJson !== null) return directJson;
       throw new Error('Invalid JSON payload');
     }
+
+    var cleanUrl = String(url || '').trim();
+    var attempts = [
+      cleanUrl,
+      ADVISORY_CORS_PROXY + encodeURIComponent(cleanUrl),
+      'https://corsproxy.io/?' + encodeURIComponent(cleanUrl),
+      'https://r.jina.ai/http://' + cleanUrl.replace(/^https?:\/\//i, '')
+    ];
+
+    var lastErr = null;
+    for (var i = 0; i < attempts.length; i += 1) {
+      try {
+        var resp = await fetch(attempts[i]);
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        var text = await resp.text();
+        var parsed = tryParseJsonPayload(text);
+        if (parsed !== null) return parsed;
+        throw new Error('Invalid JSON payload');
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+
+    throw new Error('JSON load failed across direct and proxy routes (' + (lastErr && lastErr.message ? lastErr.message : 'unknown') + ')');
   }
 
   function normalizeCountrySlug(country) {
