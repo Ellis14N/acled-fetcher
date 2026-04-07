@@ -2259,8 +2259,18 @@
       return source.fn()
         .then(function(data) {
           if (data && data.skipDisplay) {
-            var node = document.getElementById(source.id);
-            if (node && node.parentNode) node.parentNode.removeChild(node);
+            renderWeatherCard(source.id, {
+              source: source.name,
+              statusLabel: "Info",
+              statusTone: "info",
+              headline: "No recent source data for " + country + ".",
+              summary: data.skipReason || "No recent country-specific records were available in the current time window.",
+              bullets: [
+                "Source remains visible so data gaps are explicit.",
+                "Try again later as new observations are published."
+              ],
+              updatedAt: formatIsoDate(new Date().toISOString())
+            }, null);
             latestWeatherBundle.sources.push({ source: source.name, status: "skipped", reason: data.skipReason || "No recent country data" });
             return;
           }
@@ -2713,11 +2723,24 @@
       "GA", "GM", "GH", "GN", "GW", "KE", "LS", "LR", "LY", "MG", "MW", "ML", "MR", "MU", "MA", "MZ", "NA", "NE", "NG", "RW",
       "ST", "SN", "SC", "SL", "SO", "ZA", "SS", "SD", "TZ", "TG", "TN", "UG", "ZM", "ZW"
     ];
+    var africaIso3ByIso2 = {
+      DZ: "DZA", AO: "AGO", BJ: "BEN", BW: "BWA", BF: "BFA", BI: "BDI", CV: "CPV", CM: "CMR", CF: "CAF", TD: "TCD", KM: "COM",
+      CD: "COD", CG: "COG", CI: "CIV", DJ: "DJI", EG: "EGY", GQ: "GNQ", ER: "ERI", SZ: "SWZ", ET: "ETH", GA: "GAB", GM: "GMB",
+      GH: "GHA", GN: "GIN", GW: "GNB", KE: "KEN", LS: "LSO", LR: "LBR", LY: "LBY", MG: "MDG", MW: "MWI", ML: "MLI", MR: "MRT",
+      MU: "MUS", MA: "MAR", MZ: "MOZ", NA: "NAM", NE: "NER", NG: "NGA", RW: "RWA", ST: "STP", SN: "SEN", SC: "SYC", SL: "SLE",
+      SO: "SOM", ZA: "ZAF", SS: "SSD", SD: "SDN", TZ: "TZA", TG: "TGO", TN: "TUN", UG: "UGA", ZM: "ZMB", ZW: "ZWE"
+    };
     var now = Date.now();
-    var today = new Date();
-    var startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    var gmtPlus2OffsetMs = 2 * 60 * 60 * 1000;
+    var startOfTodayGmtPlus2Ms = Math.floor((now + gmtPlus2OffsetMs) / 86400000) * 86400000 - gmtPlus2OffsetMs;
     var recentWindowMs = 14 * 24 * 60 * 60 * 1000;
-    var windowStartMs = startOfToday.getTime() - recentWindowMs;
+    var windowStartMs = startOfTodayGmtPlus2Ms - recentWindowMs;
+    var countryIso3 = countryIso2 ? (africaIso3ByIso2[countryIso2] || "") : "";
+    var selectedCountryTerms = getCountrySearchTerms(country).slice();
+    var normalizedLocationCountry = normalizeSearchText(location && location.country ? location.country : "");
+    if (normalizedLocationCountry && selectedCountryTerms.indexOf(normalizedLocationCountry) === -1) {
+      selectedCountryTerms.push(normalizedLocationCountry);
+    }
 
     if (countryIso2 && africaIso2.indexOf(countryIso2) === -1) {
       return {
@@ -2759,20 +2782,69 @@
       return match ? decodeURIComponent(match[1]) : "";
     };
 
-    var extractTagValue = function(block, tagName) {
-      var pattern = new RegExp("<" + tagName + "[^>]*>([\\s\\S]*?)</" + tagName + ">", "i");
-      var match = String(block || "").match(pattern);
-      return match ? normalizeWhitespace(decodeXmlEntities(match[1])) : "";
+    var splitCountryTokens = function(value) {
+      return String(value || "")
+        .split(/,|;|\/|\||\band\b/gi)
+        .map(normalizeSearchText)
+        .filter(Boolean);
     };
 
-    var extractCapParameterValue = function(block, valueName) {
-      var escapedName = escapeRegExp(String(valueName || ""));
-      var pattern = new RegExp(
-        "<cap:parameter>[\\s\\S]*?<cap:valueName>\\s*" + escapedName + "\\s*</cap:valueName>[\\s\\S]*?<cap:value>([\\s\\S]*?)</cap:value>[\\s\\S]*?</cap:parameter>",
-        "i"
-      );
-      var match = String(block || "").match(pattern);
-      return match ? normalizeWhitespace(decodeXmlEntities(match[1])) : "";
+    var matchesCountryNameStrict = function(value) {
+      var normalizedWhole = normalizeSearchText(value);
+      if (normalizedWhole && selectedCountryTerms.indexOf(normalizedWhole) !== -1) return true;
+      var tokens = splitCountryTokens(value);
+      return tokens.some(function(token) {
+        return selectedCountryTerms.indexOf(token) !== -1;
+      });
+    };
+
+    var parseXmlDocument = function(raw) {
+      if (typeof DOMParser === "undefined") return null;
+      try {
+        var doc = new DOMParser().parseFromString(String(raw || ""), "application/xml");
+        if (doc.getElementsByTagName("parsererror").length) return null;
+        return doc;
+      } catch (_) {
+        return null;
+      }
+    };
+
+    var collectXmlNodesByNames = function(parent, names) {
+      var wanted = (Array.isArray(names) ? names : [names]).map(function(name) {
+        return String(name || "").toLowerCase();
+      });
+      var matches = [];
+      if (!parent || !wanted.length) return matches;
+
+      var nodes = parent.getElementsByTagName("*");
+      for (var i = 0; i < nodes.length; i += 1) {
+        var node = nodes[i];
+        var localName = String(node.localName || node.nodeName || "").toLowerCase();
+        var nodeName = String(node.nodeName || "").toLowerCase();
+        if (wanted.indexOf(localName) !== -1 || wanted.indexOf(nodeName) !== -1) {
+          matches.push(node);
+        }
+      }
+
+      return matches;
+    };
+
+    var extractXmlText = function(parent, names) {
+      var nodes = collectXmlNodesByNames(parent, names);
+      if (!nodes.length) return "";
+      return normalizeWhitespace(nodes[0].textContent || "");
+    };
+
+    var extractCapParameterValue = function(parent, valueName) {
+      var normalizedName = String(valueName || "").toLowerCase();
+      var parameters = collectXmlNodesByNames(parent, ["parameter", "cap:parameter"]);
+      for (var i = 0; i < parameters.length; i += 1) {
+        var parameter = parameters[i];
+        var currentName = extractXmlText(parameter, ["valueName", "cap:valueName"]).toLowerCase();
+        if (currentName !== normalizedName) continue;
+        return extractXmlText(parameter, ["value", "cap:value"]);
+      }
+      return "";
     };
 
     var toIsoOrNull = function(value) {
@@ -2801,47 +2873,47 @@
         var raw = String(xml || "");
         if (!raw) return [];
 
-        var items = [];
-        var itemRegex = /<item>([\s\S]*?)<\/item>/gi;
-        var itemMatch;
-        while ((itemMatch = itemRegex.exec(raw))) {
-          items.push(itemMatch[1] || "");
-        }
+        var xmlDoc = parseXmlDocument(raw);
+        if (!xmlDoc) return [];
+
+        var items = Array.prototype.slice.call(xmlDoc.getElementsByTagName("item") || []);
 
         var output = [];
         items.forEach(function(item) {
-          var title = extractTagValue(item, "title");
-          var description = extractTagValue(item, "description");
-          var link = extractTagValue(item, "link");
-          var pubDate = extractTagValue(item, "pubDate");
+          var title = extractXmlText(item, "title");
+          var description = extractXmlText(item, "description");
+          var link = extractXmlText(item, "link");
+          var pubDate = extractXmlText(item, "pubDate");
           var eventType = String(
-            extractTagValue(item, "gdacs:eventtype")
+            extractXmlText(item, ["eventtype", "gdacs:eventtype"])
             || extractCapParameterValue(item, "eventtype")
             || parseQueryParam(link, "eventtype")
             || ""
           ).toUpperCase();
-          var eventId = extractTagValue(item, "gdacs:eventid") || extractCapParameterValue(item, "eventid") || parseQueryParam(link, "eventid");
-          var episodeId = extractTagValue(item, "gdacs:episodeid") || extractCapParameterValue(item, "currentepisodeid") || parseQueryParam(link, "episodeid");
-          var alertLevelRaw = extractTagValue(item, "gdacs:alertlevel") || extractCapParameterValue(item, "alertlevel") || "Green";
+          var eventId = extractXmlText(item, ["eventid", "gdacs:eventid"]) || extractCapParameterValue(item, "eventid") || parseQueryParam(link, "eventid");
+          var episodeId = extractXmlText(item, ["episodeid", "gdacs:episodeid"]) || extractCapParameterValue(item, "currentepisodeid") || parseQueryParam(link, "episodeid");
+          var alertLevelRaw = extractXmlText(item, ["alertlevel", "gdacs:alertlevel"]) || extractCapParameterValue(item, "alertlevel") || "Green";
           var alertLevel = String(alertLevelRaw || "").toLowerCase();
-          var countryValue = extractTagValue(item, "gdacs:country") || extractCapParameterValue(item, "country");
-          var severityText = extractTagValue(item, "gdacs:severity") || extractCapParameterValue(item, "severity");
-          var isCurrentRaw = extractTagValue(item, "gdacs:iscurrent");
+          var countryValue = extractXmlText(item, ["country", "gdacs:country"]) || extractCapParameterValue(item, "country");
+          var iso3Value = String(extractXmlText(item, ["iso3", "gdacs:iso3"]) || extractCapParameterValue(item, "iso3") || "").toUpperCase();
+          var severityText = extractXmlText(item, ["severity", "gdacs:severity"]) || extractCapParameterValue(item, "severity");
+          var isCurrentRaw = extractXmlText(item, ["iscurrent", "gdacs:iscurrent"]);
           var isCurrent = String(isCurrentRaw || "").toLowerCase() === "true";
-          var fromIso = toIsoOrNull(extractTagValue(item, "gdacs:fromdate") || extractCapParameterValue(item, "fromdate"));
-          var toIso = toIsoOrNull(extractTagValue(item, "gdacs:todate") || extractCapParameterValue(item, "todate"));
-          var modifiedIso = toIsoOrNull(extractTagValue(item, "gdacs:datemodified") || extractCapParameterValue(item, "datemodified") || pubDate) || new Date().toISOString();
+          var fromIso = toIsoOrNull(extractXmlText(item, ["fromdate", "gdacs:fromdate"]) || extractCapParameterValue(item, "fromdate"));
+          var toIso = toIsoOrNull(extractXmlText(item, ["todate", "gdacs:todate"]) || extractCapParameterValue(item, "todate"));
+          var modifiedIso = toIsoOrNull(extractXmlText(item, ["datemodified", "gdacs:datemodified"]) || extractCapParameterValue(item, "datemodified") || pubDate) || new Date().toISOString();
 
           if (!link) {
-            var capWebLink = extractTagValue(item, "cap:web") || extractCapParameterValue(item, "link");
+            var capWebLink = extractXmlText(item, ["web", "cap:web"]) || extractCapParameterValue(item, "link");
             if (capWebLink) link = capWebLink;
           }
 
           if (hazardKeys.indexOf(eventType) === -1) return;
           if (!(alertLevel === "green" || alertLevel === "orange" || alertLevel === "red")) return;
 
-          var textBlob = [title, description, countryValue].join(" ");
-          if (!textMatchesCountry(textBlob, country)) return;
+          var isoMatch = countryIso3 && iso3Value && iso3Value === countryIso3;
+          var nameMatch = matchesCountryNameStrict(countryValue) || (!countryIso3 && (matchesCountryNameStrict(title) || matchesCountryNameStrict(description)));
+          if (!isoMatch && !nameMatch) return;
 
           var anchorDateMs = pickRelevantEventDateMs(fromIso, toIso, modifiedIso);
           var inRecentWindow = !Number.isNaN(anchorDateMs) && anchorDateMs >= windowStartMs && anchorDateMs <= now;
@@ -2906,14 +2978,19 @@
         return String(item && item.iso2 || "").toUpperCase() === countryIso2;
       });
 
+      var matchesCountryName = africanAffected.some(function(item) {
+        return matchesCountryNameStrict(item && item.countryname ? item.countryname : "");
+      });
+
       if (matchesIso) return true;
+      if (matchesCountryName) return true;
 
       // If we have a reliable ISO2 country code from geocoding, avoid loose text matching
       // that can cause false positives like Guinea vs Papua New Guinea.
       if (countryIso2) return false;
 
       var fallbackText = [properties.country, properties.name, properties.description].join(" ");
-      return textMatchesCountry(fallbackText, country);
+      return matchesCountryNameStrict(fallbackText);
     });
 
     var mergedCountryEvents = activeCountryEvents.concat(rssFeedEvents, capFeedEvents);
@@ -3956,26 +4033,42 @@
         var allDatasets = [];
         var allCategories = [];
         var snapshotFetchedAt = snapshot && snapshot.fetched_at_utc;
+        var seenDatasetKeys = {};
+        var seenCategoryKeys = {};
+        var addDatasetUnique = function(dataset) {
+          if (!dataset) return;
+          var key = String(dataset.id || dataset.slug || dataset.name || JSON.stringify(dataset));
+          if (seenDatasetKeys[key]) return;
+          seenDatasetKeys[key] = true;
+          allDatasets.push(dataset);
+        };
+        var addCategoryUnique = function(category) {
+          if (!category) return;
+          var key = String(category.id || category.slug || category.name || JSON.stringify(category));
+          if (seenCategoryKeys[key]) return;
+          seenCategoryKeys[key] = true;
+          allCategories.push(category);
+        };
         
         // Merge datasets from both ICPAC sources (if new combined structure exists)
         if (snapshot && snapshot.sources) {
           if (snapshot.sources.droughtwatch && Array.isArray(snapshot.sources.droughtwatch.datasets)) {
-            allDatasets = allDatasets.concat(snapshot.sources.droughtwatch.datasets);
+            snapshot.sources.droughtwatch.datasets.forEach(addDatasetUnique);
             if (Array.isArray(snapshot.sources.droughtwatch.categories)) {
-              allCategories = allCategories.concat(snapshot.sources.droughtwatch.categories);
+              snapshot.sources.droughtwatch.categories.forEach(addCategoryUnique);
             }
           }
           if (snapshot.sources.ea_hazards_watch && Array.isArray(snapshot.sources.ea_hazards_watch.datasets)) {
-            allDatasets = allDatasets.concat(snapshot.sources.ea_hazards_watch.datasets);
+            snapshot.sources.ea_hazards_watch.datasets.forEach(addDatasetUnique);
             if (Array.isArray(snapshot.sources.ea_hazards_watch.categories)) {
-              allCategories = allCategories.concat(snapshot.sources.ea_hazards_watch.categories);
+              snapshot.sources.ea_hazards_watch.categories.forEach(addCategoryUnique);
             }
           }
         }
         // Fallback to old snapshot structure if new structure doesn't exist
         else if (snapshot) {
-          allDatasets = Array.isArray(snapshot.datasets) ? snapshot.datasets : [];
-          allCategories = Array.isArray(snapshot.categories) ? snapshot.categories : [];
+          (Array.isArray(snapshot.datasets) ? snapshot.datasets : []).forEach(addDatasetUnique);
+          (Array.isArray(snapshot.categories) ? snapshot.categories : []).forEach(addCategoryUnique);
           snapshotFetchedAt = snapshot && (snapshot.fetched_at_utc || snapshot.generated_at || snapshot.fetched_at);
         }
         
