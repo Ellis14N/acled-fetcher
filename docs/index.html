@@ -52,6 +52,13 @@
       backdrop-filter: blur(14px);
     }
 
+    .panel.auth-mode {
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
     .logo {
       display: flex;
       align-items: center;
@@ -184,7 +191,7 @@
       text-align: center;
     }
 
-    .dashboard-title { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; }
+    .dashboard-title { font-size: 45px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; }
     .dashboard-subtitle { font-size: 14px; color: var(--text-muted); }
 
     .tools-grid {
@@ -213,7 +220,7 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      min-height: 152px;
+      min-height: 228px;
       justify-content: space-between;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
     }
@@ -225,15 +232,20 @@
     }
 
     .tool-name {
-      font-size: 17px;
+      font-size: 30px;
       font-weight: 700;
       color: var(--text-main);
     }
 
     .tool-description {
-      font-size: 13px;
+      font-size: 18px;
       color: var(--text-muted);
       line-height: 1.6;
+      display: -webkit-box;
+      line-clamp: 5;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .tool-button.coming-soon {
@@ -250,25 +262,41 @@
     }
 
     .fetch-all-tool {
-      grid-column: 1 / -1;
-      justify-self: center;
-      width: 100%;
-      max-width: 420px;
-      background: linear-gradient(145deg, rgba(23, 74, 56, 0.98), rgba(41, 126, 95, 0.94));
-      border-color: rgba(95, 209, 162, 0.42);
-      text-align: center;
-      align-items: center;
-      min-height: 142px;
-      box-shadow: 0 18px 34px rgba(22, 77, 59, 0.24);
+      background: linear-gradient(145deg, rgba(35, 83, 54, 0.98), rgba(58, 146, 103, 0.94));
+      border-color: rgba(119, 229, 178, 0.46);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
     }
 
     .fetch-all-tool:hover {
       border-color: rgba(119, 236, 188, 0.66);
-      box-shadow: 0 22px 42px rgba(22, 77, 59, 0.34);
+      box-shadow: 0 18px 36px rgba(22, 77, 59, 0.34);
     }
 
-    .fetch-all-tool .tool-description {
-      color: #d6f8ec;
+    .fetch-all-tool .tool-description { color: #d6f8ec; }
+
+    .tool-acled {
+      background: linear-gradient(145deg, rgba(61, 35, 35, 0.98), rgba(111, 46, 46, 0.94));
+      border-color: rgba(219, 112, 112, 0.44);
+    }
+
+    .tool-unhcr {
+      background: linear-gradient(145deg, rgba(33, 55, 88, 0.98), rgba(42, 95, 165, 0.94));
+      border-color: rgba(116, 173, 255, 0.42);
+    }
+
+    .tool-opensky {
+      background: linear-gradient(145deg, rgba(42, 34, 82, 0.98), rgba(78, 58, 150, 0.94));
+      border-color: rgba(156, 141, 241, 0.44);
+    }
+
+    .tool-weather {
+      background: linear-gradient(145deg, rgba(34, 71, 72, 0.98), rgba(44, 129, 133, 0.94));
+      border-color: rgba(123, 221, 224, 0.42);
+    }
+
+    .tool-travel {
+      background: linear-gradient(145deg, rgba(75, 53, 24, 0.98), rgba(148, 95, 35, 0.94));
+      border-color: rgba(237, 180, 111, 0.42);
     }
 
     .user-menu {
@@ -792,27 +820,77 @@
       text-decoration: underline;
     }
 
+    #passwordScreen {
+      min-height: calc(100vh - 190px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .password-card {
+      width: min(1140px, 100%);
+      min-height: 630px;
+      background: rgba(13, 18, 28, 0.88);
+      border: 1px solid rgba(98, 112, 146, 0.26);
+      border-radius: 20px;
+      padding: clamp(51px, 5.7vw, 75px);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+    }
+
+    .password-card .logo {
+      margin-bottom: 22px;
+    }
+
+    .password-card h2 {
+      font-size: clamp(30px, 3vw, 36px);
+      margin-bottom: 10px;
+    }
+
+    .password-card .subtitle {
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 22px;
+      max-width: none;
+    }
+
+    .password-card label {
+      font-size: 13px;
+    }
+
+    .password-card input {
+      font-size: 18px;
+      padding: 16px 18px;
+    }
+
+    .password-card button {
+      font-size: 17px;
+      padding: 15px 16px;
+    }
+
   </style>
 </head>
 <body>
 <div class="card">
   <div class="panel">
     <div id="passwordScreen">
-      <div class="logo">
-        <div class="logo-icon">
-          <img src="./logo.png" alt="14N Monitor logo" />
+      <div class="password-card">
+        <div class="logo">
+          <div class="logo-icon">
+            <img src="./logo.png" alt="14N Monitor logo" />
+          </div>
+          <div>
+            <div class="logo-text">14N Monitor</div>
+            <div class="logo-sub">Africa Monitor Data Tool</div>
+          </div>
         </div>
-        <div>
-          <div class="logo-text">14N Monitor</div>
-          <div class="logo-sub">Africa Monitor Data Tool</div>
-        </div>
+        <h2>Enter Password</h2>
+        <p class="subtitle">This tool is restricted to authorized team members. For access, please contact your administrator.</p>
+        <label for="passwordInput">Password</label>
+        <input type="password" id="passwordInput" placeholder="Enter password here" />
+        <button onclick="checkPassword()">Continue</button>
+        <div class="error" id="passwordError">Incorrect password. Please try again.</div>
       </div>
-      <h2>Enter Password</h2>
-      <p class="subtitle">This tool is restricted to authorized team members. For access, please contact your administrator.</p>
-      <label for="passwordInput">Password</label>
-      <input type="password" id="passwordInput" placeholder="Enter password here" />
-      <button onclick="checkPassword()">Continue</button>
-      <div class="error" id="passwordError">Incorrect password. Please try again.</div>
     </div>
 
     <div id="dashboardScreen" style="display:none">
@@ -831,36 +909,46 @@
       <div class="tools-grid">
         <button class="tool-button fetch-all-tool" onclick="runFetchAllAfrica()">
           <div class="tool-name">Fetch All - Africa</div>
-          <div class="tool-description">Run continent-wide ACLED and UNHCR batch extraction with dedicated Africa-wide results.</div>
+          <div class="tool-description">Run a combined, continent-wide extraction workflow that pulls ACLED conflict and UNHCR displacement snapshots for all African countries in one pass.</div>
         </button>
 
-        <button class="tool-button" onclick="show('fetchScreen')">
+        <button class="tool-button tool-acled" onclick="show('fetchScreen')">
           <div class="tool-name">ACLED Extractor</div>
-          <div class="tool-description">Fetch conflict event and actor summaries for a single country.</div>
+          <div class="tool-description">Fetch country-level conflict events with counts, fatalities, event categories, and top actors to quickly assess evolving security dynamics.</div>
         </button>
 
-        <button class="tool-button" onclick="show('fetchUNHCRScreen')">
+        <button class="tool-button tool-unhcr" onclick="show('fetchUNHCRScreen')">
           <div class="tool-name">UNHCR Extractor</div>
-          <div class="tool-description">Fetch refugee and displacement data for a single host country.</div>
+          <div class="tool-description">Collect host-country displacement indicators, including population types and origin context, from live UNHCR data endpoints.</div>
         </button>
 
-        <button class="tool-button" onclick="show('fetchOpenSkyScreen')">
+        <button class="tool-button tool-opensky" onclick="show('fetchOpenSkyScreen')">
           <div class="tool-name">OpenSky Extractor</div>
-          <div class="tool-description">Fetch flight activity for a specific airport and time window.</div>
+          <div class="tool-description">Retrieve airport activity across your selected time window to monitor arrivals and departures relevant to logistics and access.</div>
         </button>
 
-        <button class="tool-button" onclick="show('fetchWeatherScreen')">
+        <button class="tool-button tool-weather" onclick="show('fetchWeatherScreen')">
           <div class="tool-name">Weather and Severe Events</div>
-          <div class="tool-description">Country-level flood, disaster, severe weather, air quality, and IGAD outlooks from five live sources.</div>
+          <div class="tool-description">Combine flood guidance, disaster alerts, severe weather warnings, air quality conditions, and regional outlook feeds for one country.</div>
         </button>
 
-        <button class="tool-button" onclick="show('fetchTravelAdvisoriesScreen')">
+        <button class="tool-button tool-travel" onclick="show('fetchTravelAdvisoriesScreen')">
           <div class="tool-name">Travel Advisories</div>
-          <div class="tool-description">Live travel advisories from UK FCDO, US State Dept, Australian DFAT, and French MEAE.</div>
+          <div class="tool-description">Compare travel guidance from UK FCDO, US State Department, Australian DFAT, and French MEAE in a single normalized summary view.</div>
         </button>
 
         <button class="tool-button coming-soon">
           <div class="tool-name">API 6</div>
+          <div class="tool-description">Reserved for future extractor.</div>
+        </button>
+
+        <button class="tool-button coming-soon">
+          <div class="tool-name">API 7</div>
+          <div class="tool-description">Reserved for future extractor.</div>
+        </button>
+
+        <button class="tool-button coming-soon">
+          <div class="tool-name">API 8</div>
           <div class="tool-description">Reserved for future extractor.</div>
         </button>
       </div>
@@ -1780,8 +1868,17 @@
       "resultsScreen",
       "africaResultsScreen"
     ].forEach(screenId => {
-      document.getElementById(screenId).style.display = screenId === id ? "block" : "none";
+      if (screenId === id) {
+        document.getElementById(screenId).style.display = screenId === "passwordScreen" ? "flex" : "block";
+      } else {
+        document.getElementById(screenId).style.display = "none";
+      }
     });
+
+    var panel = document.querySelector('.panel');
+    if (panel) {
+      panel.classList.toggle('auth-mode', id === 'passwordScreen');
+    }
   }
 
   function markStep(id, state) {
@@ -3198,42 +3295,265 @@
     return { label: "Low", tone: "low" };
   }
 
+  var CAMS_AFRICA_MONITOR_ZONES = [
+    {
+      id: "maghreb_atlantic",
+      label: "Maghreb Atlantic",
+      lat: 29.5,
+      lon: -8.5,
+      countries: ["Morocco", "Western Algeria", "Mauritania"],
+      tags: ["sahara", "harmattan"]
+    },
+    {
+      id: "central_sahara",
+      label: "Central Sahara",
+      lat: 24.0,
+      lon: 12.0,
+      countries: ["Algeria", "Libya", "Niger", "Chad"],
+      tags: ["sahara"]
+    },
+    {
+      id: "nile_sahara",
+      label: "Nile-Sahara Corridor",
+      lat: 22.5,
+      lon: 30.0,
+      countries: ["Egypt", "Sudan", "Libya", "Chad"],
+      tags: ["sahara"]
+    },
+    {
+      id: "sahel_west",
+      label: "Western Sahel",
+      lat: 15.5,
+      lon: -5.0,
+      countries: ["Mali", "Mauritania", "Senegal", "Gambia", "Burkina Faso"],
+      tags: ["sahel", "harmattan", "savanna"]
+    },
+    {
+      id: "sahel_central",
+      label: "Central Sahel",
+      lat: 14.0,
+      lon: 8.0,
+      countries: ["Niger", "Nigeria", "Chad", "Cameroon"],
+      tags: ["sahel", "harmattan", "savanna"]
+    },
+    {
+      id: "gulf_of_guinea",
+      label: "Gulf of Guinea Belt",
+      lat: 7.0,
+      lon: 1.5,
+      countries: ["Cote d'Ivoire", "Ghana", "Togo", "Benin", "Nigeria"],
+      tags: ["harmattan", "savanna", "smoke"]
+    },
+    {
+      id: "horn_of_africa",
+      label: "Horn of Africa",
+      lat: 9.0,
+      lon: 43.0,
+      countries: ["Ethiopia", "Somalia", "Djibouti", "Eritrea"],
+      tags: ["sahara", "dust"]
+    },
+    {
+      id: "east_africa_rift",
+      label: "East Africa Rift",
+      lat: -1.5,
+      lon: 36.0,
+      countries: ["Kenya", "Uganda", "Tanzania", "Rwanda", "Burundi", "South Sudan"],
+      tags: ["smoke", "savanna"]
+    },
+    {
+      id: "congo_basin",
+      label: "Congo Basin",
+      lat: -1.0,
+      lon: 21.0,
+      countries: ["Democratic Republic of the Congo", "Congo", "Central African Republic", "Gabon", "Equatorial Guinea", "Angola"],
+      tags: ["smoke", "savanna", "wildfire"]
+    },
+    {
+      id: "southern_africa_interior",
+      label: "Southern Africa Interior",
+      lat: -19.0,
+      lon: 24.0,
+      countries: ["Namibia", "Botswana", "Zimbabwe", "Zambia", "South Africa"],
+      tags: ["smoke", "savanna", "wildfire"]
+    },
+    {
+      id: "mozambique_channel",
+      label: "Mozambique Channel",
+      lat: -18.0,
+      lon: 41.0,
+      countries: ["Mozambique", "Madagascar", "Malawi", "Comoros"],
+      tags: ["smoke", "savanna"]
+    },
+    {
+      id: "africa_southwest_coast",
+      label: "Southwest Africa Coast",
+      lat: -16.0,
+      lon: 12.0,
+      countries: ["Angola", "Namibia"],
+      tags: ["dust", "smoke"]
+    }
+  ];
+
   async function fetchCAMSOutlook(location) {
-    var url = "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + encodeURIComponent(location.latitude)
-      + "&longitude=" + encodeURIComponent(location.longitude)
-      + "&hourly=european_aqi,pm2_5,pm10,dust"
-      + "&forecast_days=3";
-    var json = await fetchJsonWithFallback(url);
-    var hourly = json.hourly || {};
-    var times = Array.isArray(hourly.time) ? hourly.time : [];
-    var aqi = Array.isArray(hourly.european_aqi) ? hourly.european_aqi : [];
-    var dust = Array.isArray(hourly.dust) ? hourly.dust : [];
-    var pm25 = Array.isArray(hourly.pm2_5) ? hourly.pm2_5 : [];
-    if (!times.length || !aqi.length) {
-      throw new Error("Air quality forecast is unavailable for this location.");
+    var selectedCountry = (location && location.country) ? location.country : "";
+    var now = new Date();
+    var month = now.getUTCMonth() + 1;
+    var harmattanSeason = month >= 11 || month <= 3;
+
+    var fetchZoneSignal = async function(zone) {
+      var url = "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=" + encodeURIComponent(zone.lat)
+        + "&longitude=" + encodeURIComponent(zone.lon)
+        + "&hourly=european_aqi,pm2_5,pm10,dust"
+        + "&forecast_days=3";
+      var json = await fetchJsonWithFallback(url);
+      var hourly = json && json.hourly ? json.hourly : {};
+      var times = Array.isArray(hourly.time) ? hourly.time : [];
+      var aqi = Array.isArray(hourly.european_aqi) ? hourly.european_aqi : [];
+      var dust = Array.isArray(hourly.dust) ? hourly.dust : [];
+      var pm25 = Array.isArray(hourly.pm2_5) ? hourly.pm2_5 : [];
+      var pm10 = Array.isArray(hourly.pm10) ? hourly.pm10 : [];
+      if (!times.length || !aqi.length) throw new Error("No CAMS data for zone " + zone.label);
+
+      var maxAqi = -Infinity;
+      var maxAqiIndex = 0;
+      for (var i = 0; i < aqi.length; i += 1) {
+        var value = Number(aqi[i]);
+        if (Number.isFinite(value) && value > maxAqi) {
+          maxAqi = value;
+          maxAqiIndex = i;
+        }
+      }
+
+      var maxDust = dust.length ? Math.max.apply(null, dust.map(function(value) { return Number(value || 0); })) : 0;
+      var maxPm25 = pm25.length ? Math.max.apply(null, pm25.map(function(value) { return Number(value || 0); })) : 0;
+      var maxPm10 = pm10.length ? Math.max.apply(null, pm10.map(function(value) { return Number(value || 0); })) : 0;
+
+      return {
+        zone: zone,
+        time: times[maxAqiIndex] || times[0],
+        maxAqi: Number.isFinite(maxAqi) ? maxAqi : 0,
+        maxDust: Number.isFinite(maxDust) ? maxDust : 0,
+        maxPm25: Number.isFinite(maxPm25) ? maxPm25 : 0,
+        maxPm10: Number.isFinite(maxPm10) ? maxPm10 : 0
+      };
+    };
+
+    var zoneResults = await Promise.allSettled(CAMS_AFRICA_MONITOR_ZONES.map(fetchZoneSignal));
+    var signals = zoneResults
+      .filter(function(result) { return result && result.status === "fulfilled" && result.value; })
+      .map(function(result) { return result.value; });
+
+    if (!signals.length) {
+      throw new Error("CAMS forecast data is unavailable for African monitoring zones.");
     }
 
-    var maxIndex = 0;
-    for (var i = 1; i < aqi.length; i += 1) {
-      if (Number(aqi[i] || 0) > Number(aqi[maxIndex] || 0)) maxIndex = i;
+    var uniqueCountriesFromSignals = function(list) {
+      var map = {};
+      list.forEach(function(item) {
+        (item.zone.countries || []).forEach(function(countryName) {
+          if (countryName) map[countryName] = true;
+        });
+      });
+      return Object.keys(map).sort();
+    };
+
+    var compactList = function(items, maxItems) {
+      var arr = Array.isArray(items) ? items : [];
+      if (arr.length <= maxItems) return arr.join(", ");
+      return arr.slice(0, maxItems).join(", ") + " +" + (arr.length - maxItems) + " more";
+    };
+
+    var hasTag = function(signal, tag) {
+      return Array.isArray(signal.zone.tags) && signal.zone.tags.indexOf(tag) !== -1;
+    };
+
+    var saharanDustSignals = signals.filter(function(signal) {
+      var saharanZone = hasTag(signal, "sahara") || hasTag(signal, "sahel") || hasTag(signal, "dust");
+      return saharanZone && (signal.maxDust >= 120 || (signal.maxDust >= 90 && signal.maxPm10 >= 100));
+    });
+
+    var harmattanSignals = signals.filter(function(signal) {
+      if (!harmattanSeason || !hasTag(signal, "harmattan")) return false;
+      return signal.maxDust >= 75 && signal.maxPm10 >= 80;
+    });
+
+    var wildfireSmokeSignals = signals.filter(function(signal) {
+      var smokeZone = hasTag(signal, "smoke") || hasTag(signal, "savanna") || hasTag(signal, "wildfire");
+      if (!smokeZone) return false;
+      return signal.maxPm25 >= 35 && signal.maxDust < 95;
+    });
+
+    var blockForHazard = function(title, severity, hazardSignals, metricLine) {
+      if (!hazardSignals.length) {
+        return {
+          title: title,
+          lines: ["No warning-level CAMS signal detected in current 72-hour African scan."]
+        };
+      }
+
+      var topSignal = hazardSignals.slice().sort(function(a, b) {
+        return Number(metricLine(a).value || 0) - Number(metricLine(b).value || 0);
+      }).reverse()[0];
+
+      var zoneNames = hazardSignals.map(function(item) { return item.zone.label; });
+      var countries = uniqueCountriesFromSignals(hazardSignals);
+      var topMetric = metricLine(topSignal);
+
+      return {
+        title: title,
+        lines: [
+          "Severity: " + severity + ".",
+          "Geographic areas: " + zoneNames.join(", ") + ".",
+          "Affected countries: " + compactList(countries, 18) + ".",
+          "Peak indicator: " + topMetric.label + " at " + topSignal.zone.label + " near " + formatShortDate(topSignal.time) + "."
+        ]
+      };
+    };
+
+    var overallSeverity = "Low";
+    var overallTone = "low";
+    if (saharanDustSignals.some(function(signal) { return signal.maxDust >= 180; }) || wildfireSmokeSignals.some(function(signal) { return signal.maxPm25 >= 55; })) {
+      overallSeverity = "Alert";
+      overallTone = "alert";
+    } else if (saharanDustSignals.length || harmattanSignals.length || wildfireSmokeSignals.length) {
+      overallSeverity = "Warning";
+      overallTone = "warning";
     }
 
-    var maxAqi = numberOrNull(aqi[maxIndex]);
-    var maxDust = dust.length ? Math.max.apply(null, dust.map(function(value) { return Number(value || 0); })) : null;
-    var maxPm25 = pm25.length ? Math.max.apply(null, pm25.map(function(value) { return Number(value || 0); })) : null;
-    var classification = classifyAqi(maxAqi);
+    var relevantSignals = saharanDustSignals.concat(harmattanSignals, wildfireSmokeSignals);
+    var relevantCountries = uniqueCountriesFromSignals(relevantSignals);
+    var selectedCountryFlag = selectedCountry && relevantCountries.some(function(name) {
+      return textMatchesCountry(name, selectedCountry);
+    });
 
     return {
-      source: "CAMS Air Quality",
-      statusLabel: classification.label,
-      statusTone: classification.tone,
-      headline: maxAqi !== null ? "Peak European AQI reaches " + formatDecimal(maxAqi, 0) + " within the next 72 hours." : "AQI signal unavailable.",
-      summary: "Open-Meteo's air quality endpoint, backed by CAMS forecasts, shows the strongest air quality signal near " + formatShortDate(times[maxIndex]) + ".",
+      source: "CAMS Africa Atmospheric Hazards",
+      statusLabel: overallSeverity,
+      statusTone: overallTone,
+      headline: relevantSignals.length
+        ? "CAMS detected " + relevantSignals.length + " warning signal(s) across African dust/smoke monitoring zones."
+        : "No warning-level Saharan dust, Harmattan, or wildfire smoke signal detected across monitored African zones.",
+      summary: selectedCountry
+        ? (selectedCountryFlag
+            ? selectedCountry + " appears within at least one active CAMS hazard footprint in the next 72 hours."
+            : selectedCountry + " is not currently within the strongest CAMS hazard footprints from this Africa-wide screening.")
+        : "Africa-wide CAMS screening completed.",
       bullets: [
-        maxAqi !== null ? "Peak European AQI: " + formatDecimal(maxAqi, 0) + "." : null,
-        maxPm25 !== null ? "Peak PM2.5: " + formatDecimal(maxPm25, 1) + " ug/m3." : null,
-        maxDust !== null ? "Peak dust: " + formatDecimal(maxDust, 1) + " ug/m3." : null,
-        "Forecast horizon: 72 hours."
+        "Scope: Africa-only screening using predefined regional monitoring zones.",
+        "Hazards: Saharan dust storms, Harmattan dust advection, and wildfire/savanna smoke.",
+        "Signal logic: dust, PM10, PM2.5 and European AQI thresholds from CAMS-backed Open-Meteo forecasts.",
+        "Forecast horizon: 72 hours (hourly CAMS-backed fields)."
+      ],
+      detailBlocks: [
+        blockForHazard("Saharan Dust Storm Warning", saharanDustSignals.some(function(signal) { return signal.maxDust >= 180; }) ? "Alert" : (saharanDustSignals.length ? "Warning" : "Watch"), saharanDustSignals, function(signal) {
+          return { value: signal.maxDust, label: "Dust " + formatDecimal(signal.maxDust, 1) + " ug/m3" };
+        }),
+        blockForHazard("Harmattan Warning", harmattanSignals.some(function(signal) { return signal.maxDust >= 120; }) ? "Warning" : (harmattanSignals.length ? "Watch" : "Watch"), harmattanSignals, function(signal) {
+          return { value: signal.maxDust, label: "Dust " + formatDecimal(signal.maxDust, 1) + " ug/m3" };
+        }),
+        blockForHazard("Wildfire / Savanna Smoke Warning", wildfireSmokeSignals.some(function(signal) { return signal.maxPm25 >= 55; }) ? "Alert" : (wildfireSmokeSignals.length ? "Warning" : "Watch"), wildfireSmokeSignals, function(signal) {
+          return { value: signal.maxPm25, label: "PM2.5 " + formatDecimal(signal.maxPm25, 1) + " ug/m3" };
+        })
       ],
       updatedAt: formatIsoDate(new Date().toISOString()),
       url: "https://open-meteo.com/en/docs/air-quality-api"
@@ -3505,6 +3825,13 @@
     ];
     var countryKey = normalizeSearchText(country);
     var isEastAfricaFocus = eastAfricaCountries.indexOf(countryKey) !== -1;
+
+    if (!isEastAfricaFocus) {
+      return {
+        skipDisplay: true,
+        skipReason: "ICPAC Drought Watch and EA Hazards Watch currently cover East Africa only (Burundi, Comoros, Djibouti, Eritrea, Ethiopia, Kenya, Rwanda, Somalia, South Sudan, Sudan, Tanzania, Uganda). " + country + " is outside this coverage scope."
+      };
+    }
 
     var monthMap = {
       jan: 1, january: 1,
@@ -4520,6 +4847,7 @@
       fcdoSlugs: ["congo"],
       frenchSlugs: ["republique-du-congo", "congo"],
       dfatNames: ["Republic of the Congo", "Congo, Republic of", "Congo (Republic of the Congo)", "Congo-Brazzaville"],
+      dfatPaths: ["/destinations/africa/congo", "/destinations/africa/republic-congo", "/destinations/africa/republic-of-the-congo"],
       stateDeptNames: ["Congo (Brazzaville)", "Republic of the Congo", "Congo"]
     },
     "democratic republic of the congo": {
@@ -4527,13 +4855,15 @@
       fcdoSlugs: ["democratic-republic-of-the-congo"],
       frenchSlugs: ["republique-democratique-du-congo"],
       dfatNames: ["Democratic Republic of the Congo", "Congo, Democratic Republic of", "DR Congo"],
+      dfatPaths: ["/destinations/africa/democratic-republic-congo", "/destinations/africa/democratic-republic-of-the-congo", "/destinations/africa/dr-congo"],
       stateDeptNames: ["Congo (Kinshasa)", "Democratic Republic of the Congo", "DRC"]
     },
     "ivory coast": {
       aliases: ["cote d'ivoire", "cote d ivoire", "côte d'ivoire"],
-      fcdoSlugs: ["cote-divoire"],
+      fcdoSlugs: ["cote-d-ivoire"],
       frenchSlugs: ["cote-d-ivoire"],
       dfatNames: ["Côte d'Ivoire", "Cote d'Ivoire", "Ivory Coast"],
+      dfatPaths: ["/destinations/africa/cote-divoire", "/destinations/africa/ivory-coast"],
       stateDeptNames: ["Cote d'Ivoire", "Ivory Coast"]
     },
     "central african republic": {
@@ -4541,6 +4871,7 @@
       fcdoSlugs: ["central-african-republic"],
       frenchSlugs: ["republique-centrafricaine"],
       dfatNames: ["Central African Republic"],
+      dfatPaths: ["/destinations/africa/central-african-republic"],
       stateDeptNames: ["Central African Republic"]
     }
   };
@@ -4579,6 +4910,7 @@
       fcdoSlugs: profile && profile.fcdoSlugs && profile.fcdoSlugs.length ? profile.fcdoSlugs.slice() : [normalizeCountrySlug(raw)],
       frenchSlugs: profile && profile.frenchSlugs && profile.frenchSlugs.length ? profile.frenchSlugs.slice() : [normalizeCountrySlug(raw)],
       dfatNames: profile && profile.dfatNames && profile.dfatNames.length ? profile.dfatNames.slice() : [raw],
+      dfatPaths: profile && profile.dfatPaths && profile.dfatPaths.length ? profile.dfatPaths.slice() : [],
       stateDeptNames: profile && profile.stateDeptNames && profile.stateDeptNames.length ? profile.stateDeptNames.slice() : [raw]
     };
   }
@@ -4742,13 +5074,15 @@
 
   // Australian DFAT: destinations page parser + country page parser
   function parseDFATDestinationsHtml(html, countryProfile) {
-    var doc = new DOMParser().parseFromString(html, 'text/html');
-    var rows = doc.querySelectorAll('tr');
     var targets = (countryProfile && countryProfile.dfatNames && countryProfile.dfatNames.length ? countryProfile.dfatNames : [countryProfile && countryProfile.input ? countryProfile.input : ''])
       .map(normalizeCountryNameKey)
       .filter(Boolean);
     var targetSet = {};
     targets.forEach(function(name) { targetSet[name] = true; });
+
+    var rawHtml = String(html || '');
+    var doc = new DOMParser().parseFromString(rawHtml, 'text/html');
+    var rows = doc.querySelectorAll('tr');
 
     for (var i = 0; i < rows.length; i++) {
       var cells = rows[i].querySelectorAll('td');
@@ -4765,6 +5099,40 @@
         href: linkEl ? linkEl.getAttribute('href') : null,
       };
     }
+
+    // r.jina.ai can return markdown-like text instead of HTML. Support lines like:
+    // [Country](url)[Region](url)Exercise a high degree of caution 20 Jan 2026
+    var lines = rawHtml.split(/\n+/).map(function(line) {
+      return normalizeWhitespace(line);
+    }).filter(Boolean);
+    var entryRegex = /^\[([^\]]+)\]\((https?:\/\/www\.smartraveller\.gov\.au\/[^)]+)\)\[[^\]]+\]\([^)]*\)(Do not travel|Reconsider your need to travel|Exercise a high degree of caution|Exercise normal safety precautions)\s+(\d{1,2}\s+\w+\s+\d{4})$/i;
+
+    for (var j = 0; j < lines.length; j += 1) {
+      var match = lines[j].match(entryRegex);
+      if (!match) continue;
+      var markdownName = normalizeWhitespace(match[1]);
+      var markdownTargets = [normalizeCountryNameKey(markdownName)];
+      // Handle entries like "Côte d'Ivoire (Ivory Coast)"
+      var altMatches = markdownName.match(/^(.*?)\((.*?)\)\s*$/);
+      if (altMatches) {
+        markdownTargets.push(normalizeCountryNameKey(altMatches[1]));
+        markdownTargets.push(normalizeCountryNameKey(altMatches[2]));
+      }
+
+      var matchesTarget = markdownTargets.some(function(name) {
+        return !!targetSet[name];
+      });
+      if (!matchesTarget) continue;
+
+      var href = match[2].replace(/^https?:\/\/www\.smartraveller\.gov\.au/i, '');
+      return {
+        countryName: markdownName,
+        levelText: normalizeWhitespace(match[3]),
+        updatedAt: normalizeWhitespace(match[4]),
+        href: href,
+      };
+    }
+
     throw new Error('Country not found in DFAT destinations table');
   }
 
@@ -4775,24 +5143,60 @@
     return {
       advisorySentence: m ? m[1].trim() : null,
       primaryDriver: driver,
+      rawText: text,
     };
   }
 
   async function fetchAusDFAT(country) {
     var profile = resolveTravelCountryProfile(country);
     var listUrl = 'https://www.smartraveller.gov.au/destinations';
-    var listHtml = await fetchTextWithFallback(listUrl);
-
-    var parsedList = parseDFATDestinationsHtml(listHtml, profile);
+    var parsedList = null;
+    try {
+      var listHtml = await fetchTextWithFallback(listUrl);
+      parsedList = parseDFATDestinationsHtml(listHtml, profile);
+    } catch (_) {
+      parsedList = null;
+    }
     var detail = { advisorySentence: null, primaryDriver: null };
 
-    if (parsedList.href) {
+    if (parsedList && parsedList.href) {
       var detailUrl = 'https://www.smartraveller.gov.au' + parsedList.href;
       try {
         detail = parseDFATCountryHtml(await fetchTextWithFallback(detailUrl));
       } catch (_) {
         // Leave detail fields nullable if detail page cannot be fetched.
       }
+    }
+
+    if (!parsedList && profile.dfatPaths && profile.dfatPaths.length) {
+      for (var i = 0; i < profile.dfatPaths.length; i += 1) {
+        var fallbackPath = profile.dfatPaths[i];
+        var fallbackUrl = 'https://www.smartraveller.gov.au' + fallbackPath;
+        try {
+          var fallbackHtml = await fetchTextWithFallback(fallbackUrl);
+          var fallbackDetail = parseDFATCountryHtml(fallbackHtml);
+          var fallbackText = String(fallbackDetail.rawText || '').toLowerCase();
+          var fallbackLevelText = null;
+          if (/do not travel/i.test(fallbackText)) fallbackLevelText = 'Do not travel';
+          else if (/reconsider your need to travel/i.test(fallbackText)) fallbackLevelText = 'Reconsider your need to travel';
+          else if (/exercise a high degree of caution/i.test(fallbackText)) fallbackLevelText = 'Exercise a high degree of caution';
+          else if (/exercise normal safety precautions/i.test(fallbackText)) fallbackLevelText = 'Exercise normal safety precautions';
+          if (!fallbackLevelText) continue;
+
+          parsedList = {
+            countryName: profile.canonicalName || country,
+            levelText: fallbackLevelText,
+            updatedAt: null,
+            href: fallbackPath,
+          };
+          detail = fallbackDetail;
+          break;
+        } catch (_) {}
+      }
+    }
+
+    if (!parsedList) {
+      throw new Error('No live Smartraveller advisory entry was found for ' + (profile.canonicalName || country) + '.');
     }
 
     var levelMap = {
@@ -4820,10 +5224,10 @@
     var levelText = 'See advisory page';
     var level = 0;
 
-    if (/formellement\s+d[eé]conseill[eé]/i.test(text)) {
+    if (/formellement\s+d[eé]conseill(?:e|é|es|ées|s|és)/i.test(text)) {
       level = 4;
       levelText = 'Formally advised against';
-    } else if (/d[eé]conseill[eé]\s+sauf\s+raison\s+imp[eé]rative/i.test(text)) {
+    } else if (/d[eé]conseill(?:e|é|es|ées|s|és)\s*,?\s*sauf\s+raison\s+imp[eé]rative/i.test(text)) {
       level = 3;
       levelText = 'Advised against except for imperative reasons';
     } else if (/vigilance\s+renforc[eé]e/i.test(text)) {
