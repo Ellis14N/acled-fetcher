@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-08T06:02:21.974460+00:00",
+  "fetched_at_utc": "2026-04-08T16:21:07.545157+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-08T06:02:20.541762+00:00",
+      "fetched_at_utc": "2026-04-08T16:21:06.181058+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -109,7 +109,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "03",
-              "end_dekad": "01",
+              "end_dekad": "11",
               "active": true,
               "dataset": "549a7b6c-65e5-4258-b18b-54310e910a5c",
               "wms_layer": "dekadal_cdi_chirps_tileset",
@@ -189,7 +189,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "03",
-                "selectedTenDays": "01",
+                "selectedTenDays": "11",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -7846,8 +7846,8 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "03",
-              "end_dekad": "26",
+              "end_month": "04",
+              "end_dekad": "01",
               "active": true,
               "dataset": "3f9400de-34bb-46ef-98e8-aa4448700a5c",
               "wms_layer": "min_temp_tileset",
@@ -8255,8 +8255,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedDay}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "03",
-                "selectedDay": "26",
+                "selectedMonth": "04",
+                "selectedDay": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -10833,7 +10833,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-08T06:02:21.974444+00:00",
+      "fetched_at_utc": "2026-04-08T16:21:07.545142+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -12291,115 +12291,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "7708c0dd-8c13-4503-ba22-cd420893436c",
-          "dataset": "7708c0dd-8c13-4503-ba22-cd420893436c",
-          "name": "Admin Level 2 Boundary",
-          "capabilities": [],
-          "summary": null,
-          "layer": "c47279f5-8481-4529-86f3-f58810f7d567",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 60,
-          "metadata": "6b06ca84-b7e8-4019-ba85-b0cdc5eb066c",
-          "layers": [
-            {
-              "id": "c47279f5-8481-4529-86f3-f58810f7d567",
-              "dataset": "7708c0dd-8c13-4503-ba22-cd420893436c",
-              "isDefault": true,
-              "name": "Admin Level 2 Boundary",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?border_level=2"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "paint": {
-                        "line-opacity": 0.4,
-                        "line-width": 0.5
-                      },
-                      "type": "line",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://gadm.org/",
-                "text": "Political boundaries data obtained from GADM. The map shows version 4.1 of the GADM data. GADM provides maps and spatial data for all countries and their sub-divisions.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name_0",
-                    "property": "Country Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "name_1",
-                    "property": "Level 1 Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "name_2",
-                    "property": "Admin Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "type_2",
-                    "property": "Admin Type",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
           "id": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
           "dataset": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
           "name": "Rainfall Anomalies",
@@ -12530,6 +12421,115 @@
           "layer_type": "wms"
         },
         {
+          "id": "7708c0dd-8c13-4503-ba22-cd420893436c",
+          "dataset": "7708c0dd-8c13-4503-ba22-cd420893436c",
+          "name": "Admin Level 2 Boundary",
+          "capabilities": [],
+          "summary": null,
+          "layer": "c47279f5-8481-4529-86f3-f58810f7d567",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 60,
+          "metadata": "6b06ca84-b7e8-4019-ba85-b0cdc5eb066c",
+          "layers": [
+            {
+              "id": "c47279f5-8481-4529-86f3-f58810f7d567",
+              "dataset": "7708c0dd-8c13-4503-ba22-cd420893436c",
+              "isDefault": true,
+              "name": "Admin Level 2 Boundary",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?border_level=2"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "paint": {
+                        "line-opacity": 0.4,
+                        "line-width": 0.5
+                      },
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://gadm.org/",
+                "text": "Political boundaries data obtained from GADM. The map shows version 4.1 of the GADM data. GADM provides maps and spatial data for all countries and their sub-divisions.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name_0",
+                    "property": "Country Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "name_1",
+                    "property": "Level 1 Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "name_2",
+                    "property": "Admin Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "type_2",
+                    "property": "Admin Type",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
           "id": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
           "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
           "name": "Rangelands Conditions",
@@ -12644,10 +12644,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 07 Apr 2026 (Initialized 31 Mar 2026)",
+          "summary": "Latest: 16 Apr 2026 (Initialized 08 Apr 2026)",
           "layer": "9ebfce98-3b47-4b47-8052-b7174e900b93",
           "dataset_slug": "weekly_heat_stress",
-          "latest_date": "2026-04-07T08:00:00+03:00",
+          "latest_date": "2026-04-16T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -12836,101 +12836,6 @@
                   {
                     "column": "name_0",
                     "property": "Basin Name",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
-          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "name": "East Africa Protected Areas",
-          "capabilities": [],
-          "summary": null,
-          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 62,
-          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
-          "layers": [
-            {
-              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
-              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-              "isDefault": true,
-              "name": "Protected Areas",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "type": "line",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
-                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name",
-                    "property": "Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "name_0",
-                    "property": "Type",
                     "type": "string"
                   }
                 ]
@@ -13152,6 +13057,101 @@
           "layer_type": "vector_file"
         },
         {
+          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "name": "East Africa Protected Areas",
+          "capabilities": [],
+          "summary": null,
+          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 62,
+          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
+          "layers": [
+            {
+              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
+              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+              "isDefault": true,
+              "name": "Protected Areas",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
+                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name",
+                    "property": "Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "name_0",
+                    "property": "Type",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
           "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
           "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
           "name": "Mean Temprature",
@@ -13261,101 +13261,6 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/",
                 "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "name": "Combined Drought Indicator",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 1st Dekad of March 2026",
-          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-          "dataset_slug": "dekadal_cdi",
-          "latest_date": "2026-03-01T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 7,
-          "sub_category": 13,
-          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
-          "layers": [
-            {
-              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-              "isDefault": true,
-              "name": "Combined Drought Indicator",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Watch: Rainfall Deficit",
-                    "color": "#ffff01"
-                  },
-                  {
-                    "name": "Warning: Soil Moisture Deficit",
-                    "color": "#ffa601"
-                  },
-                  {
-                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
-                    "color": "#ff0000"
-                  },
-                  {
-                    "name": "No Warning",
-                    "color": "#f5f5f5"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "GO TO DROUGHT WATCH",
-                "linkUrl": "https://droughtwatch.icpac.net/",
-                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -13482,6 +13387,101 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/#:~:text=Temperature%20forecast%20(Anomalies),-Temperature%20anomalies&text=Temperature%20anomalies-,Warmer%20than%20usual%20temperatures%20expected%20over%20most%20parts%20of%20the,to%20southern%20parts%20of%20Sudan.",
                 "text": "Shows deviations from normal temperature patterns, indicating warmer or cooler than usual conditions that may impact ecosystems and human activities",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "name": "Combined Drought Indicator",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 1st Dekad of March 2026",
+          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+          "dataset_slug": "dekadal_cdi",
+          "latest_date": "2026-03-01T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 7,
+          "sub_category": 13,
+          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
+          "layers": [
+            {
+              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+              "isDefault": true,
+              "name": "Combined Drought Indicator",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Watch: Rainfall Deficit",
+                    "color": "#ffff01"
+                  },
+                  {
+                    "name": "Warning: Soil Moisture Deficit",
+                    "color": "#ffa601"
+                  },
+                  {
+                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
+                    "color": "#ff0000"
+                  },
+                  {
+                    "name": "No Warning",
+                    "color": "#f5f5f5"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "GO TO DROUGHT WATCH",
+                "linkUrl": "https://droughtwatch.icpac.net/",
+                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -13762,6 +13762,89 @@
           "layer_type": "wms"
         },
         {
+          "id": "d2b11264-0d87-4513-adda-731c3e33e5e6",
+          "dataset": "d2b11264-0d87-4513-adda-731c3e33e5e6",
+          "name": "Range Land Area Mask",
+          "capabilities": [],
+          "summary": null,
+          "layer": "7bea840e-32e1-4683-9884-5d32f895c7de",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 12,
+          "sub_category": 57,
+          "metadata": "5d62182d-edf1-498a-9a3b-5e0b98e3c6ce",
+          "layers": [
+            {
+              "id": "7bea840e-32e1-4683-9884-5d32f895c7de",
+              "dataset": "d2b11264-0d87-4513-adda-731c3e33e5e6",
+              "isDefault": true,
+              "name": "Range Land Mask",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=rangeland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "0 to 20 %",
+                    "color": "#CFC6C9"
+                  },
+                  {
+                    "name": "20 to 40 %",
+                    "color": "#FFFFCB"
+                  },
+                  {
+                    "name": "40 to 60 %",
+                    "color": "#CCE1AC"
+                  },
+                  {
+                    "name": "60 to 80%",
+                    "color": "#98C38D"
+                  },
+                  {
+                    "name": "80 to 100 %",
+                    "color": "#64A46E"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "rangeland_area_mask_v3_tileset",
+              "date_format": null,
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "https://www.icpac.net/ghacof-57/livestock-and-rangelands-co-production/",
+                "text": "A dataset identifying grazing land, supporting livestock management and rangeland conservation.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "93bf992b-a9fe-4ffe-9afa-b2eaa3841d9e",
           "dataset": "93bf992b-a9fe-4ffe-9afa-b2eaa3841d9e",
           "name": "Monthly Temperature Probabilistic Forecast",
@@ -14021,89 +14104,6 @@
                 "5a78ec9c-3558-43e6-a599-f2e7c261449f",
                 "0bf76b99-c5ae-4e3e-901d-415207a2dd42"
               ],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "d2b11264-0d87-4513-adda-731c3e33e5e6",
-          "dataset": "d2b11264-0d87-4513-adda-731c3e33e5e6",
-          "name": "Range Land Area Mask",
-          "capabilities": [],
-          "summary": null,
-          "layer": "7bea840e-32e1-4683-9884-5d32f895c7de",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 12,
-          "sub_category": 57,
-          "metadata": "5d62182d-edf1-498a-9a3b-5e0b98e3c6ce",
-          "layers": [
-            {
-              "id": "7bea840e-32e1-4683-9884-5d32f895c7de",
-              "dataset": "d2b11264-0d87-4513-adda-731c3e33e5e6",
-              "isDefault": true,
-              "name": "Range Land Mask",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=rangeland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "0 to 20 %",
-                    "color": "#CFC6C9"
-                  },
-                  {
-                    "name": "20 to 40 %",
-                    "color": "#FFFFCB"
-                  },
-                  {
-                    "name": "40 to 60 %",
-                    "color": "#CCE1AC"
-                  },
-                  {
-                    "name": "60 to 80%",
-                    "color": "#98C38D"
-                  },
-                  {
-                    "name": "80 to 100 %",
-                    "color": "#64A46E"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "rangeland_area_mask_v3_tileset",
-              "date_format": null,
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://www.icpac.net/ghacof-57/livestock-and-rangelands-co-production/",
-                "text": "A dataset identifying grazing land, supporting livestock management and rangeland conservation.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
               "showAllMultiLayer": true
             }
           ],
@@ -14811,6 +14811,89 @@
           "layer_type": "wms"
         },
         {
+          "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+          "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+          "name": "Crop Land Area Mask",
+          "capabilities": [],
+          "summary": null,
+          "layer": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 12,
+          "sub_category": 57,
+          "metadata": "b48e4651-1012-434c-b09f-327bf62913ee",
+          "layers": [
+            {
+              "id": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+              "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+              "isDefault": true,
+              "name": "Crop Land Area Mask",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=cropland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "0 to 20 %",
+                    "color": "#CFC6C9"
+                  },
+                  {
+                    "name": "20 to 40%",
+                    "color": "#FFFFCB"
+                  },
+                  {
+                    "name": "40 to 60 %",
+                    "color": "#CCE1AC"
+                  },
+                  {
+                    "name": "60 to 80%",
+                    "color": "#98C38D"
+                  },
+                  {
+                    "name": "80 to 100 %",
+                    "color": "#64A46E"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "cropland_area_mask_v3_tileset",
+              "date_format": null,
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "https://data.jrc.ec.europa.eu/dataset/jrc-10112-10005",
+                "text": "A mapping tool that identifies agricultural land, helping in crop monitoring and food security analysis.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "b6176fb5-adb4-42fb-8445-0734ffe76c26",
           "dataset": "b6176fb5-adb4-42fb-8445-0734ffe76c26",
           "name": "Subseasonal Probabilistic Rainfall Forecast",
@@ -15215,89 +15298,6 @@
                 "cc51bdeb-b000-455d-b523-6b1b9648625e",
                 "06a7a70b-1f0e-47b2-9e6c-3c29dfe5dfc2"
               ],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-          "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-          "name": "Crop Land Area Mask",
-          "capabilities": [],
-          "summary": null,
-          "layer": "c32ec5a0-9817-4e61-8572-397556a2b51b",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 12,
-          "sub_category": 57,
-          "metadata": "b48e4651-1012-434c-b09f-327bf62913ee",
-          "layers": [
-            {
-              "id": "c32ec5a0-9817-4e61-8572-397556a2b51b",
-              "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-              "isDefault": true,
-              "name": "Crop Land Area Mask",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=cropland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "0 to 20 %",
-                    "color": "#CFC6C9"
-                  },
-                  {
-                    "name": "20 to 40%",
-                    "color": "#FFFFCB"
-                  },
-                  {
-                    "name": "40 to 60 %",
-                    "color": "#CCE1AC"
-                  },
-                  {
-                    "name": "60 to 80%",
-                    "color": "#98C38D"
-                  },
-                  {
-                    "name": "80 to 100 %",
-                    "color": "#64A46E"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "cropland_area_mask_v3_tileset",
-              "date_format": null,
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://data.jrc.ec.europa.eu/dataset/jrc-10112-10005",
-                "text": "A mapping tool that identifies agricultural land, helping in crop monitoring and food security analysis.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
               "showAllMultiLayer": true
             }
           ],
