@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-11T14:06:07.121768+00:00",
+  "fetched_at_utc": "2026-04-12T06:11:03.018755+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-11T14:06:05.923095+00:00",
+      "fetched_at_utc": "2026-04-12T06:11:01.800802+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -3060,8 +3060,8 @@
               "description": "",
               "disclaimer": null,
               "default": false,
-              "end_year": 2025,
-              "end_season": "oct_dec",
+              "end_year": 2026,
+              "end_season": "jan_mar",
               "end_month": null,
               "end_dekad": null,
               "active": true,
@@ -3161,8 +3161,8 @@
               },
               "paramsSentenceTemplate": "{selectedYear} {selectedSeason}",
               "params": {
-                "selectedYear": 2025,
-                "selectedSeason": "oct_dec",
+                "selectedYear": 2026,
+                "selectedSeason": "jan_mar",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -3174,6 +3174,10 @@
                   "sentence": "Year {selector}",
                   "type": "select",
                   "options": [
+                    {
+                      "label": "2026",
+                      "value": 2026
+                    },
                     {
                       "label": "2025",
                       "value": 2025
@@ -10833,7 +10837,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-11T14:06:07.121748+00:00",
+      "fetched_at_utc": "2026-04-12T06:11:03.018736+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
