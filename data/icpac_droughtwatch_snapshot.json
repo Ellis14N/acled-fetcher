@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-12T14:10:30.642691+00:00",
+  "fetched_at_utc": "2026-04-13T07:26:42.585149+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-12T14:10:29.298811+00:00",
+      "fetched_at_utc": "2026-04-13T07:26:41.671822+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -10837,7 +10837,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-12T14:10:30.642669+00:00",
+      "fetched_at_utc": "2026-04-13T07:26:42.585134+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -14851,7 +14851,7 @@
               },
               "params": {
                 "time": "",
-                "model": "ecmwf",
+                "model": "gefsv12",
                 "week": "week1"
               },
               "paramsSelectorConfig": [
@@ -14871,13 +14871,13 @@
                   "type": "dropdown",
                   "options": [
                     {
-                      "label": "ECMWF",
-                      "value": "ecmwf",
+                      "label": "GEFS v12",
+                      "value": "gefsv12",
                       "default": true
                     },
                     {
-                      "label": "GEFS v12",
-                      "value": "gefsv12",
+                      "label": "ECMWF",
+                      "value": "ecmwf",
                       "default": false
                     }
                   ],
@@ -14981,7 +14981,7 @@
               },
               "params": {
                 "time": "",
-                "model": "ecmwf",
+                "model": "gefsv12",
                 "week": "week1"
               },
               "paramsSelectorConfig": [
@@ -15001,13 +15001,13 @@
                   "type": "dropdown",
                   "options": [
                     {
-                      "label": "ECMWF",
-                      "value": "ecmwf",
+                      "label": "GEFS v12",
+                      "value": "gefsv12",
                       "default": true
                     },
                     {
-                      "label": "GEFS v12",
-                      "value": "gefsv12",
+                      "label": "ECMWF",
+                      "value": "ecmwf",
                       "default": false
                     }
                   ],
@@ -15111,7 +15111,7 @@
               },
               "params": {
                 "time": "",
-                "model": "ecmwf",
+                "model": "gefsv12",
                 "week": "week1"
               },
               "paramsSelectorConfig": [
@@ -15131,13 +15131,13 @@
                   "type": "dropdown",
                   "options": [
                     {
-                      "label": "ECMWF",
-                      "value": "ecmwf",
+                      "label": "GEFS v12",
+                      "value": "gefsv12",
                       "default": true
                     },
                     {
-                      "label": "GEFS v12",
-                      "value": "gefsv12",
+                      "label": "ECMWF",
+                      "value": "ecmwf",
                       "default": false
                     }
                   ],
@@ -15346,7 +15346,7 @@
               },
               "params": {
                 "time": "",
-                "model": "ecmwf",
+                "model": "gefsv12",
                 "week": "week1"
               },
               "paramsSelectorConfig": [
@@ -15366,13 +15366,13 @@
                   "type": "dropdown",
                   "options": [
                     {
-                      "label": "ECMWF",
-                      "value": "ecmwf",
+                      "label": "GEFS v12",
+                      "value": "gefsv12",
                       "default": true
                     },
                     {
-                      "label": "GEFS v12",
-                      "value": "gefsv12",
+                      "label": "ECMWF",
+                      "value": "ecmwf",
                       "default": false
                     }
                   ],
