@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-13T16:21:40.883725+00:00",
+  "fetched_at_utc": "2026-04-14T06:19:21.180853+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-13T16:21:39.437214+00:00",
+      "fetched_at_utc": "2026-04-14T06:19:19.654615+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -10837,7 +10837,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-13T16:21:40.883709+00:00",
+      "fetched_at_utc": "2026-04-14T06:19:21.180839+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -12295,113 +12295,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
-          "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
-          "name": "Rangelands Conditions",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 1st Dekad of April 2026",
-          "layer": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
-          "dataset_slug": "ea-rangeland-conditions",
-          "latest_date": "2026-04-01T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 4,
-          "sub_category": 9,
-          "metadata": "8eeddda3-cc5b-47b7-9eb1-6892f8797fc6",
-          "layers": [
-            {
-              "id": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
-              "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
-              "isDefault": true,
-              "name": "Range-land Conditions",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=asap8%3Awarning_gaul1_rangeland_500k&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&cql_filter=adm0_code IN (77, 70, 205, 6, 257, 226, 43, 253, 79, 133, 74)&viewparams=reference_date:{time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "No Warning",
-                    "color": "#cddfc8"
-                  },
-                  {
-                    "name": "Not Active",
-                    "color": "#ececec"
-                  },
-                  {
-                    "name": "Water Balance Warning",
-                    "color": "#fffd75"
-                  },
-                  {
-                    "name": "Biomass Warning",
-                    "color": "#f8cd46"
-                  },
-                  {
-                    "name": "Water Balance + Biomass Warning",
-                    "color": "#bf271b"
-                  },
-                  {
-                    "name": "End of Season Biomass Warning",
-                    "color": "#81170e"
-                  },
-                  {
-                    "name": "Not Analyzed",
-                    "color": "#ffffff"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "asap8%3Awarning_gaul1_rangeland_500k",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "Go to Agriculture Watch",
-                "linkUrl": "https://agriculturehotspots.icpac.net/",
-                "text": "Rangelands are often the first areas to be impacted by drought due to their sensitivity to moisture levels. Having a rangeland mask in the Hazards watch enables proactive measures to mitigate potential impacts on livestock, wildlife, and ecosystems once early warning signs of drought stress on vegetation are detected.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
           "id": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
           "dataset": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
           "name": "Rainfall Anomalies",
@@ -12532,6 +12425,113 @@
           "layer_type": "wms"
         },
         {
+          "id": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+          "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+          "name": "Rangelands Conditions",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 1st Dekad of April 2026",
+          "layer": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
+          "dataset_slug": "ea-rangeland-conditions",
+          "latest_date": "2026-04-01T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 4,
+          "sub_category": 9,
+          "metadata": "8eeddda3-cc5b-47b7-9eb1-6892f8797fc6",
+          "layers": [
+            {
+              "id": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
+              "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+              "isDefault": true,
+              "name": "Range-land Conditions",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=asap8%3Awarning_gaul1_rangeland_500k&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&cql_filter=adm0_code IN (77, 70, 205, 6, 257, 226, 43, 253, 79, 133, 74)&viewparams=reference_date:{time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "No Warning",
+                    "color": "#cddfc8"
+                  },
+                  {
+                    "name": "Not Active",
+                    "color": "#ececec"
+                  },
+                  {
+                    "name": "Water Balance Warning",
+                    "color": "#fffd75"
+                  },
+                  {
+                    "name": "Biomass Warning",
+                    "color": "#f8cd46"
+                  },
+                  {
+                    "name": "Water Balance + Biomass Warning",
+                    "color": "#bf271b"
+                  },
+                  {
+                    "name": "End of Season Biomass Warning",
+                    "color": "#81170e"
+                  },
+                  {
+                    "name": "Not Analyzed",
+                    "color": "#ffffff"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "asap8%3Awarning_gaul1_rangeland_500k",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "Go to Agriculture Watch",
+                "linkUrl": "https://agriculturehotspots.icpac.net/",
+                "text": "Rangelands are often the first areas to be impacted by drought due to their sensitivity to moisture levels. Having a rangeland mask in the Hazards watch enables proactive measures to mitigate potential impacts on livestock, wildlife, and ecosystems once early warning signs of drought stress on vegetation are detected.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "7708c0dd-8c13-4503-ba22-cd420893436c",
           "dataset": "7708c0dd-8c13-4503-ba22-cd420893436c",
           "name": "Admin Level 2 Boundary",
@@ -12641,6 +12641,99 @@
           "layer_type": "vector_tile"
         },
         {
+          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "name": "Hydroshed Level 3 Basins",
+          "capabilities": [],
+          "summary": null,
+          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 61,
+          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
+          "layers": [
+            {
+              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+              "isDefault": true,
+              "name": "Level 3 Watershed Basins",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "paint": {
+                        "line-color": "#032eb0"
+                      },
+                      "type": "line",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "East Africa Flood Watch",
+                "linkUrl": "https://www.icpac.net/",
+                "text": "Watershed basins used for hydrological modeling at ICPAC.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name_0",
+                    "property": "Basin Name",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
           "id": "f2ec09d6-7ab3-4993-810b-14b67a396421",
           "dataset": "f2ec09d6-7ab3-4993-810b-14b67a396421",
           "name": "Risk of Heatstress",
@@ -12648,10 +12741,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 22 Apr 2026 (Initialized 14 Apr 2026)",
+          "summary": "Latest: 28 Apr 2026 (Initialized 14 Apr 2026)",
           "layer": "9ebfce98-3b47-4b47-8052-b7174e900b93",
           "dataset_slug": "weekly_heat_stress",
-          "latest_date": "2026-04-22T08:00:00+03:00",
+          "latest_date": "2026-04-28T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -12760,99 +12853,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "name": "Hydroshed Level 3 Basins",
-          "capabilities": [],
-          "summary": null,
-          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 61,
-          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
-          "layers": [
-            {
-              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-              "isDefault": true,
-              "name": "Level 3 Watershed Basins",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "paint": {
-                        "line-color": "#032eb0"
-                      },
-                      "type": "line",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "East Africa Flood Watch",
-                "linkUrl": "https://www.icpac.net/",
-                "text": "Watershed basins used for hydrological modeling at ICPAC.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name_0",
-                    "property": "Basin Name",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
           "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
           "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
           "name": "East Africa Protected Areas",
@@ -12946,6 +12946,128 @@
           "initialVisible": false,
           "public": true,
           "layer_type": "vector_tile"
+        },
+        {
+          "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+          "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+          "name": "Mean Temprature",
+          "capabilities": [
+            "timeseries"
+          ],
+          "summary": "Latest: 14 Apr 2026 To 21 Apr 2026 (Initialized 14 Apr 2026)",
+          "layer": "561d86f9-40fa-473a-a144-ddf1beaeea25",
+          "dataset_slug": "weekly_mean_temperature",
+          "latest_date": "2026-04-14T08:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 1,
+          "sub_category": 1,
+          "metadata": "a6c92756-85ba-4be4-bbf5-8fd4997704b7",
+          "layers": [
+            {
+              "id": "561d86f9-40fa-473a-a144-ddf1beaeea25",
+              "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+              "isDefault": true,
+              "name": "Weekly mean Temperature",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_mean_temperature_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "choropleth",
+                "items": [
+                  {
+                    "name": "4",
+                    "color": "#801FEF"
+                  },
+                  {
+                    "name": "8",
+                    "color": "#0F18F9"
+                  },
+                  {
+                    "name": "12",
+                    "color": "#3375ED"
+                  },
+                  {
+                    "name": "16",
+                    "color": "#0DAAFF"
+                  },
+                  {
+                    "name": "20",
+                    "color": "#72C8F2"
+                  },
+                  {
+                    "name": "24",
+                    "color": "#FFFFC8"
+                  },
+                  {
+                    "name": "28",
+                    "color": "#FFD627"
+                  },
+                  {
+                    "name": "32",
+                    "color": "#FF9300"
+                  },
+                  {
+                    "name": "36",
+                    "color": "#FF2F01"
+                  },
+                  {
+                    "name": "40",
+                    "color": "#D10000"
+                  },
+                  {
+                    "name": "\u00b0C",
+                    "color": "#FFB1B1"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_mean_temperature_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "https://www.icpac.net/weekly-forecast/",
+                "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
         },
         {
           "id": "2815358d-4023-4dc8-b0e4-2dc05223e1e3",
@@ -13154,128 +13276,6 @@
           "initialVisible": false,
           "public": true,
           "layer_type": "vector_file"
-        },
-        {
-          "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
-          "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
-          "name": "Mean Temprature",
-          "capabilities": [
-            "timeseries"
-          ],
-          "summary": "Latest: 14 Apr 2026 To 21 Apr 2026 (Initialized 14 Apr 2026)",
-          "layer": "561d86f9-40fa-473a-a144-ddf1beaeea25",
-          "dataset_slug": "weekly_mean_temperature",
-          "latest_date": "2026-04-14T08:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 1,
-          "sub_category": 1,
-          "metadata": "a6c92756-85ba-4be4-bbf5-8fd4997704b7",
-          "layers": [
-            {
-              "id": "561d86f9-40fa-473a-a144-ddf1beaeea25",
-              "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
-              "isDefault": true,
-              "name": "Weekly mean Temperature",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_mean_temperature_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "choropleth",
-                "items": [
-                  {
-                    "name": "4",
-                    "color": "#801FEF"
-                  },
-                  {
-                    "name": "8",
-                    "color": "#0F18F9"
-                  },
-                  {
-                    "name": "12",
-                    "color": "#3375ED"
-                  },
-                  {
-                    "name": "16",
-                    "color": "#0DAAFF"
-                  },
-                  {
-                    "name": "20",
-                    "color": "#72C8F2"
-                  },
-                  {
-                    "name": "24",
-                    "color": "#FFFFC8"
-                  },
-                  {
-                    "name": "28",
-                    "color": "#FFD627"
-                  },
-                  {
-                    "name": "32",
-                    "color": "#FF9300"
-                  },
-                  {
-                    "name": "36",
-                    "color": "#FF2F01"
-                  },
-                  {
-                    "name": "40",
-                    "color": "#D10000"
-                  },
-                  {
-                    "name": "\u00b0C",
-                    "color": "#FFB1B1"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_mean_temperature_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://www.icpac.net/weekly-forecast/",
-                "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
         },
         {
           "id": "14258559-cf3b-44cd-b075-c2051234acb4",
@@ -13766,6 +13766,89 @@
           "layer_type": "wms"
         },
         {
+          "id": "d2b11264-0d87-4513-adda-731c3e33e5e6",
+          "dataset": "d2b11264-0d87-4513-adda-731c3e33e5e6",
+          "name": "Range Land Area Mask",
+          "capabilities": [],
+          "summary": null,
+          "layer": "7bea840e-32e1-4683-9884-5d32f895c7de",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 12,
+          "sub_category": 57,
+          "metadata": "5d62182d-edf1-498a-9a3b-5e0b98e3c6ce",
+          "layers": [
+            {
+              "id": "7bea840e-32e1-4683-9884-5d32f895c7de",
+              "dataset": "d2b11264-0d87-4513-adda-731c3e33e5e6",
+              "isDefault": true,
+              "name": "Range Land Mask",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=rangeland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "0 to 20 %",
+                    "color": "#CFC6C9"
+                  },
+                  {
+                    "name": "20 to 40 %",
+                    "color": "#FFFFCB"
+                  },
+                  {
+                    "name": "40 to 60 %",
+                    "color": "#CCE1AC"
+                  },
+                  {
+                    "name": "60 to 80%",
+                    "color": "#98C38D"
+                  },
+                  {
+                    "name": "80 to 100 %",
+                    "color": "#64A46E"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "rangeland_area_mask_v3_tileset",
+              "date_format": null,
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "https://www.icpac.net/ghacof-57/livestock-and-rangelands-co-production/",
+                "text": "A dataset identifying grazing land, supporting livestock management and rangeland conservation.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "93bf992b-a9fe-4ffe-9afa-b2eaa3841d9e",
           "dataset": "93bf992b-a9fe-4ffe-9afa-b2eaa3841d9e",
           "name": "Monthly Temperature Probabilistic Forecast",
@@ -14025,89 +14108,6 @@
                 "5a78ec9c-3558-43e6-a599-f2e7c261449f",
                 "0bf76b99-c5ae-4e3e-901d-415207a2dd42"
               ],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "d2b11264-0d87-4513-adda-731c3e33e5e6",
-          "dataset": "d2b11264-0d87-4513-adda-731c3e33e5e6",
-          "name": "Range Land Area Mask",
-          "capabilities": [],
-          "summary": null,
-          "layer": "7bea840e-32e1-4683-9884-5d32f895c7de",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 12,
-          "sub_category": 57,
-          "metadata": "5d62182d-edf1-498a-9a3b-5e0b98e3c6ce",
-          "layers": [
-            {
-              "id": "7bea840e-32e1-4683-9884-5d32f895c7de",
-              "dataset": "d2b11264-0d87-4513-adda-731c3e33e5e6",
-              "isDefault": true,
-              "name": "Range Land Mask",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=rangeland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "0 to 20 %",
-                    "color": "#CFC6C9"
-                  },
-                  {
-                    "name": "20 to 40 %",
-                    "color": "#FFFFCB"
-                  },
-                  {
-                    "name": "40 to 60 %",
-                    "color": "#CCE1AC"
-                  },
-                  {
-                    "name": "60 to 80%",
-                    "color": "#98C38D"
-                  },
-                  {
-                    "name": "80 to 100 %",
-                    "color": "#64A46E"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "rangeland_area_mask_v3_tileset",
-              "date_format": null,
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://www.icpac.net/ghacof-57/livestock-and-rangelands-co-production/",
-                "text": "A dataset identifying grazing land, supporting livestock management and rangeland conservation.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
               "showAllMultiLayer": true
             }
           ],
@@ -14383,171 +14383,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
-          "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
-          "name": "Cities Temperature Evolution",
-          "capabilities": [],
-          "summary": null,
-          "layer": "c507feee-b38a-4697-946b-b6e1fdd39261",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": true,
-          "category": 18,
-          "sub_category": 49,
-          "metadata": "64438bac-8aa2-4da6-9e12-8de0e738ff64",
-          "layers": [
-            {
-              "id": "c507feee-b38a-4697-946b-b6e1fdd39261",
-              "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
-              "isDefault": true,
-              "name": "Regional warming > 1.5\u00b0C /century",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "1.5\u00b0C /century",
-                    "color": "#5C4033"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "circle-color": "#5C4033",
-                        "circle-stroke-color": "#5C4033"
-                      },
-                      "type": "circle",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "east_africa_warming_1_5_to_2_0",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {
-                "output": [
-                  {
-                    "column": "city",
-                    "property": "City"
-                  },
-                  {
-                    "column": "region_val",
-                    "property": "City warming \u00b0C /century"
-                  }
-                ]
-              },
-              "canClip": true,
-              "linkedLayers": [
-                "d0c0732b-a72a-487c-9b97-05841815ceb3"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "d0c0732b-a72a-487c-9b97-05841815ceb3",
-              "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
-              "isDefault": false,
-              "name": "Regional warming > 2.0\u00b0C /century",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "> 2.0\u00b0C /century",
-                    "color": "#FF0000"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "circle-color": "#FF0000",
-                        "circle-stroke-color": "#FF0000"
-                      },
-                      "type": "circle",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "east_africa_warming_2_0",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {
-                "output": [
-                  {
-                    "column": "city",
-                    "property": "City"
-                  },
-                  {
-                    "column": "region_val",
-                    "property": "City warming \u00b0C /century"
-                  }
-                ]
-              },
-              "canClip": true,
-              "linkedLayers": [
-                "c507feee-b38a-4697-946b-b6e1fdd39261"
-              ],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_file"
-        },
-        {
           "id": "8637bca5-259c-4690-9a78-58d3aa2177bd",
           "dataset": "8637bca5-259c-4690-9a78-58d3aa2177bd",
           "name": "Seasonal Temperature Probabilistic Forecast",
@@ -14815,87 +14650,169 @@
           "layer_type": "wms"
         },
         {
-          "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-          "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-          "name": "Crop Land Area Mask",
+          "id": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
+          "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
+          "name": "Cities Temperature Evolution",
           "capabilities": [],
           "summary": null,
-          "layer": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+          "layer": "c507feee-b38a-4697-946b-b6e1fdd39261",
           "dataset_slug": null,
           "latest_date": null,
-          "isMultiLayer": false,
-          "category": 12,
-          "sub_category": 57,
-          "metadata": "b48e4651-1012-434c-b09f-327bf62913ee",
+          "isMultiLayer": true,
+          "category": 18,
+          "sub_category": 49,
+          "metadata": "64438bac-8aa2-4da6-9e12-8de0e738ff64",
           "layers": [
             {
-              "id": "c32ec5a0-9817-4e61-8572-397556a2b51b",
-              "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+              "id": "c507feee-b38a-4697-946b-b6e1fdd39261",
+              "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
               "isDefault": true,
-              "name": "Crop Land Area Mask",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=cropland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
+              "name": "Regional warming > 1.5\u00b0C /century",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
               "legendConfig": {
                 "type": "basic",
                 "items": [
                   {
-                    "name": "0 to 20 %",
-                    "color": "#CFC6C9"
-                  },
-                  {
-                    "name": "20 to 40%",
-                    "color": "#FFFFCB"
-                  },
-                  {
-                    "name": "40 to 60 %",
-                    "color": "#CCE1AC"
-                  },
-                  {
-                    "name": "60 to 80%",
-                    "color": "#98C38D"
-                  },
-                  {
-                    "name": "80 to 100 %",
-                    "color": "#64A46E"
+                    "name": "1.5\u00b0C /century",
+                    "color": "#5C4033"
                   }
                 ]
               },
-              "getCapabilitiesUrl": null,
-              "layerName": "cropland_area_mask_v3_tileset",
-              "date_format": null,
-              "multiTemporal": false,
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "circle-color": "#5C4033",
+                        "circle-stroke-color": "#5C4033"
+                      },
+                      "type": "circle",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "east_africa_warming_1_5_to_2_0",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://data.jrc.ec.europa.eu/dataset/jrc-10112-10005",
-                "text": "A mapping tool that identifies agricultural land, helping in crop monitoring and food security analysis.",
-                "isButton": true,
-                "showArrow": true
+              "interactionConfig": {
+                "output": [
+                  {
+                    "column": "city",
+                    "property": "City"
+                  },
+                  {
+                    "column": "region_val",
+                    "property": "City warming \u00b0C /century"
+                  }
+                ]
               },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
+              "canClip": true,
+              "linkedLayers": [
+                "d0c0732b-a72a-487c-9b97-05841815ceb3"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "d0c0732b-a72a-487c-9b97-05841815ceb3",
+              "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
+              "isDefault": false,
+              "name": "Regional warming > 2.0\u00b0C /century",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "> 2.0\u00b0C /century",
+                    "color": "#FF0000"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "circle-color": "#FF0000",
+                        "circle-stroke-color": "#FF0000"
+                      },
+                      "type": "circle",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "east_africa_warming_2_0",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {
+                "output": [
+                  {
+                    "column": "city",
+                    "property": "City"
+                  },
+                  {
+                    "column": "region_val",
+                    "property": "City warming \u00b0C /century"
+                  }
+                ]
+              },
+              "canClip": true,
+              "linkedLayers": [
+                "c507feee-b38a-4697-946b-b6e1fdd39261"
+              ],
               "showAllMultiLayer": true
             }
           ],
           "initialVisible": false,
           "public": true,
-          "layer_type": "wms"
+          "layer_type": "vector_file"
         },
         {
           "id": "b6176fb5-adb4-42fb-8445-0734ffe76c26",
@@ -15302,6 +15219,89 @@
                 "cc51bdeb-b000-455d-b523-6b1b9648625e",
                 "06a7a70b-1f0e-47b2-9e6c-3c29dfe5dfc2"
               ],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+          "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+          "name": "Crop Land Area Mask",
+          "capabilities": [],
+          "summary": null,
+          "layer": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 12,
+          "sub_category": 57,
+          "metadata": "b48e4651-1012-434c-b09f-327bf62913ee",
+          "layers": [
+            {
+              "id": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+              "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+              "isDefault": true,
+              "name": "Crop Land Area Mask",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=cropland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "0 to 20 %",
+                    "color": "#CFC6C9"
+                  },
+                  {
+                    "name": "20 to 40%",
+                    "color": "#FFFFCB"
+                  },
+                  {
+                    "name": "40 to 60 %",
+                    "color": "#CCE1AC"
+                  },
+                  {
+                    "name": "60 to 80%",
+                    "color": "#98C38D"
+                  },
+                  {
+                    "name": "80 to 100 %",
+                    "color": "#64A46E"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "cropland_area_mask_v3_tileset",
+              "date_format": null,
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "https://data.jrc.ec.europa.eu/dataset/jrc-10112-10005",
+                "text": "A mapping tool that identifies agricultural land, helping in crop monitoring and food security analysis.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
               "showAllMultiLayer": true
             }
           ],
