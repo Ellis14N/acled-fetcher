@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-18T14:11:18.212030+00:00",
+  "fetched_at_utc": "2026-04-19T06:17:10.252034+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-18T14:11:16.579619+00:00",
+      "fetched_at_utc": "2026-04-19T06:17:09.267364+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -10837,7 +10837,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-18T14:11:18.212013+00:00",
+      "fetched_at_utc": "2026-04-19T06:17:10.252018+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -13285,10 +13285,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 1st Dekad of March 2026",
+          "summary": "Latest: 3rd Dekad of March 2026",
           "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
           "dataset_slug": "dekadal_cdi",
-          "latest_date": "2026-03-01T00:00:00+03:00",
+          "latest_date": "2026-03-21T00:00:00+03:00",
           "isMultiLayer": false,
           "category": 7,
           "sub_category": 13,
