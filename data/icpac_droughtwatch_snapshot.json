@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-20T07:27:53.556668+00:00",
+  "fetched_at_utc": "2026-04-20T15:59:24.973955+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-20T07:27:52.416302+00:00",
+      "fetched_at_utc": "2026-04-20T15:59:23.368099+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -108,8 +108,8 @@
               "default": true,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "03",
-              "end_dekad": "21",
+              "end_month": "04",
+              "end_dekad": "01",
               "active": true,
               "dataset": "549a7b6c-65e5-4258-b18b-54310e910a5c",
               "wms_layer": "dekadal_cdi_chirps_tileset",
@@ -188,8 +188,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedTenDays}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "03",
-                "selectedTenDays": "21",
+                "selectedMonth": "04",
+                "selectedTenDays": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -414,7 +414,7 @@
               "default": true,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "03",
+              "end_month": "04",
               "end_dekad": "01",
               "active": true,
               "dataset": "9b05b091-9137-48ff-80b9-2610733bbd82",
@@ -480,7 +480,7 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedTenDays}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "03",
+                "selectedMonth": "04",
                 "selectedTenDays": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -702,7 +702,7 @@
               "default": true,
               "end_year": 2026,
               "end_season": "jun-sep",
-              "end_month": "feb",
+              "end_month": "mar",
               "end_dekad": null,
               "active": true,
               "dataset": "020b12a4-5004-42ca-bc00-dacdb2fb5faa",
@@ -781,7 +781,7 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "feb",
+                "selectedMonth": "mar",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -982,7 +982,7 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "feb",
+              "end_month": "mar",
               "end_dekad": null,
               "active": true,
               "dataset": "587f20c4-54d8-4865-936a-8351747854cb",
@@ -1047,7 +1047,7 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "feb",
+                "selectedMonth": "mar",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -1248,7 +1248,7 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "feb",
+              "end_month": "mar",
               "end_dekad": null,
               "active": true,
               "dataset": "91eae783-5e70-4a56-aab5-ca5c36a088f5",
@@ -1306,7 +1306,7 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "feb",
+                "selectedMonth": "mar",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -1505,8 +1505,8 @@
               "description": "",
               "disclaimer": null,
               "default": true,
-              "end_year": 2025,
-              "end_season": "oct_dec",
+              "end_year": 2026,
+              "end_season": "jan_mar",
               "end_month": null,
               "end_dekad": null,
               "active": true,
@@ -1585,8 +1585,8 @@
               },
               "paramsSentenceTemplate": "{selectedYear} {selectedSeason}",
               "params": {
-                "selectedYear": 2025,
-                "selectedSeason": "oct_dec",
+                "selectedYear": 2026,
+                "selectedSeason": "jan_mar",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -1598,6 +1598,10 @@
                   "sentence": "Year {selector}",
                   "type": "select",
                   "options": [
+                    {
+                      "label": "2026",
+                      "value": 2026
+                    },
                     {
                       "label": "2025",
                       "value": 2025
@@ -2438,8 +2442,8 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "03",
-              "end_dekad": "21",
+              "end_month": "04",
+              "end_dekad": "01",
               "active": true,
               "dataset": "bb8fd1dc-47b4-4578-9a3e-b5be5bdf9e8d",
               "wms_layer": "dekadal_sma_tileset",
@@ -2539,8 +2543,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedTenDays}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "03",
-                "selectedTenDays": "21",
+                "selectedMonth": "04",
+                "selectedTenDays": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -2761,7 +2765,7 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "feb",
+              "end_month": "mar",
               "end_dekad": null,
               "active": true,
               "dataset": "564e6aa5-aeae-4be1-ae49-9facad1f4d7a",
@@ -2861,7 +2865,7 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "feb",
+                "selectedMonth": "mar",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -3331,8 +3335,8 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "03",
-              "end_dekad": "21",
+              "end_month": "04",
+              "end_dekad": "01",
               "active": true,
               "dataset": "e7e710b0-9561-42b0-8d5a-4cfbdb773295",
               "wms_layer": "dekadal_fapar_observed_tileset",
@@ -3390,8 +3394,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedTenDays}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "03",
-                "selectedTenDays": "21",
+                "selectedMonth": "04",
+                "selectedTenDays": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -7851,7 +7855,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "04",
-              "end_dekad": "09",
+              "end_dekad": "13",
               "active": true,
               "dataset": "3f9400de-34bb-46ef-98e8-aa4448700a5c",
               "wms_layer": "min_temp_tileset",
@@ -8260,7 +8264,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "04",
-                "selectedDay": "09",
+                "selectedDay": "13",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -10837,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-20T07:27:53.556643+00:00",
+      "fetched_at_utc": "2026-04-20T15:59:24.973939+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -11041,200 +11045,303 @@
           ]
         },
         {
-          "id": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
-          "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
-          "name": "Exceptional Rainfall",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 14 Apr 2026 To 21 Apr 2026 (Initialized 14 Apr 2026)",
-          "layer": "5032f506-c401-4ffd-a3ea-7648339809aa",
-          "dataset_slug": "weekly_exceptional_precipitation",
-          "latest_date": "2026-04-14T08:00:00+03:00",
+          "id": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+          "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+          "name": "Gha Airports",
+          "capabilities": [],
+          "summary": null,
+          "layer": "1b58d03d-6949-4049-96d1-d70029055e90",
+          "dataset_slug": "gha_airports",
+          "latest_date": null,
           "isMultiLayer": true,
-          "category": 1,
-          "sub_category": 1,
-          "metadata": "c6663492-9e8c-46ef-976c-99eb7b82db37",
+          "category": 12,
+          "sub_category": 59,
+          "metadata": "41f90df5-7bb5-4741-9a83-5d102c347b82",
           "layers": [
             {
-              "id": "5032f506-c401-4ffd-a3ea-7648339809aa",
-              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+              "id": "48aca073-a839-4767-9f79-77d0338122a4",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": false,
+              "name": "Gha- Small- Airport",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport",
+                    "name": "Small Airports-GHA",
+                    "color": "#271cca",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport"
+                      },
+                      "paint": {
+                        "icon-color": "#262ded",
+                        "icon-halo-color": "#e21818"
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_small_airport",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "1b58d03d-6949-4049-96d1-d70029055e90",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "9c31265d-4e83-415c-a966-f2eac0566f4e",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": false,
+              "name": "Gha Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport",
+                    "name": "Airport",
+                    "color": "#0918ec",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport",
+                        "icon-allow-overlap": true,
+                        "icon-pitch-alignment": "map",
+                        "icon-text-fit": "both"
+                      },
+                      "paint": {
+                        "icon-color": "#1091f4",
+                        "icon-halo-color": "#27ddb0"
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_major_airports",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "1b58d03d-6949-4049-96d1-d70029055e90",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "1b58d03d-6949-4049-96d1-d70029055e90",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
               "isDefault": true,
-              "name": "Extremely Heavy Rainfall",
+              "name": "Gha- Large Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
               "isMultiLayer": true,
-              "nestedLegend": true,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_extreme_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": false,
               "legendConfig": {
                 "type": "basic",
                 "items": [
                   {
-                    "name": "Extremely Heavy Rainfal",
-                    "color": "#06008B"
+                    "icon": "airport-military",
+                    "name": "Large Airport",
+                    "color": "#171617",
+                    "iconSource": "sprite"
                   }
                 ]
               },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_extreme_heavy_rainfall_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport-military"
+                      },
+                      "paint": {
+                        "icon-color": "#171617",
+                        "icon-halo-color": "#171617",
+                        "icon-opacity": 0.9
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_large_airport",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": null,
-              "getCapabilitiesLayerName": null,
+              "interactionConfig": {},
+              "canClip": true,
               "linkedLayers": [
-                "09279d04-3129-4250-840f-ec77a79245bb",
-                "7be48e40-363c-4a2e-ac35-0934b7077e2c"
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
               ],
               "showAllMultiLayer": true
             },
             {
-              "id": "09279d04-3129-4250-840f-ec77a79245bb",
-              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+              "id": "b53a04c4-5ae4-49e9-82ea-d6d53d434893",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
               "isDefault": false,
-              "name": "Very Heavy Rainfall",
+              "name": "GHA-Medium Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
               "isMultiLayer": true,
-              "nestedLegend": true,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_very_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": false,
               "legendConfig": {
                 "type": "basic",
                 "items": [
                   {
-                    "name": "Very heavy rainfall",
-                    "color": "#1774CD"
+                    "icon": "airport",
+                    "name": "Airport",
+                    "color": "#000000",
+                    "iconSource": "sprite"
                   }
                 ]
               },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_very_heavy_rainfall_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": null,
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [
-                "5032f506-c401-4ffd-a3ea-7648339809aa",
-                "7be48e40-363c-4a2e-ac35-0934b7077e2c"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "7be48e40-363c-4a2e-ac35-0934b7077e2c",
-              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
-              "isDefault": false,
-              "name": "Heavy Rainfall",
-              "isMultiLayer": true,
               "nestedLegend": true,
-              "layerType": "wms",
-              "styleConfig": null,
               "layerConfig": {
-                "type": "raster",
+                "type": "vector",
                 "source": {
-                  "type": "raster",
+                  "type": "vector",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport"
+                      },
+                      "paint": {
+                        "icon-color": "#d02525",
+                        "icon-halo-color": "#a03737"
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
                   ]
                 }
               },
               "params": {
-                "time": ""
+                "table_name": "icpac_medium_airport",
+                "geostore_id": ""
               },
               "paramsSelectorConfig": [
                 {
-                  "key": "time",
+                  "key": "table_name",
                   "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
+                  "sentence": "{selector}"
                 }
               ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Heavy rainfall",
-                    "color": "#AFEEEE"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_heavy_rainfall_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": null,
-              "getCapabilitiesLayerName": null,
+              "interactionConfig": {},
+              "canClip": true,
               "linkedLayers": [
-                "5032f506-c401-4ffd-a3ea-7648339809aa",
-                "09279d04-3129-4250-840f-ec77a79245bb"
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "1b58d03d-6949-4049-96d1-d70029055e90"
               ],
               "showAllMultiLayer": true
             }
           ],
-          "initialVisible": true,
+          "initialVisible": false,
           "public": true,
-          "layer_type": "wms"
+          "layer_type": "vector_file"
         },
         {
           "id": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
@@ -11679,303 +11786,200 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-          "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-          "name": "Gha Airports",
-          "capabilities": [],
-          "summary": null,
-          "layer": "1b58d03d-6949-4049-96d1-d70029055e90",
-          "dataset_slug": "gha_airports",
-          "latest_date": null,
+          "id": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+          "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+          "name": "Exceptional Rainfall",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 21 Apr 2026 To 28 Apr 2026 (Initialized 21 Apr 2026)",
+          "layer": "5032f506-c401-4ffd-a3ea-7648339809aa",
+          "dataset_slug": "weekly_exceptional_precipitation",
+          "latest_date": "2026-04-21T08:00:00+03:00",
           "isMultiLayer": true,
-          "category": 12,
-          "sub_category": 59,
-          "metadata": "41f90df5-7bb5-4741-9a83-5d102c347b82",
+          "category": 1,
+          "sub_category": 1,
+          "metadata": "c6663492-9e8c-46ef-976c-99eb7b82db37",
           "layers": [
             {
-              "id": "48aca073-a839-4767-9f79-77d0338122a4",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": false,
-              "name": "Gha- Small- Airport",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Small Airports-GHA",
-                    "color": "#271cca",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport"
-                      },
-                      "paint": {
-                        "icon-color": "#262ded",
-                        "icon-halo-color": "#e21818"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_small_airport",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "1b58d03d-6949-4049-96d1-d70029055e90",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "9c31265d-4e83-415c-a966-f2eac0566f4e",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": false,
-              "name": "Gha Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Airport",
-                    "color": "#0918ec",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport",
-                        "icon-allow-overlap": true,
-                        "icon-pitch-alignment": "map",
-                        "icon-text-fit": "both"
-                      },
-                      "paint": {
-                        "icon-color": "#1091f4",
-                        "icon-halo-color": "#27ddb0"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_major_airports",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "1b58d03d-6949-4049-96d1-d70029055e90",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "1b58d03d-6949-4049-96d1-d70029055e90",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "id": "5032f506-c401-4ffd-a3ea-7648339809aa",
+              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
               "isDefault": true,
-              "name": "Gha- Large Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
+              "name": "Extremely Heavy Rainfall",
               "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport-military",
-                    "name": "Large Airport",
-                    "color": "#171617",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
               "nestedLegend": true,
+              "layerType": "wms",
+              "styleConfig": null,
               "layerConfig": {
-                "type": "vector",
+                "type": "raster",
                 "source": {
-                  "type": "vector",
+                  "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport-military"
-                      },
-                      "paint": {
-                        "icon-color": "#171617",
-                        "icon-halo-color": "#171617",
-                        "icon-opacity": 0.9
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_extreme_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
               "params": {
-                "table_name": "icpac_large_airport",
-                "geostore_id": ""
+                "time": ""
               },
               "paramsSelectorConfig": [
                 {
-                  "key": "table_name",
+                  "key": "time",
                   "required": true,
-                  "sentence": "{selector}"
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
                 }
               ],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Extremely Heavy Rainfal",
+                    "color": "#06008B"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_extreme_heavy_rainfall_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
+              "analysisConfig": [],
+              "moreInfo": null,
+              "getCapabilitiesLayerName": null,
               "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+                "09279d04-3129-4250-840f-ec77a79245bb",
+                "7be48e40-363c-4a2e-ac35-0934b7077e2c"
               ],
               "showAllMultiLayer": true
             },
             {
-              "id": "b53a04c4-5ae4-49e9-82ea-d6d53d434893",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "id": "09279d04-3129-4250-840f-ec77a79245bb",
+              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
               "isDefault": false,
-              "name": "GHA-Medium Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
+              "name": "Very Heavy Rainfall",
               "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Airport",
-                    "color": "#000000",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
               "nestedLegend": true,
+              "layerType": "wms",
+              "styleConfig": null,
               "layerConfig": {
-                "type": "vector",
+                "type": "raster",
                 "source": {
-                  "type": "vector",
+                  "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport"
-                      },
-                      "paint": {
-                        "icon-color": "#d02525",
-                        "icon-halo-color": "#a03737"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_very_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
               "params": {
-                "table_name": "icpac_medium_airport",
-                "geostore_id": ""
+                "time": ""
               },
               "paramsSelectorConfig": [
                 {
-                  "key": "table_name",
+                  "key": "time",
                   "required": true,
-                  "sentence": "{selector}"
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
                 }
               ],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Very heavy rainfall",
+                    "color": "#1774CD"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_very_heavy_rainfall_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
+              "analysisConfig": [],
+              "moreInfo": null,
+              "getCapabilitiesLayerName": null,
               "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "1b58d03d-6949-4049-96d1-d70029055e90"
+                "5032f506-c401-4ffd-a3ea-7648339809aa",
+                "7be48e40-363c-4a2e-ac35-0934b7077e2c"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "7be48e40-363c-4a2e-ac35-0934b7077e2c",
+              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+              "isDefault": false,
+              "name": "Heavy Rainfall",
+              "isMultiLayer": true,
+              "nestedLegend": true,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Heavy rainfall",
+                    "color": "#AFEEEE"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_heavy_rainfall_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": null,
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [
+                "5032f506-c401-4ffd-a3ea-7648339809aa",
+                "09279d04-3129-4250-840f-ec77a79245bb"
               ],
               "showAllMultiLayer": true
             }
           ],
-          "initialVisible": false,
+          "initialVisible": true,
           "public": true,
-          "layer_type": "vector_file"
+          "layer_type": "wms"
         },
         {
           "id": "676bb843-3757-4bec-b472-94e0e0829f48",
@@ -12088,10 +12092,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: 14 Apr 2026 To 21 Apr 2026 (Initialized 14 Apr 2026)",
+          "summary": "Latest: 21 Apr 2026 To 28 Apr 2026 (Initialized 21 Apr 2026)",
           "layer": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
           "dataset_slug": "weekly_total_precipitation",
-          "latest_date": "2026-04-14T08:00:00+03:00",
+          "latest_date": "2026-04-21T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -12517,10 +12521,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: 14 Apr 2026 To 21 Apr 2026 (Initialized 14 Apr 2026)",
+          "summary": "Latest: 21 Apr 2026 To 28 Apr 2026 (Initialized 21 Apr 2026)",
           "layer": "8509bae8-88cf-4a9e-a3fc-00f85e27d1f3",
           "dataset_slug": "weekly_precipitation_anomally",
-          "latest_date": "2026-04-14T08:00:00+03:00",
+          "latest_date": "2026-04-21T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -12641,99 +12645,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "name": "Hydroshed Level 3 Basins",
-          "capabilities": [],
-          "summary": null,
-          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 61,
-          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
-          "layers": [
-            {
-              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-              "isDefault": true,
-              "name": "Level 3 Watershed Basins",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "paint": {
-                        "line-color": "#032eb0"
-                      },
-                      "type": "line",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "East Africa Flood Watch",
-                "linkUrl": "https://www.icpac.net/",
-                "text": "Watershed basins used for hydrological modeling at ICPAC.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name_0",
-                    "property": "Basin Name",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
           "id": "f2ec09d6-7ab3-4993-810b-14b67a396421",
           "dataset": "f2ec09d6-7ab3-4993-810b-14b67a396421",
           "name": "Risk of Heatstress",
@@ -12741,7 +12652,7 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 28 Apr 2026 (Initialized 14 Apr 2026)",
+          "summary": "Latest: 28 Apr 2026 (Initialized 21 Apr 2026)",
           "layer": "9ebfce98-3b47-4b47-8052-b7174e900b93",
           "dataset_slug": "weekly_heat_stress",
           "latest_date": "2026-04-28T08:00:00+03:00",
@@ -12853,126 +12764,97 @@
           "layer_type": "wms"
         },
         {
-          "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
-          "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
-          "name": "Mean Temprature",
-          "capabilities": [
-            "timeseries"
-          ],
-          "summary": "Latest: 14 Apr 2026 To 21 Apr 2026 (Initialized 14 Apr 2026)",
-          "layer": "561d86f9-40fa-473a-a144-ddf1beaeea25",
-          "dataset_slug": "weekly_mean_temperature",
-          "latest_date": "2026-04-14T08:00:00+03:00",
+          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "name": "Hydroshed Level 3 Basins",
+          "capabilities": [],
+          "summary": null,
+          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+          "dataset_slug": null,
+          "latest_date": null,
           "isMultiLayer": false,
-          "category": 1,
-          "sub_category": 1,
-          "metadata": "a6c92756-85ba-4be4-bbf5-8fd4997704b7",
+          "category": 22,
+          "sub_category": 61,
+          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
           "layers": [
             {
-              "id": "561d86f9-40fa-473a-a144-ddf1beaeea25",
-              "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
               "isDefault": true,
-              "name": "Weekly mean Temperature",
+              "name": "Level 3 Watershed Basins",
               "isMultiLayer": false,
               "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
+              "layerType": "vector_tile",
               "layerConfig": {
-                "type": "raster",
+                "type": "vector",
                 "source": {
-                  "type": "raster",
+                  "type": "vector",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_mean_temperature_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "paint": {
+                        "line-color": "#032eb0"
+                      },
+                      "type": "line",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
                   ]
                 }
               },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": false,
               "legendConfig": {
-                "type": "choropleth",
-                "items": [
-                  {
-                    "name": "4",
-                    "color": "#801FEF"
-                  },
-                  {
-                    "name": "8",
-                    "color": "#0F18F9"
-                  },
-                  {
-                    "name": "12",
-                    "color": "#3375ED"
-                  },
-                  {
-                    "name": "16",
-                    "color": "#0DAAFF"
-                  },
-                  {
-                    "name": "20",
-                    "color": "#72C8F2"
-                  },
-                  {
-                    "name": "24",
-                    "color": "#FFFFC8"
-                  },
-                  {
-                    "name": "28",
-                    "color": "#FFD627"
-                  },
-                  {
-                    "name": "32",
-                    "color": "#FF9300"
-                  },
-                  {
-                    "name": "36",
-                    "color": "#FF2F01"
-                  },
-                  {
-                    "name": "40",
-                    "color": "#D10000"
-                  },
-                  {
-                    "name": "\u00b0C",
-                    "color": "#FFB1B1"
-                  }
-                ]
+                "type": "basic",
+                "items": []
               },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_mean_temperature_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
+              "multiTemporal": false,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
-              "analysisConfig": [],
               "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://www.icpac.net/weekly-forecast/",
-                "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
+                "linkText": "East Africa Flood Watch",
+                "linkUrl": "https://www.icpac.net/",
+                "text": "Watershed basins used for hydrological modeling at ICPAC.",
                 "isButton": true,
                 "showArrow": true
               },
-              "getCapabilitiesLayerName": null,
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name_0",
+                    "property": "Basin Name",
+                    "type": "string"
+                  }
+                ]
+              },
               "linkedLayers": [],
               "showAllMultiLayer": true
             }
           ],
           "initialVisible": false,
           "public": true,
-          "layer_type": "wms"
+          "layer_type": "vector_tile"
         },
         {
           "id": "2815358d-4023-4dc8-b0e4-2dc05223e1e3",
@@ -13278,27 +13160,26 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "name": "Combined Drought Indicator",
+          "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+          "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+          "name": "Mean Temprature",
           "capabilities": [
-            "timeseries",
-            "nearRealTime"
+            "timeseries"
           ],
-          "summary": "Latest: 3rd Dekad of March 2026",
-          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-          "dataset_slug": "dekadal_cdi",
-          "latest_date": "2026-03-21T00:00:00+03:00",
+          "summary": "Latest: 21 Apr 2026 To 28 Apr 2026 (Initialized 21 Apr 2026)",
+          "layer": "561d86f9-40fa-473a-a144-ddf1beaeea25",
+          "dataset_slug": "weekly_mean_temperature",
+          "latest_date": "2026-04-21T08:00:00+03:00",
           "isMultiLayer": false,
-          "category": 7,
-          "sub_category": 13,
-          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
+          "category": 1,
+          "sub_category": 1,
+          "metadata": "a6c92756-85ba-4be4-bbf5-8fd4997704b7",
           "layers": [
             {
-              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+              "id": "561d86f9-40fa-473a-a144-ddf1beaeea25",
+              "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
               "isDefault": true,
-              "name": "Combined Drought Indicator",
+              "name": "Weekly mean Temperature",
               "isMultiLayer": false,
               "nestedLegend": false,
               "layerType": "wms",
@@ -13308,7 +13189,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_mean_temperature_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -13329,37 +13210,65 @@
               ],
               "paramsSelectorColumnView": true,
               "legendConfig": {
-                "type": "basic",
+                "type": "choropleth",
                 "items": [
                   {
-                    "name": "Watch: Rainfall Deficit",
-                    "color": "#ffff01"
+                    "name": "4",
+                    "color": "#801FEF"
                   },
                   {
-                    "name": "Warning: Soil Moisture Deficit",
-                    "color": "#ffa601"
+                    "name": "8",
+                    "color": "#0F18F9"
                   },
                   {
-                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
-                    "color": "#ff0000"
+                    "name": "12",
+                    "color": "#3375ED"
                   },
                   {
-                    "name": "No Warning",
-                    "color": "#f5f5f5"
+                    "name": "16",
+                    "color": "#0DAAFF"
+                  },
+                  {
+                    "name": "20",
+                    "color": "#72C8F2"
+                  },
+                  {
+                    "name": "24",
+                    "color": "#FFFFC8"
+                  },
+                  {
+                    "name": "28",
+                    "color": "#FFD627"
+                  },
+                  {
+                    "name": "32",
+                    "color": "#FF9300"
+                  },
+                  {
+                    "name": "36",
+                    "color": "#FF2F01"
+                  },
+                  {
+                    "name": "40",
+                    "color": "#D10000"
+                  },
+                  {
+                    "name": "\u00b0C",
+                    "color": "#FFB1B1"
                   }
                 ]
               },
-              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_mean_temperature_tileset",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
               "analysisConfig": [],
               "moreInfo": {
-                "linkText": "GO TO DROUGHT WATCH",
-                "linkUrl": "https://droughtwatch.icpac.net/",
-                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
+                "linkText": "More Details",
+                "linkUrl": "https://www.icpac.net/weekly-forecast/",
+                "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
                 "isButton": true,
                 "showArrow": true
               },
@@ -13379,10 +13288,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: 14 Apr 2026 To 21 Apr 2026 (Initialized 14 Apr 2026)",
+          "summary": "Latest: 21 Apr 2026 To 28 Apr 2026 (Initialized 21 Apr 2026)",
           "layer": "bf2511e5-304b-4095-aa8a-5352a08e6097",
           "dataset_slug": "weekly_temperature_anomaly",
-          "latest_date": "2026-04-14T08:00:00+03:00",
+          "latest_date": "2026-04-21T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -13486,6 +13395,101 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/#:~:text=Temperature%20forecast%20(Anomalies),-Temperature%20anomalies&text=Temperature%20anomalies-,Warmer%20than%20usual%20temperatures%20expected%20over%20most%20parts%20of%20the,to%20southern%20parts%20of%20Sudan.",
                 "text": "Shows deviations from normal temperature patterns, indicating warmer or cooler than usual conditions that may impact ecosystems and human activities",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "name": "Combined Drought Indicator",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 3rd Dekad of March 2026",
+          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+          "dataset_slug": "dekadal_cdi",
+          "latest_date": "2026-03-21T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 7,
+          "sub_category": 13,
+          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
+          "layers": [
+            {
+              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+              "isDefault": true,
+              "name": "Combined Drought Indicator",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Watch: Rainfall Deficit",
+                    "color": "#ffff01"
+                  },
+                  {
+                    "name": "Warning: Soil Moisture Deficit",
+                    "color": "#ffa601"
+                  },
+                  {
+                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
+                    "color": "#ff0000"
+                  },
+                  {
+                    "name": "No Warning",
+                    "color": "#f5f5f5"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "GO TO DROUGHT WATCH",
+                "linkUrl": "https://droughtwatch.icpac.net/",
+                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -14905,10 +14909,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 17 Apr 2026 To 24 Apr 2026 (Initialized 17 Apr 2026)",
+          "summary": "Latest: 18 Apr 2026 To 25 Apr 2026 (Initialized 18 Apr 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-04-17T08:00:00+03:00",
+          "latest_date": "2026-04-18T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -15317,10 +15321,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 17 Apr 2026 To 24 Apr 2026 (Initialized 17 Apr 2026)",
+          "summary": "Latest: 18 Apr 2026 To 25 Apr 2026 (Initialized 18 Apr 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-04-17T08:00:00+03:00",
+          "latest_date": "2026-04-18T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
