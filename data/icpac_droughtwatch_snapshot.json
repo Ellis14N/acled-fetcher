@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-20T15:59:24.973955+00:00",
+  "fetched_at_utc": "2026-04-21T06:23:22.756228+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-20T15:59:23.368099+00:00",
+      "fetched_at_utc": "2026-04-21T06:23:21.733553+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -6646,7 +6646,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "04",
-              "end_dekad": "12",
+              "end_dekad": "14",
               "active": true,
               "dataset": "b07acf0a-b653-4180-a94a-aae4be59f0a5",
               "wms_layer": "max_temp_tileset",
@@ -7055,7 +7055,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "04",
-                "selectedDay": "12",
+                "selectedDay": "14",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -7855,7 +7855,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "04",
-              "end_dekad": "13",
+              "end_dekad": "14",
               "active": true,
               "dataset": "3f9400de-34bb-46ef-98e8-aa4448700a5c",
               "wms_layer": "min_temp_tileset",
@@ -8264,7 +8264,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "04",
-                "selectedDay": "13",
+                "selectedDay": "14",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-20T15:59:24.973939+00:00",
+      "fetched_at_utc": "2026-04-21T06:23:22.756209+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
