@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-29T07:50:53.760397+00:00",
+  "fetched_at_utc": "2026-04-29T17:09:50.544209+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-29T07:50:52.322267+00:00",
+      "fetched_at_utc": "2026-04-29T17:09:49.513033+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -3336,7 +3336,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "04",
-              "end_dekad": "01",
+              "end_dekad": "11",
               "active": true,
               "dataset": "e7e710b0-9561-42b0-8d5a-4cfbdb773295",
               "wms_layer": "dekadal_fapar_observed_tileset",
@@ -3395,7 +3395,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "04",
-                "selectedTenDays": "01",
+                "selectedTenDays": "11",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -4099,7 +4099,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "04",
-              "end_dekad": "01",
+              "end_dekad": "11",
               "active": true,
               "dataset": "14a23f1b-be7c-44b1-a8ec-37816521f129",
               "wms_layer": "dekadal_fapar_anomaly_tileset",
@@ -4200,7 +4200,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "04",
-                "selectedTenDays": "01",
+                "selectedTenDays": "11",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -6646,7 +6646,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "04",
-              "end_dekad": "21",
+              "end_dekad": "23",
               "active": true,
               "dataset": "b07acf0a-b653-4180-a94a-aae4be59f0a5",
               "wms_layer": "max_temp_tileset",
@@ -7055,7 +7055,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "04",
-                "selectedDay": "21",
+                "selectedDay": "23",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -7855,7 +7855,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "04",
-              "end_dekad": "21",
+              "end_dekad": "23",
               "active": true,
               "dataset": "3f9400de-34bb-46ef-98e8-aa4448700a5c",
               "wms_layer": "min_temp_tileset",
@@ -8264,7 +8264,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "04",
-                "selectedDay": "21",
+                "selectedDay": "23",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-29T07:50:53.760380+00:00",
+      "fetched_at_utc": "2026-04-29T17:09:50.544192+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
