@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-28T17:58:15.093324+00:00",
+  "fetched_at_utc": "2026-04-29T07:50:53.760397+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-28T17:58:13.010302+00:00",
+      "fetched_at_utc": "2026-04-29T07:50:52.322267+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-28T17:58:15.093310+00:00",
+      "fetched_at_utc": "2026-04-29T07:50:53.760380+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -11344,245 +11344,6 @@
           "layer_type": "vector_file"
         },
         {
-          "id": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
-          "dataset": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
-          "name": "Disaster Induced Displacements",
-          "capabilities": [],
-          "summary": "Latest Update: January 2026",
-          "layer": "c7bbbe94-dc59-4dfb-95d9-92a32ad3612b",
-          "dataset_slug": "disaster_induced_displacements",
-          "latest_date": "2026-01-31T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 23,
-          "sub_category": 63,
-          "metadata": "1c51df87-182e-4de8-a8aa-89d6ee9f348f",
-          "layers": [
-            {
-              "id": "c7bbbe94-dc59-4dfb-95d9-92a32ad3612b",
-              "dataset": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
-              "isDefault": true,
-              "name": "Disaster Induced Displacements",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/impact.get_disaster_displacement/{z}/{x}/{y}.pbf"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "type": "fill",
-                      "paint": {
-                        "fill-color": [
-                          "interpolate",
-                          [
-                            "linear"
-                          ],
-                          [
-                            "to-number",
-                            [
-                              "get",
-                              "total_displaced"
-                            ]
-                          ],
-                          0,
-                          "#feedde",
-                          500,
-                          "#fdd0a2",
-                          3000,
-                          "#fdae6b",
-                          10000,
-                          "#fd8d3c",
-                          30000,
-                          "#f16913",
-                          100000,
-                          "#d94801",
-                          300000,
-                          "#8c2d04"
-                        ]
-                      },
-                      "source-layer": "default"
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "hazard": "all",
-                "year": "all"
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "hazard",
-                  "required": true,
-                  "type": "dropdown",
-                  "options": [
-                    {
-                      "label": "All Disasters",
-                      "value": "all",
-                      "default": true
-                    },
-                    {
-                      "label": "Drought",
-                      "value": "Drought",
-                      "default": false
-                    },
-                    {
-                      "label": "Flood",
-                      "value": "Flood",
-                      "default": false
-                    },
-                    {
-                      "label": "Mass Movement",
-                      "value": "Mass Movement",
-                      "default": false
-                    },
-                    {
-                      "label": "Storm",
-                      "value": "Storm",
-                      "default": false
-                    },
-                    {
-                      "label": "Earthquake",
-                      "value": "Earthquake",
-                      "default": false
-                    },
-                    {
-                      "label": "Wildfire",
-                      "value": "Wildfire",
-                      "default": false
-                    }
-                  ],
-                  "sentence": "Select Hazard {selector}"
-                },
-                {
-                  "key": "year",
-                  "required": true,
-                  "type": "dropdown",
-                  "options": [
-                    {
-                      "label": "All Years",
-                      "value": "all",
-                      "default": true
-                    },
-                    {
-                      "label": "2026",
-                      "value": "2026",
-                      "default": false
-                    },
-                    {
-                      "label": "2025",
-                      "value": "2025",
-                      "default": false
-                    },
-                    {
-                      "label": "2024",
-                      "value": "2024",
-                      "default": false
-                    },
-                    {
-                      "label": "2023",
-                      "value": "2023",
-                      "default": false
-                    },
-                    {
-                      "label": "2022",
-                      "value": "2022",
-                      "default": false
-                    },
-                    {
-                      "label": "2021",
-                      "value": "2021",
-                      "default": false
-                    },
-                    {
-                      "label": "2020",
-                      "value": "2020",
-                      "default": false
-                    }
-                  ],
-                  "sentence": "Select Year {selector}"
-                }
-              ],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "1 to 500",
-                    "color": "#feedde"
-                  },
-                  {
-                    "name": "501 to 3000",
-                    "color": "#fdd0a2"
-                  },
-                  {
-                    "name": "3001 to 10000",
-                    "color": "#fdae6b"
-                  },
-                  {
-                    "name": "10001 to 30000",
-                    "color": "#fd8d3c"
-                  },
-                  {
-                    "name": "30001 to 100000",
-                    "color": "#f16913"
-                  },
-                  {
-                    "name": "100001 to 300000",
-                    "color": "#d94801"
-                  },
-                  {
-                    "name": "More than 300000",
-                    "color": "#8c2d04"
-                  }
-                ]
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://www.icpac.net/publications/?&q=displacement#results",
-                "text": "Inspired by the absence of disaster data aggregator for the IGAD region, this activity of collecting and aggregating disaster displacement data was initiated to address gaps in disaster risk management.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "state_name",
-                    "property": "Country",
-                    "type": "string"
-                  },
-                  {
-                    "column": "admin_name",
-                    "property": "Admin Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "total_displaced",
-                    "property": "Total Displaced",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
           "id": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
           "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
           "name": "Available Forage Forecast",
@@ -11887,6 +11648,245 @@
           "initialVisible": true,
           "public": true,
           "layer_type": "wms"
+        },
+        {
+          "id": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
+          "dataset": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
+          "name": "Disaster Induced Displacements",
+          "capabilities": [],
+          "summary": "Latest Update: January 2026",
+          "layer": "c7bbbe94-dc59-4dfb-95d9-92a32ad3612b",
+          "dataset_slug": "disaster_induced_displacements",
+          "latest_date": "2026-01-31T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 23,
+          "sub_category": 63,
+          "metadata": "1c51df87-182e-4de8-a8aa-89d6ee9f348f",
+          "layers": [
+            {
+              "id": "c7bbbe94-dc59-4dfb-95d9-92a32ad3612b",
+              "dataset": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
+              "isDefault": true,
+              "name": "Disaster Induced Displacements",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/impact.get_disaster_displacement/{z}/{x}/{y}.pbf"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "type": "fill",
+                      "paint": {
+                        "fill-color": [
+                          "interpolate",
+                          [
+                            "linear"
+                          ],
+                          [
+                            "to-number",
+                            [
+                              "get",
+                              "total_displaced"
+                            ]
+                          ],
+                          0,
+                          "#feedde",
+                          500,
+                          "#fdd0a2",
+                          3000,
+                          "#fdae6b",
+                          10000,
+                          "#fd8d3c",
+                          30000,
+                          "#f16913",
+                          100000,
+                          "#d94801",
+                          300000,
+                          "#8c2d04"
+                        ]
+                      },
+                      "source-layer": "default"
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "hazard": "all",
+                "year": "all"
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "hazard",
+                  "required": true,
+                  "type": "dropdown",
+                  "options": [
+                    {
+                      "label": "All Disasters",
+                      "value": "all",
+                      "default": true
+                    },
+                    {
+                      "label": "Drought",
+                      "value": "Drought",
+                      "default": false
+                    },
+                    {
+                      "label": "Flood",
+                      "value": "Flood",
+                      "default": false
+                    },
+                    {
+                      "label": "Mass Movement",
+                      "value": "Mass Movement",
+                      "default": false
+                    },
+                    {
+                      "label": "Storm",
+                      "value": "Storm",
+                      "default": false
+                    },
+                    {
+                      "label": "Earthquake",
+                      "value": "Earthquake",
+                      "default": false
+                    },
+                    {
+                      "label": "Wildfire",
+                      "value": "Wildfire",
+                      "default": false
+                    }
+                  ],
+                  "sentence": "Select Hazard {selector}"
+                },
+                {
+                  "key": "year",
+                  "required": true,
+                  "type": "dropdown",
+                  "options": [
+                    {
+                      "label": "All Years",
+                      "value": "all",
+                      "default": true
+                    },
+                    {
+                      "label": "2026",
+                      "value": "2026",
+                      "default": false
+                    },
+                    {
+                      "label": "2025",
+                      "value": "2025",
+                      "default": false
+                    },
+                    {
+                      "label": "2024",
+                      "value": "2024",
+                      "default": false
+                    },
+                    {
+                      "label": "2023",
+                      "value": "2023",
+                      "default": false
+                    },
+                    {
+                      "label": "2022",
+                      "value": "2022",
+                      "default": false
+                    },
+                    {
+                      "label": "2021",
+                      "value": "2021",
+                      "default": false
+                    },
+                    {
+                      "label": "2020",
+                      "value": "2020",
+                      "default": false
+                    }
+                  ],
+                  "sentence": "Select Year {selector}"
+                }
+              ],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "1 to 500",
+                    "color": "#feedde"
+                  },
+                  {
+                    "name": "501 to 3000",
+                    "color": "#fdd0a2"
+                  },
+                  {
+                    "name": "3001 to 10000",
+                    "color": "#fdae6b"
+                  },
+                  {
+                    "name": "10001 to 30000",
+                    "color": "#fd8d3c"
+                  },
+                  {
+                    "name": "30001 to 100000",
+                    "color": "#f16913"
+                  },
+                  {
+                    "name": "100001 to 300000",
+                    "color": "#d94801"
+                  },
+                  {
+                    "name": "More than 300000",
+                    "color": "#8c2d04"
+                  }
+                ]
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://www.icpac.net/publications/?&q=displacement#results",
+                "text": "Inspired by the absence of disaster data aggregator for the IGAD region, this activity of collecting and aggregating disaster displacement data was initiated to address gaps in disaster risk management.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "state_name",
+                    "property": "Country",
+                    "type": "string"
+                  },
+                  {
+                    "column": "admin_name",
+                    "property": "Admin Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "total_displaced",
+                    "property": "Total Displaced",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
         },
         {
           "id": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
@@ -12645,99 +12645,6 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "name": "Hydroshed Level 3 Basins",
-          "capabilities": [],
-          "summary": null,
-          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 61,
-          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
-          "layers": [
-            {
-              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-              "isDefault": true,
-              "name": "Level 3 Watershed Basins",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "paint": {
-                        "line-color": "#032eb0"
-                      },
-                      "type": "line",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "East Africa Flood Watch",
-                "linkUrl": "https://www.icpac.net/",
-                "text": "Watershed basins used for hydrological modeling at ICPAC.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name_0",
-                    "property": "Basin Name",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
           "id": "f2ec09d6-7ab3-4993-810b-14b67a396421",
           "dataset": "f2ec09d6-7ab3-4993-810b-14b67a396421",
           "name": "Risk of Heatstress",
@@ -12844,6 +12751,316 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/",
                 "text": "The Heat Stress Index is categorized into three levels: Caution (Green & Blue, 28\u201334\u00b0C) indicates low heat stress, with possible fatigue if exposed for long durations. Extreme Caution (Yellow & Brown, 34\u201344\u00b0C) signals moderate to high heat stress, where the risk of heat exhaustion increases. Danger (Red, 44\u00b0C and above) represents severe heat stress, with a high likelihood of heat stroke or collapse, requiring immediate protection.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "name": "Hydroshed Level 3 Basins",
+          "capabilities": [],
+          "summary": null,
+          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 61,
+          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
+          "layers": [
+            {
+              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+              "isDefault": true,
+              "name": "Level 3 Watershed Basins",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "paint": {
+                        "line-color": "#032eb0"
+                      },
+                      "type": "line",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "East Africa Flood Watch",
+                "linkUrl": "https://www.icpac.net/",
+                "text": "Watershed basins used for hydrological modeling at ICPAC.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name_0",
+                    "property": "Basin Name",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
+          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "name": "East Africa Protected Areas",
+          "capabilities": [],
+          "summary": null,
+          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 62,
+          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
+          "layers": [
+            {
+              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
+              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+              "isDefault": true,
+              "name": "Protected Areas",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
+                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name",
+                    "property": "Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "name_0",
+                    "property": "Type",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
+          "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+          "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+          "name": "Mean Temprature",
+          "capabilities": [
+            "timeseries"
+          ],
+          "summary": "Latest: 28 Apr 2026 To 05 May 2026 (Initialized 28 Apr 2026)",
+          "layer": "561d86f9-40fa-473a-a144-ddf1beaeea25",
+          "dataset_slug": "weekly_mean_temperature",
+          "latest_date": "2026-04-28T08:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 1,
+          "sub_category": 1,
+          "metadata": "a6c92756-85ba-4be4-bbf5-8fd4997704b7",
+          "layers": [
+            {
+              "id": "561d86f9-40fa-473a-a144-ddf1beaeea25",
+              "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
+              "isDefault": true,
+              "name": "Weekly mean Temperature",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_mean_temperature_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "choropleth",
+                "items": [
+                  {
+                    "name": "4",
+                    "color": "#801FEF"
+                  },
+                  {
+                    "name": "8",
+                    "color": "#0F18F9"
+                  },
+                  {
+                    "name": "12",
+                    "color": "#3375ED"
+                  },
+                  {
+                    "name": "16",
+                    "color": "#0DAAFF"
+                  },
+                  {
+                    "name": "20",
+                    "color": "#72C8F2"
+                  },
+                  {
+                    "name": "24",
+                    "color": "#FFFFC8"
+                  },
+                  {
+                    "name": "28",
+                    "color": "#FFD627"
+                  },
+                  {
+                    "name": "32",
+                    "color": "#FF9300"
+                  },
+                  {
+                    "name": "36",
+                    "color": "#FF2F01"
+                  },
+                  {
+                    "name": "40",
+                    "color": "#D10000"
+                  },
+                  {
+                    "name": "\u00b0C",
+                    "color": "#FFB1B1"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_mean_temperature_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "https://www.icpac.net/weekly-forecast/",
+                "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
                 "isButton": true,
                 "showArrow": true
               },
@@ -13065,318 +13282,6 @@
           "layer_type": "vector_file"
         },
         {
-          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "name": "East Africa Protected Areas",
-          "capabilities": [],
-          "summary": null,
-          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 62,
-          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
-          "layers": [
-            {
-              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
-              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-              "isDefault": true,
-              "name": "Protected Areas",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "type": "line",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
-                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name",
-                    "property": "Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "name_0",
-                    "property": "Type",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
-          "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
-          "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
-          "name": "Mean Temprature",
-          "capabilities": [
-            "timeseries"
-          ],
-          "summary": "Latest: 28 Apr 2026 To 05 May 2026 (Initialized 28 Apr 2026)",
-          "layer": "561d86f9-40fa-473a-a144-ddf1beaeea25",
-          "dataset_slug": "weekly_mean_temperature",
-          "latest_date": "2026-04-28T08:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 1,
-          "sub_category": 1,
-          "metadata": "a6c92756-85ba-4be4-bbf5-8fd4997704b7",
-          "layers": [
-            {
-              "id": "561d86f9-40fa-473a-a144-ddf1beaeea25",
-              "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
-              "isDefault": true,
-              "name": "Weekly mean Temperature",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_mean_temperature_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "choropleth",
-                "items": [
-                  {
-                    "name": "4",
-                    "color": "#801FEF"
-                  },
-                  {
-                    "name": "8",
-                    "color": "#0F18F9"
-                  },
-                  {
-                    "name": "12",
-                    "color": "#3375ED"
-                  },
-                  {
-                    "name": "16",
-                    "color": "#0DAAFF"
-                  },
-                  {
-                    "name": "20",
-                    "color": "#72C8F2"
-                  },
-                  {
-                    "name": "24",
-                    "color": "#FFFFC8"
-                  },
-                  {
-                    "name": "28",
-                    "color": "#FFD627"
-                  },
-                  {
-                    "name": "32",
-                    "color": "#FF9300"
-                  },
-                  {
-                    "name": "36",
-                    "color": "#FF2F01"
-                  },
-                  {
-                    "name": "40",
-                    "color": "#D10000"
-                  },
-                  {
-                    "name": "\u00b0C",
-                    "color": "#FFB1B1"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_mean_temperature_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://www.icpac.net/weekly-forecast/",
-                "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "name": "Combined Drought Indicator",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 3rd Dekad of March 2026",
-          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-          "dataset_slug": "dekadal_cdi",
-          "latest_date": "2026-03-21T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 7,
-          "sub_category": 13,
-          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
-          "layers": [
-            {
-              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-              "isDefault": true,
-              "name": "Combined Drought Indicator",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Watch: Rainfall Deficit",
-                    "color": "#ffff01"
-                  },
-                  {
-                    "name": "Warning: Soil Moisture Deficit",
-                    "color": "#ffa601"
-                  },
-                  {
-                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
-                    "color": "#ff0000"
-                  },
-                  {
-                    "name": "No Warning",
-                    "color": "#f5f5f5"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "GO TO DROUGHT WATCH",
-                "linkUrl": "https://droughtwatch.icpac.net/",
-                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
           "id": "43cd0ad2-d5af-430e-8191-4634cabb077a",
           "dataset": "43cd0ad2-d5af-430e-8191-4634cabb077a",
           "name": "Temperature Anomaly",
@@ -13490,6 +13395,101 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/#:~:text=Temperature%20forecast%20(Anomalies),-Temperature%20anomalies&text=Temperature%20anomalies-,Warmer%20than%20usual%20temperatures%20expected%20over%20most%20parts%20of%20the,to%20southern%20parts%20of%20Sudan.",
                 "text": "Shows deviations from normal temperature patterns, indicating warmer or cooler than usual conditions that may impact ecosystems and human activities",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "name": "Combined Drought Indicator",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 3rd Dekad of March 2026",
+          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+          "dataset_slug": "dekadal_cdi",
+          "latest_date": "2026-03-21T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 7,
+          "sub_category": 13,
+          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
+          "layers": [
+            {
+              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+              "isDefault": true,
+              "name": "Combined Drought Indicator",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Watch: Rainfall Deficit",
+                    "color": "#ffff01"
+                  },
+                  {
+                    "name": "Warning: Soil Moisture Deficit",
+                    "color": "#ffa601"
+                  },
+                  {
+                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
+                    "color": "#ff0000"
+                  },
+                  {
+                    "name": "No Warning",
+                    "color": "#f5f5f5"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "GO TO DROUGHT WATCH",
+                "linkUrl": "https://droughtwatch.icpac.net/",
+                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -14909,10 +14909,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 26 Apr 2026 To 03 May 2026 (Initialized 26 Apr 2026)",
+          "summary": "Latest: 27 Apr 2026 To 04 May 2026 (Initialized 27 Apr 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-04-26T08:00:00+03:00",
+          "latest_date": "2026-04-27T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -15321,10 +15321,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 26 Apr 2026 To 03 May 2026 (Initialized 26 Apr 2026)",
+          "summary": "Latest: 27 Apr 2026 To 04 May 2026 (Initialized 27 Apr 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-04-26T08:00:00+03:00",
+          "latest_date": "2026-04-27T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
