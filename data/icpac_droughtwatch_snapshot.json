@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-04-29T17:09:50.544209+00:00",
+  "fetched_at_utc": "2026-04-30T07:54:08.824512+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-04-29T17:09:49.513033+00:00",
+      "fetched_at_utc": "2026-04-30T07:54:06.883107+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-04-29T17:09:50.544192+00:00",
+      "fetched_at_utc": "2026-04-30T07:54:08.824496+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -14909,10 +14909,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 27 Apr 2026 To 04 May 2026 (Initialized 27 Apr 2026)",
+          "summary": "Latest: 28 Apr 2026 To 05 May 2026 (Initialized 28 Apr 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-04-27T08:00:00+03:00",
+          "latest_date": "2026-04-28T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -15321,10 +15321,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 27 Apr 2026 To 04 May 2026 (Initialized 27 Apr 2026)",
+          "summary": "Latest: 28 Apr 2026 To 05 May 2026 (Initialized 28 Apr 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-04-27T08:00:00+03:00",
+          "latest_date": "2026-04-28T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
