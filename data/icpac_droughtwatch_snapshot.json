@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-05-28T02:28:51.230512+00:00",
+  "fetched_at_utc": "2026-05-28T15:33:26.331150+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-05-28T02:28:50.060682+00:00",
+      "fetched_at_utc": "2026-05-28T15:33:24.763540+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-05-28T02:28:51.230496+00:00",
+      "fetched_at_utc": "2026-05-28T15:33:26.331132+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -12299,6 +12299,136 @@
           "layer_type": "wms"
         },
         {
+          "id": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
+          "dataset": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
+          "name": "Rainfall Anomalies",
+          "capabilities": [
+            "timeseries"
+          ],
+          "summary": "Latest: 26 May 2026 To 02 Jun 2026 (Initialized 26 May 2026)",
+          "layer": "8509bae8-88cf-4a9e-a3fc-00f85e27d1f3",
+          "dataset_slug": "weekly_precipitation_anomally",
+          "latest_date": "2026-05-26T08:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 1,
+          "sub_category": 1,
+          "metadata": "df3103ef-5310-42b2-8e11-1761ffa6633f",
+          "layers": [
+            {
+              "id": "8509bae8-88cf-4a9e-a3fc-00f85e27d1f3",
+              "dataset": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
+              "isDefault": true,
+              "name": "Weekly  Rainfall Anomalies(mm)",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_precipitation_anomaly_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "choropleth",
+                "items": [
+                  {
+                    "name": "-60",
+                    "color": "#FF0200"
+                  },
+                  {
+                    "name": "-50",
+                    "color": "#FF2600"
+                  },
+                  {
+                    "name": "-40",
+                    "color": "#FF4E00"
+                  },
+                  {
+                    "name": "-30",
+                    "color": "#FF7601"
+                  },
+                  {
+                    "name": "-20",
+                    "color": "#FF9D00"
+                  },
+                  {
+                    "name": "-10",
+                    "color": "#FFC402"
+                  },
+                  {
+                    "name": "10",
+                    "color": "#FFFFFF"
+                  },
+                  {
+                    "name": "20",
+                    "color": "#54F254"
+                  },
+                  {
+                    "name": "30",
+                    "color": "#45BE18"
+                  },
+                  {
+                    "name": "40",
+                    "color": "#34A50A"
+                  },
+                  {
+                    "name": "50",
+                    "color": "#1E8F07"
+                  },
+                  {
+                    "name": "60",
+                    "color": "#0E7A04"
+                  },
+                  {
+                    "name": "mm",
+                    "color": "#015000"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_precipitation_anomaly_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "http://icpac.net/weekly-forecast/#:~:text=Rainfall%20forecast%20(anomalies),-Rainfall%20anomalies&text=Rainfall%20anomalies-,More%20than%20usual%20rainfall%20expected%20over%20most%20parts%20of%20South,over%20parts%20of%20western%20Kenya%2C%20\u2026",
+                "text": "Highlights areas with significantly above or below normal rainfall, helping stakeholders anticipate droughts or excessive wet conditions",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
           "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
           "name": "Rangelands Conditions",
@@ -12515,229 +12645,6 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
-          "dataset": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
-          "name": "Rainfall Anomalies",
-          "capabilities": [
-            "timeseries"
-          ],
-          "summary": "Latest: 26 May 2026 To 02 Jun 2026 (Initialized 26 May 2026)",
-          "layer": "8509bae8-88cf-4a9e-a3fc-00f85e27d1f3",
-          "dataset_slug": "weekly_precipitation_anomally",
-          "latest_date": "2026-05-26T08:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 1,
-          "sub_category": 1,
-          "metadata": "df3103ef-5310-42b2-8e11-1761ffa6633f",
-          "layers": [
-            {
-              "id": "8509bae8-88cf-4a9e-a3fc-00f85e27d1f3",
-              "dataset": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
-              "isDefault": true,
-              "name": "Weekly  Rainfall Anomalies(mm)",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_precipitation_anomaly_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "choropleth",
-                "items": [
-                  {
-                    "name": "-60",
-                    "color": "#FF0200"
-                  },
-                  {
-                    "name": "-50",
-                    "color": "#FF2600"
-                  },
-                  {
-                    "name": "-40",
-                    "color": "#FF4E00"
-                  },
-                  {
-                    "name": "-30",
-                    "color": "#FF7601"
-                  },
-                  {
-                    "name": "-20",
-                    "color": "#FF9D00"
-                  },
-                  {
-                    "name": "-10",
-                    "color": "#FFC402"
-                  },
-                  {
-                    "name": "10",
-                    "color": "#FFFFFF"
-                  },
-                  {
-                    "name": "20",
-                    "color": "#54F254"
-                  },
-                  {
-                    "name": "30",
-                    "color": "#45BE18"
-                  },
-                  {
-                    "name": "40",
-                    "color": "#34A50A"
-                  },
-                  {
-                    "name": "50",
-                    "color": "#1E8F07"
-                  },
-                  {
-                    "name": "60",
-                    "color": "#0E7A04"
-                  },
-                  {
-                    "name": "mm",
-                    "color": "#015000"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_precipitation_anomaly_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "http://icpac.net/weekly-forecast/#:~:text=Rainfall%20forecast%20(anomalies),-Rainfall%20anomalies&text=Rainfall%20anomalies-,More%20than%20usual%20rainfall%20expected%20over%20most%20parts%20of%20South,over%20parts%20of%20western%20Kenya%2C%20\u2026",
-                "text": "Highlights areas with significantly above or below normal rainfall, helping stakeholders anticipate droughts or excessive wet conditions",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "name": "Hydroshed Level 3 Basins",
-          "capabilities": [],
-          "summary": null,
-          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 61,
-          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
-          "layers": [
-            {
-              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-              "isDefault": true,
-              "name": "Level 3 Watershed Basins",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "paint": {
-                        "line-color": "#032eb0"
-                      },
-                      "type": "line",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "East Africa Flood Watch",
-                "linkUrl": "https://www.icpac.net/",
-                "text": "Watershed basins used for hydrological modeling at ICPAC.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name_0",
-                    "property": "Basin Name",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
           "id": "f2ec09d6-7ab3-4993-810b-14b67a396421",
           "dataset": "f2ec09d6-7ab3-4993-810b-14b67a396421",
           "name": "Risk of Heatstress",
@@ -12857,24 +12764,24 @@
           "layer_type": "wms"
         },
         {
-          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "name": "East Africa Protected Areas",
+          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "name": "Hydroshed Level 3 Basins",
           "capabilities": [],
           "summary": null,
-          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
+          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
           "dataset_slug": null,
           "latest_date": null,
           "isMultiLayer": false,
           "category": 22,
-          "sub_category": 62,
-          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
+          "sub_category": 61,
+          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
           "layers": [
             {
-              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
-              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
               "isDefault": true,
-              "name": "Protected Areas",
+              "name": "Level 3 Watershed Basins",
               "isMultiLayer": false,
               "nestedLegend": false,
               "layerType": "vector_tile",
@@ -12883,7 +12790,7 @@
                 "source": {
                   "type": "vector",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
+                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
                   ]
                 },
                 "render": {
@@ -12894,14 +12801,17 @@
                         "fill-opacity": 0.1
                       },
                       "type": "fill",
-                      "source-layer": "default",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
                       "metadata": {
                         "position": "top"
                       }
                     },
                     {
+                      "paint": {
+                        "line-color": "#032eb0"
+                      },
                       "type": "line",
-                      "source-layer": "default",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
                       "metadata": {
                         "position": "top"
                       }
@@ -12911,7 +12821,7 @@
               },
               "params": {},
               "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
+              "paramsSelectorColumnView": false,
               "legendConfig": {
                 "type": "basic",
                 "items": []
@@ -12920,9 +12830,9 @@
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
               "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
-                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
+                "linkText": "East Africa Flood Watch",
+                "linkUrl": "https://www.icpac.net/",
+                "text": "Watershed basins used for hydrological modeling at ICPAC.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -12932,13 +12842,8 @@
                 "type": "intersection",
                 "output": [
                   {
-                    "column": "name",
-                    "property": "Name",
-                    "type": "string"
-                  },
-                  {
                     "column": "name_0",
-                    "property": "Type",
+                    "property": "Basin Name",
                     "type": "string"
                   }
                 ]
@@ -13160,6 +13065,101 @@
           "layer_type": "vector_file"
         },
         {
+          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "name": "East Africa Protected Areas",
+          "capabilities": [],
+          "summary": null,
+          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 62,
+          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
+          "layers": [
+            {
+              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
+              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+              "isDefault": true,
+              "name": "Protected Areas",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
+                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name",
+                    "property": "Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "name_0",
+                    "property": "Type",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
           "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
           "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
           "name": "Mean Temprature",
@@ -13269,6 +13269,101 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/",
                 "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "name": "Combined Drought Indicator",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 1st Dekad of May 2026",
+          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+          "dataset_slug": "dekadal_cdi",
+          "latest_date": "2026-05-01T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 7,
+          "sub_category": 13,
+          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
+          "layers": [
+            {
+              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+              "isDefault": true,
+              "name": "Combined Drought Indicator",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Watch: Rainfall Deficit",
+                    "color": "#ffff01"
+                  },
+                  {
+                    "name": "Warning: Soil Moisture Deficit",
+                    "color": "#ffa601"
+                  },
+                  {
+                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
+                    "color": "#ff0000"
+                  },
+                  {
+                    "name": "No Warning",
+                    "color": "#f5f5f5"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "GO TO DROUGHT WATCH",
+                "linkUrl": "https://droughtwatch.icpac.net/",
+                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -13395,101 +13490,6 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/#:~:text=Temperature%20forecast%20(Anomalies),-Temperature%20anomalies&text=Temperature%20anomalies-,Warmer%20than%20usual%20temperatures%20expected%20over%20most%20parts%20of%20the,to%20southern%20parts%20of%20Sudan.",
                 "text": "Shows deviations from normal temperature patterns, indicating warmer or cooler than usual conditions that may impact ecosystems and human activities",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "name": "Combined Drought Indicator",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 1st Dekad of May 2026",
-          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-          "dataset_slug": "dekadal_cdi",
-          "latest_date": "2026-05-01T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 7,
-          "sub_category": 13,
-          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
-          "layers": [
-            {
-              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-              "isDefault": true,
-              "name": "Combined Drought Indicator",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Watch: Rainfall Deficit",
-                    "color": "#ffff01"
-                  },
-                  {
-                    "name": "Warning: Soil Moisture Deficit",
-                    "color": "#ffa601"
-                  },
-                  {
-                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
-                    "color": "#ff0000"
-                  },
-                  {
-                    "name": "No Warning",
-                    "color": "#f5f5f5"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "GO TO DROUGHT WATCH",
-                "linkUrl": "https://droughtwatch.icpac.net/",
-                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -14909,10 +14909,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 25 May 2026 To 01 Jun 2026 (Initialized 25 May 2026)",
+          "summary": "Latest: 26 May 2026 To 02 Jun 2026 (Initialized 26 May 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-05-25T08:00:00+03:00",
+          "latest_date": "2026-05-26T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -15321,10 +15321,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 25 May 2026 To 01 Jun 2026 (Initialized 25 May 2026)",
+          "summary": "Latest: 26 May 2026 To 02 Jun 2026 (Initialized 26 May 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-05-25T08:00:00+03:00",
+          "latest_date": "2026-05-26T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
