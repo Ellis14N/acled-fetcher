@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-06-09T02:28:16.093870+00:00",
+  "fetched_at_utc": "2026-06-09T14:31:20.962335+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-06-09T02:28:14.427987+00:00",
+      "fetched_at_utc": "2026-06-09T14:31:19.543161+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -1755,7 +1755,7 @@
               "default": true,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "apr",
+              "end_month": "may",
               "end_dekad": "03",
               "active": true,
               "dataset": "37366e97-9c8a-4a0a-81e8-e0af253580c8",
@@ -1891,7 +1891,7 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Timescale: {selectedTimeScale}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "apr",
+                "selectedMonth": "may",
                 "selectedTimeScale": "03",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -2137,7 +2137,7 @@
               "default": true,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "apr",
+              "end_month": "may",
               "end_dekad": null,
               "active": true,
               "dataset": "bc17dee7-ec18-4496-a667-e89af42d52c9",
@@ -2237,7 +2237,7 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "apr",
+                "selectedMonth": "may",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -6645,8 +6645,8 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "05",
-              "end_dekad": "29",
+              "end_month": "06",
+              "end_dekad": "03",
               "active": true,
               "dataset": "b07acf0a-b653-4180-a94a-aae4be59f0a5",
               "wms_layer": "max_temp_tileset",
@@ -7054,8 +7054,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedDay}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "05",
-                "selectedDay": "29",
+                "selectedMonth": "06",
+                "selectedDay": "03",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -7854,8 +7854,8 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "05",
-              "end_dekad": "29",
+              "end_month": "06",
+              "end_dekad": "03",
               "active": true,
               "dataset": "3f9400de-34bb-46ef-98e8-aa4448700a5c",
               "wms_layer": "min_temp_tileset",
@@ -8263,8 +8263,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedDay}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "05",
-                "selectedDay": "29",
+                "selectedMonth": "06",
+                "selectedDay": "03",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-06-09T02:28:16.093853+00:00",
+      "fetched_at_utc": "2026-06-09T14:31:20.962315+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -11052,10 +11052,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 02 Jun 2026 To 09 Jun 2026 (Initialized 02 Jun 2026)",
+          "summary": "Latest: 10 Jun 2026 To 17 Jun 2026 (Initialized 10 Jun 2026)",
           "layer": "5032f506-c401-4ffd-a3ea-7648339809aa",
           "dataset_slug": "weekly_exceptional_precipitation",
-          "latest_date": "2026-06-02T08:00:00+03:00",
+          "latest_date": "2026-06-10T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 1,
@@ -11075,7 +11075,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_extreme_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_extreme_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -11105,7 +11105,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "weekly_extreme_heavy_rainfall_tileset",
+              "layerName": "weekly_extreme_heavy_rainfall",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -11133,7 +11133,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_very_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_very_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -11163,7 +11163,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "weekly_very_heavy_rainfall_tileset",
+              "layerName": "weekly_very_heavy_rainfall",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -11191,7 +11191,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_heavy_rainfall_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -11221,7 +11221,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "weekly_heavy_rainfall_tileset",
+              "layerName": "weekly_heavy_rainfall",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -11573,116 +11573,6 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
-          "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
-          "name": "Available Forage Forecast",
-          "capabilities": [
-            "timeseries"
-          ],
-          "summary": "Latest: Jun-Sep (Initialized May-2026)",
-          "layer": "d904b6ce-62e4-4765-b08c-8ab4d552b412",
-          "dataset_slug": "seasonal_forage_forecast",
-          "latest_date": "2026-05-01T08:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 4,
-          "sub_category": 10,
-          "metadata": "b5da25e3-b5df-4830-be4e-e52dbe448af6",
-          "layers": [
-            {
-              "id": "d904b6ce-62e4-4765-b08c-8ab4d552b412",
-              "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
-              "isDefault": true,
-              "name": "Available Forage Forecast",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_available_forage_biomass_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "MMMM yyyy"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Less than or = 0.5 t/ha - Very Low",
-                    "color": "#8b5a00"
-                  },
-                  {
-                    "name": "Less than or = 1 t/ha - Low",
-                    "color": "#eead0e"
-                  },
-                  {
-                    "name": "Less than or = 1.5 t/ha",
-                    "color": "#ffff00"
-                  },
-                  {
-                    "name": "Less than or = 2 t/ha - Medium",
-                    "color": "#b6ff3e"
-                  },
-                  {
-                    "name": "Less than or = 2.5 t/ha",
-                    "color": "#2a9c30"
-                  },
-                  {
-                    "name": "Less than or = 3 t/ha - High",
-                    "color": "#07620f"
-                  },
-                  {
-                    "name": "Less than or = 3.5 t/ha - Very High",
-                    "color": "#006400"
-                  },
-                  {
-                    "name": "Greater than 3.5 t/ha - Extremely High",
-                    "color": "#cd4f39"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "seasonal_available_forage_biomass_tileset",
-              "date_format": "MMMM yyyy",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details  (ICPALD)",
-                "linkUrl": "https://icpald.org/seasonal-range-forage-prediction-2/",
-                "text": "The data show available Forage Forecast in t/ha for the current season.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
           "id": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
           "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
           "name": "Gha Airports",
@@ -11982,6 +11872,116 @@
           "layer_type": "vector_file"
         },
         {
+          "id": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
+          "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
+          "name": "Available Forage Forecast",
+          "capabilities": [
+            "timeseries"
+          ],
+          "summary": "Latest: Jun-Sep (Initialized May-2026)",
+          "layer": "d904b6ce-62e4-4765-b08c-8ab4d552b412",
+          "dataset_slug": "seasonal_forage_forecast",
+          "latest_date": "2026-05-01T08:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 4,
+          "sub_category": 10,
+          "metadata": "b5da25e3-b5df-4830-be4e-e52dbe448af6",
+          "layers": [
+            {
+              "id": "d904b6ce-62e4-4765-b08c-8ab4d552b412",
+              "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
+              "isDefault": true,
+              "name": "Available Forage Forecast",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_available_forage_biomass_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "MMMM yyyy"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Less than or = 0.5 t/ha - Very Low",
+                    "color": "#8b5a00"
+                  },
+                  {
+                    "name": "Less than or = 1 t/ha - Low",
+                    "color": "#eead0e"
+                  },
+                  {
+                    "name": "Less than or = 1.5 t/ha",
+                    "color": "#ffff00"
+                  },
+                  {
+                    "name": "Less than or = 2 t/ha - Medium",
+                    "color": "#b6ff3e"
+                  },
+                  {
+                    "name": "Less than or = 2.5 t/ha",
+                    "color": "#2a9c30"
+                  },
+                  {
+                    "name": "Less than or = 3 t/ha - High",
+                    "color": "#07620f"
+                  },
+                  {
+                    "name": "Less than or = 3.5 t/ha - Very High",
+                    "color": "#006400"
+                  },
+                  {
+                    "name": "Greater than 3.5 t/ha - Extremely High",
+                    "color": "#cd4f39"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "seasonal_available_forage_biomass_tileset",
+              "date_format": "MMMM yyyy",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details  (ICPALD)",
+                "linkUrl": "https://icpald.org/seasonal-range-forage-prediction-2/",
+                "text": "The data show available Forage Forecast in t/ha for the current season.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "676bb843-3757-4bec-b472-94e0e0829f48",
           "dataset": "676bb843-3757-4bec-b472-94e0e0829f48",
           "name": "Admin Level 1 Boundary",
@@ -12092,10 +12092,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: 02 Jun 2026 To 09 Jun 2026 (Initialized 02 Jun 2026)",
+          "summary": "Latest: 10 Jun 2026 To 17 Jun 2026 (Initialized 10 Jun 2026)",
           "layer": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
           "dataset_slug": "weekly_total_precipitation",
-          "latest_date": "2026-06-02T08:00:00+03:00",
+          "latest_date": "2026-06-10T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -12115,7 +12115,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_total_precipitation_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_total_precipitation&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -12169,7 +12169,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "weekly_total_precipitation_tileset",
+              "layerName": "weekly_total_precipitation",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -12521,10 +12521,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: 02 Jun 2026 To 09 Jun 2026 (Initialized 02 Jun 2026)",
+          "summary": "Latest: 10 Jun 2026 To 17 Jun 2026 (Initialized 10 Jun 2026)",
           "layer": "8509bae8-88cf-4a9e-a3fc-00f85e27d1f3",
           "dataset_slug": "weekly_precipitation_anomally",
-          "latest_date": "2026-06-02T08:00:00+03:00",
+          "latest_date": "2026-06-10T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -12652,10 +12652,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 10 Jun 2026 (Initialized 02 Jun 2026)",
+          "summary": "Latest: 18 Jun 2026 (Initialized 10 Jun 2026)",
           "layer": "9ebfce98-3b47-4b47-8052-b7174e900b93",
           "dataset_slug": "weekly_heat_stress",
-          "latest_date": "2026-06-10T08:00:00+03:00",
+          "latest_date": "2026-06-18T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -12863,10 +12863,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: 02 Jun 2026 To 09 Jun 2026 (Initialized 02 Jun 2026)",
+          "summary": "Latest: 10 Jun 2026 To 17 Jun 2026 (Initialized 10 Jun 2026)",
           "layer": "561d86f9-40fa-473a-a144-ddf1beaeea25",
           "dataset_slug": "weekly_mean_temperature",
-          "latest_date": "2026-06-02T08:00:00+03:00",
+          "latest_date": "2026-06-10T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -13383,10 +13383,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: 02 Jun 2026 To 09 Jun 2026 (Initialized 02 Jun 2026)",
+          "summary": "Latest: 10 Jun 2026 To 17 Jun 2026 (Initialized 10 Jun 2026)",
           "layer": "bf2511e5-304b-4095-aa8a-5352a08e6097",
           "dataset_slug": "weekly_temperature_anomaly",
-          "latest_date": "2026-06-02T08:00:00+03:00",
+          "latest_date": "2026-06-10T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 1,
@@ -14387,6 +14387,171 @@
           "layer_type": "wms"
         },
         {
+          "id": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
+          "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
+          "name": "Cities Temperature Evolution",
+          "capabilities": [],
+          "summary": null,
+          "layer": "c507feee-b38a-4697-946b-b6e1fdd39261",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": true,
+          "category": 18,
+          "sub_category": 49,
+          "metadata": "64438bac-8aa2-4da6-9e12-8de0e738ff64",
+          "layers": [
+            {
+              "id": "c507feee-b38a-4697-946b-b6e1fdd39261",
+              "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
+              "isDefault": true,
+              "name": "Regional warming > 1.5\u00b0C /century",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "1.5\u00b0C /century",
+                    "color": "#5C4033"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "circle-color": "#5C4033",
+                        "circle-stroke-color": "#5C4033"
+                      },
+                      "type": "circle",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "east_africa_warming_1_5_to_2_0",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {
+                "output": [
+                  {
+                    "column": "city",
+                    "property": "City"
+                  },
+                  {
+                    "column": "region_val",
+                    "property": "City warming \u00b0C /century"
+                  }
+                ]
+              },
+              "canClip": true,
+              "linkedLayers": [
+                "d0c0732b-a72a-487c-9b97-05841815ceb3"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "d0c0732b-a72a-487c-9b97-05841815ceb3",
+              "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
+              "isDefault": false,
+              "name": "Regional warming > 2.0\u00b0C /century",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "> 2.0\u00b0C /century",
+                    "color": "#FF0000"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "circle-color": "#FF0000",
+                        "circle-stroke-color": "#FF0000"
+                      },
+                      "type": "circle",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "east_africa_warming_2_0",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {
+                "output": [
+                  {
+                    "column": "city",
+                    "property": "City"
+                  },
+                  {
+                    "column": "region_val",
+                    "property": "City warming \u00b0C /century"
+                  }
+                ]
+              },
+              "canClip": true,
+              "linkedLayers": [
+                "c507feee-b38a-4697-946b-b6e1fdd39261"
+              ],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_file"
+        },
+        {
           "id": "8637bca5-259c-4690-9a78-58d3aa2177bd",
           "dataset": "8637bca5-259c-4690-9a78-58d3aa2177bd",
           "name": "Seasonal Temperature Probabilistic Forecast",
@@ -14654,171 +14819,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
-          "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
-          "name": "Cities Temperature Evolution",
-          "capabilities": [],
-          "summary": null,
-          "layer": "c507feee-b38a-4697-946b-b6e1fdd39261",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": true,
-          "category": 18,
-          "sub_category": 49,
-          "metadata": "64438bac-8aa2-4da6-9e12-8de0e738ff64",
-          "layers": [
-            {
-              "id": "c507feee-b38a-4697-946b-b6e1fdd39261",
-              "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
-              "isDefault": true,
-              "name": "Regional warming > 1.5\u00b0C /century",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "1.5\u00b0C /century",
-                    "color": "#5C4033"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "circle-color": "#5C4033",
-                        "circle-stroke-color": "#5C4033"
-                      },
-                      "type": "circle",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "east_africa_warming_1_5_to_2_0",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {
-                "output": [
-                  {
-                    "column": "city",
-                    "property": "City"
-                  },
-                  {
-                    "column": "region_val",
-                    "property": "City warming \u00b0C /century"
-                  }
-                ]
-              },
-              "canClip": true,
-              "linkedLayers": [
-                "d0c0732b-a72a-487c-9b97-05841815ceb3"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "d0c0732b-a72a-487c-9b97-05841815ceb3",
-              "dataset": "3a84250b-11fa-4cdb-9736-52fb2cbc5e9f",
-              "isDefault": false,
-              "name": "Regional warming > 2.0\u00b0C /century",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "> 2.0\u00b0C /century",
-                    "color": "#FF0000"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "circle-color": "#FF0000",
-                        "circle-stroke-color": "#FF0000"
-                      },
-                      "type": "circle",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "east_africa_warming_2_0",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {
-                "output": [
-                  {
-                    "column": "city",
-                    "property": "City"
-                  },
-                  {
-                    "column": "region_val",
-                    "property": "City warming \u00b0C /century"
-                  }
-                ]
-              },
-              "canClip": true,
-              "linkedLayers": [
-                "c507feee-b38a-4697-946b-b6e1fdd39261"
-              ],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_file"
-        },
-        {
           "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
           "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
           "name": "Crop Land Area Mask",
@@ -14909,10 +14909,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 06 Jun 2026 To 13 Jun 2026 (Initialized 06 Jun 2026)",
+          "summary": "Latest: 07 Jun 2026 To 14 Jun 2026 (Initialized 07 Jun 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-06-06T08:00:00+03:00",
+          "latest_date": "2026-06-07T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -14932,7 +14932,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=subseasonal_precipitation_forecast_below_normal_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&model={model}&week={week}&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=subseasonal_precipitation_forecast_below_normal&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&model={model}&week={week}&time={time}"
                   ]
                 }
               },
@@ -15033,8 +15033,8 @@
                   }
                 ]
               },
-              "getCapabilitiesUrl": "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "subseasonal_precipitation_forecast_below_normal_tileset",
+              "getCapabilitiesUrl": "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "subseasonal_precipitation_forecast_below_normal",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "from_dataset_props",
@@ -15062,7 +15062,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=subseasonal_precipitation_forecast_above_normal_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&model={model}&week={week}&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=subseasonal_precipitation_forecast_above_normal&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&model={model}&week={week}&time={time}"
                   ]
                 }
               },
@@ -15164,7 +15164,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "subseasonal_precipitation_forecast_above_normal_tileset",
+              "layerName": "subseasonal_precipitation_forecast_above_normal",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "from_dataset_props",
@@ -15192,7 +15192,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=subseasonal_precipitation_forecast_normal_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&model={model}&week={week}&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=subseasonal_precipitation_forecast_normal&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&model={model}&week={week}&time={time}"
                   ]
                 }
               },
@@ -15294,7 +15294,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "subseasonal_precipitation_forecast_normal_tileset",
+              "layerName": "subseasonal_precipitation_forecast_normal",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "from_dataset_props",
@@ -15321,10 +15321,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 06 Jun 2026 To 13 Jun 2026 (Initialized 06 Jun 2026)",
+          "summary": "Latest: 07 Jun 2026 To 14 Jun 2026 (Initialized 07 Jun 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-06-06T08:00:00+03:00",
+          "latest_date": "2026-06-07T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
@@ -15344,7 +15344,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=subseasonal_precipitation_anomaly_forecast_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&model={model}&week={week}&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=subseasonal_precipitation_anomaly_forecast&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&model={model}&week={week}&time={time}"
                   ]
                 }
               },
@@ -15470,7 +15470,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "subseasonal_precipitation_anomaly_forecast_tileset",
+              "layerName": "subseasonal_precipitation_anomaly_forecast",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "from_dataset_props",
