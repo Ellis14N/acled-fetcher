@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-06-09T14:31:20.962335+00:00",
+  "fetched_at_utc": "2026-06-10T02:41:36.485886+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-06-09T14:31:19.543161+00:00",
+      "fetched_at_utc": "2026-06-10T02:41:35.314860+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-06-09T14:31:20.962315+00:00",
+      "fetched_at_utc": "2026-06-10T02:41:36.485871+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -12544,7 +12544,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_precipitation_anomaly_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_precipitation_anomaly&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -12622,7 +12622,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "weekly_precipitation_anomaly_tileset",
+              "layerName": "weekly_precipitation_anomaly",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -12675,7 +12675,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=heatstress_risk_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=heatstress_risk&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -12741,7 +12741,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "heatstress_risk_tileset",
+              "layerName": "heatstress_risk",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -12886,7 +12886,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_mean_temperature_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_mean_temperature&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -12956,7 +12956,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "weekly_mean_temperature_tileset",
+              "layerName": "weekly_mean_temperature",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -13406,7 +13406,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_temperature_anomaly_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_temperature_anomaly&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -13480,7 +13480,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "weekly_temperature_anomaly_tileset",
+              "layerName": "weekly_temperature_anomaly",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -13532,7 +13532,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_precipitation_prob_below_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_precipitation_prob_below&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -13586,7 +13586,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "monthly_precipitation_prob_below_tileset",
+              "layerName": "monthly_precipitation_prob_below",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -13614,7 +13614,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_precipitation_prob_normal_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_precipitation_prob_normal&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -13668,7 +13668,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "monthly_precipitation_prob_normal_tileset",
+              "layerName": "monthly_precipitation_prob_normal",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -13696,7 +13696,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_precipitation_prob_above_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_precipitation_prob_above&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -13750,7 +13750,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "monthly_precipitation_prob_above_tileset",
+              "layerName": "monthly_precipitation_prob_above",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -13799,7 +13799,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_temperature_prob_below_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_temperature_prob_below&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -13853,7 +13853,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "monthly_temperature_prob_below_tileset",
+              "layerName": "monthly_temperature_prob_below",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -13881,7 +13881,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_temperature_prob_normal_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_temperature_prob_normal&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -13935,7 +13935,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "monthly_temperature_prob_normal_tileset",
+              "layerName": "monthly_temperature_prob_normal",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -13963,7 +13963,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_temperature_prob_above_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=monthly_temperature_prob_above&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -14017,7 +14017,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "monthly_temperature_prob_above_tileset",
+              "layerName": "monthly_temperature_prob_above",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -14149,7 +14149,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_precipitation_prob_below_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_precipitation_prob_below&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -14203,7 +14203,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "seasonal_precipitation_prob_below_tileset",
+              "layerName": "seasonal_precipitation_prob_below",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -14231,7 +14231,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_precipitation_prob_normal_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_precipitation_prob_normal&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -14285,7 +14285,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "seasonal_precipitation_prob_normal_tileset",
+              "layerName": "seasonal_precipitation_prob_normal",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -14313,7 +14313,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_precipitation_prob_above_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_precipitation_prob_above&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -14367,7 +14367,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "seasonal_precipitation_prob_above_tileset",
+              "layerName": "seasonal_precipitation_prob_above",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
@@ -14581,7 +14581,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_temperature_prob_below_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_temperature_prob_below&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -14635,7 +14635,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "seasonal_temperature_prob_below_tileset",
+              "layerName": "seasonal_temperature_prob_below",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "from_dataset_props",
@@ -14663,7 +14663,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_temperature_prob_above_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_temperature_prob_above&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -14717,7 +14717,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "seasonal_temperature_prob_above_tileset",
+              "layerName": "seasonal_temperature_prob_above",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "from_dataset_props",
@@ -14745,7 +14745,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_temperature_prob_normal_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_temperature_prob_normal&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -14799,7 +14799,7 @@
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "seasonal_temperature_prob_normal_tileset",
+              "layerName": "seasonal_temperature_prob_normal",
               "date_format": "MMMM yyyy",
               "multiTemporal": true,
               "currentTimeMethod": "from_dataset_props",
