@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-06-26T02:38:01.817154+00:00",
+  "fetched_at_utc": "2026-06-26T14:07:39.399014+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-06-26T02:38:00.448013+00:00",
+      "fetched_at_utc": "2026-06-26T14:07:38.213961+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -2443,7 +2443,7 @@
               "end_year": 2026,
               "end_season": null,
               "end_month": "06",
-              "end_dekad": "01",
+              "end_dekad": "11",
               "active": true,
               "dataset": "bb8fd1dc-47b4-4578-9a3e-b5be5bdf9e8d",
               "wms_layer": "dekadal_sma_tileset",
@@ -2544,7 +2544,7 @@
               "params": {
                 "selectedYear": 2026,
                 "selectedMonth": "06",
-                "selectedTenDays": "01",
+                "selectedTenDays": "11",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -3335,8 +3335,8 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "05",
-              "end_dekad": "21",
+              "end_month": "06",
+              "end_dekad": "01",
               "active": true,
               "dataset": "e7e710b0-9561-42b0-8d5a-4cfbdb773295",
               "wms_layer": "dekadal_fapar_observed_tileset",
@@ -3394,8 +3394,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedTenDays}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "05",
-                "selectedTenDays": "21",
+                "selectedMonth": "06",
+                "selectedTenDays": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -4098,8 +4098,8 @@
               "default": false,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "05",
-              "end_dekad": "21",
+              "end_month": "06",
+              "end_dekad": "01",
               "active": true,
               "dataset": "14a23f1b-be7c-44b1-a8ec-37816521f129",
               "wms_layer": "dekadal_fapar_anomaly_tileset",
@@ -4199,8 +4199,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedTenDays}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "05",
-                "selectedTenDays": "21",
+                "selectedMonth": "06",
+                "selectedTenDays": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-06-26T02:38:01.817138+00:00",
+      "fetched_at_utc": "2026-06-26T14:07:39.399003+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -11043,6 +11043,644 @@
               }
             }
           ]
+        },
+        {
+          "id": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+          "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+          "name": "Admin Level 0 Boundary",
+          "capabilities": [],
+          "summary": null,
+          "layer": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 60,
+          "metadata": "bccd5a4a-e63d-4498-84ee-40d5b146027c",
+          "layers": [
+            {
+              "id": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
+              "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+              "isDefault": true,
+              "name": "Admin Level 0 Boundary",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf? border_level=0"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "paint": {
+                        "line-width": 1.2
+                      },
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://gadm.org/",
+                "text": "Political boundaries data obtained from GADM. The map shows version 4.1 of the GADM data. GADM provides maps and spatial data for all countries and their sub-divisions.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name_0",
+                    "property": "Country Name",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": true,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
+          "id": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
+          "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
+          "name": "Available Forage Forecast",
+          "capabilities": [
+            "timeseries"
+          ],
+          "summary": "Latest: Jun-Sep (Initialized May-2026)",
+          "layer": "d904b6ce-62e4-4765-b08c-8ab4d552b412",
+          "dataset_slug": "seasonal_forage_forecast",
+          "latest_date": "2026-05-01T08:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 4,
+          "sub_category": 10,
+          "metadata": "b5da25e3-b5df-4830-be4e-e52dbe448af6",
+          "layers": [
+            {
+              "id": "d904b6ce-62e4-4765-b08c-8ab4d552b412",
+              "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
+              "isDefault": true,
+              "name": "Available Forage Forecast",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_available_forage_biomass_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "MMMM yyyy"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Less than or = 0.5 t/ha - Very Low",
+                    "color": "#8b5a00"
+                  },
+                  {
+                    "name": "Less than or = 1 t/ha - Low",
+                    "color": "#eead0e"
+                  },
+                  {
+                    "name": "Less than or = 1.5 t/ha",
+                    "color": "#ffff00"
+                  },
+                  {
+                    "name": "Less than or = 2 t/ha - Medium",
+                    "color": "#b6ff3e"
+                  },
+                  {
+                    "name": "Less than or = 2.5 t/ha",
+                    "color": "#2a9c30"
+                  },
+                  {
+                    "name": "Less than or = 3 t/ha - High",
+                    "color": "#07620f"
+                  },
+                  {
+                    "name": "Less than or = 3.5 t/ha - Very High",
+                    "color": "#006400"
+                  },
+                  {
+                    "name": "Greater than 3.5 t/ha - Extremely High",
+                    "color": "#cd4f39"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "seasonal_available_forage_biomass_tileset",
+              "date_format": "MMMM yyyy",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details  (ICPALD)",
+                "linkUrl": "https://icpald.org/seasonal-range-forage-prediction-2/",
+                "text": "The data show available Forage Forecast in t/ha for the current season.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
+          "dataset": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
+          "name": "Disaster Induced Displacements",
+          "capabilities": [],
+          "summary": "Latest Update: January 2026",
+          "layer": "c7bbbe94-dc59-4dfb-95d9-92a32ad3612b",
+          "dataset_slug": "disaster_induced_displacements",
+          "latest_date": "2026-01-31T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 23,
+          "sub_category": 63,
+          "metadata": "1c51df87-182e-4de8-a8aa-89d6ee9f348f",
+          "layers": [
+            {
+              "id": "c7bbbe94-dc59-4dfb-95d9-92a32ad3612b",
+              "dataset": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
+              "isDefault": true,
+              "name": "Disaster Induced Displacements",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/impact.get_disaster_displacement/{z}/{x}/{y}.pbf"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "type": "fill",
+                      "paint": {
+                        "fill-color": [
+                          "interpolate",
+                          [
+                            "linear"
+                          ],
+                          [
+                            "to-number",
+                            [
+                              "get",
+                              "total_displaced"
+                            ]
+                          ],
+                          0,
+                          "#feedde",
+                          500,
+                          "#fdd0a2",
+                          3000,
+                          "#fdae6b",
+                          10000,
+                          "#fd8d3c",
+                          30000,
+                          "#f16913",
+                          100000,
+                          "#d94801",
+                          300000,
+                          "#8c2d04"
+                        ]
+                      },
+                      "source-layer": "default"
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "hazard": "all",
+                "year": "all"
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "hazard",
+                  "required": true,
+                  "type": "dropdown",
+                  "options": [
+                    {
+                      "label": "All Disasters",
+                      "value": "all",
+                      "default": true
+                    },
+                    {
+                      "label": "Drought",
+                      "value": "Drought",
+                      "default": false
+                    },
+                    {
+                      "label": "Flood",
+                      "value": "Flood",
+                      "default": false
+                    },
+                    {
+                      "label": "Mass Movement",
+                      "value": "Mass Movement",
+                      "default": false
+                    },
+                    {
+                      "label": "Storm",
+                      "value": "Storm",
+                      "default": false
+                    },
+                    {
+                      "label": "Earthquake",
+                      "value": "Earthquake",
+                      "default": false
+                    },
+                    {
+                      "label": "Wildfire",
+                      "value": "Wildfire",
+                      "default": false
+                    }
+                  ],
+                  "sentence": "Select Hazard {selector}"
+                },
+                {
+                  "key": "year",
+                  "required": true,
+                  "type": "dropdown",
+                  "options": [
+                    {
+                      "label": "All Years",
+                      "value": "all",
+                      "default": true
+                    },
+                    {
+                      "label": "2026",
+                      "value": "2026",
+                      "default": false
+                    },
+                    {
+                      "label": "2025",
+                      "value": "2025",
+                      "default": false
+                    },
+                    {
+                      "label": "2024",
+                      "value": "2024",
+                      "default": false
+                    },
+                    {
+                      "label": "2023",
+                      "value": "2023",
+                      "default": false
+                    },
+                    {
+                      "label": "2022",
+                      "value": "2022",
+                      "default": false
+                    },
+                    {
+                      "label": "2021",
+                      "value": "2021",
+                      "default": false
+                    },
+                    {
+                      "label": "2020",
+                      "value": "2020",
+                      "default": false
+                    }
+                  ],
+                  "sentence": "Select Year {selector}"
+                }
+              ],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "1 to 500",
+                    "color": "#feedde"
+                  },
+                  {
+                    "name": "501 to 3000",
+                    "color": "#fdd0a2"
+                  },
+                  {
+                    "name": "3001 to 10000",
+                    "color": "#fdae6b"
+                  },
+                  {
+                    "name": "10001 to 30000",
+                    "color": "#fd8d3c"
+                  },
+                  {
+                    "name": "30001 to 100000",
+                    "color": "#f16913"
+                  },
+                  {
+                    "name": "100001 to 300000",
+                    "color": "#d94801"
+                  },
+                  {
+                    "name": "More than 300000",
+                    "color": "#8c2d04"
+                  }
+                ]
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://www.icpac.net/publications/?&q=displacement#results",
+                "text": "Inspired by the absence of disaster data aggregator for the IGAD region, this activity of collecting and aggregating disaster displacement data was initiated to address gaps in disaster risk management.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "state_name",
+                    "property": "Country",
+                    "type": "string"
+                  },
+                  {
+                    "column": "admin_name",
+                    "property": "Admin Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "total_displaced",
+                    "property": "Total Displaced",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
+          "id": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+          "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+          "name": "Exceptional Rainfall",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 23 Jun 2026 To 30 Jun 2026 (Initialized 23 Jun 2026)",
+          "layer": "5032f506-c401-4ffd-a3ea-7648339809aa",
+          "dataset_slug": "weekly_exceptional_precipitation",
+          "latest_date": "2026-06-23T08:00:00+03:00",
+          "isMultiLayer": true,
+          "category": 1,
+          "sub_category": 1,
+          "metadata": "c6663492-9e8c-46ef-976c-99eb7b82db37",
+          "layers": [
+            {
+              "id": "5032f506-c401-4ffd-a3ea-7648339809aa",
+              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+              "isDefault": true,
+              "name": "Extremely Heavy Rainfall",
+              "isMultiLayer": true,
+              "nestedLegend": true,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_extreme_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Extremely Heavy Rainfal",
+                    "color": "#06008B"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_extreme_heavy_rainfall",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": null,
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [
+                "09279d04-3129-4250-840f-ec77a79245bb",
+                "7be48e40-363c-4a2e-ac35-0934b7077e2c"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "09279d04-3129-4250-840f-ec77a79245bb",
+              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+              "isDefault": false,
+              "name": "Very Heavy Rainfall",
+              "isMultiLayer": true,
+              "nestedLegend": true,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_very_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Very heavy rainfall",
+                    "color": "#1774CD"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_very_heavy_rainfall",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": null,
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [
+                "5032f506-c401-4ffd-a3ea-7648339809aa",
+                "7be48e40-363c-4a2e-ac35-0934b7077e2c"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "7be48e40-363c-4a2e-ac35-0934b7077e2c",
+              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
+              "isDefault": false,
+              "name": "Heavy Rainfall",
+              "isMultiLayer": true,
+              "nestedLegend": true,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Heavy rainfall",
+                    "color": "#AFEEEE"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_heavy_rainfall",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": null,
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [
+                "5032f506-c401-4ffd-a3ea-7648339809aa",
+                "09279d04-3129-4250-840f-ec77a79245bb"
+              ],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": true,
+          "public": true,
+          "layer_type": "wms"
         },
         {
           "id": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
@@ -11342,644 +11980,6 @@
           "initialVisible": false,
           "public": true,
           "layer_type": "vector_file"
-        },
-        {
-          "id": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
-          "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
-          "name": "Available Forage Forecast",
-          "capabilities": [
-            "timeseries"
-          ],
-          "summary": "Latest: Jun-Sep (Initialized May-2026)",
-          "layer": "d904b6ce-62e4-4765-b08c-8ab4d552b412",
-          "dataset_slug": "seasonal_forage_forecast",
-          "latest_date": "2026-05-01T08:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 4,
-          "sub_category": 10,
-          "metadata": "b5da25e3-b5df-4830-be4e-e52dbe448af6",
-          "layers": [
-            {
-              "id": "d904b6ce-62e4-4765-b08c-8ab4d552b412",
-              "dataset": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
-              "isDefault": true,
-              "name": "Available Forage Forecast",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=seasonal_available_forage_biomass_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "MMMM yyyy"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Less than or = 0.5 t/ha - Very Low",
-                    "color": "#8b5a00"
-                  },
-                  {
-                    "name": "Less than or = 1 t/ha - Low",
-                    "color": "#eead0e"
-                  },
-                  {
-                    "name": "Less than or = 1.5 t/ha",
-                    "color": "#ffff00"
-                  },
-                  {
-                    "name": "Less than or = 2 t/ha - Medium",
-                    "color": "#b6ff3e"
-                  },
-                  {
-                    "name": "Less than or = 2.5 t/ha",
-                    "color": "#2a9c30"
-                  },
-                  {
-                    "name": "Less than or = 3 t/ha - High",
-                    "color": "#07620f"
-                  },
-                  {
-                    "name": "Less than or = 3.5 t/ha - Very High",
-                    "color": "#006400"
-                  },
-                  {
-                    "name": "Greater than 3.5 t/ha - Extremely High",
-                    "color": "#cd4f39"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "seasonal_available_forage_biomass_tileset",
-              "date_format": "MMMM yyyy",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details  (ICPALD)",
-                "linkUrl": "https://icpald.org/seasonal-range-forage-prediction-2/",
-                "text": "The data show available Forage Forecast in t/ha for the current season.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
-          "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
-          "name": "Exceptional Rainfall",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 23 Jun 2026 To 30 Jun 2026 (Initialized 23 Jun 2026)",
-          "layer": "5032f506-c401-4ffd-a3ea-7648339809aa",
-          "dataset_slug": "weekly_exceptional_precipitation",
-          "latest_date": "2026-06-23T08:00:00+03:00",
-          "isMultiLayer": true,
-          "category": 1,
-          "sub_category": 1,
-          "metadata": "c6663492-9e8c-46ef-976c-99eb7b82db37",
-          "layers": [
-            {
-              "id": "5032f506-c401-4ffd-a3ea-7648339809aa",
-              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
-              "isDefault": true,
-              "name": "Extremely Heavy Rainfall",
-              "isMultiLayer": true,
-              "nestedLegend": true,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_extreme_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Extremely Heavy Rainfal",
-                    "color": "#06008B"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_extreme_heavy_rainfall",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": null,
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [
-                "09279d04-3129-4250-840f-ec77a79245bb",
-                "7be48e40-363c-4a2e-ac35-0934b7077e2c"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "09279d04-3129-4250-840f-ec77a79245bb",
-              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
-              "isDefault": false,
-              "name": "Very Heavy Rainfall",
-              "isMultiLayer": true,
-              "nestedLegend": true,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_very_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Very heavy rainfall",
-                    "color": "#1774CD"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_very_heavy_rainfall",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": null,
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [
-                "5032f506-c401-4ffd-a3ea-7648339809aa",
-                "7be48e40-363c-4a2e-ac35-0934b7077e2c"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "7be48e40-363c-4a2e-ac35-0934b7077e2c",
-              "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
-              "isDefault": false,
-              "name": "Heavy Rainfall",
-              "isMultiLayer": true,
-              "nestedLegend": true,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_heavy_rainfall&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Heavy rainfall",
-                    "color": "#AFEEEE"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_heavy_rainfall",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": null,
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [
-                "5032f506-c401-4ffd-a3ea-7648339809aa",
-                "09279d04-3129-4250-840f-ec77a79245bb"
-              ],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": true,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
-          "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
-          "name": "Admin Level 0 Boundary",
-          "capabilities": [],
-          "summary": null,
-          "layer": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 60,
-          "metadata": "bccd5a4a-e63d-4498-84ee-40d5b146027c",
-          "layers": [
-            {
-              "id": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
-              "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
-              "isDefault": true,
-              "name": "Admin Level 0 Boundary",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf? border_level=0"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "paint": {
-                        "line-width": 1.2
-                      },
-                      "type": "line",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://gadm.org/",
-                "text": "Political boundaries data obtained from GADM. The map shows version 4.1 of the GADM data. GADM provides maps and spatial data for all countries and their sub-divisions.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name_0",
-                    "property": "Country Name",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": true,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
-          "id": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
-          "dataset": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
-          "name": "Disaster Induced Displacements",
-          "capabilities": [],
-          "summary": "Latest Update: January 2026",
-          "layer": "c7bbbe94-dc59-4dfb-95d9-92a32ad3612b",
-          "dataset_slug": "disaster_induced_displacements",
-          "latest_date": "2026-01-31T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 23,
-          "sub_category": 63,
-          "metadata": "1c51df87-182e-4de8-a8aa-89d6ee9f348f",
-          "layers": [
-            {
-              "id": "c7bbbe94-dc59-4dfb-95d9-92a32ad3612b",
-              "dataset": "3760dbbe-ae57-4bab-851b-6aa9662c41a4",
-              "isDefault": true,
-              "name": "Disaster Induced Displacements",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/impact.get_disaster_displacement/{z}/{x}/{y}.pbf"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "type": "fill",
-                      "paint": {
-                        "fill-color": [
-                          "interpolate",
-                          [
-                            "linear"
-                          ],
-                          [
-                            "to-number",
-                            [
-                              "get",
-                              "total_displaced"
-                            ]
-                          ],
-                          0,
-                          "#feedde",
-                          500,
-                          "#fdd0a2",
-                          3000,
-                          "#fdae6b",
-                          10000,
-                          "#fd8d3c",
-                          30000,
-                          "#f16913",
-                          100000,
-                          "#d94801",
-                          300000,
-                          "#8c2d04"
-                        ]
-                      },
-                      "source-layer": "default"
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "hazard": "all",
-                "year": "all"
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "hazard",
-                  "required": true,
-                  "type": "dropdown",
-                  "options": [
-                    {
-                      "label": "All Disasters",
-                      "value": "all",
-                      "default": true
-                    },
-                    {
-                      "label": "Drought",
-                      "value": "Drought",
-                      "default": false
-                    },
-                    {
-                      "label": "Flood",
-                      "value": "Flood",
-                      "default": false
-                    },
-                    {
-                      "label": "Mass Movement",
-                      "value": "Mass Movement",
-                      "default": false
-                    },
-                    {
-                      "label": "Storm",
-                      "value": "Storm",
-                      "default": false
-                    },
-                    {
-                      "label": "Earthquake",
-                      "value": "Earthquake",
-                      "default": false
-                    },
-                    {
-                      "label": "Wildfire",
-                      "value": "Wildfire",
-                      "default": false
-                    }
-                  ],
-                  "sentence": "Select Hazard {selector}"
-                },
-                {
-                  "key": "year",
-                  "required": true,
-                  "type": "dropdown",
-                  "options": [
-                    {
-                      "label": "All Years",
-                      "value": "all",
-                      "default": true
-                    },
-                    {
-                      "label": "2026",
-                      "value": "2026",
-                      "default": false
-                    },
-                    {
-                      "label": "2025",
-                      "value": "2025",
-                      "default": false
-                    },
-                    {
-                      "label": "2024",
-                      "value": "2024",
-                      "default": false
-                    },
-                    {
-                      "label": "2023",
-                      "value": "2023",
-                      "default": false
-                    },
-                    {
-                      "label": "2022",
-                      "value": "2022",
-                      "default": false
-                    },
-                    {
-                      "label": "2021",
-                      "value": "2021",
-                      "default": false
-                    },
-                    {
-                      "label": "2020",
-                      "value": "2020",
-                      "default": false
-                    }
-                  ],
-                  "sentence": "Select Year {selector}"
-                }
-              ],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "1 to 500",
-                    "color": "#feedde"
-                  },
-                  {
-                    "name": "501 to 3000",
-                    "color": "#fdd0a2"
-                  },
-                  {
-                    "name": "3001 to 10000",
-                    "color": "#fdae6b"
-                  },
-                  {
-                    "name": "10001 to 30000",
-                    "color": "#fd8d3c"
-                  },
-                  {
-                    "name": "30001 to 100000",
-                    "color": "#f16913"
-                  },
-                  {
-                    "name": "100001 to 300000",
-                    "color": "#d94801"
-                  },
-                  {
-                    "name": "More than 300000",
-                    "color": "#8c2d04"
-                  }
-                ]
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://www.icpac.net/publications/?&q=displacement#results",
-                "text": "Inspired by the absence of disaster data aggregator for the IGAD region, this activity of collecting and aggregating disaster displacement data was initiated to address gaps in disaster risk management.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "state_name",
-                    "property": "Country",
-                    "type": "string"
-                  },
-                  {
-                    "column": "admin_name",
-                    "property": "Admin Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "total_displaced",
-                    "property": "Total Displaced",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
         },
         {
           "id": "676bb843-3757-4bec-b472-94e0e0829f48",
@@ -12408,113 +12408,6 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
-          "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
-          "name": "Rangelands Conditions",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 1st Dekad of June 2026",
-          "layer": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
-          "dataset_slug": "ea-rangeland-conditions",
-          "latest_date": "2026-06-01T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 4,
-          "sub_category": 9,
-          "metadata": "8eeddda3-cc5b-47b7-9eb1-6892f8797fc6",
-          "layers": [
-            {
-              "id": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
-              "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
-              "isDefault": true,
-              "name": "Range-land Conditions",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=asap8%3Awarning_gaul1_rangeland_500k&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&cql_filter=adm0_code IN (77, 70, 205, 6, 257, 226, 43, 253, 79, 133, 74)&viewparams=reference_date:{time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "No Warning",
-                    "color": "#cddfc8"
-                  },
-                  {
-                    "name": "Not Active",
-                    "color": "#ececec"
-                  },
-                  {
-                    "name": "Water Balance Warning",
-                    "color": "#fffd75"
-                  },
-                  {
-                    "name": "Biomass Warning",
-                    "color": "#f8cd46"
-                  },
-                  {
-                    "name": "Water Balance + Biomass Warning",
-                    "color": "#bf271b"
-                  },
-                  {
-                    "name": "End of Season Biomass Warning",
-                    "color": "#81170e"
-                  },
-                  {
-                    "name": "Not Analyzed",
-                    "color": "#ffffff"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "asap8%3Awarning_gaul1_rangeland_500k",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "Go to Agriculture Watch",
-                "linkUrl": "https://agriculturehotspots.icpac.net/",
-                "text": "Rangelands are often the first areas to be impacted by drought due to their sensitivity to moisture levels. Having a rangeland mask in the Hazards watch enables proactive measures to mitigate potential impacts on livestock, wildlife, and ecosystems once early warning signs of drought stress on vegetation are detected.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
           "id": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
           "dataset": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
           "name": "Rainfall Anomalies",
@@ -12632,6 +12525,113 @@
                 "linkText": "More Details",
                 "linkUrl": "http://icpac.net/weekly-forecast/#:~:text=Rainfall%20forecast%20(anomalies),-Rainfall%20anomalies&text=Rainfall%20anomalies-,More%20than%20usual%20rainfall%20expected%20over%20most%20parts%20of%20South,over%20parts%20of%20western%20Kenya%2C%20\u2026",
                 "text": "Highlights areas with significantly above or below normal rainfall, helping stakeholders anticipate droughts or excessive wet conditions",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+          "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+          "name": "Rangelands Conditions",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 1st Dekad of June 2026",
+          "layer": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
+          "dataset_slug": "ea-rangeland-conditions",
+          "latest_date": "2026-06-01T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 4,
+          "sub_category": 9,
+          "metadata": "8eeddda3-cc5b-47b7-9eb1-6892f8797fc6",
+          "layers": [
+            {
+              "id": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
+              "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+              "isDefault": true,
+              "name": "Range-land Conditions",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=asap8%3Awarning_gaul1_rangeland_500k&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&cql_filter=adm0_code IN (77, 70, 205, 6, 257, 226, 43, 253, 79, 133, 74)&viewparams=reference_date:{time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "No Warning",
+                    "color": "#cddfc8"
+                  },
+                  {
+                    "name": "Not Active",
+                    "color": "#ececec"
+                  },
+                  {
+                    "name": "Water Balance Warning",
+                    "color": "#fffd75"
+                  },
+                  {
+                    "name": "Biomass Warning",
+                    "color": "#f8cd46"
+                  },
+                  {
+                    "name": "Water Balance + Biomass Warning",
+                    "color": "#bf271b"
+                  },
+                  {
+                    "name": "End of Season Biomass Warning",
+                    "color": "#81170e"
+                  },
+                  {
+                    "name": "Not Analyzed",
+                    "color": "#ffffff"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "asap8%3Awarning_gaul1_rangeland_500k",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "Go to Agriculture Watch",
+                "linkUrl": "https://agriculturehotspots.icpac.net/",
+                "text": "Rangelands are often the first areas to be impacted by drought due to their sensitivity to moisture levels. Having a rangeland mask in the Hazards watch enables proactive measures to mitigate potential impacts on livestock, wildlife, and ecosystems once early warning signs of drought stress on vegetation are detected.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -12855,6 +12855,101 @@
           "initialVisible": false,
           "public": true,
           "layer_type": "wms"
+        },
+        {
+          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "name": "East Africa Protected Areas",
+          "capabilities": [],
+          "summary": null,
+          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 62,
+          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
+          "layers": [
+            {
+              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
+              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+              "isDefault": true,
+              "name": "Protected Areas",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
+                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name",
+                    "property": "Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "name_0",
+                    "property": "Type",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
         },
         {
           "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
@@ -13187,196 +13282,6 @@
           "layer_type": "vector_file"
         },
         {
-          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "name": "East Africa Protected Areas",
-          "capabilities": [],
-          "summary": null,
-          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 62,
-          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
-          "layers": [
-            {
-              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
-              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-              "isDefault": true,
-              "name": "Protected Areas",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "type": "line",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
-                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name",
-                    "property": "Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "name_0",
-                    "property": "Type",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
-          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "name": "Combined Drought Indicator",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 3rd Dekad of May 2026",
-          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-          "dataset_slug": "dekadal_cdi",
-          "latest_date": "2026-05-21T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 7,
-          "sub_category": 13,
-          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
-          "layers": [
-            {
-              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-              "isDefault": true,
-              "name": "Combined Drought Indicator",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Watch: Rainfall Deficit",
-                    "color": "#ffff01"
-                  },
-                  {
-                    "name": "Warning: Soil Moisture Deficit",
-                    "color": "#ffa601"
-                  },
-                  {
-                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
-                    "color": "#ff0000"
-                  },
-                  {
-                    "name": "No Warning",
-                    "color": "#f5f5f5"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "GO TO DROUGHT WATCH",
-                "linkUrl": "https://droughtwatch.icpac.net/",
-                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
           "id": "43cd0ad2-d5af-430e-8191-4634cabb077a",
           "dataset": "43cd0ad2-d5af-430e-8191-4634cabb077a",
           "name": "Temperature Anomaly",
@@ -13490,6 +13395,101 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/#:~:text=Temperature%20forecast%20(Anomalies),-Temperature%20anomalies&text=Temperature%20anomalies-,Warmer%20than%20usual%20temperatures%20expected%20over%20most%20parts%20of%20the,to%20southern%20parts%20of%20Sudan.",
                 "text": "Shows deviations from normal temperature patterns, indicating warmer or cooler than usual conditions that may impact ecosystems and human activities",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "name": "Combined Drought Indicator",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 3rd Dekad of May 2026",
+          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+          "dataset_slug": "dekadal_cdi",
+          "latest_date": "2026-05-21T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 7,
+          "sub_category": 13,
+          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
+          "layers": [
+            {
+              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+              "isDefault": true,
+              "name": "Combined Drought Indicator",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Watch: Rainfall Deficit",
+                    "color": "#ffff01"
+                  },
+                  {
+                    "name": "Warning: Soil Moisture Deficit",
+                    "color": "#ffa601"
+                  },
+                  {
+                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
+                    "color": "#ff0000"
+                  },
+                  {
+                    "name": "No Warning",
+                    "color": "#f5f5f5"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "GO TO DROUGHT WATCH",
+                "linkUrl": "https://droughtwatch.icpac.net/",
+                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -14909,10 +14909,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 23 Jun 2026 To 30 Jun 2026 (Initialized 23 Jun 2026)",
+          "summary": "Latest: 24 Jun 2026 To 01 Jul 2026 (Initialized 24 Jun 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-06-23T08:00:00+03:00",
+          "latest_date": "2026-06-24T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -15321,10 +15321,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 23 Jun 2026 To 30 Jun 2026 (Initialized 23 Jun 2026)",
+          "summary": "Latest: 24 Jun 2026 To 01 Jul 2026 (Initialized 24 Jun 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-06-23T08:00:00+03:00",
+          "latest_date": "2026-06-24T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
