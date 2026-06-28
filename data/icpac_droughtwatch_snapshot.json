@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-06-28T02:43:44.280169+00:00",
+  "fetched_at_utc": "2026-06-28T13:20:55.268911+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-06-28T02:43:42.692456+00:00",
+      "fetched_at_utc": "2026-06-28T13:20:54.333062+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-06-28T02:43:44.280153+00:00",
+      "fetched_at_utc": "2026-06-28T13:20:55.268895+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -11045,53 +11045,58 @@
           ]
         },
         {
-          "id": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
-          "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
-          "name": "Admin Level 0 Boundary",
+          "id": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+          "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+          "name": "Gha Airports",
           "capabilities": [],
           "summary": null,
-          "layer": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
-          "dataset_slug": null,
+          "layer": "1b58d03d-6949-4049-96d1-d70029055e90",
+          "dataset_slug": "gha_airports",
           "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 60,
-          "metadata": "bccd5a4a-e63d-4498-84ee-40d5b146027c",
+          "isMultiLayer": true,
+          "category": 12,
+          "sub_category": 59,
+          "metadata": "41f90df5-7bb5-4741-9a83-5d102c347b82",
           "layers": [
             {
-              "id": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
-              "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
-              "isDefault": true,
-              "name": "Admin Level 0 Boundary",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
+              "id": "48aca073-a839-4767-9f79-77d0338122a4",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": false,
+              "name": "Gha- Small- Airport",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport",
+                    "name": "Small Airports-GHA",
+                    "color": "#271cca",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
               "layerConfig": {
                 "type": "vector",
                 "source": {
                   "type": "vector",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf? border_level=0"
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
                   ]
                 },
                 "render": {
                   "layers": [
                     {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
+                      "layout": {
+                        "icon-image": "airport"
                       },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
                       "paint": {
-                        "line-width": 1.2
+                        "icon-color": "#262ded",
+                        "icon-halo-color": "#e21818"
                       },
-                      "type": "line",
+                      "type": "symbol",
                       "source-layer": "default",
                       "metadata": {
                         "position": "top"
@@ -11100,42 +11105,243 @@
                   ]
                 }
               },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
+              "params": {
+                "table_name": "icpac_small_airport",
+                "geostore_id": ""
               },
-              "multiTemporal": false,
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://gadm.org/",
-                "text": "Political boundaries data obtained from GADM. The map shows version 4.1 of the GADM data. GADM provides maps and spatial data for all countries and their sub-divisions.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "1b58d03d-6949-4049-96d1-d70029055e90",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "9c31265d-4e83-415c-a966-f2eac0566f4e",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": false,
+              "name": "Gha Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
                   {
-                    "column": "name_0",
-                    "property": "Country Name",
-                    "type": "string"
+                    "icon": "airport",
+                    "name": "Airport",
+                    "color": "#0918ec",
+                    "iconSource": "sprite"
                   }
                 ]
               },
-              "linkedLayers": [],
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport",
+                        "icon-allow-overlap": true,
+                        "icon-pitch-alignment": "map",
+                        "icon-text-fit": "both"
+                      },
+                      "paint": {
+                        "icon-color": "#1091f4",
+                        "icon-halo-color": "#27ddb0"
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_major_airports",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "1b58d03d-6949-4049-96d1-d70029055e90",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "1b58d03d-6949-4049-96d1-d70029055e90",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": true,
+              "name": "Gha- Large Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport-military",
+                    "name": "Large Airport",
+                    "color": "#171617",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport-military"
+                      },
+                      "paint": {
+                        "icon-color": "#171617",
+                        "icon-halo-color": "#171617",
+                        "icon-opacity": 0.9
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_large_airport",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "b53a04c4-5ae4-49e9-82ea-d6d53d434893",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": false,
+              "name": "GHA-Medium Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport",
+                    "name": "Airport",
+                    "color": "#000000",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport"
+                      },
+                      "paint": {
+                        "icon-color": "#d02525",
+                        "icon-halo-color": "#a03737"
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_medium_airport",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "1b58d03d-6949-4049-96d1-d70029055e90"
+              ],
               "showAllMultiLayer": true
             }
           ],
-          "initialVisible": true,
+          "initialVisible": false,
           "public": true,
-          "layer_type": "vector_tile"
+          "layer_type": "vector_file"
         },
         {
           "id": "f4f32f26-d98b-46a4-9851-c1afb5b48362",
@@ -11487,6 +11693,99 @@
           "layer_type": "vector_tile"
         },
         {
+          "id": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+          "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+          "name": "Admin Level 0 Boundary",
+          "capabilities": [],
+          "summary": null,
+          "layer": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 60,
+          "metadata": "bccd5a4a-e63d-4498-84ee-40d5b146027c",
+          "layers": [
+            {
+              "id": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
+              "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+              "isDefault": true,
+              "name": "Admin Level 0 Boundary",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf? border_level=0"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "paint": {
+                        "line-width": 1.2
+                      },
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://gadm.org/",
+                "text": "Political boundaries data obtained from GADM. The map shows version 4.1 of the GADM data. GADM provides maps and spatial data for all countries and their sub-divisions.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name_0",
+                    "property": "Country Name",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": true,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
           "id": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
           "dataset": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
           "name": "Exceptional Rainfall",
@@ -11681,305 +11980,6 @@
           "initialVisible": true,
           "public": true,
           "layer_type": "wms"
-        },
-        {
-          "id": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-          "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-          "name": "Gha Airports",
-          "capabilities": [],
-          "summary": null,
-          "layer": "1b58d03d-6949-4049-96d1-d70029055e90",
-          "dataset_slug": "gha_airports",
-          "latest_date": null,
-          "isMultiLayer": true,
-          "category": 12,
-          "sub_category": 59,
-          "metadata": "41f90df5-7bb5-4741-9a83-5d102c347b82",
-          "layers": [
-            {
-              "id": "48aca073-a839-4767-9f79-77d0338122a4",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": false,
-              "name": "Gha- Small- Airport",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Small Airports-GHA",
-                    "color": "#271cca",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport"
-                      },
-                      "paint": {
-                        "icon-color": "#262ded",
-                        "icon-halo-color": "#e21818"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_small_airport",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "1b58d03d-6949-4049-96d1-d70029055e90",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "9c31265d-4e83-415c-a966-f2eac0566f4e",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": false,
-              "name": "Gha Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Airport",
-                    "color": "#0918ec",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport",
-                        "icon-allow-overlap": true,
-                        "icon-pitch-alignment": "map",
-                        "icon-text-fit": "both"
-                      },
-                      "paint": {
-                        "icon-color": "#1091f4",
-                        "icon-halo-color": "#27ddb0"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_major_airports",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "1b58d03d-6949-4049-96d1-d70029055e90",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "1b58d03d-6949-4049-96d1-d70029055e90",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": true,
-              "name": "Gha- Large Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport-military",
-                    "name": "Large Airport",
-                    "color": "#171617",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport-military"
-                      },
-                      "paint": {
-                        "icon-color": "#171617",
-                        "icon-halo-color": "#171617",
-                        "icon-opacity": 0.9
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_large_airport",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "b53a04c4-5ae4-49e9-82ea-d6d53d434893",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": false,
-              "name": "GHA-Medium Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Airport",
-                    "color": "#000000",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport"
-                      },
-                      "paint": {
-                        "icon-color": "#d02525",
-                        "icon-halo-color": "#a03737"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_medium_airport",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "1b58d03d-6949-4049-96d1-d70029055e90"
-              ],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_file"
         },
         {
           "id": "676bb843-3757-4bec-b472-94e0e0829f48",
@@ -12857,101 +12857,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "name": "East Africa Protected Areas",
-          "capabilities": [],
-          "summary": null,
-          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 62,
-          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
-          "layers": [
-            {
-              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
-              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-              "isDefault": true,
-              "name": "Protected Areas",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "type": "line",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
-                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name",
-                    "property": "Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "name_0",
-                    "property": "Type",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
           "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
           "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
           "name": "Mean Temprature",
@@ -13282,6 +13187,196 @@
           "layer_type": "vector_file"
         },
         {
+          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "name": "East Africa Protected Areas",
+          "capabilities": [],
+          "summary": null,
+          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 62,
+          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
+          "layers": [
+            {
+              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
+              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+              "isDefault": true,
+              "name": "Protected Areas",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
+                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name",
+                    "property": "Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "name_0",
+                    "property": "Type",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
+          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "name": "Combined Drought Indicator",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 3rd Dekad of May 2026",
+          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+          "dataset_slug": "dekadal_cdi",
+          "latest_date": "2026-05-21T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 7,
+          "sub_category": 13,
+          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
+          "layers": [
+            {
+              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+              "isDefault": true,
+              "name": "Combined Drought Indicator",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Watch: Rainfall Deficit",
+                    "color": "#ffff01"
+                  },
+                  {
+                    "name": "Warning: Soil Moisture Deficit",
+                    "color": "#ffa601"
+                  },
+                  {
+                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
+                    "color": "#ff0000"
+                  },
+                  {
+                    "name": "No Warning",
+                    "color": "#f5f5f5"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "GO TO DROUGHT WATCH",
+                "linkUrl": "https://droughtwatch.icpac.net/",
+                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "43cd0ad2-d5af-430e-8191-4634cabb077a",
           "dataset": "43cd0ad2-d5af-430e-8191-4634cabb077a",
           "name": "Temperature Anomaly",
@@ -13395,101 +13490,6 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/#:~:text=Temperature%20forecast%20(Anomalies),-Temperature%20anomalies&text=Temperature%20anomalies-,Warmer%20than%20usual%20temperatures%20expected%20over%20most%20parts%20of%20the,to%20southern%20parts%20of%20Sudan.",
                 "text": "Shows deviations from normal temperature patterns, indicating warmer or cooler than usual conditions that may impact ecosystems and human activities",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "name": "Combined Drought Indicator",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 3rd Dekad of May 2026",
-          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-          "dataset_slug": "dekadal_cdi",
-          "latest_date": "2026-05-21T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 7,
-          "sub_category": 13,
-          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
-          "layers": [
-            {
-              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-              "isDefault": true,
-              "name": "Combined Drought Indicator",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Watch: Rainfall Deficit",
-                    "color": "#ffff01"
-                  },
-                  {
-                    "name": "Warning: Soil Moisture Deficit",
-                    "color": "#ffa601"
-                  },
-                  {
-                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
-                    "color": "#ff0000"
-                  },
-                  {
-                    "name": "No Warning",
-                    "color": "#f5f5f5"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "GO TO DROUGHT WATCH",
-                "linkUrl": "https://droughtwatch.icpac.net/",
-                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -14909,10 +14909,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 24 Jun 2026 To 01 Jul 2026 (Initialized 24 Jun 2026)",
+          "summary": "Latest: 26 Jun 2026 To 03 Jul 2026 (Initialized 26 Jun 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-06-24T08:00:00+03:00",
+          "latest_date": "2026-06-26T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -15321,10 +15321,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 24 Jun 2026 To 01 Jul 2026 (Initialized 24 Jun 2026)",
+          "summary": "Latest: 26 Jun 2026 To 03 Jul 2026 (Initialized 26 Jun 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-06-24T08:00:00+03:00",
+          "latest_date": "2026-06-26T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
