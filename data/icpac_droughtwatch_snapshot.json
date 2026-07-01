@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-07-01T02:44:39.662521+00:00",
+  "fetched_at_utc": "2026-07-01T14:14:08.652377+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-07-01T02:44:38.496709+00:00",
+      "fetched_at_utc": "2026-07-01T14:14:07.305883+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -108,8 +108,8 @@
               "default": true,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "05",
-              "end_dekad": "21",
+              "end_month": "06",
+              "end_dekad": "01",
               "active": true,
               "dataset": "549a7b6c-65e5-4258-b18b-54310e910a5c",
               "wms_layer": "dekadal_cdi_chirps_tileset",
@@ -188,8 +188,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedTenDays}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "05",
-                "selectedTenDays": "21",
+                "selectedMonth": "06",
+                "selectedTenDays": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -414,8 +414,8 @@
               "default": true,
               "end_year": 2026,
               "end_season": null,
-              "end_month": "05",
-              "end_dekad": "21",
+              "end_month": "06",
+              "end_dekad": "01",
               "active": true,
               "dataset": "9b05b091-9137-48ff-80b9-2610733bbd82",
               "wms_layer": "dekadal_chirps_recovery_tileset",
@@ -480,8 +480,8 @@
               "paramsSentenceTemplate": "{selectedYear} {selectedMonth}, Dekad: {selectedTenDays}",
               "params": {
                 "selectedYear": 2026,
-                "selectedMonth": "05",
-                "selectedTenDays": "21",
+                "selectedMonth": "06",
+                "selectedTenDays": "01",
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
                 "MASK_ADMIN_LEVEL": 0
@@ -10841,7 +10841,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-07-01T02:44:39.662504+00:00",
+      "fetched_at_utc": "2026-07-01T14:14:08.652362+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
