@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-07-22T13:24:58.668419+00:00",
+  "fetched_at_utc": "2026-07-23T02:02:12.620037+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-07-22T13:24:57.190468+00:00",
+      "fetched_at_utc": "2026-07-23T02:02:10.981266+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -9005,7 +9005,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-07-22T13:24:58.668401+00:00",
+      "fetched_at_utc": "2026-07-23T02:02:12.620021+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
