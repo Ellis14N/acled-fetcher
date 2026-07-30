@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-07-30T01:45:09.012559+00:00",
+  "fetched_at_utc": "2026-07-30T13:40:56.835666+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-07-30T01:45:07.691586+00:00",
+      "fetched_at_utc": "2026-07-30T13:40:55.482850+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -7671,8 +7671,8 @@
               "disclaimer": null,
               "default": true,
               "end_year": 2026,
-              "end_season": "jul",
-              "end_month": "jun",
+              "end_season": "aug",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "399d9865-597a-4143-b8d5-5ec37e38dfbb",
@@ -7738,7 +7738,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_prob_prec_forecast_normal_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PMONTH=jul&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_prob_prec_forecast_normal_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PMONTH=aug&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -7760,7 +7760,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -7778,8 +7778,8 @@
               "disclaimer": null,
               "default": false,
               "end_year": 2026,
-              "end_season": "jul",
-              "end_month": "jun",
+              "end_season": "aug",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "399d9865-597a-4143-b8d5-5ec37e38dfbb",
@@ -7845,7 +7845,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_prob_prec_forecast_below_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PMONTH=jul&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_prob_prec_forecast_below_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PMONTH=aug&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -7867,7 +7867,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -7885,8 +7885,8 @@
               "disclaimer": null,
               "default": false,
               "end_year": 2026,
-              "end_season": "jul",
-              "end_month": "jun",
+              "end_season": "aug",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "399d9865-597a-4143-b8d5-5ec37e38dfbb",
@@ -7952,7 +7952,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_prob_prec_forecast_above_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PMONTH=jul&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_prob_prec_forecast_above_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PMONTH=aug&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -7974,7 +7974,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8007,8 +8007,8 @@
               "disclaimer": null,
               "default": true,
               "end_year": 2026,
-              "end_season": "jul_sep",
-              "end_month": "jun",
+              "end_season": "aug_oct",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "0967c2cb-8678-40e6-b6b0-88fc8d6254f0",
@@ -8074,7 +8074,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_prob_prec_forecast_normal_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PSEASON=jul_sep&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_prob_prec_forecast_normal_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PSEASON=aug_oct&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8096,7 +8096,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul-Sep",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug-Oct",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8114,8 +8114,8 @@
               "disclaimer": null,
               "default": false,
               "end_year": 2026,
-              "end_season": "jul_sep",
-              "end_month": "jun",
+              "end_season": "aug_oct",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "0967c2cb-8678-40e6-b6b0-88fc8d6254f0",
@@ -8181,7 +8181,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_prob_prec_forecast_below_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PSEASON=jul_sep&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_prob_prec_forecast_below_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PSEASON=aug_oct&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8203,7 +8203,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul-Sep",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug-Oct",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8221,8 +8221,8 @@
               "disclaimer": null,
               "default": false,
               "end_year": 2026,
-              "end_season": "jul_sep",
-              "end_month": "jun",
+              "end_season": "aug_oct",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "0967c2cb-8678-40e6-b6b0-88fc8d6254f0",
@@ -8288,7 +8288,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_prob_prec_forecast_above_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PSEASON=jul_sep&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_prob_prec_forecast_above_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PSEASON=aug_oct&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8310,7 +8310,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul-Sep",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug-Oct",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8343,8 +8343,8 @@
               "disclaimer": null,
               "default": true,
               "end_year": 2026,
-              "end_season": "jul",
-              "end_month": "jun",
+              "end_season": "aug",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "9c2042bb-e348-42a0-b4e8-93ac740cac41",
@@ -8410,7 +8410,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_temp_prob_normal_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PMONTH=jul&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_temp_prob_normal_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PMONTH=aug&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8432,7 +8432,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8450,8 +8450,8 @@
               "disclaimer": null,
               "default": false,
               "end_year": 2026,
-              "end_season": "jul",
-              "end_month": "jun",
+              "end_season": "aug",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "9c2042bb-e348-42a0-b4e8-93ac740cac41",
@@ -8517,7 +8517,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_temp_prob_below_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PMONTH=jul&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_temp_prob_below_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PMONTH=aug&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8539,7 +8539,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8557,8 +8557,8 @@
               "disclaimer": null,
               "default": false,
               "end_year": 2026,
-              "end_season": "jul",
-              "end_month": "jun",
+              "end_season": "aug",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "9c2042bb-e348-42a0-b4e8-93ac740cac41",
@@ -8624,7 +8624,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_temp_prob_above_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PMONTH=jul&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=monthly_temp_prob_above_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PMONTH=aug&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8646,7 +8646,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8679,8 +8679,8 @@
               "disclaimer": null,
               "default": true,
               "end_year": 2026,
-              "end_season": "jul_sep",
-              "end_month": "jun",
+              "end_season": "aug_oct",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "8427c687-ec2a-4569-9826-128a9064cb0d",
@@ -8746,7 +8746,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_temp_prob_normal_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PSEASON=jul_sep&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_temp_prob_normal_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PSEASON=aug_oct&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8768,7 +8768,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul-Sep",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug-Oct",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8786,8 +8786,8 @@
               "disclaimer": null,
               "default": false,
               "end_year": 2026,
-              "end_season": "jul_sep",
-              "end_month": "jun",
+              "end_season": "aug_oct",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "8427c687-ec2a-4569-9826-128a9064cb0d",
@@ -8853,7 +8853,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_temp_prob_below_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PSEASON=jul_sep&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_temp_prob_below_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PSEASON=aug_oct&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8875,7 +8875,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul-Sep",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug-Oct",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -8893,8 +8893,8 @@
               "disclaimer": null,
               "default": false,
               "end_year": 2026,
-              "end_season": "jul_sep",
-              "end_month": "jun",
+              "end_season": "aug_oct",
+              "end_month": "jul",
               "end_dekad": null,
               "active": true,
               "dataset": "8427c687-ec2a-4569-9826-128a9064cb0d",
@@ -8960,7 +8960,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_temp_prob_above_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jun&SELECTED_PSEASON=jul_sep&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
+                    "https://droughtwatch.icpac.net/mapcache/?LAYERS=seasonal_temp_prob_above_forecast_tileset&FORMAT=image/png&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS=EPSG:900913&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&STYLES=&SELECTED_IYEAR=2026&SELECTED_IMONTH=jul&SELECTED_PSEASON=aug_oct&MASK_AREA={MASK_AREA}&MASK_UNIT_ID={MASK_UNIT_ID}&MASK_ADMIN_LEVEL={MASK_ADMIN_LEVEL}"
                   ],
                   "minzoom": 3,
                   "maxzoom": 12
@@ -8982,7 +8982,7 @@
                   }
                 ]
               },
-              "paramsSentenceTemplate": "Init: Jun 2026, Pred: Jul-Sep",
+              "paramsSentenceTemplate": "Init: Jul 2026, Pred: Aug-Oct",
               "params": {
                 "MASK_AREA": "Admin",
                 "MASK_UNIT_ID": "",
@@ -9005,7 +9005,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-07-30T01:45:09.012539+00:00",
+      "fetched_at_utc": "2026-07-30T13:40:56.835651+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -10146,27 +10146,26 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "a5b2b206-c70b-49fe-b747-9d591d02925a",
-          "dataset": "a5b2b206-c70b-49fe-b747-9d591d02925a",
-          "name": "Crops Conditions",
+          "id": "f5012c24-2902-408c-9815-466290d34bca",
+          "dataset": "f5012c24-2902-408c-9815-466290d34bca",
+          "name": "Total Rainfall Forecast",
           "capabilities": [
-            "timeseries",
-            "nearRealTime"
+            "timeseries"
           ],
-          "summary": "Latest: 2nd Dekad of July 2026",
-          "layer": "003b958f-c8e5-4851-8b6a-9e8a1c17ad1c",
-          "dataset_slug": "ea-agriculture-crop-conditions",
-          "latest_date": "2026-07-11T00:00:00+03:00",
+          "summary": "Latest: 28 Jul 2026 To 04 Aug 2026 (Initialized 28 Jul 2026)",
+          "layer": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
+          "dataset_slug": "weekly_total_precipitation",
+          "latest_date": "2026-07-28T08:00:00+03:00",
           "isMultiLayer": false,
-          "category": 4,
-          "sub_category": 9,
-          "metadata": "8de4b7fd-9f98-4f47-b660-3e0b23909863",
+          "category": 1,
+          "sub_category": 1,
+          "metadata": "4e182f3c-51f2-4092-a3fd-0bcda1d091d9",
           "layers": [
             {
-              "id": "003b958f-c8e5-4851-8b6a-9e8a1c17ad1c",
-              "dataset": "a5b2b206-c70b-49fe-b747-9d591d02925a",
+              "id": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
+              "dataset": "f5012c24-2902-408c-9815-466290d34bca",
               "isDefault": true,
-              "name": "Crops Conditions",
+              "name": "Weekly Total Rainfall Forecast",
               "isMultiLayer": false,
               "nestedLegend": false,
               "layerType": "wms",
@@ -10176,7 +10175,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&TRANSPARENT=True&LAYERS=asap8:warning_gaul1_crop_500k&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&CRS=EPSG:3857&cql_filter=adm0_code IN (77, 70, 205, 6, 257, 226, 43, 253, 79, 133, 74)&viewparams=reference_date:{time}"
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_total_precipitation&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
@@ -10197,49 +10196,49 @@
               ],
               "paramsSelectorColumnView": true,
               "legendConfig": {
-                "type": "basic",
+                "type": "choropleth",
                 "items": [
                   {
-                    "name": "No Warning",
-                    "color": "#cddfc8"
+                    "name": "1",
+                    "color": "#D9D9D9"
                   },
                   {
-                    "name": "Not Active",
-                    "color": "#ececec"
+                    "name": "10",
+                    "color": "#FFA500"
                   },
                   {
-                    "name": "Water Balance Warning",
-                    "color": "#fffd75"
+                    "name": "30",
+                    "color": "#FEFF00"
                   },
                   {
-                    "name": "Biomass Warning",
-                    "color": "#f8cd46"
+                    "name": "50",
+                    "color": "#CAFF70"
                   },
                   {
-                    "name": "Water Balance + Biomass Warning",
-                    "color": "#bf271b"
+                    "name": "100",
+                    "color": "#00FF00"
                   },
                   {
-                    "name": "End of Season Biomass Warning",
-                    "color": "#81170e"
+                    "name": "200",
+                    "color": "#67CD01"
                   },
                   {
-                    "name": "Not Analyzed",
-                    "color": "#ffffff"
+                    "name": "mm",
+                    "color": "#238B21"
                   }
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "asap8:warning_gaul1_crop_500k",
+              "layerName": "weekly_total_precipitation",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
               "analysisConfig": [],
               "moreInfo": {
-                "linkText": "Go to Agriculture Watch",
-                "linkUrl": "https://agriculturehotspots.icpac.net/",
-                "text": "Every 10 days, ASAP system generates automatic warnings about low or delayed vegetation performance at province level plus weather and Earth Observation vegetation indicator",
+                "linkText": "Read more",
+                "linkUrl": "https://www.icpac.net/weekly-forecast/",
+                "text": "Estimates the total amount of rainfall expected in different regions, aiding water resource management and disaster preparedness",
                 "isButton": true,
                 "showArrow": true
               },
@@ -10357,26 +10356,27 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "f5012c24-2902-408c-9815-466290d34bca",
-          "dataset": "f5012c24-2902-408c-9815-466290d34bca",
-          "name": "Total Rainfall Forecast",
+          "id": "a5b2b206-c70b-49fe-b747-9d591d02925a",
+          "dataset": "a5b2b206-c70b-49fe-b747-9d591d02925a",
+          "name": "Crops Conditions",
           "capabilities": [
-            "timeseries"
+            "timeseries",
+            "nearRealTime"
           ],
-          "summary": "Latest: 28 Jul 2026 To 04 Aug 2026 (Initialized 28 Jul 2026)",
-          "layer": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
-          "dataset_slug": "weekly_total_precipitation",
-          "latest_date": "2026-07-28T08:00:00+03:00",
+          "summary": "Latest: 2nd Dekad of July 2026",
+          "layer": "003b958f-c8e5-4851-8b6a-9e8a1c17ad1c",
+          "dataset_slug": "ea-agriculture-crop-conditions",
+          "latest_date": "2026-07-11T00:00:00+03:00",
           "isMultiLayer": false,
-          "category": 1,
-          "sub_category": 1,
-          "metadata": "4e182f3c-51f2-4092-a3fd-0bcda1d091d9",
+          "category": 4,
+          "sub_category": 9,
+          "metadata": "8de4b7fd-9f98-4f47-b660-3e0b23909863",
           "layers": [
             {
-              "id": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
-              "dataset": "f5012c24-2902-408c-9815-466290d34bca",
+              "id": "003b958f-c8e5-4851-8b6a-9e8a1c17ad1c",
+              "dataset": "a5b2b206-c70b-49fe-b747-9d591d02925a",
               "isDefault": true,
-              "name": "Weekly Total Rainfall Forecast",
+              "name": "Crops Conditions",
               "isMultiLayer": false,
               "nestedLegend": false,
               "layerType": "wms",
@@ -10386,7 +10386,7 @@
                 "source": {
                   "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_total_precipitation&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                    "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&TRANSPARENT=True&LAYERS=asap8:warning_gaul1_crop_500k&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&CRS=EPSG:3857&cql_filter=adm0_code IN (77, 70, 205, 6, 257, 226, 43, 253, 79, 133, 74)&viewparams=reference_date:{time}"
                   ]
                 }
               },
@@ -10407,49 +10407,49 @@
               ],
               "paramsSelectorColumnView": true,
               "legendConfig": {
-                "type": "choropleth",
+                "type": "basic",
                 "items": [
                   {
-                    "name": "1",
-                    "color": "#D9D9D9"
+                    "name": "No Warning",
+                    "color": "#cddfc8"
                   },
                   {
-                    "name": "10",
-                    "color": "#FFA500"
+                    "name": "Not Active",
+                    "color": "#ececec"
                   },
                   {
-                    "name": "30",
-                    "color": "#FEFF00"
+                    "name": "Water Balance Warning",
+                    "color": "#fffd75"
                   },
                   {
-                    "name": "50",
-                    "color": "#CAFF70"
+                    "name": "Biomass Warning",
+                    "color": "#f8cd46"
                   },
                   {
-                    "name": "100",
-                    "color": "#00FF00"
+                    "name": "Water Balance + Biomass Warning",
+                    "color": "#bf271b"
                   },
                   {
-                    "name": "200",
-                    "color": "#67CD01"
+                    "name": "End of Season Biomass Warning",
+                    "color": "#81170e"
                   },
                   {
-                    "name": "mm",
-                    "color": "#238B21"
+                    "name": "Not Analyzed",
+                    "color": "#ffffff"
                   }
                 ]
               },
               "getCapabilitiesUrl": null,
-              "layerName": "weekly_total_precipitation",
+              "layerName": "asap8:warning_gaul1_crop_500k",
               "date_format": "yyyy-MM-dd",
               "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
               "analysisConfig": [],
               "moreInfo": {
-                "linkText": "Read more",
-                "linkUrl": "https://www.icpac.net/weekly-forecast/",
-                "text": "Estimates the total amount of rainfall expected in different regions, aiding water resource management and disaster preparedness",
+                "linkText": "Go to Agriculture Watch",
+                "linkUrl": "https://agriculturehotspots.icpac.net/",
+                "text": "Every 10 days, ASAP system generates automatic warnings about low or delayed vegetation performance at province level plus weather and Earth Observation vegetation indicator",
                 "isButton": true,
                 "showArrow": true
               },
@@ -11673,10 +11673,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: Jul (Initialized Jun-2026)",
+          "summary": "Latest: Aug (Initialized Jul-2026)",
           "layer": "207fbdb8-a967-4cb2-be98-0fafd951ee81",
           "dataset_slug": "monthly_probabilistic_precipitation",
-          "latest_date": "2026-06-01T08:00:00+03:00",
+          "latest_date": "2026-07-01T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 2,
@@ -11940,10 +11940,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: Jul (Initialized Jun-2026)",
+          "summary": "Latest: Aug (Initialized Jul-2026)",
           "layer": "0c311b0e-703b-448d-8cdd-e1e94fad16bb",
           "dataset_slug": "monthly_probabilistic_temperature",
-          "latest_date": "2026-06-01T08:00:00+03:00",
+          "latest_date": "2026-07-01T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 2,
@@ -12290,10 +12290,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: Jul-Sep (Initialized Jun-2026)",
+          "summary": "Latest: Aug-Oct (Initialized Jul-2026)",
           "layer": "52f97413-67ff-43f6-b579-68faa0b2890e",
           "dataset_slug": "seasonal_probabilistic_precipitation",
-          "latest_date": "2026-06-01T08:00:00+03:00",
+          "latest_date": "2026-07-01T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 3,
@@ -12722,10 +12722,10 @@
           "capabilities": [
             "timeseries"
           ],
-          "summary": "Latest: Jul-Sep (Initialized Jun-2026)",
+          "summary": "Latest: Aug-Oct (Initialized Jul-2026)",
           "layer": "af25bff0-a0df-43a6-952a-b7d76c00b9a7",
           "dataset_slug": "seasonal_probabilistic_temperature",
-          "latest_date": "2026-06-01T08:00:00+03:00",
+          "latest_date": "2026-07-01T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 3,
@@ -12983,6 +12983,89 @@
           "layer_type": "wms"
         },
         {
+          "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+          "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+          "name": "Crop Land Area Mask",
+          "capabilities": [],
+          "summary": null,
+          "layer": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 12,
+          "sub_category": 57,
+          "metadata": "b48e4651-1012-434c-b09f-327bf62913ee",
+          "layers": [
+            {
+              "id": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+              "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+              "isDefault": true,
+              "name": "Crop Land Area Mask",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=cropland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "0 to 20 %",
+                    "color": "#CFC6C9"
+                  },
+                  {
+                    "name": "20 to 40%",
+                    "color": "#FFFFCB"
+                  },
+                  {
+                    "name": "40 to 60 %",
+                    "color": "#CCE1AC"
+                  },
+                  {
+                    "name": "60 to 80%",
+                    "color": "#98C38D"
+                  },
+                  {
+                    "name": "80 to 100 %",
+                    "color": "#64A46E"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "cropland_area_mask_v3_tileset",
+              "date_format": null,
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "https://data.jrc.ec.europa.eu/dataset/jrc-10112-10005",
+                "text": "A mapping tool that identifies agricultural land, helping in crop monitoring and food security analysis.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "b6176fb5-adb4-42fb-8445-0734ffe76c26",
           "dataset": "b6176fb5-adb4-42fb-8445-0734ffe76c26",
           "name": "Subseasonal Probabilistic Rainfall Forecast",
@@ -12990,10 +13073,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 27 Jul 2026 To 03 Aug 2026 (Initialized 27 Jul 2026)",
+          "summary": "Latest: 28 Jul 2026 To 04 Aug 2026 (Initialized 28 Jul 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-07-27T08:00:00+03:00",
+          "latest_date": "2026-07-28T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -13395,89 +13478,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-          "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-          "name": "Crop Land Area Mask",
-          "capabilities": [],
-          "summary": null,
-          "layer": "c32ec5a0-9817-4e61-8572-397556a2b51b",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 12,
-          "sub_category": 57,
-          "metadata": "b48e4651-1012-434c-b09f-327bf62913ee",
-          "layers": [
-            {
-              "id": "c32ec5a0-9817-4e61-8572-397556a2b51b",
-              "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-              "isDefault": true,
-              "name": "Crop Land Area Mask",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=cropland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "0 to 20 %",
-                    "color": "#CFC6C9"
-                  },
-                  {
-                    "name": "20 to 40%",
-                    "color": "#FFFFCB"
-                  },
-                  {
-                    "name": "40 to 60 %",
-                    "color": "#CCE1AC"
-                  },
-                  {
-                    "name": "60 to 80%",
-                    "color": "#98C38D"
-                  },
-                  {
-                    "name": "80 to 100 %",
-                    "color": "#64A46E"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "cropland_area_mask_v3_tileset",
-              "date_format": null,
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://data.jrc.ec.europa.eu/dataset/jrc-10112-10005",
-                "text": "A mapping tool that identifies agricultural land, helping in crop monitoring and food security analysis.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
           "id": "5dace56a-2ec3-42a5-8bfa-3757ca327f20",
           "dataset": "5dace56a-2ec3-42a5-8bfa-3757ca327f20",
           "name": "Subseasonal Rainfall Anomaly Forecast",
@@ -13485,10 +13485,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 27 Jul 2026 To 03 Aug 2026 (Initialized 27 Jul 2026)",
+          "summary": "Latest: 28 Jul 2026 To 04 Aug 2026 (Initialized 28 Jul 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-07-27T08:00:00+03:00",
+          "latest_date": "2026-07-28T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
