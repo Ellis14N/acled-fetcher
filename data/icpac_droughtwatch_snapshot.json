@@ -1,8 +1,8 @@
 {
-  "fetched_at_utc": "2026-08-11T01:06:11.118478+00:00",
+  "fetched_at_utc": "2026-08-11T12:44:17.443746+00:00",
   "sources": {
     "droughtwatch": {
-      "fetched_at_utc": "2026-08-11T01:06:09.401849+00:00",
+      "fetched_at_utc": "2026-08-11T12:44:15.723797+00:00",
       "source_base_url": "https://droughtwatch.icpac.net/api",
       "source_name": "droughtwatch",
       "category_count": 14,
@@ -9005,7 +9005,7 @@
       ]
     },
     "ea_hazards_watch": {
-      "fetched_at_utc": "2026-08-11T01:06:11.118462+00:00",
+      "fetched_at_utc": "2026-08-11T12:44:17.443726+00:00",
       "source_base_url": "https://eahazardswatch.icpac.net/api",
       "source_name": "ea_hazards_watch",
       "category_count": 9,
@@ -9207,6 +9207,398 @@
               }
             }
           ]
+        },
+        {
+          "id": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+          "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+          "name": "Gha Airports",
+          "capabilities": [],
+          "summary": null,
+          "layer": "1b58d03d-6949-4049-96d1-d70029055e90",
+          "dataset_slug": "gha_airports",
+          "latest_date": null,
+          "isMultiLayer": true,
+          "category": 12,
+          "sub_category": 59,
+          "metadata": "41f90df5-7bb5-4741-9a83-5d102c347b82",
+          "layers": [
+            {
+              "id": "48aca073-a839-4767-9f79-77d0338122a4",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": false,
+              "name": "Gha- Small- Airport",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport",
+                    "name": "Small Airports-GHA",
+                    "color": "#271cca",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport"
+                      },
+                      "paint": {
+                        "icon-color": "#262ded",
+                        "icon-halo-color": "#e21818"
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_small_airport",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "1b58d03d-6949-4049-96d1-d70029055e90",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "9c31265d-4e83-415c-a966-f2eac0566f4e",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": false,
+              "name": "Gha Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport",
+                    "name": "Airport",
+                    "color": "#0918ec",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport",
+                        "icon-allow-overlap": true,
+                        "icon-pitch-alignment": "map",
+                        "icon-text-fit": "both"
+                      },
+                      "paint": {
+                        "icon-color": "#1091f4",
+                        "icon-halo-color": "#27ddb0"
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_major_airports",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "1b58d03d-6949-4049-96d1-d70029055e90",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "1b58d03d-6949-4049-96d1-d70029055e90",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": true,
+              "name": "Gha- Large Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport-military",
+                    "name": "Large Airport",
+                    "color": "#171617",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport-military"
+                      },
+                      "paint": {
+                        "icon-color": "#171617",
+                        "icon-halo-color": "#171617",
+                        "icon-opacity": 0.9
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_large_airport",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
+              ],
+              "showAllMultiLayer": true
+            },
+            {
+              "id": "b53a04c4-5ae4-49e9-82ea-d6d53d434893",
+              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
+              "isDefault": false,
+              "name": "GHA-Medium Airports",
+              "layerType": "vector_file",
+              "multiTemporal": false,
+              "isMultiLayer": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "icon": "airport",
+                    "name": "Airport",
+                    "color": "#000000",
+                    "iconSource": "sprite"
+                  }
+                ]
+              },
+              "nestedLegend": true,
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "layout": {
+                        "icon-image": "airport"
+                      },
+                      "paint": {
+                        "icon-color": "#d02525",
+                        "icon-halo-color": "#a03737"
+                      },
+                      "type": "symbol",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {
+                "table_name": "icpac_medium_airport",
+                "geostore_id": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "table_name",
+                  "required": true,
+                  "sentence": "{selector}"
+                }
+              ],
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "interactionConfig": {},
+              "canClip": true,
+              "linkedLayers": [
+                "48aca073-a839-4767-9f79-77d0338122a4",
+                "9c31265d-4e83-415c-a966-f2eac0566f4e",
+                "1b58d03d-6949-4049-96d1-d70029055e90"
+              ],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_file"
+        },
+        {
+          "id": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+          "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+          "name": "Admin Level 0 Boundary",
+          "capabilities": [],
+          "summary": null,
+          "layer": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 60,
+          "metadata": "bccd5a4a-e63d-4498-84ee-40d5b146027c",
+          "layers": [
+            {
+              "id": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
+              "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+              "isDefault": true,
+              "name": "Admin Level 0 Boundary",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "paint": {
+                        "line-width": 1.2
+                      },
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": false,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://gadm.org/",
+                "text": "Political boundaries data obtained from GADM. The map shows version 4.1 of the GADM data. GADM provides maps and spatial data for all countries and their sub-divisions.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name_0",
+                    "property": "Country Name",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": true,
+          "public": true,
+          "layer_type": "vector_tile"
         },
         {
           "id": "9247a020-8f04-4c83-bae3-dbe14c1446f8",
@@ -9754,396 +10146,110 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
-          "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
-          "name": "Admin Level 0 Boundary",
-          "capabilities": [],
-          "summary": null,
-          "layer": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
-          "dataset_slug": null,
-          "latest_date": null,
+          "id": "f5012c24-2902-408c-9815-466290d34bca",
+          "dataset": "f5012c24-2902-408c-9815-466290d34bca",
+          "name": "Total Rainfall Forecast",
+          "capabilities": [
+            "timeseries"
+          ],
+          "summary": "Latest: 11 Aug 2026 To 18 Aug 2026 (Initialized 11 Aug 2026)",
+          "layer": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
+          "dataset_slug": "weekly_total_precipitation",
+          "latest_date": "2026-08-11T08:00:00+03:00",
           "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 60,
-          "metadata": "bccd5a4a-e63d-4498-84ee-40d5b146027c",
+          "category": 1,
+          "sub_category": 1,
+          "metadata": "4e182f3c-51f2-4092-a3fd-0bcda1d091d9",
           "layers": [
             {
-              "id": "b6c3b7d9-c3dd-4012-9cc9-857f0640e702",
-              "dataset": "cad4a12d-d971-4999-9825-d1ceb830ad5f",
+              "id": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
+              "dataset": "f5012c24-2902-408c-9815-466290d34bca",
               "isDefault": true,
-              "name": "Admin Level 0 Boundary",
+              "name": "Weekly Total Rainfall Forecast",
               "isMultiLayer": false,
               "nestedLegend": false,
-              "layerType": "vector_tile",
+              "layerType": "wms",
+              "styleConfig": null,
               "layerConfig": {
-                "type": "vector",
+                "type": "raster",
                 "source": {
-                  "type": "vector",
+                  "type": "raster",
                   "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "paint": {
-                        "line-width": 1.2
-                      },
-                      "type": "line",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
+                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_total_precipitation&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
                   ]
                 }
               },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
+              "params": {
+                "time": ""
               },
-              "multiTemporal": false,
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "choropleth",
+                "items": [
+                  {
+                    "name": "1",
+                    "color": "#D9D9D9"
+                  },
+                  {
+                    "name": "10",
+                    "color": "#FFA500"
+                  },
+                  {
+                    "name": "30",
+                    "color": "#FEFF00"
+                  },
+                  {
+                    "name": "50",
+                    "color": "#CAFF70"
+                  },
+                  {
+                    "name": "100",
+                    "color": "#00FF00"
+                  },
+                  {
+                    "name": "200",
+                    "color": "#67CD01"
+                  },
+                  {
+                    "name": "mm",
+                    "color": "#238B21"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "weekly_total_precipitation",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
+              "analysisConfig": [],
               "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://gadm.org/",
-                "text": "Political boundaries data obtained from GADM. The map shows version 4.1 of the GADM data. GADM provides maps and spatial data for all countries and their sub-divisions.",
+                "linkText": "Read more",
+                "linkUrl": "https://www.icpac.net/weekly-forecast/",
+                "text": "Estimates the total amount of rainfall expected in different regions, aiding water resource management and disaster preparedness",
                 "isButton": true,
                 "showArrow": true
               },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name_0",
-                    "property": "Country Name",
-                    "type": "string"
-                  }
-                ]
-              },
+              "getCapabilitiesLayerName": null,
               "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": true,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
-          "id": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-          "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-          "name": "Gha Airports",
-          "capabilities": [],
-          "summary": null,
-          "layer": "1b58d03d-6949-4049-96d1-d70029055e90",
-          "dataset_slug": "gha_airports",
-          "latest_date": null,
-          "isMultiLayer": true,
-          "category": 12,
-          "sub_category": 59,
-          "metadata": "41f90df5-7bb5-4741-9a83-5d102c347b82",
-          "layers": [
-            {
-              "id": "48aca073-a839-4767-9f79-77d0338122a4",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": false,
-              "name": "Gha- Small- Airport",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Small Airports-GHA",
-                    "color": "#271cca",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport"
-                      },
-                      "paint": {
-                        "icon-color": "#262ded",
-                        "icon-halo-color": "#e21818"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_small_airport",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "1b58d03d-6949-4049-96d1-d70029055e90",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "9c31265d-4e83-415c-a966-f2eac0566f4e",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": false,
-              "name": "Gha Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Airport",
-                    "color": "#0918ec",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport",
-                        "icon-allow-overlap": true,
-                        "icon-pitch-alignment": "map",
-                        "icon-text-fit": "both"
-                      },
-                      "paint": {
-                        "icon-color": "#1091f4",
-                        "icon-halo-color": "#27ddb0"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_major_airports",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "1b58d03d-6949-4049-96d1-d70029055e90",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "1b58d03d-6949-4049-96d1-d70029055e90",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": true,
-              "name": "Gha- Large Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport-military",
-                    "name": "Large Airport",
-                    "color": "#171617",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport-military"
-                      },
-                      "paint": {
-                        "icon-color": "#171617",
-                        "icon-halo-color": "#171617",
-                        "icon-opacity": 0.9
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_large_airport",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "b53a04c4-5ae4-49e9-82ea-d6d53d434893"
-              ],
-              "showAllMultiLayer": true
-            },
-            {
-              "id": "b53a04c4-5ae4-49e9-82ea-d6d53d434893",
-              "dataset": "ffbb0f99-1f5a-41ab-b2a1-d2fbc31323d4",
-              "isDefault": false,
-              "name": "GHA-Medium Airports",
-              "layerType": "vector_file",
-              "multiTemporal": false,
-              "isMultiLayer": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "icon": "airport",
-                    "name": "Airport",
-                    "color": "#000000",
-                    "iconSource": "sprite"
-                  }
-                ]
-              },
-              "nestedLegend": true,
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/api/vector-tiles/{z}/{x}/{y}?table_name={table_name}&geostore_id={geostore_id}"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "layout": {
-                        "icon-image": "airport"
-                      },
-                      "paint": {
-                        "icon-color": "#d02525",
-                        "icon-halo-color": "#a03737"
-                      },
-                      "type": "symbol",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {
-                "table_name": "icpac_medium_airport",
-                "geostore_id": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "table_name",
-                  "required": true,
-                  "sentence": "{selector}"
-                }
-              ],
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "interactionConfig": {},
-              "canClip": true,
-              "linkedLayers": [
-                "48aca073-a839-4767-9f79-77d0338122a4",
-                "9c31265d-4e83-415c-a966-f2eac0566f4e",
-                "1b58d03d-6949-4049-96d1-d70029055e90"
-              ],
               "showAllMultiLayer": true
             }
           ],
           "initialVisible": false,
           "public": true,
-          "layer_type": "vector_file"
+          "layer_type": "wms"
         },
         {
           "id": "676bb843-3757-4bec-b472-94e0e0829f48",
@@ -10357,112 +10463,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "f5012c24-2902-408c-9815-466290d34bca",
-          "dataset": "f5012c24-2902-408c-9815-466290d34bca",
-          "name": "Total Rainfall Forecast",
-          "capabilities": [
-            "timeseries"
-          ],
-          "summary": "Latest: 11 Aug 2026 To 18 Aug 2026 (Initialized 11 Aug 2026)",
-          "layer": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
-          "dataset_slug": "weekly_total_precipitation",
-          "latest_date": "2026-08-11T08:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 1,
-          "sub_category": 1,
-          "metadata": "4e182f3c-51f2-4092-a3fd-0bcda1d091d9",
-          "layers": [
-            {
-              "id": "ce4d4a70-e42d-485e-986a-d8c0470f65e7",
-              "dataset": "f5012c24-2902-408c-9815-466290d34bca",
-              "isDefault": true,
-              "name": "Weekly Total Rainfall Forecast",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapserver/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=weekly_total_precipitation&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "choropleth",
-                "items": [
-                  {
-                    "name": "1",
-                    "color": "#D9D9D9"
-                  },
-                  {
-                    "name": "10",
-                    "color": "#FFA500"
-                  },
-                  {
-                    "name": "30",
-                    "color": "#FEFF00"
-                  },
-                  {
-                    "name": "50",
-                    "color": "#CAFF70"
-                  },
-                  {
-                    "name": "100",
-                    "color": "#00FF00"
-                  },
-                  {
-                    "name": "200",
-                    "color": "#67CD01"
-                  },
-                  {
-                    "name": "mm",
-                    "color": "#238B21"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "weekly_total_precipitation",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "Read more",
-                "linkUrl": "https://www.icpac.net/weekly-forecast/",
-                "text": "Estimates the total amount of rainfall expected in different regions, aiding water resource management and disaster preparedness",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
           "id": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
           "dataset": "8987fafc-1164-40f8-9d44-8aefa5a2b38a",
           "name": "Rainfall Anomalies",
@@ -10593,6 +10593,113 @@
           "layer_type": "wms"
         },
         {
+          "id": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+          "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+          "name": "Rangelands Conditions",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 2nd Dekad of July 2026",
+          "layer": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
+          "dataset_slug": "ea-rangeland-conditions",
+          "latest_date": "2026-07-11T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 4,
+          "sub_category": 9,
+          "metadata": "8eeddda3-cc5b-47b7-9eb1-6892f8797fc6",
+          "layers": [
+            {
+              "id": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
+              "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+              "isDefault": true,
+              "name": "Range-land Conditions",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=asap8%3Awarning_gaul1_rangeland_500k&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&cql_filter=adm0_code IN (77, 70, 205, 6, 257, 226, 43, 253, 79, 133, 74)&viewparams=reference_date:{time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "No Warning",
+                    "color": "#cddfc8"
+                  },
+                  {
+                    "name": "Not Active",
+                    "color": "#ececec"
+                  },
+                  {
+                    "name": "Water Balance Warning",
+                    "color": "#fffd75"
+                  },
+                  {
+                    "name": "Biomass Warning",
+                    "color": "#f8cd46"
+                  },
+                  {
+                    "name": "Water Balance + Biomass Warning",
+                    "color": "#bf271b"
+                  },
+                  {
+                    "name": "End of Season Biomass Warning",
+                    "color": "#81170e"
+                  },
+                  {
+                    "name": "Not Analyzed",
+                    "color": "#ffffff"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "asap8%3Awarning_gaul1_rangeland_500k",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "Go to Agriculture Watch",
+                "linkUrl": "https://agriculturehotspots.icpac.net/",
+                "text": "Rangelands are often the first areas to be impacted by drought due to their sensitivity to moisture levels. Having a rangeland mask in the Hazards watch enables proactive measures to mitigate potential impacts on livestock, wildlife, and ecosystems once early warning signs of drought stress on vegetation are detected.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "7708c0dd-8c13-4503-ba22-cd420893436c",
           "dataset": "7708c0dd-8c13-4503-ba22-cd420893436c",
           "name": "Admin Level 2 Boundary",
@@ -10702,111 +10809,97 @@
           "layer_type": "vector_tile"
         },
         {
-          "id": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
-          "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
-          "name": "Rangelands Conditions",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 2nd Dekad of July 2026",
-          "layer": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
-          "dataset_slug": "ea-rangeland-conditions",
-          "latest_date": "2026-07-11T00:00:00+03:00",
+          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
+          "name": "Hydroshed Level 3 Basins",
+          "capabilities": [],
+          "summary": null,
+          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+          "dataset_slug": null,
+          "latest_date": null,
           "isMultiLayer": false,
-          "category": 4,
-          "sub_category": 9,
-          "metadata": "8eeddda3-cc5b-47b7-9eb1-6892f8797fc6",
+          "category": 22,
+          "sub_category": 61,
+          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
           "layers": [
             {
-              "id": "541a5361-5a2e-4e1e-a2fd-b5070c5914ad",
-              "dataset": "1ac73650-9b07-4ee9-8701-1fdfe59b5b5b",
+              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
+              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
               "isDefault": true,
-              "name": "Range-land Conditions",
+              "name": "Level 3 Watershed Basins",
               "isMultiLayer": false,
               "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
+              "layerType": "vector_tile",
               "layerConfig": {
-                "type": "raster",
+                "type": "vector",
                 "source": {
-                  "type": "raster",
+                  "type": "vector",
                   "tiles": [
-                    "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=asap8%3Awarning_gaul1_rangeland_500k&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&cql_filter=adm0_code IN (77, 70, 205, 6, 257, 226, 43, 253, 79, 133, 74)&viewparams=reference_date:{time}"
+                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "paint": {
+                        "line-color": "#032eb0"
+                      },
+                      "type": "line",
+                      "source-layer": "boundary.ea_watersheds_level_03_v1",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
                   ]
                 }
               },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": false,
               "legendConfig": {
                 "type": "basic",
-                "items": [
-                  {
-                    "name": "No Warning",
-                    "color": "#cddfc8"
-                  },
-                  {
-                    "name": "Not Active",
-                    "color": "#ececec"
-                  },
-                  {
-                    "name": "Water Balance Warning",
-                    "color": "#fffd75"
-                  },
-                  {
-                    "name": "Biomass Warning",
-                    "color": "#f8cd46"
-                  },
-                  {
-                    "name": "Water Balance + Biomass Warning",
-                    "color": "#bf271b"
-                  },
-                  {
-                    "name": "End of Season Biomass Warning",
-                    "color": "#81170e"
-                  },
-                  {
-                    "name": "Not Analyzed",
-                    "color": "#ffffff"
-                  }
-                ]
+                "items": []
               },
-              "getCapabilitiesUrl": "https://agriculturehotspots.icpac.net/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "asap8%3Awarning_gaul1_rangeland_500k",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
+              "multiTemporal": false,
               "currentTimeMethod": "latest_from_source",
               "autoUpdateInterval": null,
-              "analysisConfig": [],
               "moreInfo": {
-                "linkText": "Go to Agriculture Watch",
-                "linkUrl": "https://agriculturehotspots.icpac.net/",
-                "text": "Rangelands are often the first areas to be impacted by drought due to their sensitivity to moisture levels. Having a rangeland mask in the Hazards watch enables proactive measures to mitigate potential impacts on livestock, wildlife, and ecosystems once early warning signs of drought stress on vegetation are detected.",
+                "linkText": "East Africa Flood Watch",
+                "linkUrl": "https://www.icpac.net/",
+                "text": "Watershed basins used for hydrological modeling at ICPAC.",
                 "isButton": true,
                 "showArrow": true
               },
-              "getCapabilitiesLayerName": null,
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name_0",
+                    "property": "Basin Name",
+                    "type": "string"
+                  }
+                ]
+              },
               "linkedLayers": [],
               "showAllMultiLayer": true
             }
           ],
           "initialVisible": false,
           "public": true,
-          "layer_type": "wms"
+          "layer_type": "vector_tile"
         },
         {
           "id": "f2ec09d6-7ab3-4993-810b-14b67a396421",
@@ -10926,194 +11019,6 @@
           "initialVisible": false,
           "public": true,
           "layer_type": "wms"
-        },
-        {
-          "id": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-          "name": "Hydroshed Level 3 Basins",
-          "capabilities": [],
-          "summary": null,
-          "layer": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 61,
-          "metadata": "3c721d1d-be8f-4578-8407-3feb68af4278",
-          "layers": [
-            {
-              "id": "6ce8adeb-80a7-4e40-aade-a6d40f6c9d6a",
-              "dataset": "bdb3856c-4505-4a59-b2b1-08ad035e4185",
-              "isDefault": true,
-              "name": "Level 3 Watershed Basins",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net:443/pg/tileserv/boundary.ea_watersheds_level_03_v1/{z}/{x}/{y}.pbf"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "paint": {
-                        "line-color": "#032eb0"
-                      },
-                      "type": "line",
-                      "source-layer": "boundary.ea_watersheds_level_03_v1",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": false,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "East Africa Flood Watch",
-                "linkUrl": "https://www.icpac.net/",
-                "text": "Watershed basins used for hydrological modeling at ICPAC.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name_0",
-                    "property": "Basin Name",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
-        },
-        {
-          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-          "name": "East Africa Protected Areas",
-          "capabilities": [],
-          "summary": null,
-          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 22,
-          "sub_category": 62,
-          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
-          "layers": [
-            {
-              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
-              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
-              "isDefault": true,
-              "name": "Protected Areas",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "vector_tile",
-              "layerConfig": {
-                "type": "vector",
-                "source": {
-                  "type": "vector",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
-                  ]
-                },
-                "render": {
-                  "layers": [
-                    {
-                      "paint": {
-                        "fill-color": "#ffffff",
-                        "fill-opacity": 0.1
-                      },
-                      "type": "fill",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    },
-                    {
-                      "type": "line",
-                      "source-layer": "default",
-                      "metadata": {
-                        "position": "top"
-                      }
-                    }
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": []
-              },
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "moreInfo": {
-                "linkText": "Read More",
-                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
-                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "tileJsonUrl": null,
-              "timestampsResponseObjectKey": null,
-              "interactionConfig": {
-                "type": "intersection",
-                "output": [
-                  {
-                    "column": "name",
-                    "property": "Name",
-                    "type": "string"
-                  },
-                  {
-                    "column": "name_0",
-                    "property": "Type",
-                    "type": "string"
-                  }
-                ]
-              },
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "vector_tile"
         },
         {
           "id": "2815358d-4023-4dc8-b0e4-2dc05223e1e3",
@@ -11324,6 +11229,101 @@
           "layer_type": "vector_file"
         },
         {
+          "id": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+          "name": "East Africa Protected Areas",
+          "capabilities": [],
+          "summary": null,
+          "layer": "4974f072-48ca-47b9-a77c-80124d2a6875",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 22,
+          "sub_category": 62,
+          "metadata": "394a56e1-dce2-421d-9d7d-a1c52a27d391",
+          "layers": [
+            {
+              "id": "4974f072-48ca-47b9-a77c-80124d2a6875",
+              "dataset": "20ccfd5c-5cd7-4fa7-8a47-77e9aef42a71",
+              "isDefault": true,
+              "name": "Protected Areas",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "vector_tile",
+              "layerConfig": {
+                "type": "vector",
+                "source": {
+                  "type": "vector",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/pg/tileserv/boundary.get_pre_defined_boundary/{z}/{x}/{y}.pbf?project_name=PROTECTED"
+                  ]
+                },
+                "render": {
+                  "layers": [
+                    {
+                      "paint": {
+                        "fill-color": "#ffffff",
+                        "fill-opacity": 0.1
+                      },
+                      "type": "fill",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    },
+                    {
+                      "type": "line",
+                      "source-layer": "default",
+                      "metadata": {
+                        "position": "top"
+                      }
+                    }
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": []
+              },
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "moreInfo": {
+                "linkText": "Read More",
+                "linkUrl": "https://www.protectedplanet.net/en/thematic-areas/wdpa?tab=WDPA",
+                "text": "The World Database on Protected Areas (WDPA) is the most comprehensive global database of marine and terrestrial protected areas.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "tileJsonUrl": null,
+              "timestampsResponseObjectKey": null,
+              "interactionConfig": {
+                "type": "intersection",
+                "output": [
+                  {
+                    "column": "name",
+                    "property": "Name",
+                    "type": "string"
+                  },
+                  {
+                    "column": "name_0",
+                    "property": "Type",
+                    "type": "string"
+                  }
+                ]
+              },
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "vector_tile"
+        },
+        {
           "id": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
           "dataset": "fe4c6c02-b3f8-4f7b-a7af-b4cbcc49091a",
           "name": "Mean Temprature",
@@ -11433,101 +11433,6 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/",
                 "text": "Displays the mean temperature forecast for a given week  for the Great Horn of Africa",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
-          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-          "name": "Combined Drought Indicator",
-          "capabilities": [
-            "timeseries",
-            "nearRealTime"
-          ],
-          "summary": "Latest: 3rd Dekad of June 2026",
-          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-          "dataset_slug": "dekadal_cdi",
-          "latest_date": "2026-06-21T00:00:00+03:00",
-          "isMultiLayer": false,
-          "category": 7,
-          "sub_category": 13,
-          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
-          "layers": [
-            {
-              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
-              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
-              "isDefault": true,
-              "name": "Combined Drought Indicator",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
-                  ]
-                }
-              },
-              "params": {
-                "time": ""
-              },
-              "paramsSelectorConfig": [
-                {
-                  "key": "time",
-                  "required": true,
-                  "sentence": "{selector}",
-                  "type": "datetime",
-                  "availableDates": [],
-                  "dateFormat": {
-                    "currentTime": "yyyy-MM-dd"
-                  }
-                }
-              ],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "Watch: Rainfall Deficit",
-                    "color": "#ffff01"
-                  },
-                  {
-                    "name": "Warning: Soil Moisture Deficit",
-                    "color": "#ffa601"
-                  },
-                  {
-                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
-                    "color": "#ff0000"
-                  },
-                  {
-                    "name": "No Warning",
-                    "color": "#f5f5f5"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
-              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
-              "date_format": "yyyy-MM-dd",
-              "multiTemporal": true,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "GO TO DROUGHT WATCH",
-                "linkUrl": "https://droughtwatch.icpac.net/",
-                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -11654,6 +11559,101 @@
                 "linkText": "More Details",
                 "linkUrl": "https://www.icpac.net/weekly-forecast/#:~:text=Temperature%20forecast%20(Anomalies),-Temperature%20anomalies&text=Temperature%20anomalies-,Warmer%20than%20usual%20temperatures%20expected%20over%20most%20parts%20of%20the,to%20southern%20parts%20of%20Sudan.",
                 "text": "Shows deviations from normal temperature patterns, indicating warmer or cooler than usual conditions that may impact ecosystems and human activities",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
+          "id": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+          "name": "Combined Drought Indicator",
+          "capabilities": [
+            "timeseries",
+            "nearRealTime"
+          ],
+          "summary": "Latest: 3rd Dekad of June 2026",
+          "layer": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+          "dataset_slug": "dekadal_cdi",
+          "latest_date": "2026-06-21T00:00:00+03:00",
+          "isMultiLayer": false,
+          "category": 7,
+          "sub_category": 13,
+          "metadata": "b565ffd4-72e2-462f-a59f-8c27efad2b3a",
+          "layers": [
+            {
+              "id": "813f50c6-1c28-49b5-a802-fe4b9f5c90d4",
+              "dataset": "14258559-cf3b-44cd-b075-c2051234acb4",
+              "isDefault": true,
+              "name": "Combined Drought Indicator",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=timestamped_dekadal_cdi_chirps_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857&time={time}"
+                  ]
+                }
+              },
+              "params": {
+                "time": ""
+              },
+              "paramsSelectorConfig": [
+                {
+                  "key": "time",
+                  "required": true,
+                  "sentence": "{selector}",
+                  "type": "datetime",
+                  "availableDates": [],
+                  "dateFormat": {
+                    "currentTime": "yyyy-MM-dd"
+                  }
+                }
+              ],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "Watch: Rainfall Deficit",
+                    "color": "#ffff01"
+                  },
+                  {
+                    "name": "Warning: Soil Moisture Deficit",
+                    "color": "#ffa601"
+                  },
+                  {
+                    "name": "Alert: Vegetation stress following rainfall/ soil moisture deficit",
+                    "color": "#ff0000"
+                  },
+                  {
+                    "name": "No Warning",
+                    "color": "#f5f5f5"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": "https://droughtwatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities",
+              "layerName": "timestamped_dekadal_cdi_chirps_tileset",
+              "date_format": "yyyy-MM-dd",
+              "multiTemporal": true,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "GO TO DROUGHT WATCH",
+                "linkUrl": "https://droughtwatch.icpac.net/",
+                "text": "Identify areas affected by agricultural drought, and areas with the potential to be affected. For indepth drought analysis, please visit the specialized system using the button below.",
                 "isButton": true,
                 "showArrow": true
               },
@@ -12983,89 +12983,6 @@
           "layer_type": "wms"
         },
         {
-          "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-          "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-          "name": "Crop Land Area Mask",
-          "capabilities": [],
-          "summary": null,
-          "layer": "c32ec5a0-9817-4e61-8572-397556a2b51b",
-          "dataset_slug": null,
-          "latest_date": null,
-          "isMultiLayer": false,
-          "category": 12,
-          "sub_category": 57,
-          "metadata": "b48e4651-1012-434c-b09f-327bf62913ee",
-          "layers": [
-            {
-              "id": "c32ec5a0-9817-4e61-8572-397556a2b51b",
-              "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
-              "isDefault": true,
-              "name": "Crop Land Area Mask",
-              "isMultiLayer": false,
-              "nestedLegend": false,
-              "layerType": "wms",
-              "styleConfig": null,
-              "layerConfig": {
-                "type": "raster",
-                "source": {
-                  "type": "raster",
-                  "tiles": [
-                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=cropland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
-                  ]
-                }
-              },
-              "params": {},
-              "paramsSelectorConfig": [],
-              "paramsSelectorColumnView": true,
-              "legendConfig": {
-                "type": "basic",
-                "items": [
-                  {
-                    "name": "0 to 20 %",
-                    "color": "#CFC6C9"
-                  },
-                  {
-                    "name": "20 to 40%",
-                    "color": "#FFFFCB"
-                  },
-                  {
-                    "name": "40 to 60 %",
-                    "color": "#CCE1AC"
-                  },
-                  {
-                    "name": "60 to 80%",
-                    "color": "#98C38D"
-                  },
-                  {
-                    "name": "80 to 100 %",
-                    "color": "#64A46E"
-                  }
-                ]
-              },
-              "getCapabilitiesUrl": null,
-              "layerName": "cropland_area_mask_v3_tileset",
-              "date_format": null,
-              "multiTemporal": false,
-              "currentTimeMethod": "latest_from_source",
-              "autoUpdateInterval": null,
-              "analysisConfig": [],
-              "moreInfo": {
-                "linkText": "More Details",
-                "linkUrl": "https://data.jrc.ec.europa.eu/dataset/jrc-10112-10005",
-                "text": "A mapping tool that identifies agricultural land, helping in crop monitoring and food security analysis.",
-                "isButton": true,
-                "showArrow": true
-              },
-              "getCapabilitiesLayerName": null,
-              "linkedLayers": [],
-              "showAllMultiLayer": true
-            }
-          ],
-          "initialVisible": false,
-          "public": true,
-          "layer_type": "wms"
-        },
-        {
           "id": "b6176fb5-adb4-42fb-8445-0734ffe76c26",
           "dataset": "b6176fb5-adb4-42fb-8445-0734ffe76c26",
           "name": "Subseasonal Probabilistic Rainfall Forecast",
@@ -13073,10 +12990,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 08 Aug 2026 To 15 Aug 2026 (Initialized 08 Aug 2026)",
+          "summary": "Latest: 09 Aug 2026 To 16 Aug 2026 (Initialized 09 Aug 2026)",
           "layer": "cc51bdeb-b000-455d-b523-6b1b9648625e",
           "dataset_slug": "subseasonal-probabilistic-precipitation-forecast",
-          "latest_date": "2026-08-08T08:00:00+03:00",
+          "latest_date": "2026-08-09T08:00:00+03:00",
           "isMultiLayer": true,
           "category": 1,
           "sub_category": 37,
@@ -13478,6 +13395,89 @@
           "layer_type": "wms"
         },
         {
+          "id": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+          "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+          "name": "Crop Land Area Mask",
+          "capabilities": [],
+          "summary": null,
+          "layer": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+          "dataset_slug": null,
+          "latest_date": null,
+          "isMultiLayer": false,
+          "category": 12,
+          "sub_category": 57,
+          "metadata": "b48e4651-1012-434c-b09f-327bf62913ee",
+          "layers": [
+            {
+              "id": "c32ec5a0-9817-4e61-8572-397556a2b51b",
+              "dataset": "c21e9708-478f-4df3-80de-4b16dde0d8fa",
+              "isDefault": true,
+              "name": "Crop Land Area Mask",
+              "isMultiLayer": false,
+              "nestedLegend": false,
+              "layerType": "wms",
+              "styleConfig": null,
+              "layerConfig": {
+                "type": "raster",
+                "source": {
+                  "type": "raster",
+                  "tiles": [
+                    "https://eahazardswatch.icpac.net/mapcache/?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TRANSPARENT=True&LAYERS=cropland_area_mask_v3_tileset&STYLES=&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&SRS=EPSG:3857"
+                  ]
+                }
+              },
+              "params": {},
+              "paramsSelectorConfig": [],
+              "paramsSelectorColumnView": true,
+              "legendConfig": {
+                "type": "basic",
+                "items": [
+                  {
+                    "name": "0 to 20 %",
+                    "color": "#CFC6C9"
+                  },
+                  {
+                    "name": "20 to 40%",
+                    "color": "#FFFFCB"
+                  },
+                  {
+                    "name": "40 to 60 %",
+                    "color": "#CCE1AC"
+                  },
+                  {
+                    "name": "60 to 80%",
+                    "color": "#98C38D"
+                  },
+                  {
+                    "name": "80 to 100 %",
+                    "color": "#64A46E"
+                  }
+                ]
+              },
+              "getCapabilitiesUrl": null,
+              "layerName": "cropland_area_mask_v3_tileset",
+              "date_format": null,
+              "multiTemporal": false,
+              "currentTimeMethod": "latest_from_source",
+              "autoUpdateInterval": null,
+              "analysisConfig": [],
+              "moreInfo": {
+                "linkText": "More Details",
+                "linkUrl": "https://data.jrc.ec.europa.eu/dataset/jrc-10112-10005",
+                "text": "A mapping tool that identifies agricultural land, helping in crop monitoring and food security analysis.",
+                "isButton": true,
+                "showArrow": true
+              },
+              "getCapabilitiesLayerName": null,
+              "linkedLayers": [],
+              "showAllMultiLayer": true
+            }
+          ],
+          "initialVisible": false,
+          "public": true,
+          "layer_type": "wms"
+        },
+        {
           "id": "5dace56a-2ec3-42a5-8bfa-3757ca327f20",
           "dataset": "5dace56a-2ec3-42a5-8bfa-3757ca327f20",
           "name": "Subseasonal Rainfall Anomaly Forecast",
@@ -13485,10 +13485,10 @@
             "timeseries",
             "nearRealTime"
           ],
-          "summary": "Latest: 08 Aug 2026 To 15 Aug 2026 (Initialized 08 Aug 2026)",
+          "summary": "Latest: 09 Aug 2026 To 16 Aug 2026 (Initialized 09 Aug 2026)",
           "layer": "d75b0c79-a2c7-4bef-845d-fdf1538a8b68",
           "dataset_slug": "subseasonal-precipitation-anomaly-forecast",
-          "latest_date": "2026-08-08T08:00:00+03:00",
+          "latest_date": "2026-08-09T08:00:00+03:00",
           "isMultiLayer": false,
           "category": 1,
           "sub_category": 37,
